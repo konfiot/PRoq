@@ -98,8 +98,8 @@ id = data["weather"][0]["id"]
 
 weather_string = get_weather_string(id);
 
-obj = imaplib.IMAP4_SSL('imap.free.fr','993')
-obj.login('user','password')
+obj = imaplib.IMAP4_SSL('imap.laposte.net','993')
+obj.login('test.smartwake','helicoptere')
 obj.select()
 unread = len(obj.search(None, 'UnSeen')[1][0].split())
 
