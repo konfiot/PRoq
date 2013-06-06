@@ -4,6 +4,8 @@
 import urllib
 import json
 import subprocess
+import imaplib
+
 
 def get_weather_string (id) :
 	string = "Non reconnu"
@@ -96,4 +98,9 @@ id = data["weather"][0]["id"]
 
 weather_string = get_weather_string(id);
 
-subprocess.call(["espeak", "-v", "mb/mb-fr1", "Temps prévu pour aujourd'hui : " + weather_string])
+obj = imaplib.IMAP4_SSL('imap.free.fr','993')
+obj.login('user','password')
+obj.select()
+unread = len(obj.search(None, 'UnSeen')[1][0].split())
+
+subprocess.call(["espeak", "-v", "mb/mb-fr1", "Temps prévu pour aujourd'hui : " + weather_string + ". Vous avez "+ str(unread) + "Messages non lus"])
