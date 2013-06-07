@@ -1,10 +1,13 @@
-#!/usr/bin/python
+#!/usr/bin/python2.7
 # -*- coding: utf-8 -*-
 
 import urllib
 import json
 import subprocess
 import imaplib
+from datetime import datetime
+import caldav
+
 
 
 def get_weather_string (id) :
@@ -91,6 +94,8 @@ def get_weather_string (id) :
 	
 	return string
 
+# Gestion Météo
+
 req = urllib.urlopen("http://api.openweathermap.org/data/2.5/weather?q=Eaubonne");
 data = json.load(req)
 
@@ -98,9 +103,33 @@ id = data["weather"][0]["id"]
 
 weather_string = get_weather_string(id);
 
+# Gestion Mail
+
 obj = imaplib.IMAP4_SSL('imap.laposte.net','993')
 obj.login('test.smartwake','helicoptere')
 obj.select()
 unread = len(obj.search(None, 'UnSeen')[1][0].split())
+
+# Gestion Calendrier
+
+rdv = "Aucun rendez-vous"
+
+url = "http://test-smartwake:b5a1cc4965b6d43790ac774350abf653@sync.memotoo.com/calDAV/test-smartwake/"
+
+'''client = caldav.DAVClient(url)
+principal = caldav.Principal(client, url)
+calendars = principal.calendars()
+
+if len(calendars) > 0:
+	calendar = calendars[0]
+	results = calendar.date_search(datetime.today())
+	if results is not None:
+		rdv = ""
+	for event in results:
+		print event
+
+'''
+
+# Synthèse vocale
 
 subprocess.call(["espeak", "-v", "mb/mb-fr1", "Temps prévu pour aujourd'hui : " + weather_string + ". Vous avez "+ str(unread) + "Messages non lus"])

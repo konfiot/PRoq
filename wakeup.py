@@ -2,14 +2,17 @@
 # -*- coding: utf-8 -*-
 
 import subprocess
-import pyglet
+import os
+import time
+
 
 def wait_for_dismiss () :
-    return
+	time.sleep(10)
 
-ring = pyglet.media.load('ringtone.mp3', streaming=False)
-explosion.play()
+process = subprocess.Popen(["mplayer", "-loop", "0", "ringtone"])
 
 wait_for_dismiss()
+
+process.terminate()
 
 subprocess.call(["./tts.py"])
