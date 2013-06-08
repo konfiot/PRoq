@@ -4,10 +4,9 @@
 import urllib
 import json
 import subprocess
-import imaplib
+import imaplib 
+from icalendar import Calendar, Event, vDDDTypes
 from datetime import datetime
-import caldav
-
 
 
 def get_weather_string (id) :
@@ -114,22 +113,15 @@ unread = len(obj.search(None, 'UnSeen')[1][0].split())
 
 rdv = "Aucun rendez-vous"
 
-url = "http://test-smartwake:b5a1cc4965b6d43790ac774350abf653@sync.memotoo.com/calDAV/test-smartwake/"
+req = urllib.urlopen("https://sync.memotoo.com/calendarICS.php?l=test-smartwake&p=b5a1cc4965b6d43790ac774350abf653")
 
-'''client = caldav.DAVClient(url)
-principal = caldav.Principal(client, url)
-calendars = principal.calendars()
-
-if len(calendars) > 0:
-	calendar = calendars[0]
-	results = calendar.date_search(datetime.today())
-	if results is not None:
-		rdv = ""
-	for event in results:
-		print event
-
-'''
+gcal = Calendar.from_ical(req.read())
+for component in gcal.walk():
+	if component.name == "VEVENT":
+		print (component.get('summary')) 
+		if datetime.today() >= vDDDTypes.from_ical(component.get('dtstart')) and datetime.today() <= vDDDTypes.from_ical(component.get('dtend')) :
+			print ("Dan est bien un kouby") 
 
 # Synthèse vocale
 
-subprocess.call(["espeak", "-v", "mb/mb-fr1", "Temps prévu pour aujourd'hui : " + weather_string + ". Vous avez "+ str(unread) + "Messages non lus"])
+subprocess.call(["espeak", "-v", "mb/mb-fr1", "Temps prévu pour aujourd'hui : " + weather_string + ". Vous avez "+ str(unread) + "Messages non lus. "])
