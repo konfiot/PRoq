@@ -6,7 +6,8 @@ import json
 import subprocess
 import imaplib 
 from icalendar import Calendar, Event, vDDDTypes
-from datetime import datetime
+from datetime import datetime, date
+import pytz
 
 
 def get_weather_string (id) :
@@ -112,16 +113,28 @@ unread = len(obj.search(None, 'UnSeen')[1][0].split())
 # Gestion Calendrier
 
 rdv = "Aucun rendez-vous"
-
 req = urllib.urlopen("https://sync.memotoo.com/calendarICS.php?l=test-smartwake&p=b5a1cc4965b6d43790ac774350abf653")
-
 gcal = Calendar.from_ical(req.read())
+
+i = 0
+
 for component in gcal.walk():
-	if component.name == "VEVENT":
-		print (component.get('summary')) 
-		if datetime.today() >= vDDDTypes.from_ical(component.get('dtstart')) and datetime.today() <= vDDDTypes.from_ical(component.get('dtend')) :
-			print ("Dan est bien un kouby") 
+	if component.name == "VEVENT" :
+		if type(vDDDTypes.from_ical(component.get('dtstart'))) == type(date.today()) :
+			start = vDDDTypes.from_ical(component.get('dtstart'))
+			end = vDDDTypes.from_ical(component.get('dtend'))
+		elif type(vDDDTypes.from_ical(component.get('dtstart'))) == type(datetime.today()) :
+			start = vDDDTypes.from_ical(component.get('dtstart')).date()
+			end = vDDDTypes.from_ical(component.get('dtend')).date()
+
+		if date.today() >= start and date.today() <= end :
+			if i == 0 :
+				rdv = component.get("summary") + ", "
+			else :
+				rdv += component.get("summary") + ", "
+			i += 1
+
 
 # Synthèse vocale
 
-subprocess.call(["espeak", "-v", "mb/mb-fr1", "Temps prévu pour aujourd'hui : " + weather_string + ". Vous avez "+ str(unread) + "Messages non lus. "])
+subprocess.call(["espeak", "-v", "mb/mb-fr1", "Temps prevu pour aujourd'hui : " + weather_string + ". Vous avez "+ str(unread) + "Messages non lus. " + str(i) + " evenement aujourd'hui : " + rdv])
