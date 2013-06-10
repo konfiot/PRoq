@@ -112,7 +112,7 @@ unread = len(obj.search(None, 'UnSeen')[1][0].split())
 
 # Gestion Calendrier
 
-rdv = "Aucun rendez-vous"
+rdv = ""
 req = urllib.urlopen("https://sync.memotoo.com/calendarICS.php?l=test-smartwake&p=b5a1cc4965b6d43790ac774350abf653")
 gcal = Calendar.from_ical(req.read())
 
@@ -128,10 +128,7 @@ for component in gcal.walk():
 			end = vDDDTypes.from_ical(component.get('dtend')).date()
 
 		if date.today() >= start and date.today() <= end :
-			if i == 0 :
-				rdv = component.get("summary") + ", "
-			else :
-				rdv += component.get("summary") + ", "
+			rdv += component.get("summary") + ", "
 			i += 1
 
 
