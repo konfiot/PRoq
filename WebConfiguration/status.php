@@ -10,42 +10,27 @@
  
   </head>
   <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container-fluid">
-				<a class="brand" href="index.html">Smart wake</a>
-				<div class="nav-collapse collapse">
-					<p class="navbar-text pull-right">
-						Petit message sympatique de bienvenue
-					</p>
-					<ul class="nav">
-						<li><a href="index.html">Accueil</a></li>
-						<li class="active"><a href="status.html">Status</a></li>
-						<li><a href="parametres.html">Paramètres</a></li>
-					</ul>
-				</div> <!--/.nav-collapse -->
-			</div>
-		</div>
-    </div>
-    
+
+    <?php include("elements/top-navbar.php"); ?>
+  
     <div class="container-fluid">
-		<div class="row-fluid">
-			<div class="offset1 span10 hero-unit">
-				<h1>Status</h1>
-				
-				<h2>Quoi mettre sur cette page ? <?php echo $_SERVER['REQUEST_URI']; ?></h2>
-				<p>
-					En fait je doit l'avouer, j'ai pensé à cette page d'un manière un peut <em>pulsat... pulsative ... pulrrblr ...</em> <strong>expeditive</strong><br />
-					Donc en fait je pensais mettre des trucs du genre mettre un recapitulatif des infos et des paramètres (oui très useless oui ...) ou encore le status du serveur (ce qui est en soit très stupide --'). <br />
-					Et pis y a aussi le fait qu'il faut justifier la navbar :s
-				</p>
-				<p>
-					Et au passage ca m'aurrais éclaté d'utilliser ce genre de trucs <br />
-					<span class="label">Bonswir</span> <span class="label label-warning">Attention !!! ca va pokuler !!!</span> <span class="label label-important">Trop tard ...</span>
-				</p>
-			</div>
-		</div>
-	</div>
+        <div class="row-fluid">
+            <div class="offset1 span10 hero-unit">
+                <h1>Status</h1>
+                
+                <h2>Quoi mettre sur cette page ?</h2>
+                <p>
+                    En fait je doit l'avouer, j'ai pensé à cette page d'un manière un peut <em>pulsat... pulsative ... pulrrblr ...</em> <strong>expeditive</strong><br />
+                    Donc en fait je pensais mettre des trucs du genre mettre un recapitulatif des infos et des paramètres (oui très useless oui ...) ou encore le status du serveur (ce qui est en soit très stupide --'). <br />
+                    Et pis y a aussi le fait qu'il faut justifier la navbar :s
+                </p>
+                <p>
+                    Et au passage ca m'aurrais éclaté d'utilliser ce genre de trucs <br />
+                    <span class="label">Bonswir</span> <span class="label label-warning">Attention !!! ca va pokuler !!!</span> <span class="label label-important">Trop tard ...</span>
+                </p>
+            </div>
+        </div>
+    </div>
     
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
