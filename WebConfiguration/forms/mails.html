@@ -1,4 +1,50 @@
-<h1>Paramètrage des mails</h1>
+<h1>Paramètres</h1>
 <p>
-    Ici, plus tard ... un formulaire
+    <form class="form-horizontal">
+    
+        <fieldset>
+        <legend>Compte mail</legend>
+        
+        <div class="control-group">
+            <label class="control-label" for="AdresseMail">Adresse email</label>
+                <div class="controls">
+                    <input type="text" id="AdresseMail" class="first_focus" placeholder="Exemple : name@exemple.com">
+                    <span class="help-inline">Ici, il y aura les erreur, et ca sera tout rouge</span>
+                </div>
+            </div>
+            
+            <div class="control-group success">
+                <label class="control-label" for="Password">Mot de passe</label>
+                <div class="controls">
+                    <input type="password" id="PasswordMail" placeholder="">
+                    <span class="help-inline">Genre cette ligne a pas de probleme</span>
+                </div>
+            </div>
+            
+            <div class="control-group error">
+                <label class="control-label" for="ServMail">Serveur mail</label>
+                <div class="controls">
+                    <input type="text" id="ServMail" placeholder="Facultatif">
+                    <span class="help-inline">Et là y a une erreur</span>
+                </div>
+            </div>
+        </fieldset>
+        
+        <div class="input-prepend input-append offset6"> 
+            <button class="btn" type="button">Annuler</button>
+            <button class="btn" type="button">Valider</button> 
+        </div>
+    </form>
+        
+    <div class="alert span11">
+        <strong>Attention !</strong> Je sais pas ... Un truc louche
+    </div>
+    
+    <div class="alert span11 alert-success">
+        Le formulaire a été envoyé avec succès
+    </div>
+    
+    <div class="alert span11 alert-danger">
+        <strong>Erreur !</strong> Le formulaire n'a pas put être envoyé
+    </div>
 </p>
