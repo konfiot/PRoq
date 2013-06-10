@@ -33,7 +33,7 @@
 			<div class="offset1 span10 hero-unit">
 				<h1>Status</h1>
 				
-				<h2>Quoi mettre sur cette page ?</h2>
+				<h2>Quoi mettre sur cette page ? <?php echo $_SERVER['REQUEST_URI']; ?></h2>
 				<p>
 					En fait je doit l'avouer, j'ai pensé à cette page d'un manière un peut <em>pulsat... pulsative ... pulrrblr ...</em> <strong>expeditive</strong><br />
 					Donc en fait je pensais mettre des trucs du genre mettre un recapitulatif des infos et des paramètres (oui très useless oui ...) ou encore le status du serveur (ce qui est en soit très stupide --'). <br />
