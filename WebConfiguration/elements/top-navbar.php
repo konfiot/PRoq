@@ -7,7 +7,7 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container-fluid">
-                <a class="brand" href="index.html">Smart wake</a>
+                <a class="brand" href="index.php">Smart wake</a>
                 <div class="nav-collapse collapse">
                     <p class="navbar-text pull-right">
                         Petit message sympatique de bienvenue

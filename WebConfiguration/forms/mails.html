@@ -5,27 +5,27 @@
         <fieldset>
         <legend>Compte mail</legend>
         
-        <div class="control-group">
-            <label class="control-label" for="AdresseMail">Adresse email</label>
+            <div class="control-group">
+                <label class="control-label" for="AdresseMail">Adresse email</label>
                 <div class="controls">
                     <input type="text" id="AdresseMail" class="first_focus" placeholder="Exemple : name@exemple.com">
-                    <span class="help-inline">Ici, il y aura les erreur, et ca sera tout rouge</span>
+                    <span class="help-inline"></span> <!-- Message d'erreur -->
                 </div>
             </div>
             
-            <div class="control-group success">
-                <label class="control-label" for="Password">Mot de passe</label>
+            <div class="control-group">
+                <label class="control-label" for="MailPassword">Mot de passe</label>
                 <div class="controls">
-                    <input type="password" id="PasswordMail" placeholder="">
-                    <span class="help-inline">Genre cette ligne a pas de probleme</span>
+                    <input type="password" id="MailPassword" placeholder="">
+                    <span class="help-inline"></span> <!-- Message d'erreur -->
                 </div>
             </div>
             
-            <div class="control-group error">
+            <div class="control-group">
                 <label class="control-label" for="ServMail">Serveur mail</label>
                 <div class="controls">
                     <input type="text" id="ServMail" placeholder="Facultatif">
-                    <span class="help-inline">Et là y a une erreur</span>
+                    <span class="help-inline"></span> <!-- Message d'erreur -->
                 </div>
             </div>
         </fieldset>
@@ -36,15 +36,7 @@
         </div>
     </form>
         
-    <div class="alert span11">
-        <strong>Attention !</strong> Je sais pas ... Un truc louche
-    </div>
-    
-    <div class="alert span11 alert-success">
-        Le formulaire a été envoyé avec succès
-    </div>
-    
-    <div class="alert span11 alert-danger">
-        <strong>Erreur !</strong> Le formulaire n'a pas put être envoyé
+    <div class="alert span11 hide" id="generalErreur">
+        Ici, les erreurs
     </div>
 </p>
