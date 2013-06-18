@@ -29,6 +29,8 @@ $(".leftnav").mousedown(function(e){//Quand on clic sur un élément du menu
 
 
 var config = {
+    initialValue : "",                                                           //Une variable qui contient la valeure initiale du champ édité
+    
     //Une fonction qui sert à éditer l'erreur ; sel est l'id du champ
     erreur: function(sel, type, message) {
         var el = $(sel);
@@ -49,7 +51,13 @@ var config = {
     //Connecte tous les inputs
     connectInputs : function(){
         //Check le champ lors de la perte du focus
+        $("input").focusin(function(){
+            config.initialValue = this.value;
+        });
+        
         $("input").focusout(function(){
+            if( config.initialValue == this.value ) return;             //Rien n'a changé
+            
             if(this.value === "" && config.inputP[this.id]["obligatoire"])
                 config.erreur("#"+this.id, "error", "Champ obligatoire");
             else if(config.inputP[this.id]["format"].test(this.value))
