@@ -18,7 +18,7 @@
                         Petit message sympatique de bienvenue
                     </p>
                     <ul class="nav">
-                        <li <?php if($page=="index.php")      echo 'class="active"'; ?> ><a href="index.php">Accueil</a></li>
+                    <li <?php if($page=="index.php")      echo 'class="active"'; ?> ><a href="index.php">Accueil</a></li>
                         <li <?php if($page=="status.php")     echo 'class="active"'; ?> ><a href="status.php">Status</a></li>
                         <li <?php if($page=="parametres.php") echo 'class="active"'; ?> ><a href="parametres.php">Paramètres</a></li>
                     </ul>

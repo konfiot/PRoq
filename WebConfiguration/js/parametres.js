@@ -14,7 +14,7 @@ $(".leftnav").mousedown(function(e){//Quand on clic sur un élément du menu
 
     $(".hero-unit").load("forms/" + onglet + ".html", function(){       //On envoit la requette
         config.erreur("AdresseMail", "success", "Salut, ca va  ?");
-        connectInputs();                                                //On connecte les inputs
+        config.connectInputs();                                         //On connecte les inputs
     });
     
 });
@@ -24,7 +24,7 @@ $(".leftnav").mousedown(function(e){//Quand on clic sur un élément du menu
 
 
 /*******************************************************************************************************************************
-**                                                Gestion des formulaires                                                    **        
+**                                                 Gestion des formulaires                                                    **        
 *******************************************************************************************************************************/
 
 
@@ -44,32 +44,48 @@ var config = {
             $("#generalErreur").removeClass("hide alert-success alert-danger");
             $("#generalErreur").addClass(type).html(message);
         }
-    }
-}
+    },
 
-//Connecte tous les inputs
-function connectInputs(){
-    //Check le champ lors de la perte du focus
-    $("input").focusout(function(){
-        if(this.value == "" && inputP[this.id]["obligatoire"])
-            config.erreur("#"+this.id, "error", "Champ obligatoire");
-        else if(inputP[this.id]["format"].test(this.value))
-            config.erreur("#"+this.id, "success", "");
-        else
-            config.erreur("#"+this.id, "error", inputP[this.id]["error"]);
-    });
+    //Connecte tous les inputs
+    connectInputs : function(){
+        //Check le champ lors de la perte du focus
+        $("input").focusout(function(){
+            if(this.value === "" && config.inputP[this.id]["obligatoire"])
+                config.erreur("#"+this.id, "error", "Champ obligatoire");
+            else if(config.inputP[this.id]["format"].test(this.value))
+                config.erreur("#"+this.id, "success", "");
+            else
+                config.erreur("#"+this.id, "error", config.inputP[this.id]["error"]);
+        });
+        
+        //Quand on enleve le focus de l'adresse mail ca change l'adresse du serveur par defaut
+        $("#AdresseMail").focusout(function(){
+            var c = $("#AdresseMail");
+            if( config.inputP["AdresseMail"]["format"].test(c.val()) ){
+                var serv = c.val()
+                serv = serv.substring(serv.indexOf("@")+1, serv.length);
+                $("#ServMail").attr("placeholder", "imap." + serv);
+                
+                config.erreur("#ServMail", "success", "Trouvé automatiquement");
+            }
+            else{
+                $("#ServMail").attr("placeholder", "Facultatif");                    //Faut bien reset le placeholder
+                config.erreur("#ServMail", "", "");
+            }
+        });
+    },
+    
+    //Configuraton de la validation du formulaire
+    inputP : {"AdresseMail" : {
+                    "error" : "Adresse mail invalide",
+                    "format" : /^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$/,
+                    "obligatoire" : true },
+                  "MailPassword" : {
+                    "error" : "Mot de passe non valide",
+                    "format" : /()/,
+                    "obligatoire" : true },
+                  "ServMail" : {
+                    "error" : "Serveur mail incorrect",
+                    "format" : /()/ ,
+                    "obligatoire" : false } }
 }
-
-//Configuraton de la validation du formulaire
-var inputP = {"AdresseMail" : {
-                "error" : "Adresse mail invalide",
-                "format" : /^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$/,
-                "obligatoire" : true },
-              "MailPassword" : {
-                "error" : "Mot de passe non valide",
-                "format" : /()/,
-                "obligatoire" : true },
-              "ServMail" : {
-                "error" : "Serveur mail incorrect",
-                "format" : /()/ ,
-                "obligatoire" : false } };
