@@ -4,17 +4,17 @@ $(function() {  //Executé après le chargement
 *******************************************************************************************************************************/
 
 $(".leftnav").mousedown(function(e){//Quand on clic sur un élément du menu
-    $(".leftnav").removeClass("active");                                //On desactive tout
-    $(e.delegateTarget).addClass("active");                             //On active le bon
+    $(".leftnav").removeClass("active");                                        //On desactive tout
+    $(e.delegateTarget).addClass("active");                                     //On active le bon
     
     //---------------------
     
-    var onglet = $(e.delegateTarget).children("a").attr("href");        //On choppe l'id ciblé par le lien
-    onglet = onglet.substring(1, onglet.length);                        //On vire le '#'
+    var onglet = $(e.delegateTarget).children("a").attr("href");                //On choppe l'id ciblé par le lien
+    onglet = onglet.substring(1, onglet.length);                                //On vire le '#'
 
-    $(".hero-unit").load("forms/" + onglet + ".html", function(){       //On envoit la requette
+    $(".hero-unit").load("forms/" + onglet + ".html", function(){               //On envoit la requette
         config.erreur("AdresseMail", "success", "Salut, ca va  ?");
-        config.connectInputs();                                         //On connecte les inputs
+        config.connectInputs();                                                 //On connecte les inputs
     });
     
 });
@@ -29,7 +29,7 @@ $(".leftnav").mousedown(function(e){//Quand on clic sur un élément du menu
 
 
 var config = {
-    initialValue : "",                                                           //Une variable qui contient la valeure initiale du champ édité
+    initialValue : "",                                                          //Une variable qui contient la valeure initiale du champ édité
     
     //Une fonction qui sert à éditer l'erreur ; sel est l'id du champ
     erreur: function(sel, type, message) {
@@ -56,7 +56,7 @@ var config = {
         });
         
         $("input").focusout(function(){
-            if( config.initialValue == this.value ) return;             //Rien n'a changé
+            if( config.initialValue == this.value ) return;                     //Rien n'a changé
             
             if(this.value === "" && config.inputP[this.id]["obligatoire"])
                 config.erreur("#"+this.id, "error", "Champ obligatoire");
@@ -77,7 +77,7 @@ var config = {
                 config.erreur("#ServMail", "success", "Trouvé automatiquement");
             }
             else{
-                $("#ServMail").attr("placeholder", "Facultatif");                    //Faut bien reset le placeholder
+                $("#ServMail").attr("placeholder", "Facultatif");               //Faut bien reset le placeholder
                 config.erreur("#ServMail", "", "");
             }
         });
