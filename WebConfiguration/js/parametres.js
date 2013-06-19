@@ -69,9 +69,9 @@ var config = {
         $("#AdresseMail").focusout(function(){        
             var c = $("#AdresseMail");
             var serv = c.val()
-            serv = serv.substring(serv.indexOf("@")+1, serv.length);
+            serv = serv.substring(serv.indexOf("@")+1, serv.length);            //On isole le sufixe de l'adresse mail
 
-            if( serv !== "")
+            if( serv !== "")                                                    //Si quelque chose est entré dans le champ serveur, on cherche le serveur mail
                 $.ajax({
                     type: "GET",
                     url: "functions/webmail.php?adresse=" + serv,
@@ -86,7 +86,7 @@ var config = {
                     }
                 });
             else{
-                $("#ServMail").attr("placeholder", "Facultatif");                
+                $("#ServMail").attr("placeholder", "Facultatif");               //Si rien n'est inscrit, on reset le champ mail
                 config.erreur("#ServMail", "", "");
             }
         });
