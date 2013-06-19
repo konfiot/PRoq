@@ -3,22 +3,20 @@ $(function() {  //Executé après le chargement
 **                                                  Gestion du menu                                                           **        
 *******************************************************************************************************************************/
 
-$(".leftnav").mousedown(function(e){//Quand on clic sur un élément du menu
-    $(".leftnav").removeClass("active");                                        //On desactive tout
-    $(e.delegateTarget).addClass("active");                                     //On active le bon
+    $(".leftnav").mousedown(function(e){//Quand on clic sur un élément du menu
+        $(".leftnav").removeClass("active");                                    //On desactive tout
+        $(e.delegateTarget).addClass("active");                                 //On active le bon
+        
+        //---------------------
+        
+        var onglet = $(e.delegateTarget).children("a").attr("href");            //On choppe l'id ciblé par le lien
+        onglet = onglet.substring(1, onglet.length);                            //On vire le '#'
     
-    //---------------------
+        $(".hero-unit").load("forms/" + onglet + ".html", function(){           //On envoit la requette
+            config.connectInputs();                                             //On connecte les inputs
+        });
+    });      
     
-    var onglet = $(e.delegateTarget).children("a").attr("href");                //On choppe l'id ciblé par le lien
-    onglet = onglet.substring(1, onglet.length);                                //On vire le '#'
-
-    $(".hero-unit").load("forms/" + onglet + ".html", function(){               //On envoit la requette
-        config.erreur("AdresseMail", "success", "Salut, ca va  ?");
-        config.connectInputs();                                                 //On connecte les inputs
-    });
-    
-});
-
 /****/
 });             //Executé après le chargement {fin}
 
@@ -50,11 +48,12 @@ var config = {
 
     //Connecte tous les inputs
     connectInputs : function(){
-        //Check le champ lors de la perte du focus
+        //Enregistre la valeure du champ avant l'édition
         $("input").focusin(function(){
             config.initialValue = this.value;
         });
         
+        //Check le champ lors de la perte du focus
         $("input").focusout(function(){
             if( config.initialValue == this.value ) return;                     //Rien n'a changé
             
@@ -67,20 +66,31 @@ var config = {
         });
         
         //Quand on enleve le focus de l'adresse mail ca change l'adresse du serveur par defaut
-        $("#AdresseMail").focusout(function(){
+        $("#AdresseMail").focusout(function(){        
             var c = $("#AdresseMail");
-            if( config.inputP["AdresseMail"]["format"].test(c.val()) ){
-                var serv = c.val()
-                serv = serv.substring(serv.indexOf("@")+1, serv.length);
-                $("#ServMail").attr("placeholder", "imap." + serv);
-                
-                config.erreur("#ServMail", "success", "Trouvé automatiquement");
-            }
+            var serv = c.val()
+            serv = serv.substring(serv.indexOf("@")+1, serv.length);
+
+            if( serv !== "")
+                $.ajax({
+                    type: "GET",
+                    url: "functions/webmail.php?adresse=" + serv,
+                    dataType: "text",
+                    success: function(serveur){
+                        $("#ServMail").attr("placeholder", serveur);
+                        
+                        if(serveur === ""){
+                            config.erreur("#ServMail", "error", "Impossible de trouver le serveur");
+                            $("#ServMail").attr("placeholder", "A indiquer manuellement");
+                        }                        
+                    }
+                });
             else{
-                $("#ServMail").attr("placeholder", "Facultatif");               //Faut bien reset le placeholder
+                $("#ServMail").attr("placeholder", "Facultatif");                
                 config.erreur("#ServMail", "", "");
             }
         });
+        
     },
     
     //Configuraton de la validation du formulaire
@@ -95,5 +105,5 @@ var config = {
                   "ServMail" : {
                     "error" : "Serveur mail incorrect",
                     "format" : /()/ ,
-                    "obligatoire" : false } }
+                    "obligatoire" : false } }                    
 }
