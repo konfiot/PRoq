@@ -108,14 +108,23 @@ var config = {
         $("#btn_annuler").click(function(){
             $("#confirmModal").modal("show");
             
-            $("#confirmModalOui").click(function(){
+            var valide = function(){
                 config.resetForm();
                 $("#confirmModal").modal("hide");
                 config.checkForm();
-            });
-            $("#confirmModalNon").click(function(){
+                
+                $("#confirmModalOui").unbind("click", valide);                  //On supprime les évenements
+                $("#confirmModalNon").unbind("click", refuse);
+            }
+            var refuse = function(){
                 $("#confirmModal").modal("hide");
-            });
+                
+                $("#confirmModalOui").unbind("click", valide);                  //On supprime les évenements
+                $("#confirmModalNon").unbind("click", refuse);
+            }
+            
+            $("#confirmModalOui").bind("click", valide);
+            $("#confirmModalNon").bind("click", refuse);
         });
         
     },
