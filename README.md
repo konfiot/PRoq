@@ -4,10 +4,10 @@ smart-wake
 Le projet SmartWake de SI 2013
 
 #Prérequis
--Linux
--Python
--Apache + PHP
--Espeak
+* Linux
+* Python
+* Apache + PHP
+* Espeak
 
 
 #Installation
