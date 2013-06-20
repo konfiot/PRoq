@@ -41,7 +41,7 @@
             }
         }
     }
-    else{                                                               //On retourne le contenu brut du fichier
+    else{                                                           //On retourne le contenu brut du fichier
         echo $json;
     }
     

@@ -7,17 +7,25 @@ $(function() {  //Executé après le chargement
         $(".leftnav").removeClass("active");                                    //On desactive tout
         $(e.delegateTarget).addClass("active");                                 //On active le bon
         
-        //---------------------
+        //----------------------------
         
-        var onglet = $(e.delegateTarget).children("a").attr("href");            //On choppe l'id ciblé par le lien
-        onglet = onglet.substring(1, onglet.length);                            //On vire le '#'
+        config.onglet = $(e.delegateTarget).children("a").attr("href");         //On choppe l'id ciblé par le lien
+        config.onglet = config.onglet.substring(1, config.onglet.length);       //On vire le '#'
     
-        $(".hero-unit").load("forms/" + onglet + ".html", function(){           //On envoit la requette
+        $(".hero-unit").load("forms/" + config.onglet + ".html", function(){    //On envoit la requette
             config.connectInputs();                                             //On connecte les inputs
-            if(onglet == "mail")
+            if(config.onglet == "mail")
                 mail.connectInputs();
+        
+            config.resetForm();                                                 //On met les valeures existantes
         });
     });      
+        
+    /**************************************************************************/
+    
+    $.getJSON("functions/config.php", function(donnees){                        //On recupère la configuration sur le serveur
+        config.config = donnees;
+    });
     
 /****/
 });             //Executé après le chargement {fin}
@@ -30,6 +38,8 @@ $(function() {  //Executé après le chargement
 
 var config = {
     initialValue : "",                                                          //Une variable qui contient la valeure initiale du champ édité
+    onglet : "defaut",                                                          //Contient l'onglet actuel
+    config : {},                                                                //Et celle - ci la configuration json
     
     //Une fonction qui sert à éditer l'erreur ; sel est l'id du champ
     erreur: function(sel, type, message) {
@@ -48,6 +58,14 @@ var config = {
         }
     },
     
+    resetForm : function(){
+        $("input").each(function(e){
+            var champ = config.inputP[this.id]["nomChamp"];
+            this.value = config.config[config.onglet][champ];
+        });
+    },
+    
+    //Verifie si un champ est valide et le met en forme
     checkInput : function(sel){
         var e = $("#" + sel);
         
@@ -80,14 +98,17 @@ var config = {
     
     //Configuraton de la validation du formulaire
     inputP : {  "AdresseMail" : {
+                    "nomChamp" : "full_adress",
                     "error" : "Adresse mail invalide",
                     "format" : /^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$/,
                     "obligatoire" : true },
                 "MailPassword" : {
+                    "nomChamp" : "passwd",
                     "error" : "Mot de passe non valide",
                     "format" : /()/,
                     "obligatoire" : true },
                 "ServMail" : {
+                    "nomChamp" : "server",
                     "error" : "Serveur mail incorrect",
                     "format" : /()/ ,
                     "obligatoire" : false }

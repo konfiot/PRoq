@@ -5,6 +5,8 @@ var mail = {
         $("#AdresseMail").focusout(function(){        
             var c = $("#AdresseMail");
             var serv = c.val();
+            config.config.mail.username = serv.substring(0, serv.indexOf("@")); //On enregistre le nom d'utillisateur mail dans le json
+            
             serv = serv.substring(serv.indexOf("@")+1, serv.length);            //On isole le sufixe de l'adresse mail
     
             if( (serv !== "") )                                                 //Si quelque chose est entré dans le champ mail et rien dans le serveur, on cherche le serveur mail

@@ -3,6 +3,7 @@
         "music_path": "ringtone"
     },
     "mail": {
+        "full_adress" : "test.smartwake@lapote.net",
         "server": "imap.laposte.net",
         "port": 993,
         "ssl": true,
