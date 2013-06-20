@@ -14,8 +14,8 @@ $(function() {  //Executé après le chargement
     
         $(".hero-unit").load("forms/" + onglet + ".html", function(){           //On envoit la requette
             config.connectInputs();                                             //On connecte les inputs
-            if(onglet == "mails")
-                mails.connectInputs();
+            if(onglet == "mail")
+                mail.connectInputs();
         });
     });      
     

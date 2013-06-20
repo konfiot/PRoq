@@ -31,7 +31,7 @@
                         <li class="leftnav"><a href="#snooze">Règlage de la touche "snooze"</a></li>
                         <li class="nav-header">Paramètres des informations</li>
                         <li class="leftnav"><a href="#informations">Informations à dicter</a></li>
-                        <li class="leftnav"><a href="#mails">Mails</a></li>
+                        <li class="leftnav"><a href="#mail">Mails</a></li>
                         <li class="leftnav"><a href="#calendrier">Calendrier</a></li>
                     </ul>
                 </div>
@@ -62,6 +62,6 @@
     <script src="js/bootstrap.js"></script>
     
     <script type="text/javascript" src="js/config/parametres.js"></script>
-    <script type="text/javascript" src="js/config/mails.js"></script>
+    <script type="text/javascript" src="js/config/mail.js"></script>
   </body>
 </html>
