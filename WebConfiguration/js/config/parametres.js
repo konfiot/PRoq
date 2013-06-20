@@ -18,6 +18,7 @@ $(function() {  //Executé après le chargement
                 mail.connectInputs();
         
             config.resetForm();                                                 //On met les valeures existantes
+            config.checkForm();                                                 //On colore les champs
         });
     });      
         
@@ -80,6 +81,15 @@ var config = {
             
         return false;
     },
+    
+    //Verifie tous les champs et remet en forme
+    checkForm : function(){
+        var test = true;
+        $("input").each(function(e){
+            test = config.checkInput(this.id) ? test :false;
+        });
+        return test;
+    },
 
     //Connecte tous les inputs
     connectInputs : function(){
@@ -92,6 +102,20 @@ var config = {
         $("input").focusout(function(){
             if( config.initialValue != this.value )                             //Quelque-chose a changé
                 config.checkInput(this.id);
+        });
+        
+        //Pour reset le formulaire
+        $("#btn_annuler").click(function(){
+            $("#confirmModal").modal("show");
+            
+            $("#confirmModalOui").click(function(){
+                config.resetForm();
+                $("#confirmModal").modal("hide");
+                config.checkForm();
+            });
+            $("#confirmModalNon").click(function(){
+                $("#confirmModal").modal("hide");
+            });
         });
         
     },

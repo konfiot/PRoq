@@ -58,6 +58,8 @@
         </div>
     </div>
     
+    <?php include("elements/fenConfirm.php"); ?>
+    
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
     
