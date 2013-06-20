@@ -6,9 +6,9 @@
     <div class="modal hide fade" id="confirmModal">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>Confirmation de la suppression</h3>
+            <h3>Confirmation de la suppression</h3>
+        <div class="modal-body"></i>
         </div>
-        <div class="modal-body">
             <h5>Etes-vous sûr de vouloir réinitialiser le formulaire ?</h5>
             <p>
                 Toutes les modifications apportés depuis la dernière soumission vont êtres <em>supprimées</em>.
