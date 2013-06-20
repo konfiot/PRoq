@@ -14,6 +14,8 @@ $(function() {  //Executé après le chargement
     
         $(".hero-unit").load("forms/" + onglet + ".html", function(){           //On envoit la requette
             config.connectInputs();                                             //On connecte les inputs
+            if(onglet == "mails")
+                mails.connectInputs();
         });
     });      
     
@@ -45,6 +47,21 @@ var config = {
             $("#generalErreur").addClass(type).html(message);
         }
     },
+    
+    checkInput : function(sel){
+        var e = $("#" + sel);
+        
+        if( e.val() === "" && config.inputP[sel]["obligatoire"] )
+            config.erreur("#"+sel, "error", "Champ obligatoire");
+        else if( config.inputP[sel]["format"].test( e.val() ) ){
+            config.erreur("#"+sel, "success", "");
+            return true
+        }
+        else
+            config.erreur("#"+sel, "error", config.inputP[sel]["error"]);
+            
+        return false;
+    },
 
     //Connecte tous les inputs
     connectInputs : function(){
@@ -55,56 +72,24 @@ var config = {
         
         //Check le champ lors de la perte du focus
         $("input").focusout(function(){
-            if( config.initialValue == this.value ) return;                     //Rien n'a changé
-            
-            if(this.value === "" && config.inputP[this.id]["obligatoire"])
-                config.erreur("#"+this.id, "error", "Champ obligatoire");
-            else if(config.inputP[this.id]["format"].test(this.value))
-                config.erreur("#"+this.id, "success", "");
-            else
-                config.erreur("#"+this.id, "error", config.inputP[this.id]["error"]);
-        });
-        
-        //Quand on enleve le focus de l'adresse mail ca change l'adresse du serveur par defaut
-        $("#AdresseMail").focusout(function(){        
-            var c = $("#AdresseMail");
-            var serv = c.val()
-            serv = serv.substring(serv.indexOf("@")+1, serv.length);            //On isole le sufixe de l'adresse mail
-
-            if( serv !== "")                                                    //Si quelque chose est entré dans le champ serveur, on cherche le serveur mail
-                $.ajax({
-                    type: "GET",
-                    url: "functions/webmail.php?adresse=" + serv,
-                    dataType: "text",
-                    success: function(serveur){
-                        $("#ServMail").attr("placeholder", serveur);
-                        config.erreur("#ServMail", "succes", "");
-                        
-                        if(serveur === ""){
-                            config.erreur("#ServMail", "error", "Impossible de trouver le serveur");
-                            $("#ServMail").attr("placeholder", "A indiquer manuellement");
-                        }                        
-                    }
-                });
-            else{
-                $("#ServMail").attr("placeholder", "Facultatif");               //Si rien n'est inscrit, on reset le champ mail
-                config.erreur("#ServMail", "", "");
-            }
+            if( config.initialValue != this.value )                             //Quelque-chose a changé
+                config.checkInput(this.id);
         });
         
     },
     
     //Configuraton de la validation du formulaire
-    inputP : {"AdresseMail" : {
+    inputP : {  "AdresseMail" : {
                     "error" : "Adresse mail invalide",
                     "format" : /^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$/,
                     "obligatoire" : true },
-                  "MailPassword" : {
+                "MailPassword" : {
                     "error" : "Mot de passe non valide",
                     "format" : /()/,
                     "obligatoire" : true },
-                  "ServMail" : {
+                "ServMail" : {
                     "error" : "Serveur mail incorrect",
                     "format" : /()/ ,
-                    "obligatoire" : false } }                    
+                    "obligatoire" : false }
+             }                    
 }

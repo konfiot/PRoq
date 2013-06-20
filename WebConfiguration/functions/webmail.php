@@ -5,7 +5,7 @@
     *       - Argument "protocole" = imap (defaut) ou pop3
     ***********************************************************************/
 
-    if($_GET["protocole"] == "")
+    if( !isset($_GET["protocole"]) )
         $_GET["protocole"] = "imap";
     
 
