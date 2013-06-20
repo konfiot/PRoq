@@ -1,0 +1,18 @@
+{
+    "general": {
+        "music_path": "ringtone"
+    },
+    "mail": {
+        "server": "imap.laposte.net",
+        "port": 993,
+        "ssl": true,
+        "username": "test.smartwake",
+        "passwd": "helicoptere"
+    },
+    "calendar": {
+        "url": "https://sync.memotoo.com/calendarICS.php?l=test-smartwake&p=b5a1cc4965b6d43790ac774350abf653"
+    },
+    "weather": {
+        "location": "Eaubonne"
+    }
+}

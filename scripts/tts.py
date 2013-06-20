@@ -94,9 +94,15 @@ def get_weather_string (id) :
 	
 	return string
 
+# Ouverture du fichier de configuration
+
+conf_file = open("../conf/wake.json")
+conf = json.load(conf_file)
+
+
 # Gestion Météo
 
-req = urllib.urlopen("http://api.openweathermap.org/data/2.5/weather?q=Eaubonne");
+req = urllib.urlopen("http://api.openweathermap.org/data/2.5/weather?q=" + conf["weather"]["location"]);
 data = json.load(req)
 
 id = data["weather"][0]["id"]
@@ -105,15 +111,17 @@ weather_string = get_weather_string(id);
 
 # Gestion Mail
 
-obj = imaplib.IMAP4_SSL('imap.laposte.net','993')
-obj.login('test.smartwake','helicoptere')
+mail_conf = conf["mail"]
+
+obj = imaplib.IMAP4_SSL(mail_conf["server"], mail_conf["port"])
+obj.login(mail_conf["username"], mail_conf["passwd"])
 obj.select()
 unread = len(obj.search(None, 'UnSeen')[1][0].split())
 
 # Gestion Calendrier
 
 rdv = ""
-req = urllib.urlopen("https://sync.memotoo.com/calendarICS.php?l=test-smartwake&p=b5a1cc4965b6d43790ac774350abf653")
+req = urllib.urlopen(conf["calendar"]["url"])
 gcal = Calendar.from_ical(req.read())
 
 i = 0
