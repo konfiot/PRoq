@@ -1,10 +1,10 @@
-#!/usr/bin/python
+#!/usr/bin/python2.7
 # -*- coding: utf-8 -*-
 
 import subprocess
 import os
 import time
-
+import json
 
 def wait_for_dismiss () :
 	time.sleep(10)
