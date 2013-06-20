@@ -5,9 +5,9 @@ Le projet SmartWake de SI 2013
 
 #Prérequis
 * Linux
-* Python
-* Apache + PHP
-* Espeak
+* Python 2.7
+* Apache  PHP
+* SVOX Pico
 
 
 #Installation
