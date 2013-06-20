@@ -78,6 +78,7 @@ var config = {
                     dataType: "text",
                     success: function(serveur){
                         $("#ServMail").attr("placeholder", serveur);
+                        config.erreur("#ServMail", "succes", "");
                         
                         if(serveur === ""){
                             config.erreur("#ServMail", "error", "Impossible de trouver le serveur");
