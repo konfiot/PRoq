@@ -6,8 +6,9 @@ import Image, ImageTk
 import json
 import urllib
 import StringIO
-from datetime import datetime
+from datetime import datetime, date
 import imaplib
+from icalendar import Calendar, Event, vDDDTypes
 
 root = Tk()
 
@@ -79,6 +80,36 @@ unread = len(obj.search(None, 'UnSeen')[1][0].split())
 
 label_mail = Label(root, background="black", foreground="white", text=unread)
 label_mail.place(x=170, y=42, width=w*10/100,height=h*15/100)
+
+# On ajoute le compteur d'évènements dans la journée
+
+image_cal = Image.open("../images/misc/cal.png")
+tkpi_cal = ImageTk.PhotoImage(image_cal)
+
+label_image_cal = Label(root, image=tkpi_cal, background="black")
+label_image_cal.place(x=210,y=30,width=w*25/100,height=h*25/100)
+
+rdv = ""
+req = urllib.urlopen(conf["calendar"]["url"])
+gcal = Calendar.from_ical(req.read())
+
+i = 0
+
+for component in gcal.walk():
+	if component.name == "VEVENT" :
+		if type(vDDDTypes.from_ical(component.get('dtstart'))) == type(date.today()) :
+			start = vDDDTypes.from_ical(component.get('dtstart'))
+			end = vDDDTypes.from_ical(component.get('dtend'))
+		elif type(vDDDTypes.from_ical(component.get('dtstart'))) == type(datetime.today()) :
+			start = vDDDTypes.from_ical(component.get('dtstart')).date()
+			end = vDDDTypes.from_ical(component.get('dtend')).date()
+
+		if date.today() >= start and date.today() <= end :
+			rdv += component.get("summary") + ", "
+			i += 1
+
+label_cal = Label(root, background="black", foreground="white", text=i)
+label_cal.place(x=260, y=42, width=w*10/100,height=h*15/100)
 
 # On lance la fenêtre
 
