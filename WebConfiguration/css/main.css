@@ -19,3 +19,16 @@ body {
       padding-right: 5px;
     }
 }
+
+/************************************************
+    	Pour l'utillisation de la navbar
+************************************************/
+
+.navbar{
+    position: fixed;
+}
+
+.container-fluid{                                                               /*Ajoute une marge pour ne pas couper*/
+    margin-left:20px;
+    margin-right: 20px;
+}
