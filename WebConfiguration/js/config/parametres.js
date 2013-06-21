@@ -54,8 +54,8 @@ var config = {
         if(message == "")
             $("#generalErreur").addClass("hide");
         else{
-            $("#generalErreur").removeClass("hide alert-success alert-danger");
-            $("#generalErreur").addClass(type).html(message);
+            $("#generalErreur").removeClass("hide alert-success alert-danger alert-info");
+            $("#generalErreur").addClass("alert-" + type).html(message);
         }
     },
     
@@ -91,6 +91,30 @@ var config = {
         });
         return test;
     },
+    
+    sendForm : function(){
+        if( !config.checkForm() ){
+            config.generalErreur("danger", "Formulaire invalide");
+            return;
+        }
+            
+        $("input").each(function(e){
+            var champ = config.inputP[this.id]["nomChamp"];
+            config.config[config.onglet][champ] = (this.value !== "") ? this.value : this.getAttribute("placeholder");
+        });
+        
+        $.ajax({
+            type: "GET",
+            url: "functions/config.php?categorie=" + config.onglet + "&value=" + JSON.stringify(config.config[config.onglet]),
+            dataType: "text",
+            success: function(){
+                config.generalErreur("success", "Le formulaire à été envoyé avec succès");
+            },
+            error: function(){
+                config.generalErreur("danger", "Un problème est arrivé pendant l'envoit du formulaire");
+            }
+        });
+    },
 
     //Connecte tous les inputs
     connectInputs : function(){
@@ -117,6 +141,7 @@ var config = {
                 });
         });
         
+        $("#btn_envoyer").click(config.sendForm);        
     },
     
     //Configuraton de la validation du formulaire
