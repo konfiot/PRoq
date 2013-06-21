@@ -7,6 +7,7 @@ import json
 import urllib
 import StringIO
 from datetime import datetime
+import imaplib
 
 root = Tk()
 
@@ -60,6 +61,24 @@ label_image_set.place(x=210,y=-15,width=w*25/100,height=h*25/100)
 
 label_time_set = Label(root, background="black", foreground="white", text=datetime.fromtimestamp(data["sys"]["sunset"]).strftime("%H:%M"))
 label_time_set.place(x=260, y=0, width=w*15/100,height=h*15/100)
+
+# On ajoute le compteur des mails non lus
+
+image_mail = Image.open("../images/misc/mail.png")
+tkpi_mail = ImageTk.PhotoImage(image_mail)
+
+label_image_mail = Label(root, image=tkpi_mail, background="black")
+label_image_mail.place(x=120,y=30,width=w*25/100,height=h*25/100)
+
+mail_conf = conf["mail"]
+
+obj = imaplib.IMAP4_SSL(mail_conf["server"], mail_conf["port"])
+obj.login(mail_conf["username"], mail_conf["passwd"])
+obj.select()
+unread = len(obj.search(None, 'UnSeen')[1][0].split())
+
+label_mail = Label(root, background="black", foreground="white", text=unread)
+label_mail.place(x=170, y=42, width=w*10/100,height=h*15/100)
 
 # On lance la fenêtre
 
