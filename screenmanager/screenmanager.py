@@ -17,7 +17,7 @@ conf = json.load(conf_file)
 # On met la fenêtre en plein écran
 
 w, h = 320, 240
-root.overrideredirect(1)
+#root.overrideredirect(1)
 root.geometry("%dx%d+0+0" % (w, h))
 root.configure(background='black')
 
@@ -34,7 +34,7 @@ image = Image.open("../images/weather/" + data["weather"][0]["icon"] + ".png")
 tkpi = ImageTk.PhotoImage(image)
 
 label_image = Label(root, image=tkpi, background="black")
-label_image.place(x=0,y=0,width=w*50/100,height=h*50/100)
+label_image.place(x=-15,y=0,width=w*50/100,height=h*50/100)
 
 # On ajoute l'heure
 
@@ -47,13 +47,19 @@ image_rise = Image.open("../images/misc/rise.png")
 tkpi_rise = ImageTk.PhotoImage(image_rise)
 
 label_image_rise = Label(root, image=tkpi_rise, background="black")
-label_image_rise.place(x=160,y=0,width=w*25/100,height=h*25/100)
+label_image_rise.place(x=120,y=-15,width=w*25/100,height=h*25/100)
+
+label_time_set = Label(root, background="black", foreground="white", text=datetime.fromtimestamp(data["sys"]["sunrise"]).strftime("%H:%M"))
+label_time_set.place(x=170, y=0, width=w*15/100,height=h*15/100)
 
 image_set = Image.open("../images/misc/set.png")
 tkpi_set = ImageTk.PhotoImage(image_set)
 
 label_image_set = Label(root, image=tkpi_set, background="black")
-label_image_set.place(x=160,y=60,width=w*25/100,height=h*25/100)
+label_image_set.place(x=210,y=-15,width=w*25/100,height=h*25/100)
+
+label_time_set = Label(root, background="black", foreground="white", text=datetime.fromtimestamp(data["sys"]["sunset"]).strftime("%H:%M"))
+label_time_set.place(x=260, y=0, width=w*15/100,height=h*15/100)
 
 # On lance la fenêtre
 
