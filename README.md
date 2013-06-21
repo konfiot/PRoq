@@ -5,10 +5,10 @@ Le projet SmartWake de SI 2013
 
 #Prérequis
 * Linux
-* Python 2.7
+* Python 2.7 avec l'extension icalendar
 * Apache  PHP
 * SVOX Pico
-
+* PIL avec les bindings tkinter
 
 #Installation
 Cloner le dépot ou le télécharger en Zip
