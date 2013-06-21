@@ -15,7 +15,7 @@ conf = json.load(conf_file)
 
 # On met la fenêtre en plein écran
 
-w, h = root.winfo_screenwidth(), root.winfo_screenheight()
+w, h = 320, 240
 root.overrideredirect(1)
 root.geometry("%dx%d+0+0" % (w, h))
 root.configure(background='black')
@@ -29,12 +29,11 @@ data = json.load(req)
 
 reqimg = urllib.urlopen("http://openweathermap.org/img/w/"+ data["weather"][0]["icon"] + ".png")
 
-image = Image.open(StringIO.StringIO(reqimg.read()))
+image = Image.open("../images/weather/" + data["weather"][0]["icon"] + ".png")
 tkpi = ImageTk.PhotoImage(image)
- 
-label_image = Label(root, image=tkpi)
-label_image.place(x=0,y=0,width=w,height=h)
 
+label_image = Label(root, image=tkpi, background="black")
+label_image.place(x=0,y=0,width=w*50/100,height=h*50/100)
 
 # On lance la fenêtre
 root.mainloop()
