@@ -6,6 +6,7 @@ import Image, ImageTk
 import json
 import urllib
 import StringIO
+from datetime import datetime
 
 root = Tk()
 
@@ -34,6 +35,11 @@ tkpi = ImageTk.PhotoImage(image)
 
 label_image = Label(root, image=tkpi, background="black")
 label_image.place(x=0,y=0,width=w*50/100,height=h*50/100)
+
+# On ajoute l'heure
+
+label_time = Label(root, background="black", foreground="white", text=datetime.today().strftime("%H:%M"), font=("Helvetica", 95))
+label_time.place(x=0, y=120, width=w, height=h*50/100)
 
 # On lance la fenêtre
 root.mainloop()
