@@ -49,19 +49,19 @@ image_rise = Image.open("../images/misc/rise.png")
 tkpi_rise = ImageTk.PhotoImage(image_rise)
 
 label_image_rise = Label(root, image=tkpi_rise, background="black")
-label_image_rise.place(x=120,y=-15,width=w*25/100,height=h*25/100)
+label_image_rise.place(x=120,y=30,width=w*25/100,height=h*25/100)
 
 label_time_set = Label(root, background="black", foreground="white", text=datetime.fromtimestamp(data["sys"]["sunrise"]).strftime("%H:%M"))
-label_time_set.place(x=170, y=0, width=w*15/100,height=h*15/100)
+label_time_set.place(x=170, y=42, width=w*15/100,height=h*15/100)
 
 image_set = Image.open("../images/misc/set.png")
 tkpi_set = ImageTk.PhotoImage(image_set)
 
 label_image_set = Label(root, image=tkpi_set, background="black")
-label_image_set.place(x=210,y=-15,width=w*25/100,height=h*25/100)
+label_image_set.place(x=210,y=30,width=w*25/100,height=h*25/100)
 
 label_time_set = Label(root, background="black", foreground="white", text=datetime.fromtimestamp(data["sys"]["sunset"]).strftime("%H:%M"))
-label_time_set.place(x=260, y=0, width=w*15/100,height=h*15/100)
+label_time_set.place(x=260, y=42, width=w*15/100,height=h*15/100)
 
 # On ajoute le compteur des mails non lus
 
@@ -69,7 +69,7 @@ image_mail = Image.open("../images/misc/mail.png")
 tkpi_mail = ImageTk.PhotoImage(image_mail)
 
 label_image_mail = Label(root, image=tkpi_mail, background="black")
-label_image_mail.place(x=120,y=30,width=w*25/100,height=h*25/100)
+label_image_mail.place(x=120,y=75,width=w*25/100,height=h*25/100)
 
 mail_conf = conf["mail"]
 
@@ -79,7 +79,7 @@ obj.select()
 unread = len(obj.search(None, 'UnSeen')[1][0].split())
 
 label_mail = Label(root, background="black", foreground="white", text=unread)
-label_mail.place(x=170, y=42, width=w*10/100,height=h*15/100)
+label_mail.place(x=170, y=84, width=w*10/100,height=h*15/100)
 
 # On ajoute le compteur d'évènements dans la journée
 
@@ -87,7 +87,7 @@ image_cal = Image.open("../images/misc/cal.png")
 tkpi_cal = ImageTk.PhotoImage(image_cal)
 
 label_image_cal = Label(root, image=tkpi_cal, background="black")
-label_image_cal.place(x=210,y=30,width=w*25/100,height=h*25/100)
+label_image_cal.place(x=210,y=75,width=w*25/100,height=h*25/100)
 
 rdv = ""
 req = urllib.urlopen(conf["calendar"]["url"])
@@ -109,7 +109,7 @@ for component in gcal.walk():
 			i += 1
 
 label_cal = Label(root, background="black", foreground="white", text=i)
-label_cal.place(x=260, y=42, width=w*10/100,height=h*15/100)
+label_cal.place(x=260, y=84, width=w*10/100,height=h*15/100)
 
 # On lance la fenêtre
 
