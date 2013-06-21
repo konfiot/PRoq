@@ -61,6 +61,7 @@
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
     
+    <script type="text/javascript" src="js/config/elements.js"></script>
     <script type="text/javascript" src="js/config/parametres.js"></script>
     <script type="text/javascript" src="js/config/mail.js"></script>
     
