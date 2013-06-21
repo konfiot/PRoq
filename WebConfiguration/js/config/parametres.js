@@ -59,6 +59,7 @@ var config = {
         }
     },
     
+    //Réinscrit les valeures du json dans les champs
     resetForm : function(){
         $("input").each(function(e){
             var champ = config.inputP[this.id]["nomChamp"];
@@ -106,25 +107,14 @@ var config = {
         
         //Pour reset le formulaire
         $("#btn_annuler").click(function(){
-            $("#confirmModal").modal("show");
-            
-            var valide = function(){
-                config.resetForm();
-                $("#confirmModal").modal("hide");
-                config.checkForm();
-                
-                $("#confirmModalOui").unbind("click", valide);                  //On supprime les évenements
-                $("#confirmModalNon").unbind("click", refuse);
-            }
-            var refuse = function(){
-                $("#confirmModal").modal("hide");
-                
-                $("#confirmModalOui").unbind("click", valide);                  //On supprime les évenements
-                $("#confirmModalNon").unbind("click", refuse);
-            }
-            
-            $("#confirmModalOui").bind("click", valide);
-            $("#confirmModalNon").bind("click", refuse);
+            dialogs.confirm("#confirmModal",
+                function(){     //onOk
+                    config.resetForm();
+                    config.checkForm();
+                },
+                function(){     //onNo
+                    
+                });
         });
         
     },

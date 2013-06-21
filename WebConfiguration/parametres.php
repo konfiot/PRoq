@@ -65,5 +65,7 @@
     
     <script type="text/javascript" src="js/config/parametres.js"></script>
     <script type="text/javascript" src="js/config/mail.js"></script>
+    
+    <script type="text/javascript" src="js/dialogs.js"></script>
   </body>
 </html>

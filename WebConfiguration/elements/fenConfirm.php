@@ -5,7 +5,6 @@
     
     <div class="modal hide fade" id="confirmModal">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h3>Confirmation de la suppression</h3>
         <div class="modal-body"></i>
         </div>
@@ -16,8 +15,8 @@
             </p>
         </div>
         <div class="modal-footer">
-            <a href="#" class="btn" id="confirmModalNon">Non</a>
-        <a href="#" class="btn btn-primary" id="confirmModalOui">Oui</a>
+            <a class="btn-non btn">Non</a>
+            <a class="btn-oui btn btn-danger">Oui</a>
         </div>
     </div>
     
