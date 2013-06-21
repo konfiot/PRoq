@@ -43,6 +43,17 @@ label_image.place(x=-15,y=0,width=w*50/100,height=h*50/100)
 label_time = Label(root, background="black", foreground="white", text=datetime.today().strftime("%H:%M"), font=("Helvetica", 95))
 label_time.place(x=0, y=120, width=w, height=h*50/100)
 
+# On ajoute la température
+
+image_temp = Image.open("../images/misc/temp.png")
+tkpi_temp = ImageTk.PhotoImage(image_temp)
+
+label_image_temp = Label(root, image=tkpi_temp, background="black")
+label_image_temp.place(x=120,y=-10,width=w*25/100,height=h*25/100)
+
+label_temp = Label(root, background="black", foreground="white", text=round(data["main"]["temp"]-273.15, 2))
+label_temp.place(x=165, y=2, width=w*15/100,height=h*15/100)
+
 # On ajoute les image de lever et de coucher du soleil
 
 image_rise = Image.open("../images/misc/rise.png")
