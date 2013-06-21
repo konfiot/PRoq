@@ -41,5 +41,20 @@ label_image.place(x=0,y=0,width=w*50/100,height=h*50/100)
 label_time = Label(root, background="black", foreground="white", text=datetime.today().strftime("%H:%M"), font=("Helvetica", 95))
 label_time.place(x=0, y=120, width=w, height=h*50/100)
 
+# On ajoute les image de lever et de coucher du soleil
+
+image_rise = Image.open("../images/misc/rise.png")
+tkpi_rise = ImageTk.PhotoImage(image_rise)
+
+label_image_rise = Label(root, image=tkpi_rise, background="black")
+label_image_rise.place(x=160,y=0,width=w*25/100,height=h*25/100)
+
+image_set = Image.open("../images/misc/set.png")
+tkpi_set = ImageTk.PhotoImage(image_set)
+
+label_image_set = Label(root, image=tkpi_set, background="black")
+label_image_set.place(x=160,y=60,width=w*25/100,height=h*25/100)
+
 # On lance la fenêtre
+
 root.mainloop()
