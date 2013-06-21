@@ -13,9 +13,11 @@ $(function() {  //Executé après le chargement
         config.onglet = config.onglet.substring(1, config.onglet.length);       //On vire le '#'
     
         $(".hero-unit").load("forms/" + config.onglet + ".html", function(){    //On envoit la requette
-            config.connectInputs();                                             //On connecte les inputs
+            config.connectAll();                                                //On connecte les inputs
             if(config.onglet == "mail")
                 mail.connectInputs();
+                
+            inputs.AdresseMail.reconnect();
         
             config.resetForm();                                                 //On met les valeures existantes
             config.checkForm();                                                 //On colore les champs
@@ -62,32 +64,18 @@ var config = {
     //Réinscrit les valeures du json dans les champs
     resetForm : function(){
         $("input").each(function(e){
-            var champ = config.inputP[this.id]["nomChamp"];
-            this.value = config.config[config.onglet][champ];
+            var champ = inputs[this.id].champ,
+                categorie = inputs[this.id].categorie;
+                
+            inputs[this.id].valeure( config.config[categorie][champ] );
         });
-    },
-    
-    //Verifie si un champ est valide et le met en forme
-    checkInput : function(sel){
-        var e = $("#" + sel);
-        
-        if( e.val() === "" && config.inputP[sel]["obligatoire"] )
-            config.erreur("#"+sel, "error", "Champ obligatoire");
-        else if( config.inputP[sel]["format"].test( e.val() ) ){
-            config.erreur("#"+sel, "success", "");
-            return true
-        }
-        else
-            config.erreur("#"+sel, "error", config.inputP[sel]["error"]);
-            
-        return false;
     },
     
     //Verifie tous les champs et remet en forme
     checkForm : function(){
         var test = true;
         $("input").each(function(e){
-            test = config.checkInput(this.id) ? test :false;
+            test = inputs[this.id].isValid() ? test : false;
         });
         return test;
     },
@@ -99,8 +87,9 @@ var config = {
         }
             
         $("input").each(function(e){
-            var champ = config.inputP[this.id]["nomChamp"];
-            config.config[config.onglet][champ] = (this.value !== "") ? this.value : this.getAttribute("placeholder");
+            var champ = inputs[this.id].champ
+               ,categorie = inputs[this.id].categorie;
+            config.config[categorie][champ] = inputs[this.id].valeure();
         });
         
         $.ajax({
@@ -117,17 +106,10 @@ var config = {
     },
 
     //Connecte tous les inputs
-    connectInputs : function(){
-        //Enregistre la valeure du champ avant l'édition
-        $("input").focusin(function(){
-            config.initialValue = this.value;
-        });
-        
-        //Check le champ lors de la perte du focus
-        $("input").focusout(function(){
-            if( config.initialValue != this.value )                             //Quelque-chose a changé
-                config.checkInput(this.id);
-        });
+    connectAll : function(){
+        for (var i in inputs) {
+            inputs[i].reconnect();
+        }
         
         //Pour reset le formulaire
         $("#btn_annuler").click(function(){
@@ -142,23 +124,50 @@ var config = {
         });
         
         $("#btn_envoyer").click(config.sendForm);        
-    },
-    
-    //Configuraton de la validation du formulaire
-    inputP : {  "AdresseMail" : {
-                    "nomChamp" : "full_adress",
-                    "error" : "Adresse mail invalide",
-                    "format" : /^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$/,
-                    "obligatoire" : true },
-                "MailPassword" : {
-                    "nomChamp" : "passwd",
-                    "error" : "Mot de passe non valide",
-                    "format" : /()/,
-                    "obligatoire" : true },
-                "ServMail" : {
-                    "nomChamp" : "server",
-                    "error" : "Serveur mail incorrect",
-                    "format" : /()/ ,
-                    "obligatoire" : false }
-             }                    
-}
+    }
+};
+
+/*******************************************************************************************************************************
+**                                              Configuration des éléments                                                    **        
+*******************************************************************************************************************************/
+
+var inputs = {
+    "AdresseMail": new elementInput("#AdresseMail",
+        "mail",
+        "full_adress",
+        [
+            {
+                "format": /\S+/,
+                "msg": {
+                    "type": "error",
+                    "text": "Champ obligatoire"
+                }
+            },
+            {
+                "format": /^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$/,
+                "msg": {
+                "type": "error",
+                "text": "Adresse mail invalide"
+                }
+            }
+        ]
+    ),
+    "MailPassword": new elementInput("#MailPassword",
+        "mail",
+        "passwd",
+        [
+            {
+                "format": /[:alnum:]{1,}/,
+                "msg": {
+                    "type": "error",
+                    "text": "Champ obligatoire"
+                }
+            }
+        ]
+    ),
+    "ServMail": new elementInput("#ServMail",
+        "mail",
+        "server",
+        [ ]
+    )
+};
