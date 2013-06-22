@@ -4,14 +4,16 @@
 
 function element(_sel, _categorie, _champ){
     this.element = _sel;                                                        //Selecteur JQuery
-    this.categorie = _categorie                                                 //Categorie pour l'enregistrement
+    this.categorie = _categorie;                                                //Categorie pour l'enregistrement
     this.champ = _champ;                                                        //Champ pour l'enregistrement
     
     this.initialValue = "";                                                     //Sert à retenir la valeur à la prise de focus
     
     this.valeure = function(v){
-        if( (typeof v) !== "undefined" )
+        if( (typeof v) !== "undefined" ){
             $(this.element).val(v);
+            $(this.element).trigger("changed");
+        }
         else
             return $(this.element).val();
     };
@@ -49,13 +51,17 @@ function elementInput(_element, _categorie, _champ, _validation){
     this.validation = _validation;                                              //Liste des validateurs
     
     this.valeure = function(v){
-        if( (typeof v) !== "undefined" )
+        if( (typeof v) !== "undefined" ){
             $(this.element).val(v);
+            this.isValid();
+            
+            $(this.element).trigger("changed");
+        }
         else{
             if( $(this.element).val() !== "" )
                 return $(this.element).val();
             else
-                return $(this.element).attr("placeholder");
+                return "";
         }
     };
     
@@ -71,11 +77,66 @@ function elementInput(_element, _categorie, _champ, _validation){
     };
     
     this.reconnect = function(){
-        var temp = new element("a", "z", "e");
+        var temp = new element();
         temp.reconnect.call(this);
         
         $(this.element).on("changed", function(){
             inputs[this.id].isValid();
         });
-    }
+    };
 }
+
+/*******************************************************************************************************************************
+**                                            Classe élément auto-définis                                                     **        
+*******************************************************************************************************************************/
+
+function elementInputAuto(_element, _categorie, _champ, _validation, _proccess){
+    elementInput.call(this, _element, _categorie, _champ, _validation);
+    this.proccess = _proccess;
+    this.auto = false;
+    
+    this.valeure = function(v){
+        var temp = new elementInput();
+        temp.valeure.call(this, v);
+        
+        if( $(this.element).val() == $(this.element).attr("placeholder") ){
+            this.valeure("");
+            this.auto = true;
+        }
+        else this.auto = false;
+            
+        if( typeof v === "undefined" && $(this.element).val() === "" && this.auto)
+            return $(this.element).attr("placeholder");
+    };
+    
+    this.manset = function(v){
+        this.auto = false;
+        $(this.element).attr("placeholder", v);
+    };
+    
+    this.autoset = function(v){
+        this.auto = true;
+        $(this.element).attr("placeholder", v);
+        
+        if( $(this.element).val() == $(this.element).attr("placeholder") ){
+            this.valeure("");
+            this.auto = true;
+        }
+        else this.auto = false;
+    };
+    
+    this.isValid = function(){
+        if( this.auto )                                                         //Si c'est auto ... On s'en tappe !!!
+            return true;
+            
+        var temp = new elementInput();
+        return temp.isValid.call(this);
+    };
+    
+    this.reconnect = function(){
+        var temp = new elementInput();
+        temp.reconnect.call(this);
+        
+        this.proccess();
+    };
+};

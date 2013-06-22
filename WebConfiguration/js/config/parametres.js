@@ -14,10 +14,6 @@ $(function() {  //Executé après le chargement
     
         $(".hero-unit").load("forms/" + config.onglet + ".html", function(){    //On envoit la requette
             config.connectAll();                                                //On connecte les inputs
-            if(config.onglet == "mail")
-                mail.connectInputs();
-                
-            inputs.AdresseMail.reconnect();
         
             config.resetForm();                                                 //On met les valeures existantes
             config.checkForm();                                                 //On colore les champs
@@ -53,7 +49,7 @@ var config = {
     
     //Pour afficher une erreur en bas de la page
     generalErreur: function(type, message) {
-        if(message == "")
+        if(message === "")
             $("#generalErreur").addClass("hide");
         else{
             $("#generalErreur").removeClass("hide alert-success alert-danger alert-info");
@@ -85,10 +81,10 @@ var config = {
             config.generalErreur("danger", "Formulaire invalide");
             return;
         }
-            
+
         $("input").each(function(e){
-            var champ = inputs[this.id].champ
-               ,categorie = inputs[this.id].categorie;
+            var champ = inputs[this.id].champ,
+                categorie = inputs[this.id].categorie;
             config.config[categorie][champ] = inputs[this.id].valeure();
         });
         
@@ -157,7 +153,7 @@ var inputs = {
         "passwd",
         [
             {
-                "format": /[:alnum:]{1,}/,
+                "format": /\S+/,
                 "msg": {
                     "type": "error",
                     "text": "Champ obligatoire"
@@ -165,9 +161,40 @@ var inputs = {
             }
         ]
     ),
-    "ServMail": new elementInput("#ServMail",
+    "ServMail": new elementInputAuto("#ServMail",
         "mail",
         "server",
-        [ ]
+        [
+            {
+                "format": /\S+/,
+                "msg": {
+                    "type": "error",
+                    "text": "Veuillez remplir manuellement"
+                }
+            }
+        ],
+        autoConfig.mail
+    ),
+    "PortMail": new elementInputAuto("#PortMail",
+        "mail",
+        "port",
+        [
+            {
+                "format": /\S+/,
+                "msg": {
+                    "type": "error",
+                    "text": "Veuillez remplir manuellement"
+                }
+            },
+            {
+                "format": /^[0-9]{1,5}$/,
+                "msg": {
+                    "type": "error",
+                    "text": "Le port doit etre un nombre compris entre 1 et 65535"
+                }
+            }
+        
+        ],
+        autoConfig.port
     )
 };
