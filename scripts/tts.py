@@ -142,4 +142,6 @@ for component in gcal.walk():
 
 # Synthèse vocale
 
-subprocess.call(["../picospeaker/picospeaker", "-l", "fr-FR", "Temps prévu pour aujourd'hui : " + weather_string + ". Vous avez "+ str(unread) + "Messages non lus. " + str(i) + " évènements aujourd'hui : " + rdv])
+tosay = "Temps prévu pour aujourd'hui : ".decode("utf-8") + weather_string + ". Vous avez " + str(unread) + "Messages non lus. " + str(i) + " évènements aujourd'hui : ".decode("utf-8") + rdv.decode("utf-8")
+
+subprocess.call(["../picospeaker/picospeaker", "-l", "fr-FR", tosay.encode("utf-8")])
