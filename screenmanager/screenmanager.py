@@ -28,11 +28,14 @@ root.configure(background='black')
 req = urllib.urlopen("http://api.openweathermap.org/data/2.5/weather?q=" + conf["weather"]["location"]);
 data = json.load(req)
 
+req = urllib.urlopen("http://api.openweathermap.org/data/2.5/forecast/daily?units=metric&cnt=1&q=" + conf["weather"]["location"]);
+data_forecast = json.load(req)
+
 # On ouvre l'image
 
-reqimg = urllib.urlopen("http://openweathermap.org/img/w/"+ data["weather"][0]["icon"] + ".png")
+# reqimg = urllib.urlopen("http://openweathermap.org/img/w/"+ data["list"][0]["weather"][0]["icon"] + ".png")
 
-image = Image.open("../images/weather/" + data["weather"][0]["icon"] + ".png")
+image = Image.open("../images/weather/" + data_forecast["list"][0]["weather"][0]["icon"] + ".png")
 tkpi = ImageTk.PhotoImage(image)
 
 label_image = Label(root, image=tkpi, background="black")
@@ -51,7 +54,7 @@ tkpi_temp = ImageTk.PhotoImage(image_temp)
 label_image_temp = Label(root, image=tkpi_temp, background="black")
 label_image_temp.place(x=120,y=-10,width=w*25/100,height=h*25/100)
 
-label_temp = Label(root, background="black", foreground="white", text=round(data["main"]["temp"]-273.15, 1))
+label_temp = Label(root, background="black", foreground="white", text=round(data_forecast["list"][0]["temp"]["day"], 1))
 label_temp.place(x=165, y=2, width=w*15/100,height=h*15/100)
 
 # On ajoute les image de lever et de coucher du soleil
