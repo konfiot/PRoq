@@ -96,47 +96,59 @@ function elementInputAuto(_element, _categorie, _champ, _validation, _proccess){
     this.auto = false;
     
     this.valeure = function(v){
-        var temp = new elementInput();
-        temp.valeure.call(this, v);
-        
-        if( $(this.element).val() == $(this.element).attr("placeholder") ){
-            this.valeure("");
-            this.auto = true;
-        }
-        else this.auto = false;
-            
         if( typeof v === "undefined" && $(this.element).val() === "" && this.auto)
             return $(this.element).attr("placeholder");
+            
+        var temp = new elementInput();
+        temp.valeure.call(this, v);                                             //seter actif
+            
+        this.refreshAuto();
+        this.isValid();
+        
+        return temp.valeure.call(this);                                         //seter actif
+            
     };
     
     this.manset = function(v){
         this.auto = false;
         $(this.element).attr("placeholder", v);
+        
+        this.refreshAuto();
+        this.isValid();
     };
     
     this.autoset = function(v){
         this.auto = true;
         $(this.element).attr("placeholder", v);
         
-        if( $(this.element).val() == $(this.element).attr("placeholder") ){
-            this.valeure("");
-            this.auto = true;
-        }
-        else this.auto = false;
+        this.refreshAuto();
+        this.isValid();
     };
     
     this.isValid = function(){
-        if( this.auto )                                                         //Si c'est auto ... On s'en tappe !!!
+        if( this.auto && $(this.element).val() === "" ){                        //Si c'est auto ... On s'en tappe !!!
+            this.erreur("success", "");
             return true;
-            
+        }
+        
         var temp = new elementInput();
         return temp.isValid.call(this);
     };
     
     this.reconnect = function(){
-        var temp = new elementInput();
+        var temp = new element();
         temp.reconnect.call(this);
         
         this.proccess();
+        
+        $(this.element).on("changed", function(){
+            inputs[this.id].refreshAuto();
+            inputs[this.id].isValid();
+        });
     };
-};
+    
+    this.refreshAuto = function(){
+        if( $(this.element).val() === $(this.element).attr("placeholder") )
+            $(this.element).val("");
+    };
+}
