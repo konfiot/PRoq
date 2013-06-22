@@ -17,6 +17,8 @@
     $e = $e->getElementsByTagName("incomingServer");
     foreach($e as $i)
         if( $i->hasAttribute("type") )
-        if( $i->getAttribute("type") == $_GET["protocole"] )
+        if( $i->getAttribute("type") == $_GET["protocole"] ){
             echo $i->getElementsByTagName("hostname")->item(0)->nodeValue;
+            return;
+        }
 ?>
