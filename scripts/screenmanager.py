@@ -24,15 +24,9 @@ root.configure(background='black')
 
 # On va chercher la météo
 
-req = urllib.urlopen("http://api.openweathermap.org/data/2.5/weather?q=" + conf["weather"]["location"]);
-data = json.load(req)
-
-req = urllib.urlopen("http://api.openweathermap.org/data/2.5/forecast/daily?units=metric&cnt=1&q=" + conf["weather"]["location"]);
-data_forecast = json.load(req)
+(data, data_forecast) = get.weather(conf) 
 
 # On ouvre l'image
-
-# reqimg = urllib.urlopen("http://openweathermap.org/img/w/"+ data["list"][0]["weather"][0]["icon"] + ".png")
 
 image = Image.open("images/weather/" + data_forecast["list"][0]["weather"][0]["icon"] + ".png")
 tkpi = ImageTk.PhotoImage(image)

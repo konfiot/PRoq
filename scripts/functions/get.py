@@ -2,6 +2,7 @@ import imaplib
 import urllib
 from icalendar import Calendar, Event, vDDDTypes
 from datetime import datetime, date
+import json
 
 def mail (conf) :
 	mail_conf = conf["mail"]
@@ -35,3 +36,13 @@ def calendar (conf) :
 				rdv += component.get("summary") + ", "
 				i += 1
 	return (i, rdv)
+
+def weather(conf) : 
+	req = urllib.urlopen("http://api.openweathermap.org/data/2.5/weather?q=" + conf["weather"]["location"]);
+	data = json.load(req)
+
+	req = urllib.urlopen("http://api.openweathermap.org/data/2.5/forecast/daily?units=metric&cnt=1&q=" + conf["weather"]["location"]);
+	data_forecast = json.load(req)
+
+	return (data, data_forecast)
+
