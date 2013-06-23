@@ -203,5 +203,19 @@ var inputs = {
         "mail",
         "ssl",
         autoConfig.ssl
+    ),
+    //Paramètresdu calendrier
+    "CalendarUrl": new elementInput("#CalendarUrl",
+        "calendar",
+        "url",
+        [
+            {
+                "format": /\S+/,
+                "msg": {
+                    "type": "error",
+                    "text": "Champ obligatoire"
+                }
+            }        
+        ]
     )
 };
