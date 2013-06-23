@@ -40,7 +40,7 @@
                             <i class="icon-fixed-width icon-info-sign"></i> Informations à dicter</a></li>
                         <li class="leftnav"><a href="#mail">
                             <i class="icon-fixed-width icon-envelope-alt"></i> Mails</a></li>
-                        <li class="leftnav"><a href="#calendrier">
+                        <li class="leftnav"><a href="#calendar">
                             <i class="icon-fixed-width icon-calendar"></i> Calendrier</a></li>
                     </ul>
                 </div>
