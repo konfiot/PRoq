@@ -60,5 +60,26 @@ var autoConfig = {
                 e.erreur("", "");
             }
         });
+    },
+    ssl : function(){
+        $("#AdresseMail").on("changed", function(){        
+            var c = $("#AdresseMail");
+            var serv = c.val();
+            var e = inputs.MailSsl;
+            
+            serv = serv.substring(serv.indexOf("@")+1, serv.length);            //On isole le sufixe de l'adresse mail
+    
+            if( serv !== "")                                                    //Si quelque chose est entré dans le champ mail
+                $.ajax({
+                    type: "GET",
+                    url: "functions/servmail.php?champ=socketType&adresse=" + serv,
+                    dataType: "text",
+                    success: function(serveur){
+                        if( serveur !== "" ){
+                            e.valeur( serveur == "SSL" );
+                        }
+                    }
+                });
+        });
     }
 };

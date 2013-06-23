@@ -8,7 +8,7 @@
             <div class="control-group">
                 <label class="control-label" for="AdresseMail">Adresse email</label>
                 <div class="controls">
-                    <input type="email" id="AdresseMail" class="first_focus" placeholder="Exemple : name@exemple.com">
+                    <input type="email" id="AdresseMail" class="first_focus form-element" placeholder="Exemple : name@exemple.com">
                     <span class="help-inline"></span> <!-- Message d'erreur -->
                 </div>
             </div>
@@ -16,7 +16,7 @@
             <div class="control-group">
                 <label class="control-label" for="MailPassword">Mot de passe</label>
                 <div class="controls">
-                    <input type="password" id="MailPassword" placeholder="">
+                    <input type="password" id="MailPassword" placeholder="" class="form-element">
                     <span class="help-inline"></span> <!-- Message d'erreur -->
                 </div>
             </div>
@@ -27,14 +27,23 @@
             <div class="control-group">
                 <label class="control-label" for="ServMail">Serveur mail</label>
                 <div class="controls">
-                    <input type="text" id="ServMail" placeholder="Facultatif">
+                    <input type="text" id="ServMail" placeholder="Facultatif" class="form-element">
                     <span class="help-inline"></span> <!-- Message d'erreur -->
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="PortMail">Port</label>
                 <div class="controls">
-                    <input type="text" id="PortMail" min="0" max="65535" placeholder="Facultatif">
+                    <input type="text" id="PortMail" min="0" max="65535" placeholder="Facultatif" class="form-element">
+                    <span class="help-inline"></span> <!-- Message d'erreur -->
+                </div>
+            </div>
+            <div class="control-group success">
+                <label class="control-label" for="MailSsl">SSL</label>
+                <div class="controls">
+                    <div class="switch form-element" data-on-label="Oui" data-off-label="Non" id="MailSsl">
+                        <input type="checkbox" checked="checked">
+                    </div>
                     <span class="help-inline"></span> <!-- Message d'erreur -->
                 </div>
             </div>

@@ -17,6 +17,8 @@ $(function() {  //Executé après le chargement
         
             config.resetForm();                                                 //On met les valeurs existantes
             config.checkForm();                                                 //On colore les champs
+            
+            $('.switch')['bootstrapSwitch']();
         });
     });      
         
@@ -59,7 +61,7 @@ var config = {
     
     //Réinscrit les valeurs du json dans les champs
     resetForm : function(){
-        $("input").each(function(e){
+        $(".form-element").each(function(e){
             var champ = inputs[this.id].champ,
                 categorie = inputs[this.id].categorie;
                 
@@ -70,7 +72,7 @@ var config = {
     //Verifie tous les champs et remet en forme
     checkForm : function(){
         var test = true;
-        $("input").each(function(e){
+        $(".form-element").each(function(e){
             test = inputs[this.id].isValid() ? test : false;
         });
         return test;
@@ -82,7 +84,7 @@ var config = {
             return;
         }
 
-        $("input").each(function(e){
+        $(".form-element").each(function(e){
             var champ = inputs[this.id].champ,
                 categorie = inputs[this.id].categorie;
             config.config[categorie][champ] = inputs[this.id].valeur();
@@ -196,5 +198,10 @@ var inputs = {
         
         ],
         autoConfig.port
+    ),
+    "MailSsl": new elementSwitchAuto("#MailSsl",
+        "mail",
+        "ssl",
+        autoConfig.ssl
     )
 };

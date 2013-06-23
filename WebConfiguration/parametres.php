@@ -6,6 +6,7 @@
 
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/bootstrapSwitch.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
   </head>
   <body>
@@ -60,6 +61,7 @@
     
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrapSwitch.js"></script>
     
     <script type="text/javascript" src="js/config/elements.js"></script>
     <script type="text/javascript" src="js/config/autoconfig.js"></script>

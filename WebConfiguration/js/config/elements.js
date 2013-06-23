@@ -152,3 +152,31 @@ function elementInputAuto(_element, _categorie, _champ, _validation, _proccess){
             $(this.element).val("");
     };
 }
+
+/*******************************************************************************************************************************
+**                                                Classe élément input                                                        **        
+*******************************************************************************************************************************/
+
+function elementSwitch(_element, _categorie, _champ, _proprietes){
+    element.call(this, _element, _categorie, _champ);                           //Hérite de la classe élément
+    this.proprietes = _proprietes;
+    
+    this.valeur = function(v){
+        if( (typeof v) == "undefined" )
+            return $(this.element).bootstrapSwitch("status");
+        else
+            $(this.element).bootstrapSwitch("setState", v);
+    };
+}
+
+function elementSwitchAuto(_element, _categorie, _champ, _proccess){
+    elementSwitch.call(this, _element, _categorie, _champ);                     //Hérite de la classe élémentSwitch
+    this.proccess = _proccess;
+    
+    this.reconnect = function(){
+        var temp = new elementSwitch();
+        temp.reconnect.call(this);
+        
+        this.proccess();
+    };   
+}
