@@ -20,6 +20,8 @@ Pour tester la synthèse vocale, il suffit d'appeler le script tts.py (En l'ayan
 
 Pour tester le script total de réveil, il faut configurer le path de la musique à lire dans le fichier de configuration dans conf/wake.json, puis lancer le script wakeup.py
 
+Pour tester l'affichage à l'écran, il faut lancer screenmanager.py
+
 #Crédits
 
 Toutes les informations météoroligiques sonte fournies par openweathermap.org
