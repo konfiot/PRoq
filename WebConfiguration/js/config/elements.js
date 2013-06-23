@@ -31,11 +31,11 @@ function element(_sel, _categorie, _champ){
     
     this.reconnect = function(){
         $(this.element).focusin(function(){
-            $.data( $("#"+this.id), "initialValue", this.value );
+            $("#"+this.id).data( "initialValue", this.value );
         });
         
         $(this.element).focusout(function(){
-            if( $.data( $("#"+this.id), "initialValue" ) != this.value ){
+            if( $("#"+this.id).data( "initialValue" ) != this.value ){
                 $("#"+this.id).trigger("changed");
             }
         });
