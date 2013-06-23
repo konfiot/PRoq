@@ -118,4 +118,4 @@ cal = get.calendar(conf)
 
 tosay = "Temps prévu pour aujourd'hui : ".decode("utf-8") + weather_string + ". Vous avez " + str(unread) + "Messages non lus. " + str(cal[0]) + " évènements aujourd'hui : ".decode("utf-8") + cal[1].decode("utf-8")
 
-subprocess.call(["../picospeaker/picospeaker", "-l", "fr-FR", tosay.encode("utf-8")])
+subprocess.call(["picospeaker/picospeaker", "-l", "fr-FR", tosay.encode("utf-8")])
