@@ -98,8 +98,7 @@ conf = json.load(conf_file)
 
 # Gestion Météo
 
-req = urllib.urlopen("http://api.openweathermap.org/data/2.5/forecast/daily?units=metric&cnt=1&q=" + conf["weather"]["location"]);
-data = json.load(req)
+data = get.weather(conf)[1]
 
 id = data["list"][0]["weather"][0]["id"]
 
