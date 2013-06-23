@@ -15,7 +15,7 @@ $(function() {  //Executé après le chargement
         $(".hero-unit").load("forms/" + config.onglet + ".html", function(){    //On envoit la requette
             config.connectAll();                                                //On connecte les inputs
         
-            config.resetForm();                                                 //On met les valeures existantes
+            config.resetForm();                                                 //On met les valeurs existantes
             config.checkForm();                                                 //On colore les champs
         });
     });      
@@ -36,7 +36,7 @@ $(function() {  //Executé après le chargement
 
 
 var config = {
-    initialValue : "",                                                          //Une variable qui contient la valeure initiale du champ édité
+    initialValue : "",                                                          //Une variable qui contient la valeur initiale du champ édité
     onglet : "defaut",                                                          //Contient l'onglet actuel
     config : {},                                                                //Et celle - ci la configuration json
     
@@ -57,13 +57,13 @@ var config = {
         }
     },
     
-    //Réinscrit les valeures du json dans les champs
+    //Réinscrit les valeurs du json dans les champs
     resetForm : function(){
         $("input").each(function(e){
             var champ = inputs[this.id].champ,
                 categorie = inputs[this.id].categorie;
                 
-            inputs[this.id].valeure( config.config[categorie][champ] );
+            inputs[this.id].valeur( config.config[categorie][champ] );
         });
     },
     
@@ -85,7 +85,7 @@ var config = {
         $("input").each(function(e){
             var champ = inputs[this.id].champ,
                 categorie = inputs[this.id].categorie;
-            config.config[categorie][champ] = inputs[this.id].valeure();
+            config.config[categorie][champ] = inputs[this.id].valeur();
         });
         
         $.ajax({

@@ -9,7 +9,7 @@ function element(_sel, _categorie, _champ){
     
     this.initialValue = "";                                                     //Sert à retenir la valeur à la prise de focus
     
-    this.valeure = function(v){
+    this.valeur = function(v){
         if( (typeof v) !== "undefined" ){
             $(this.element).val(v);
             $(this.element).trigger("changed");
@@ -50,7 +50,7 @@ function elementInput(_element, _categorie, _champ, _validation){
     element.call(this, _element, _categorie, _champ);                           //Hérite de la classe élément
     this.validation = _validation;                                              //Liste des validateurs
     
-    this.valeure = function(v){
+    this.valeur = function(v){
         if( (typeof v) !== "undefined" ){
             $(this.element).val(v);
             this.isValid();
@@ -95,17 +95,17 @@ function elementInputAuto(_element, _categorie, _champ, _validation, _proccess){
     this.proccess = _proccess;
     this.auto = false;
     
-    this.valeure = function(v){
+    this.valeur = function(v){
         if( typeof v === "undefined" && $(this.element).val() === "" && this.auto)
             return $(this.element).attr("placeholder");
             
         var temp = new elementInput();
-        temp.valeure.call(this, v);                                             //seter actif
+        temp.valeur.call(this, v);                                             //seter actif
             
         this.refreshAuto();
         this.isValid();
         
-        return temp.valeure.call(this);                                         //seter actif
+        return temp.valeur.call(this);                                         //seter actif
             
     };
     
