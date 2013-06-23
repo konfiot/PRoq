@@ -14,6 +14,28 @@ root = Tk()
 conf_file = open("../conf/wake.json")
 conf = json.load(conf_file)
 
+def update_time () :
+	label_time.configure(text=datetime.today().strftime("%H:%M"))
+	label_time.after(1000, update_time)
+
+def update() :
+	(data, data_forecast) = get.weather(conf)
+	image_ = Image.open("images/weather/" + data_forecast["list"][0]["weather"][0]["icon"] + ".png")
+	tkpi_ = ImageTk.PhotoImage(image_)
+	label_image.configure(image=tkpi)
+
+	label_temp.configure(text=round(data_forecast["list"][0]["temp"]["day"], 1))
+
+	label_time_rise.configure(text=datetime.fromtimestamp(data["sys"]["sunrise"]).strftime("%H:%M"))
+
+	label_time_set.configure(text=datetime.fromtimestamp(data["sys"]["sunset"]).strftime("%H:%M"))
+
+	label_mail.configure(text=get.mail(conf))
+	
+	label_cal.configure(text=get.calendar(conf)[0])
+
+	root.after(10000, update)
+
 
 # On met la fenêtre en plein écran
 
@@ -58,8 +80,8 @@ tkpi_rise = ImageTk.PhotoImage(image_rise)
 label_image_rise = Label(root, image=tkpi_rise, background="black")
 label_image_rise.place(x=120,y=30,width=w*25/100,height=h*25/100)
 
-label_time_set = Label(root, background="black", foreground="white", text=datetime.fromtimestamp(data["sys"]["sunrise"]).strftime("%H:%M"))
-label_time_set.place(x=170, y=42, width=w*15/100,height=h*15/100)
+label_time_rise = Label(root, background="black", foreground="white", text=datetime.fromtimestamp(data["sys"]["sunrise"]).strftime("%H:%M"))
+label_time_rise.place(x=170, y=42, width=w*15/100,height=h*15/100)
 
 image_set = Image.open("images/misc/set.png")
 tkpi_set = ImageTk.PhotoImage(image_set)
@@ -97,5 +119,8 @@ label_cal = Label(root, background="black", foreground="white", text=cal[0]		)
 label_cal.place(x=260, y=80, width=w*10/100,height=h*15/100)
 
 # On lance la fenêtre
+
+root.after(10000, update)
+label_time.after(1000, update_time)
 
 root.mainloop()
