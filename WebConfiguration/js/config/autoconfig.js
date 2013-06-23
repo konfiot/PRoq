@@ -19,12 +19,10 @@ var autoConfig = {
                     dataType: "text",
                     success: function(serveur){
                         if( (serveur === "") && ($("#ServMail").val() === "") ){
-                            e.erreur("error", "Impossible de trouver le serveur");
-                            e.manset("A indiquer manuellement");
+                            e.manset("Ex : imap.googlemail.com");
                         }
                         else{
                             e.autoset(serveur);
-                            e.erreur("success", "");
                         }
                     }
                 });
@@ -50,12 +48,10 @@ var autoConfig = {
                     dataType: "text",
                     success: function(serveur){
                         if( (serveur === "") && ($("#PortMail").val() === "") ){
-                            e.erreur("error", "Impossible de trouver le serveur");
-                            e.manset("A indiquer manuellement");
+                            e.manset("Ex : 993");
                         }
                         else{
                             e.autoset(serveur);
-                            e.erreur("success", "");
                         }
                     }
                 });

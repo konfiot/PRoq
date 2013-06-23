@@ -20,7 +20,7 @@ function element(_sel, _categorie, _champ){
     
     //Une fonction qui sert à éditer l'erreur
     this.erreur = function(type, message) {
-        $(this.element).parent().parent().removeClass("success error").addClass(type);
+        $(this.element).parent().parent().removeClass("success error info warning").addClass(type);
         $(this.element).parent().children(".help-inline").html(message);
     },
     

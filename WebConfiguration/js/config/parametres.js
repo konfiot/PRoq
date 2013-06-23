@@ -168,8 +168,8 @@ var inputs = {
             {
                 "format": /\S+/,
                 "msg": {
-                    "type": "error",
-                    "text": "Veuillez remplir manuellement"
+                    "type": "info",
+                    "text": "A remplir manuellement"
                 }
             }
         ],
@@ -182,8 +182,8 @@ var inputs = {
             {
                 "format": /\S+/,
                 "msg": {
-                    "type": "error",
-                    "text": "Veuillez remplir manuellement"
+                    "type": "info",
+                    "text": "A remplir manuellement"
                 }
             },
             {
