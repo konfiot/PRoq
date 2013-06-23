@@ -87,7 +87,11 @@ label_image_mail.place(x=120,y=70,width=w*25/100,height=h*25/100)
 
 mail_conf = conf["mail"]
 
-obj = imaplib.IMAP4_SSL(mail_conf["server"], mail_conf["port"])
+if mail_conf["ssl"] :
+	obj = imaplib.IMAP4_SSL(mail_conf["server"], mail_conf["port"])
+else :
+	obj = imaplib.IMAP4_SSL(mail_conf["server"], mail_conf["port"])
+
 obj.login(mail_conf["username"], mail_conf["passwd"])
 obj.select()
 unread = len(obj.search(None, 'UnSeen')[1][0].split())
