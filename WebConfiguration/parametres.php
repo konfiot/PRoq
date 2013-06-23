@@ -37,11 +37,13 @@
                             <i class="icon-fixed-width icon-pause"></i> Règlage de la touche "snooze"</a></li>
                         <li class="nav-header">Paramètres des informations</li>
                         <li class="leftnav"><a href="#informations">
-                            <i class="icon-fixed-width icon-info-sign"></i> Informations à dicter</a></li>
+                            <i class="icon-fixed-width icon-comment-alt"></i> Informations à dicter</a></li>
                         <li class="leftnav"><a href="#mail">
                             <i class="icon-fixed-width icon-envelope-alt"></i> Mails</a></li>
                         <li class="leftnav"><a href="#calendar">
                             <i class="icon-fixed-width icon-calendar"></i> Calendrier</a></li>
+                        <li class="leftnav"><a href="#weather">
+                            <i class="icon-fixed-width icon-cloud"></i> Météo</a></li>
                     </ul>
                 </div>
             </div>

@@ -217,5 +217,11 @@ var inputs = {
                 }
             }        
         ]
+    ),
+    //Paramètresdu calendrier
+    "MeteoPos": new elementInput("#MeteoPos",
+        "weather",
+        "location",
+        [ ]
     )
 };
