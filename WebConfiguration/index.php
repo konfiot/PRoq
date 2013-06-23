@@ -6,6 +6,9 @@
 
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    
     <link href="css/main.css" rel="stylesheet">
  
   </head>
@@ -34,7 +37,7 @@
                     </ul>
                 </p>
                 <p>
-                    <a class="btn btn-primary btn-large pull-right" href="https://github.com/konfiot/smart-wake">Projet github</a>
+                    <a class="btn btn-primary btn-large pull-right" href="https://github.com/konfiot/smart-wake"><i class="icon-github icon"></i> Projet github</a>
                 </p>
             </div>
         </div>

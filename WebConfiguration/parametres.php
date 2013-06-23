@@ -6,7 +6,10 @@
 
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    
+    <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/bootstrapSwitch.css" rel="stylesheet">
+    
     <link href="css/main.css" rel="stylesheet">
   </head>
   <body>
@@ -24,14 +27,21 @@
                 <div class="well sidebar-nav">
                     <ul class="nav nav-list">
                         <li class="nav-header">Paramètres de reveil</li>
-                        <li class="leftnav"><a href="#horaires">Regler les horaires de sonerie</a></li>
-                        <li class="leftnav"><a href="#sonneries">Choisir la sonnerie</a></li>
-                        <li class="leftnav"><a href="#radios">Webradios</a></li>
-                        <li class="leftnav"><a href="#snooze">Règlage de la touche "snooze"</a></li>
+                        <li class="leftnav"><a href="#horaires">
+                            <i class="icon-fixed-width icon-time"></i> Regler les horaires de sonerie</a></li>
+                        <li class="leftnav"><a href="#sonneries">
+                            <i class="icon-fixed-width icon-bell"></i> Choisir la sonnerie</a></li>
+                        <li class="leftnav"><a href="#radios">
+                            <i class="icon-fixed-width icon-music"></i> Webradios</a></li>
+                        <li class="leftnav"><a href="#snooze">
+                            <i class="icon-fixed-width icon-pause"></i> Règlage de la touche "snooze"</a></li>
                         <li class="nav-header">Paramètres des informations</li>
-                        <li class="leftnav"><a href="#informations">Informations à dicter</a></li>
-                        <li class="leftnav"><a href="#mail">Mails</a></li>
-                        <li class="leftnav"><a href="#calendrier">Calendrier</a></li>
+                        <li class="leftnav"><a href="#informations">
+                            <i class="icon-fixed-width icon-info-sign"></i> Informations à dicter</a></li>
+                        <li class="leftnav"><a href="#mail">
+                            <i class="icon-fixed-width icon-envelope-alt"></i> Mails</a></li>
+                        <li class="leftnav"><a href="#calendrier">
+                            <i class="icon-fixed-width icon-calendar"></i> Calendrier</a></li>
                     </ul>
                 </div>
             </div>
