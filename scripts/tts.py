@@ -4,11 +4,7 @@
 import urllib
 import json
 import subprocess
-import imaplib 
-from icalendar import Calendar, Event, vDDDTypes
-from datetime import datetime, date
-import pytz
-
+from functions import get
 
 def get_weather_string (id) :
 	string = "Non reconnu"
@@ -111,41 +107,15 @@ weather_string = get_weather_string(id);
 
 # Gestion Mail
 
-mail_conf = conf["mail"]
-
-if mail_conf["ssl"] :
-	obj = imaplib.IMAP4_SSL(mail_conf["server"], mail_conf["port"])
-else :
-	obj = imaplib.IMAP4_SSL(mail_conf["server"], mail_conf["port"])
-
-obj.login(mail_conf["username"], mail_conf["passwd"])
-obj.select()
-unread = len(obj.search(None, 'UnSeen')[1][0].split())
+unread = get.mail(conf)
 
 # Gestion Calendrier
 
-rdv = ""
-req = urllib.urlopen(conf["calendar"]["url"])
-gcal = Calendar.from_ical(req.read())
-
-i = 0
-
-for component in gcal.walk():
-	if component.name == "VEVENT" :
-		if type(vDDDTypes.from_ical(component.get('dtstart'))) == type(date.today()) :
-			start = vDDDTypes.from_ical(component.get('dtstart'))
-			end = vDDDTypes.from_ical(component.get('dtend'))
-		elif type(vDDDTypes.from_ical(component.get('dtstart'))) == type(datetime.today()) :
-			start = vDDDTypes.from_ical(component.get('dtstart')).date()
-			end = vDDDTypes.from_ical(component.get('dtend')).date()
-
-		if date.today() >= start and date.today() <= end :
-			rdv += component.get("summary") + ", "
-			i += 1
+cal = get.calendar(conf)
 
 
 # Synthèse vocale
 
-tosay = "Temps prévu pour aujourd'hui : ".decode("utf-8") + weather_string + ". Vous avez " + str(unread) + "Messages non lus. " + str(i) + " évènements aujourd'hui : ".decode("utf-8") + rdv.decode("utf-8")
+tosay = "Temps prévu pour aujourd'hui : ".decode("utf-8") + weather_string + ". Vous avez " + str(unread) + "Messages non lus. " + str(cal[0]) + " évènements aujourd'hui : ".decode("utf-8") + cal[1].decode("utf-8")
 
 subprocess.call(["../picospeaker/picospeaker", "-l", "fr-FR", tosay.encode("utf-8")])
