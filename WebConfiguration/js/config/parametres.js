@@ -130,6 +130,7 @@ var config = {
 *******************************************************************************************************************************/
 
 var inputs = {
+    //Paramètres des mails
     "AdresseMail": new elementInput("#AdresseMail",
         "mail",
         "full_adress",
@@ -148,7 +149,8 @@ var inputs = {
                 "text": "Adresse mail invalide"
                 }
             }
-        ]
+        ],
+        function(){}
     ),
     "MailPassword": new elementInput("#MailPassword",
         "mail",
@@ -161,7 +163,8 @@ var inputs = {
                     "text": "Champ obligatoire"
                 }
             }
-        ]
+        ],
+        function(){}
     ),
     "ServMail": new elementInputAuto("#ServMail",
         "mail",
@@ -199,7 +202,7 @@ var inputs = {
         ],
         autoConfig.port
     ),
-    "MailSsl": new elementSwitchAuto("#MailSsl",
+    "MailSsl": new elementSwitch("#MailSsl",
         "mail",
         "ssl",
         autoConfig.ssl
@@ -216,12 +219,14 @@ var inputs = {
                     "text": "Champ obligatoire"
                 }
             }        
-        ]
+        ],
+        function(){}
     ),
-    //Paramètresdu calendrier
+    //Paramètres de la météo
     "MeteoPos": new elementInput("#MeteoPos",
         "weather",
         "location",
-        [ ]
+        [ ],
+        function(){}
     )
 };

@@ -2,10 +2,11 @@
 **                                                Classe élément mère                                                         **        
 *******************************************************************************************************************************/
 
-function element(_sel, _categorie, _champ){
+function element(_sel, _categorie, _champ, _proccess){
     this.element = _sel;                                                        //Selecteur JQuery
     this.categorie = _categorie;                                                //Categorie pour l'enregistrement
     this.champ = _champ;                                                        //Champ pour l'enregistrement
+    this.proccess = _proccess;
     
     this.initialValue = "";                                                     //Sert à retenir la valeur à la prise de focus
     
@@ -39,6 +40,8 @@ function element(_sel, _categorie, _champ){
                 $("#"+this.id).trigger("changed");
             }
         });
+        
+        this.proccess();
     };
 }
 
@@ -46,8 +49,8 @@ function element(_sel, _categorie, _champ){
 **                                                Classe élément input                                                        **        
 *******************************************************************************************************************************/
 
-function elementInput(_element, _categorie, _champ, _validation){
-    element.call(this, _element, _categorie, _champ);                           //Hérite de la classe élément
+function elementInput(_element, _categorie, _champ, _validation, _proccess){
+    element.call(this, _element, _categorie, _champ,  _proccess);               //Hérite de la classe élément
     this.validation = _validation;                                              //Liste des validateurs
     
     this.valeur = function(v){
@@ -91,8 +94,7 @@ function elementInput(_element, _categorie, _champ, _validation){
 *******************************************************************************************************************************/
 
 function elementInputAuto(_element, _categorie, _champ, _validation, _proccess){
-    elementInput.call(this, _element, _categorie, _champ, _validation);
-    this.proccess = _proccess;
+    elementInput.call(this, _element, _categorie, _champ, _validation, _proccess);
     this.auto = false;
     
     this.valeur = function(v){
@@ -139,8 +141,6 @@ function elementInputAuto(_element, _categorie, _champ, _validation, _proccess){
         var temp = new element();
         temp.reconnect.call(this);
         
-        this.proccess();
-        
         $(this.element).on("changed", function(){
             inputs[this.id].refreshAuto();
             inputs[this.id].isValid();
@@ -157,9 +157,8 @@ function elementInputAuto(_element, _categorie, _champ, _validation, _proccess){
 **                                                Classe élément input                                                        **        
 *******************************************************************************************************************************/
 
-function elementSwitch(_element, _categorie, _champ, _proprietes){
-    element.call(this, _element, _categorie, _champ);                           //Hérite de la classe élément
-    this.proprietes = _proprietes;
+function elementSwitch(_element, _categorie, _champ, _proccess){
+    element.call(this, _element, _categorie, _champ,  _proccess);               //Hérite de la classe élément
     
     this.valeur = function(v){
         if( (typeof v) == "undefined" )
@@ -167,16 +166,4 @@ function elementSwitch(_element, _categorie, _champ, _proprietes){
         else
             $(this.element).bootstrapSwitch("setState", v);
     };
-}
-
-function elementSwitchAuto(_element, _categorie, _champ, _proccess){
-    elementSwitch.call(this, _element, _categorie, _champ);                     //Hérite de la classe élémentSwitch
-    this.proccess = _proccess;
-    
-    this.reconnect = function(){
-        var temp = new elementSwitch();
-        temp.reconnect.call(this);
-        
-        this.proccess();
-    };   
 }
