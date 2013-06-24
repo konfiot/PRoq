@@ -81,5 +81,10 @@ var autoConfig = {
                     }
                 });
         });
+    },
+    ville : function(){
+        $("#btn-find-pos").click(function(){
+            inputs.MeteoPos.valeur(geoplugin_city());
+        });
     }
 };

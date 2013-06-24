@@ -227,6 +227,6 @@ var inputs = {
         "weather",
         "location",
         [ ],
-        function(){}
+        autoConfig.ville
     )
 };

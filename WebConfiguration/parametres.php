@@ -71,9 +71,10 @@
     
     <?php include("elements/fenConfirm.php"); ?>
     
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootstrapSwitch.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrapSwitch.js"></script>
+    <script type="text/javascript" src="http://www.geoplugin.net/javascript.gp"></script>
     
     <script type="text/javascript" src="js/config/elements.js"></script>
     <script type="text/javascript" src="js/config/autoconfig.js"></script>
