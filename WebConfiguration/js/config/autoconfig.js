@@ -82,9 +82,22 @@ var autoConfig = {
                 });
         });
     },
+    // Villes , météo ...
     ville : function(){
         $("#btn-find-pos").click(function(){
             inputs.MeteoPos.valeur(geoplugin_city());
         });
+    },
+    checkCity : function(ville){                                                // Retourne si oui ou non la ville existe
+        var strReturn = "";
+        jQuery.ajax({
+            url: "http://smart-wake.remi100756.c9.io/WebConfiguration/functions/checkCity.php?city=" + ville,
+            success: function(html) {
+                strReturn = html;
+            },
+            async:false
+        });
+    
+        return strReturn == "true";
     }
 };

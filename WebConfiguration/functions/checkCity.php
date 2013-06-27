@@ -6,9 +6,9 @@
     $json = file_get_contents("http://api.openweathermap.org/data/2.5/find?mode=json&q=" . $_GET["city"]);
     $json = json_decode($json, true);
     
-    if( $json["cod"] == 200 )
-        echo "1";
+    if( $json["count"] > 0 )
+        echo "true";
     else
-        echo "0";
+        echo "false";
     
 ?>

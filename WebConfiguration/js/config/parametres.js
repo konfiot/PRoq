@@ -218,7 +218,7 @@ var inputs = {
                     "type": "error",
                     "text": "Champ obligatoire"
                 }
-            }        
+            }
         ],
         function(){}
     ),
@@ -226,7 +226,15 @@ var inputs = {
     "MeteoPos": new elementInput("#MeteoPos",
         "weather",
         "location",
-        [ ],
+        [
+            {
+                "format": autoConfig.checkCity,
+                "msg": {
+                    "type": "warning",
+                    "text": "Cette ville n'est pas référencé"
+                }
+            }
+        ],
         autoConfig.ville
     )
 };

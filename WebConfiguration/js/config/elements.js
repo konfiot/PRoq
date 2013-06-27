@@ -70,9 +70,15 @@ function elementInput(_element, _categorie, _champ, _validation, _proccess){
     
     this.isValid = function(){
         for (var i = 0 ; i < this.validation.length ; i++) {
-            if( !this.validation[i].format.test( $(this.element).val() ) ){
+            if(typeof this.validation[i].format != "function"){
+                if( !this.validation[i].format.test( $(this.element).val() ) ){
+                    this.erreur(this.validation[i].msg.type, this.validation[i].msg.text);
+                    return false;
+                }
+            }
+            else if( !this.validation[i].format($(this.element).val()) ){
                 this.erreur(this.validation[i].msg.type, this.validation[i].msg.text);
-                return false;
+                return false
             }
         }
         this.erreur("success", "");
