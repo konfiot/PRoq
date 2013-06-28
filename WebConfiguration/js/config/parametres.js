@@ -3,34 +3,36 @@ $(function() {  //Executé après le chargement
 **                                                  Gestion du menu                                                           **        
 *******************************************************************************************************************************/
 
-    $(".leftnav").mousedown(function(e){//Quand on clic sur un élément du menu
+    $(".leftnav").mousedown(function(e){    //Quand on clic sur un élément du menu
         $(".leftnav").removeClass("active");                                    //On desactive tout
         $(e.delegateTarget).addClass("active");                                 //On active le bon
         
         //----------------------------
         
-        config.onglet = $(e.delegateTarget).children("a").attr("href");         //On choppe l'id ciblé par le lien
-        config.onglet = config.onglet.substring(1, config.onglet.length);       //On vire le '#'
+        config.loadForm(window.location.hash.slice(1));
+
+    });
     
-        $(".hero-unit").load("forms/" + config.onglet + ".html", function(){    //On envoit la requette
-            config.connectAll();                                                //On connecte les inputs
-        
-            config.resetForm();                                                 //On met les valeurs existantes
-            config.checkForm();                                                 //On colore les champs
-            
-            $('.switch')['bootstrapSwitch']();
-        });
-    });      
-        
     /**************************************************************************/
     
     $.getJSON("functions/config.php", function(donnees){                        //On recupère la configuration sur le serveur
         config.config = donnees;
+        
+    
+        /**********************************************************************/
+        //Pour afficher le bon formulaire si il y a une ancre
+        var ancre = window.location.hash.slice(1);
+        if( ancre )
+            config.loadForm(ancre);
     });
     
 /****/
 });             //Executé après le chargement {fin}
 
+//Quand l'ancre change
+$(window).bind('hashchange', function () { //detect hash change
+    config.loadForm(window.location.hash.slice(1));
+});
 
 /*******************************************************************************************************************************
 **                                                 Gestion des formulaires                                                    **        
@@ -42,6 +44,18 @@ var config = {
     onglet : "defaut",                                                          //Contient l'onglet actuel
     config : {},                                                                //Et celle - ci la configuration json
     
+    //Pour changer le formulaire affiché
+    loadForm : function(formulaire){
+        $(".hero-unit").load("forms/" + formulaire + ".html", function(){    //On envoit la requette
+            config.connectAll();                                                //On connecte les inputs
+        
+            config.resetForm();                                                 //On met les valeurs existantes
+            config.checkForm();                                                 //On colore les champs
+            
+            $('.switch')['bootstrapSwitch']();
+        })
+    },
+
     //Une fonction qui sert à éditer l'erreur ; sel est l'id du champ
     erreur: function(sel, type, message) {
         var el = $(sel);
