@@ -205,6 +205,7 @@ var inputs = {
     "MailSsl": new elementSwitch("#MailSsl",
         "mail",
         "ssl",
+        [ ],
         autoConfig.ssl
     ),
     //Paramètresdu calendrier

@@ -2,11 +2,12 @@
 **                                                Classe élément mère                                                         **        
 *******************************************************************************************************************************/
 
-function element(_sel, _categorie, _champ, _proccess){
+function element(_sel, _categorie, _champ, _validation, _proccess){
     this.element = _sel;                                                        //Selecteur JQuery
     this.categorie = _categorie;                                                //Categorie pour l'enregistrement
     this.champ = _champ;                                                        //Champ pour l'enregistrement
-    this.proccess = _proccess;
+    this.proccess = _proccess;                                                  //A executer à l'apparation
+    this.validation = _validation;                                              //Liste des validateurs
     
     this.initialValue = "";                                                     //Sert à retenir la valeur à la prise de focus
     
@@ -26,6 +27,18 @@ function element(_sel, _categorie, _champ, _proccess){
     },
     
     this.isValid = function(){
+        for (var i = 0 ; i < this.validation.length ; i++) {
+            if(typeof this.validation[i].format != "function"){
+                if( !this.validation[i].format.test( $(this.element).val() ) ){
+                    this.erreur(this.validation[i].msg.type, this.validation[i].msg.text);
+                    return false;
+                }
+            }
+            else if( !this.validation[i].format($(this.element).val()) ){
+                this.erreur(this.validation[i].msg.type, this.validation[i].msg.text);
+                return false
+            }
+        }
         this.erreur("success", "");
         return true;
     };
@@ -50,8 +63,7 @@ function element(_sel, _categorie, _champ, _proccess){
 *******************************************************************************************************************************/
 
 function elementInput(_element, _categorie, _champ, _validation, _proccess){
-    element.call(this, _element, _categorie, _champ,  _proccess);               //Hérite de la classe élément
-    this.validation = _validation;                                              //Liste des validateurs
+    element.call(this, _element, _categorie, _champ, _validation,  _proccess);  //Hérite de la classe élément
     
     this.valeur = function(v){
         if( (typeof v) !== "undefined" ){
@@ -66,23 +78,6 @@ function elementInput(_element, _categorie, _champ, _validation, _proccess){
             else
                 return "";
         }
-    };
-    
-    this.isValid = function(){
-        for (var i = 0 ; i < this.validation.length ; i++) {
-            if(typeof this.validation[i].format != "function"){
-                if( !this.validation[i].format.test( $(this.element).val() ) ){
-                    this.erreur(this.validation[i].msg.type, this.validation[i].msg.text);
-                    return false;
-                }
-            }
-            else if( !this.validation[i].format($(this.element).val()) ){
-                this.erreur(this.validation[i].msg.type, this.validation[i].msg.text);
-                return false
-            }
-        }
-        this.erreur("success", "");
-        return true;
     };
     
     this.reconnect = function(){
@@ -160,11 +155,11 @@ function elementInputAuto(_element, _categorie, _champ, _validation, _proccess){
 }
 
 /*******************************************************************************************************************************
-**                                                Classe élément input                                                        **        
+**                                                Classe élément switch                                                       **        
 *******************************************************************************************************************************/
 
-function elementSwitch(_element, _categorie, _champ, _proccess){
-    element.call(this, _element, _categorie, _champ,  _proccess);               //Hérite de la classe élément
+function elementSwitch(_element, _categorie, _champ, _validation, _proccess){
+    element.call(this, _element, _categorie, _champ, _validation,  _proccess);  //Hérite de la classe élément
     
     this.valeur = function(v){
         if( (typeof v) == "undefined" )
