@@ -1,8 +1,9 @@
 import imaplib
-import urllib
+import urllib, urllib2
 from icalendar import Calendar, Event, vDDDTypes
 from datetime import datetime, date
 import json
+import re
 
 def mail (conf) :
 	mail_conf = conf["mail"]
@@ -45,4 +46,22 @@ def weather(conf) :
 	data_forecast = json.load(req)
 
 	return (data, data_forecast)
+
+def news_get_sessid(conf) : 
+	req = urllib.urlopen("http://www.newsblur.com/api/login", urllib.urlencode({"username" : conf["news"]["user"], "password": conf["news"]["passwd"]}))
+	data = json.load(req)
+	if data["code"] == 1 :
+		return re.findall(r"(newsblur_sessionid=.+?);", req.info()["Set-Cookie"])
+	else : 
+		return false
+ 
+def news(conf) : 
+	cookie = news_get_sessid(conf)
+	req = urllib2.Request("http://www.newsblur.com/reader/refresh_feeds", None, {"Cookie" : cookie[0]})
+	resp = urllib2.urlopen(req)
+	data = json.load(resp)
+	unread = 0	
+	for i in data["feeds"] : 
+		unread += data["feeds"][i]["nt"]
+	return unread
 
