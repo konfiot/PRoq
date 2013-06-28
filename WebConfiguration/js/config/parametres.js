@@ -51,11 +51,15 @@ var config = {
     
     //Pour afficher une erreur en bas de la page
     generalErreur: function(type, message) {
+        var date = new Date();                                                  //On récupère l'heure actuelle
+        var prefixe = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        prefixe = "<strong>" + prefixe + "</strong> - ";
+        
         if(message === "")
             $("#generalErreur").addClass("hide");
         else{
             $("#generalErreur").removeClass("hide alert-success alert-danger alert-info");
-            $("#generalErreur").addClass("alert-" + type).html(message);
+            $("#generalErreur").addClass("alert-" + type).html(prefixe + message);
         }
     },
     
@@ -80,7 +84,7 @@ var config = {
     
     sendForm : function(){
         if( !config.checkForm() ){
-            config.generalErreur("danger", "Formulaire invalide");
+            config.generalErreur("danger", "Echec de l'envoit : formulaire invalide");
             return;
         }
 
