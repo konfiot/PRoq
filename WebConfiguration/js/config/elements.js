@@ -9,6 +9,7 @@ function element(_sel, _categorie, _champ, _validation, _proccess){
     this.proccess = _proccess;                                                  //A executer à l'apparation
     this.validation = _validation;                                              //Liste des validateurs
     
+    this.manErreur = false;                                                     //Retient une erreur a été entrée exterieure à la méthode "isValid()"
     this.initialValue = "";                                                     //Sert à retenir la valeur à la prise de focus
     
     this.valeur = function(v){
@@ -34,13 +35,27 @@ function element(_sel, _categorie, _champ, _validation, _proccess){
                     return false;
                 }
             }
-            else if( !this.validation[i].format($(this.element).val()) ){
+            else if( !this.validation[i].format($(this.element).val(), this.validation[i].msg) ){
                 this.erreur(this.validation[i].msg.type, this.validation[i].msg.text);
-                return false
+                return false;
             }
         }
+        
         this.erreur("success", "");
-        return true;
+        
+        if(this.manErreur){
+            this.manErreur = false;
+            return false;
+        }
+        else
+            return true;
+    };
+    
+    //Pour entrer manuelement une erreur
+    this.setErreur = function(type, text){
+        if( !this.manErreur )
+            this.erreur(type, text);
+        this.manErreur = {"type" : type, "text" : text};
     };
     
     this.reconnect = function(){

@@ -88,16 +88,14 @@ var autoConfig = {
             inputs.MeteoPos.valeur(geoplugin_city());
         });
     },
-    checkCity : function(ville){                                                // Retourne si oui ou non la ville existe
-        var strReturn = "";
+    checkCity : function(ville, erreur){                                        // Retourne si oui ou non la ville existe
         jQuery.ajax({
             url: "http://smart-wake.remi100756.c9.io/WebConfiguration/functions/checkCity.php?city=" + ville,
             success: function(html) {
-                strReturn = html;
-            },
-            async:false
+                if(html != "true")
+                    inputs.MeteoPos.setErreur(erreur.type, erreur.text);
+            }
         });
-    
-        return strReturn == "true";
+        return true;                                                            // Dans l'immédiat, on considère comme validé
     }
 };
