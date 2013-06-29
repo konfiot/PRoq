@@ -15,5 +15,9 @@
     },
     "weather": {
         "location": "Eaubonne"
+    },
+    "news" : {
+	"user" : "testsmartwake",
+	"passwd" : "helicoptere"
     }
 }

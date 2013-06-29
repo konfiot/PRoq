@@ -31,6 +31,8 @@ def update() :
 	label_time_set.configure(text=datetime.fromtimestamp(data["sys"]["sunset"]).strftime("%H:%M"))
 
 	label_mail.configure(text=get.mail(conf))
+
+	label_news.configure(text=get.news(conf))
 	
 	label_cal.configure(text=get.calendar(conf)[0])
 
@@ -104,6 +106,19 @@ unread = get.mail(conf)
 
 label_mail = Label(root, background="black", foreground="white", text=unread)
 label_mail.place(x=170, y=80, width=w*10/100,height=h*15/100)
+
+# On met aussi les news
+
+image_news = Image.open("images/misc/news.png")
+tkpi_news = ImageTk.PhotoImage(image_news)
+
+label_image_news = Label(root, image=tkpi_news, background="black")
+label_image_news.place(x=210,y=-10,width=w*25/100,height=h*25/100)
+
+news = get.news(conf)
+
+label_news = Label(root, background="black", foreground="white", text=news)
+label_news.place(x=260, y=2, width=w*10/100,height=h*15/100)
 
 # On ajoute le compteur d'évènements dans la journée
 
