@@ -47,7 +47,7 @@ def weather(conf) :
 
 	return (data, data_forecast)
 
-def news_get_sessid(conf) : 
+def newsblur_get_sessid(conf) : 
 	req = urllib.urlopen("http://www.newsblur.com/api/login", urllib.urlencode({"username" : conf["news"]["user"], "password": conf["news"]["passwd"]}))
 	data = json.load(req)
 	if data["code"] == 1 :
@@ -56,12 +56,21 @@ def news_get_sessid(conf) :
 		return false
  
 def news(conf) : 
-	cookie = news_get_sessid(conf)
-	req = urllib2.Request("http://www.newsblur.com/reader/refresh_feeds", None, {"Cookie" : cookie[0]})
-	resp = urllib2.urlopen(req)
-	data = json.load(resp)
-	unread = 0	
-	for i in data["feeds"] : 
-		unread += data["feeds"][i]["nt"]
-	return unread
+	if conf["news"]["provider"] == "newsblur" :
+		cookie = newsblur_get_sessid(conf)
+		req = urllib2.Request("http://www.newsblur.com/reader/refresh_feeds", None, {"Cookie" : cookie[0]})
+		resp = urllib2.urlopen(req)
+		data = json.load(resp)
+		unread = 0	
+		for i in data["feeds"] : 
+			unread += data["feeds"][i]["nt"]
+		return unread
+	elif conf["news"]["provider"] == "theoldreader" :
+		req = urllib.urlopen("https://theoldreader.com/accounts/ClientLogin", urllib.urlencode({"accountType" : "HOSTED", "service": "reader", "output": "json", "Email" : conf["news"]["user"], "Passwd": conf["news"]["passwd"]}))
+		data = json.load(req)
+		req = urllib2.Request("https://theoldreader.com/reader/api/0/unread-count?output=json", None, {"Authorization" : "GoogleLogin auth=" + data["Auth"]})
+		resp = urllib2.urlopen(req)
+		data = json.load(resp)
+		return data["max"]
+		
 
