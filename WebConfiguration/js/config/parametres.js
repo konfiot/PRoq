@@ -22,6 +22,11 @@ $(function() {  //Executé après le chargement
         /**********************************************************************/
         //Pour afficher le bon formulaire si il y a une ancre
         config.loadForm(window.location.hash.slice(1));
+        $(".leftnav>a").each(function(e) {
+            if("#" + $(".leftnav>a")[e].href.split('#')[1] == window.location.hash){
+                $(".leftnav>a")[e].parentNode.className += " active";
+            }
+        });
     });
     
 /****/
