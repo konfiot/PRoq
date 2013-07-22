@@ -109,9 +109,10 @@ var config = {
             config.config[categorie][champ] = inputs[this.id].valeur();
         });
         
+        categorie = window.location.hash.slice(1);
         $.ajax({
             type: "GET",
-            url: "functions/config.php?categorie=" + config.onglet + "&value=" + JSON.stringify(config.config[config.onglet]),
+            url: "functions/config.php?categorie=" + categorie + "&value=" + JSON.stringify(config.config[categorie]),
             dataType: "text",
             success: function(){
                 config.generalErreur("success", "Le formulaire à été envoyé avec succès");
@@ -256,5 +257,42 @@ var inputs = {
             }
         ],
         autoConfig.ville
+    ),
+    //Paramètres des news
+    "NewsProvider": new elementList("#NewsProvider",
+        "news",
+        "provider",
+        [ ],
+        function(){}
+    ),
+    //Paramètres des news
+    "NewsUser": new elementInput("#NewsUser",
+        "news",
+        "user",
+        [
+            {
+                "format": /\S+/,
+                "msg": {
+                    "type": "error",
+                    "text": "Champ obligatoire"
+                }
+            }
+        ],
+        function(){}
+    ),
+    //Paramètres des news
+    "NewsPassword": new elementInput("#NewsPassword",
+        "news",
+        "passwd",
+        [
+            {
+                "format": /\S+/,
+                "msg": {
+                    "type": "error",
+                    "text": "Champ obligatoire"
+                }
+            }
+        ],
+        function(){}
     )
 };

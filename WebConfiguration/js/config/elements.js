@@ -183,3 +183,11 @@ function elementSwitch(_element, _categorie, _champ, _validation, _proccess){
             $(this.element).bootstrapSwitch("setState", v);
     };
 }
+
+/*******************************************************************************************************************************
+**                                                 Classe élément liste                                                       **        
+*******************************************************************************************************************************/
+
+function elementList(_element, _categorie, _champ, _validation, _proccess){
+    element.call(this, _element, _categorie, _champ, _validation,  _proccess);  //Hérite de la classe élément
+}

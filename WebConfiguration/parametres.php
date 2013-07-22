@@ -42,6 +42,8 @@
                             <i class="icon-fixed-width icon-envelope-alt"></i> Mails</a></li>
                         <li class="leftnav"><a href="#calendar">
                             <i class="icon-fixed-width icon-calendar"></i> Calendrier</a></li>
+                        <li class="leftnav"><a href="#news">
+                            <i class="icon-fixed-width icon-rss"></i> News</a></li>
                         <li class="leftnav"><a href="#weather">
                             <i class="icon-fixed-width icon-cloud"></i> Météo</a></li>
                     </ul>
