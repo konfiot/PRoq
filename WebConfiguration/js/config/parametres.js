@@ -22,11 +22,6 @@ $(function() {  //Executé après le chargement
         /**********************************************************************/
         //Pour afficher le bon formulaire si il y a une ancre
         config.loadForm(window.location.hash.slice(1));
-        $(".leftnav>a").each(function(e) {
-            if("#" + $(".leftnav>a")[e].href.split('#')[1] == window.location.hash){
-                $(".leftnav>a")[e].parentNode.className += " active";
-            }
-        });
     });
     
 /****/
@@ -59,6 +54,13 @@ var config = {
             config.checkForm();                                                 //On colore les champs
             
             $('.switch')['bootstrapSwitch']();
+        });
+        
+        $(".leftnav>a").each(function(e) {
+            $(".leftnav>a")[e].parentNode.className = "leftnav";
+            if("#" + $(".leftnav>a")[e].href.split('#')[1] == window.location.hash){
+                $(".leftnav>a")[e].parentNode.className = "leftnav active";
+            }
         });
     },
 
@@ -155,7 +157,7 @@ var config = {
 *******************************************************************************************************************************/
 
 var inputs = {
-    //Paramètres des mails
+    //Paramètres des mails    --------------------------------------------------
     "AdresseMail": new elementInput("#AdresseMail",
         "mail",
         "full_adress",
@@ -233,7 +235,7 @@ var inputs = {
         [ ],
         autoConfig.ssl
     ),
-    //Paramètresdu calendrier
+    //Paramètresdu calendrier    -----------------------------------------------
     "CalendarUrl": new elementInput("#CalendarUrl",
         "calendar",
         "url",
@@ -248,11 +250,18 @@ var inputs = {
         ],
         function(){}
     ),
-    //Paramètres de la météo
+    //Paramètres de la météo    ------------------------------------------------
     "MeteoPos": new elementInput("#MeteoPos",
         "weather",
         "location",
         [
+            {
+                "format": /\S+/,
+                "msg": {
+                    "type": "error",
+                    "text": "Champ obligatoire"
+                }
+            },
             {
                 "format": autoConfig.checkCity,
                 "msg": {
@@ -263,14 +272,13 @@ var inputs = {
         ],
         autoConfig.ville
     ),
-    //Paramètres des news
+    //Paramètres des news    ---------------------------------------------------
     "NewsProvider": new elementList("#NewsProvider",
         "news",
         "provider",
         [ ],
         function(){}
     ),
-    //Paramètres des news
     "NewsUser": new elementInput("#NewsUser",
         "news",
         "user",
@@ -285,7 +293,6 @@ var inputs = {
         ],
         function(){}
     ),
-    //Paramètres des news
     "NewsPassword": new elementInput("#NewsPassword",
         "news",
         "passwd",
