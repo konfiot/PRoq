@@ -56,12 +56,9 @@
             <!-- ----------------------------------------------------------------------------------------------- -->
     
             <div class="span9 hero-unit">
-                <h1>Paramètres</h1>
-                <p>
-                    Chaipas quoi mettre ici, à la limite autant afficher direct la premiere page de paramètres ^^ <br />
-                    Au moins j'ai rentabilisé la navbar xD <br />
-                    La navigation entre les pages de configuration se fera en javascript je pense
-                </p>
+                <h1>Paramètres 
+                    <img src="img/loader/horizontal.gif" />                     <!-- Image générée avec http://ajaxload.info/ -->
+                </h1>
             </div>
     
             <!-- ----------------------------------------------------------------------------------------------- -->

@@ -21,17 +21,15 @@ $(function() {  //Executé après le chargement
     
         /**********************************************************************/
         //Pour afficher le bon formulaire si il y a une ancre
-        var ancre = window.location.hash.slice(1);
-        if( ancre )
-            config.loadForm(ancre);
+        config.loadForm(window.location.hash.slice(1));
     });
     
 /****/
 });             //Executé après le chargement {fin}
 
 //Quand l'ancre change
-$(window).bind('hashchange', function () { //detect hash change
-    config.loadForm(window.location.hash.slice(1));
+$(window).bind('hashchange', function(){
+   config.loadForm(window.location.hash.slice(1));
 });
 
 /*******************************************************************************************************************************
@@ -46,6 +44,9 @@ var config = {
     
     //Pour changer le formulaire affiché
     loadForm : function(formulaire){
+        if(formulaire === "")
+            formulaire = "defaut";
+            
         $(".hero-unit").load("forms/" + formulaire + ".html", function(){    //On envoit la requette
             config.connectAll();                                                //On connecte les inputs
         
@@ -53,7 +54,7 @@ var config = {
             config.checkForm();                                                 //On colore les champs
             
             $('.switch')['bootstrapSwitch']();
-        })
+        });
     },
 
     //Une fonction qui sert à éditer l'erreur ; sel est l'id du champ
