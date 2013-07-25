@@ -17,8 +17,8 @@
         "location": "Eaubonne"
     },
     "news" : {
-	"provider" : "theoldreader",
-	"user" : "test.smartwake@laposte.net",
+	"provider" : "newsblur",
+	"user" : "testsmartwake",
 	"passwd" : "helicoptere"
     }
 }

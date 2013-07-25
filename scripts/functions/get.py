@@ -72,5 +72,12 @@ def news(conf) :
 		resp = urllib2.urlopen(req)
 		data = json.load(resp)
 		return data["max"]
+	elif conf["news"]["provider"] == "commafeed" :
+		req = urllib.urlopen("https://"+ conf["news"]["user"] + ":" + conf["news"]["passwd"] + "@www.commafeed.com/rest/category/get")
+		data = json.load(req)
+		unread = 0
+		for i in data["feeds"] : 
+			unread += i["unread"]
+		return unread
 		
 
