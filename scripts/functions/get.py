@@ -87,3 +87,11 @@ def news(conf) :
 		resp = urllib2.urlopen(req)
 		data = json.load(resp)
 		return data["unreadcounts"][0]["count"]
+
+	elif conf["news"]["provider"] == "inoreader" :
+		req = urllib.urlopen("https://inoreader.com/accounts/ClientLogin", urllib.urlencode({"Email" : conf["news"]["user"], "Passwd": conf["news"]["passwd"]}))
+		auth_token = re.findall(r"Auth=(.+)", req.read())
+		req = urllib2.Request("https://inoreader.com/reader/api/0/unread-count?output=json", None, {"Authorization" : "GoogleLogin auth=" + auth_token[0]})
+		resp = urllib2.urlopen(req)
+		data = json.load(resp)
+		return data["unreadcounts"][0]["count"]
