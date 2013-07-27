@@ -103,3 +103,10 @@ def news(conf) :
 		for i in data : 
 			unread += int(i["unread"])
 		return unread
+
+	elif conf["news"]["provider"] == "ttrss" :
+		req = urllib2.urlopen(conf["news"]["root"] + "/api/", '{"op":"login","user":"' + conf["news"]["user"] +'","password":"' + conf["news"]["passwd"] + '"}')
+		data = json.load(req)
+		req = urllib2.urlopen(conf["news"]["root"] + "/api/", '{"op":"getUnread","sid":"' + data["content"]["session_id"] +'"}')
+		data = json.load(req)
+		return data["content"]["unread"]
