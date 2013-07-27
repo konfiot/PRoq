@@ -95,3 +95,11 @@ def news(conf) :
 		resp = urllib2.urlopen(req)
 		data = json.load(resp)
 		return data["unreadcounts"][0]["count"]
+
+	elif conf["news"]["provider"] == "selfoss" :
+		req = urllib2.urlopen(conf["news"]["root"] + "/sources/stats/")
+		data = json.load(req)
+		unread = 0
+		for i in data : 
+			unread += int(i["unread"])
+		return unread
