@@ -96,6 +96,14 @@ def news(conf) :
 		data = json.load(resp)
 		return data["unreadcounts"][0]["count"]
 
+	elif conf["news"]["provider"] == "feedhq" :
+		req = urllib.urlopen("https://feedhq.org/accounts/ClientLogin", urllib.urlencode({"Email" : conf["news"]["user"], "Passwd": conf["news"]["passwd"]}))
+		auth_token = re.findall(r"Auth=(.+)", req.read())
+		req = urllib2.Request("https://feedhq.org/reader/api/0/unread-count?output=json", None, {"Authorization" : "GoogleLogin auth=" + auth_token[0]})
+		resp = urllib2.urlopen(req)
+		data = json.load(resp)
+		return data["unreadcounts"][len(data["unreadcounts"])-1]["count"]
+
 	elif conf["news"]["provider"] == "selfoss" :
 		req = urllib2.urlopen(conf["news"]["root"] + "/sources/stats/")
 		data = json.load(req)
