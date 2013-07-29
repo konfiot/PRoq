@@ -118,3 +118,12 @@ def news(conf) :
 		req = urllib2.urlopen(conf["news"]["root"] + "/api/", '{"op":"getUnread","sid":"' + data["content"]["session_id"] +'"}')
 		data = json.load(req)
 		return data["content"]["unread"]
+
+	elif conf["news"]["provider"] == "kouio" :
+		req = urllib2.Request("https://kouio.com/api/subscriptions?format=json", None, {"Authorization" : "Token " + conf["news"]["user"]})
+		resp = urllib2.urlopen(req)
+		data = json.load(resp)
+		unread = 0
+		for i in data : 
+			unread += int(i["unread"])
+		return unread

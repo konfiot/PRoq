@@ -17,7 +17,7 @@
         "location": "Eaubonne"
     },
     "news" : {
-	"provider" : "feedhq",
+	"provider" : "kouio",
 	"user" : "test-smartwake",
 	"passwd" : "helicoptere",
 	"root" : "http://selfoss_url"
