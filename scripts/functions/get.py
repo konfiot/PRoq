@@ -105,7 +105,7 @@ def news(conf) :
 		return data["unreadcounts"][len(data["unreadcounts"])-1]["count"]
 
 	elif conf["news"]["provider"] == "selfoss" :
-		req = urllib2.urlopen(conf["news"]["root"] + "/sources/stats/")
+		req = urllib.urlopen(conf["news"]["root"] + "/sources/stats/")
 		data = json.load(req)
 		unread = 0
 		for i in data : 
@@ -113,9 +113,9 @@ def news(conf) :
 		return unread
 
 	elif conf["news"]["provider"] == "ttrss" :
-		req = urllib2.urlopen(conf["news"]["root"] + "/api/", '{"op":"login","user":"' + conf["news"]["user"] +'","password":"' + conf["news"]["passwd"] + '"}')
+		req = urllib.urlopen(conf["news"]["root"] + "/api/", '{"op":"login","user":"' + conf["news"]["user"] +'","password":"' + conf["news"]["passwd"] + '"}')
 		data = json.load(req)
-		req = urllib2.urlopen(conf["news"]["root"] + "/api/", '{"op":"getUnread","sid":"' + data["content"]["session_id"] +'"}')
+		req = urllib.urlopen(conf["news"]["root"] + "/api/", '{"op":"getUnread","sid":"' + data["content"]["session_id"] +'"}')
 		data = json.load(req)
 		return data["content"]["unread"]
 
@@ -127,3 +127,8 @@ def news(conf) :
 		for i in data : 
 			unread += int(i["unread"])
 		return unread
+
+	elif conf["news"]["provider"] == "birdreader" :
+		req = urllib.urlopen(conf["news"]["root"] + "/api/unread")
+		data = json.load(req)
+		return len(data)

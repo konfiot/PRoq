@@ -18,8 +18,8 @@
     },
     "news" : {
 	"provider" : "kouio",
-	"user" : "test-smartwake",
-	"passwd" : "helicoptere",
-	"root" : "http://selfoss_url"
+	"user" : "",
+	"passwd" : "",
+	"root" : ""
     }
 }
