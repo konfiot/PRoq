@@ -2,34 +2,31 @@
 if [ ! -f "system.img.zip" ]
 then
 echo "Downloading image"
-wget -O system.img.zip http://archlinuxarm.org/os/rpi/archlinux-hf-2013-06-15.img.zip
+wget -O system.img.zip http://arthurtoussaint.free.fr/arch.img.bz2
+fi
+
+if [ ! -f "kernel-qemu" ]
+then
+echo "Downloading kernel"
+wget http://www.xecdesign.com/downloads/linux-qemu/kernel-qemu
 fi
 
 if [ ! -f "archlinux-hf-2013-06-15.img" ]
 then
 echo "Extracting Image"
-unzip system.img.zip
+bzip2 -d arch.img.bz2
 fi
 
 if [ ! -f "system.img" ]
 then
 echo "Copying image"
-cp archlinux-hf-2013-06-15.img system.img
+cp arch.img system.img
 fi
-
-if [ ! -d "system" ]
-then
-mkdir system
-fi
-
-echo"Mounting"
-sudo mount -o loop,offset=96468992 system.img system/
 
 echo "Installing"
-sudo rsync -r --exclude=deploy/  ../ system/home/
+qemu-system-arm -kernel kernel-qemu -cpu arm1176 -m 256 -M versatilepb -no-reboot -append "root=/dev/sda5 rw panic=1" -hda system.img -nographic -redir tcp:5555::22 &
+sleep 45
 
-echo "Unmounting"
-sudo umount system
 
 echo "Compressing"
 gzip system.img
