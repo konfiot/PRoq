@@ -1,8 +1,8 @@
 #!/bin/bash
-if [ ! -f "system.img.zip" ]
+if [ ! -f "arch.img.bz2" ]
 then
 echo "Downloading image"
-wget -O system.img.zip http://arthurtoussaint.free.fr/arch.img.bz2
+wget http://arthurtoussaint.free.fr/arch.img.bz2
 fi
 
 if [ ! -f "kernel-qemu" ]
@@ -11,7 +11,7 @@ echo "Downloading kernel"
 wget http://www.xecdesign.com/downloads/linux-qemu/kernel-qemu
 fi
 
-if [ ! -f "archlinux-hf-2013-06-15.img" ]
+if [ ! -f "arch.img" ]
 then
 echo "Extracting Image"
 bzip2 -d arch.img.bz2
@@ -35,5 +35,4 @@ echo "Uploading"
 rsync -e ssh system.img.gz konfiot@frs.sourceforge.net:/home/frs/project/smart-wake/Nightly/ --progress
 
 echo "Cleaning"
-rm system.img.gz
-rmdir system
+rm system.img
