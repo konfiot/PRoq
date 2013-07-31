@@ -2,7 +2,7 @@
 if [ ! -f "arch.img.bz2" ]
 then
 echo "Downloading image"
-wget http://arthurtoussaint.free.fr/arch.img.bz2
+wget https://dl.dropboxusercontent.com/s/5nd5k523uvq5ifu/arch.img.bz2?token_hash=AAHb1KpoDThHL0dC-Tv81w0nlEWYIwdL4QtBNc9BOvEn8w&dl=1
 fi
 
 if [ ! -f "kernel-qemu" ]
@@ -26,7 +26,10 @@ fi
 echo "Installing"
 qemu-system-arm -kernel kernel-qemu -cpu arm1176 -m 256 -M versatilepb -no-reboot -append "root=/dev/sda5 rw panic=1" -hda system.img -nographic -redir tcp:5555::22 &
 sleep 45
-yes yes | ssh root:root@localhost -p 5555 "pacman -Syu ; reboot"
+spawn ssh root@localhost oStrictHostKeyChecking=no -oCheckHostIP=no -p 5555 "pacman -Syu ; reboot"
+expect "password"
+send "root\n" 
+EOD
 
 echo "Compressing"
 gzip system.img
