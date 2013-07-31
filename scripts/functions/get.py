@@ -132,3 +132,8 @@ def news(conf) :
 		req = urllib.urlopen(conf["news"]["root"] + "/api/unread")
 		data = json.load(req)
 		return len(data)
+
+	elif conf["news"]["provider"] == "feedbin" :
+		req = urllib.urlopen("https://"+ conf["news"]["user"] + ":" + conf["news"]["passwd"] +"@api.feedbin.me/v2/unread_entries.json")
+		data = json.load(req)
+		return len(data)
