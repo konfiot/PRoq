@@ -26,6 +26,8 @@ fi
 echo "Installing"
 qemu-system-arm -kernel kernel-qemu -cpu arm1176 -m 256 -M versatilepb -no-reboot -append "root=/dev/sda5 rw panic=1" -hda system.img -nographic -redir tcp:5555::22 &
 sleep 45
+
+ssh-add .travis/deploy_key.pem
 ssh root@localhost -o StrictHostKeyChecking=no -p 5555 "pacman -Syu httpd ; reboot"
 
 echo "Compressing"
