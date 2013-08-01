@@ -1,4 +1,6 @@
 #!/bin/bash
+ssh-agent &
+
 if [ ! -f "arch.img.bz2" ]
 then
 echo "Downloading image"
