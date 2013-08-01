@@ -36,7 +36,7 @@ qemu-system-arm -kernel kernel-qemu -cpu arm1176 -m 256 -M versatilepb -no-reboo
 
 sleep 30
 
-ssh root@localhost -o StrictHostKeyChecking=no -p 5555 -i id_rsa "pacman -Syu lighttpd ; reboot"
+ssh root@localhost -o StrictHostKeyChecking=no -p 5555 -i id_rsa "yes | pacman -Syu lighttpd ; reboot"
 
 echo "Compressing"
 gzip system.img
