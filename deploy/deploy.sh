@@ -1,5 +1,5 @@
 #!/bin/bash
-ssh-agent &
+eval 'ssh-agent'
 
 if [ ! -f "arch.img.bz2" ]
 then
