@@ -36,15 +36,14 @@ qemu-system-arm -kernel kernel-qemu -cpu arm1176 -m 256 -M versatilepb -no-reboo
 
 sleep 30
 
-scp -r ../ root@localhost -o StrictHostKeyChecking=no -P 5555 -i id_rsa
-ssh root@localhost -o StrictHostKeyChecking=no -p 5555 -i id_rsa "yes | pacman -Syu lighttpd ; rm .ssh/authorized_keys .ssh/known_hosts ; sed -i 's/sda/mmcblk0p/' ; reboot"
+scp -r ./ root@localhost:./ -o StrictHostKeyChecking=no -P 5555 -i id_rsa
+ssh root@localhost -o StrictHostKeyChecking=no -p 5555 -i id_rsa "yes | pacman -Syu lighttpd ; rm .ssh/authorized_keys .ssh/known_hosts ; sed -i 's/sda/mmcblk0p/' /etc/fstab ; reboot"
 
 echo "Compressing"
-gzip system.img
+bzip2 system.img
 
 echo "Uploading"
 #yes yes | rsync -e ssh system.img.gz konfiot@frs.sourceforge.net:/home/frs/project/smart-wake/Nightly/ --progress
 
 echo "Cleaning"
-rm system.img
-rm system.img.gz
+rm system.img.bz2
