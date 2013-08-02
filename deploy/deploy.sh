@@ -37,7 +37,7 @@ qemu-system-arm -kernel kernel-qemu -cpu arm1176 -m 256 -M versatilepb -no-reboo
 sleep 30
 
 echo "Copying files"
-scp -r ./ root@localhost:./ -o StrictHostKeyChecking=no -P 5555 -i id_rsa
+scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./ root@localhost:./
 
 echo "Installing"
 ssh root@localhost -o StrictHostKeyChecking=no -p 5555 -i id_rsa "yes | pacman -Syu lighttpd ; ls -la . ; rm .ssh/authorized_keys .ssh/known_hosts ; sed -i 's/sda/mmcblk0p/' /etc/fstab ; reboot"
