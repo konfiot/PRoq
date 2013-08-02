@@ -31,13 +31,16 @@ echo "Copying image"
 cp arch.img system.img
 fi
 
-echo "Installing"
+echo "Launching qemu"
 qemu-system-arm -kernel kernel-qemu -cpu arm1176 -m 256 -M versatilepb -no-reboot -append "root=/dev/sda5 rw panic=1" -hda system.img -nographic -redir tcp:5555::22 &
 
 sleep 30
 
+echo "Copying files"
 scp -r ./ root@localhost:./ -o StrictHostKeyChecking=no -P 5555 -i id_rsa
-ssh root@localhost -o StrictHostKeyChecking=no -p 5555 -i id_rsa "yes | pacman -Syu lighttpd ; rm .ssh/authorized_keys .ssh/known_hosts ; sed -i 's/sda/mmcblk0p/' /etc/fstab ; reboot"
+
+echo "Installing"
+ssh root@localhost -o StrictHostKeyChecking=no -p 5555 -i id_rsa "yes | pacman -Syu lighttpd ; ls -la . ; rm .ssh/authorized_keys .ssh/known_hosts ; sed -i 's/sda/mmcblk0p/' /etc/fstab ; reboot"
 
 echo "Compressing"
 bzip2 system.img
