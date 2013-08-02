@@ -37,10 +37,11 @@ qemu-system-arm -kernel kernel-qemu -cpu arm1176 -m 256 -M versatilepb -no-reboo
 sleep 30
 
 echo "Copying files"
-scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./ root@localhost:./
+scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./scripts root@localhost:./scripts
+scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./WebConfiguration/ root@localhost:./
 
 echo "Installing"
-ssh root@localhost -o StrictHostKeyChecking=no -p 5555 -i id_rsa "yes | pacman -Syu lighttpd ; ls -la . ; rm .ssh/authorized_keys .ssh/known_hosts ; sed -i 's/sda/mmcblk0p/' /etc/fstab ; reboot"
+ssh root@localhost -o StrictHostKeyChecking=no -p 5555 -i id_rsa "yes | pacman -Syu lighttpd php-cgi php ; mv -r ~/WebConfiguration/* /srv/http/ ; rm .ssh/authorized_keys .ssh/known_hosts ; sed -i 's/sda/mmcblk0p/' /etc/fstab ; reboot"
 
 echo "Compressing"
 bzip2 system.img
