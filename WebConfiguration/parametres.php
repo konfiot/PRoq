@@ -4,11 +4,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
     <title>Smart Wake - configuration</title>
 
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
     
     <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/bootstrapSwitch.css" rel="stylesheet">
+    <link href="css/bootstrapSwitch.min.css" rel="stylesheet">
     
     <link href="css/main.css" rel="stylesheet">
   </head>
@@ -72,7 +72,7 @@
     
     <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/bootstrapSwitch.js"></script>
+    <script type="text/javascript" src="js/bootstrapSwitch.min.js"></script>
     <script type="text/javascript" src="http://www.geoplugin.net/javascript.gp"></script>
     
     <script type="text/javascript" src="js/config/elements.js"></script>
