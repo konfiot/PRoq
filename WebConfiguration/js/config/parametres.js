@@ -1,3 +1,7 @@
+$.ajaxSetup ({
+    cache: false                                                                //Pour ne pas utiliser le cache en dev
+});
+
 $(function() {  //Executé après le chargement
 /*******************************************************************************************************************************
 **                                                  Gestion du menu                                                           **        

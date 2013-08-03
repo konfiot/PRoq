@@ -1,4 +1,82 @@
 <h1>Paramètrage des webradios</h1>
 <p>
-    Ici, plus tard ... un formulaire
+    <form class="form-horizontal">
+    
+        <fieldset>         
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Adresse</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>100% Radio</td>
+                        <td>http://mp3.live.tv-radio.com/centpourcent/all/centpourcent-128k.mp3</td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-info"><i class="icon-pencil"></i> Modifier</button>
+                                <button type="button" class="btn btn-danger"><i class="icon-remove"></i> Supprimer</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4U Radios - All Funky Classics</td>
+                        <td>http://www.4uradios.com/funkyclassics.asx</td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-info"><i class="icon-pencil"></i> Modifier</button>
+                                <button type="button" class="btn btn-danger"><i class="icon-remove"></i> Supprimer</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+        
+        <fieldset>
+        <legend>Ajout d'une nouvelle radio</legend>
+            <div class="control-group">
+                <label class="control-label" for="RadioName">Nom de la radio</label>
+                <div class="controls">
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="icon-font"></i></span>
+                        <input type="text" id="RadioName" placeholder="Nom affiché" class="form-element">
+                    </div>
+                    <span class="help-inline"></span> <!-- Message d'erreur -->
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="RadioUrl">Url de la radio</label>
+                <div class="controls">
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="icon-code"></i></span>
+                        <input type="text" id="RadioUrl" placeholder="Adresse de la radio" class="form-element">
+                    </div>
+                    <span class="help-inline"></span> <!-- Message d'erreur -->
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="RadioPic">Icone de la radio</label>
+                <div class="controls">
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="icon-picture"></i></span>
+                        <input type="text" id="RadioPic" placeholder="Adresse d'une image" class="form-element">
+                    </div>
+                    <span class="help-inline"></span> <!-- Message d'erreur -->
+                </div>
+            </div>
+        </fieldset>
+        
+        <div class="input-prepend input-append" style="padding-left:75px" >
+            <button class="btn btn-info" type="button btn-info" id="btn_annuler"> <i class="icon-search"></i> Chercher une radio</button>
+            <button class="btn btn-success" type="button btn-success" id="btn_envoyer"> <i class="icon-plus"></i> Ajouter</button> 
+        </div>
+    </form>
+        
+    <div class="alert span11 hide" id="generalErreur">
+        Ici, les erreurs
+    </div>
 </p>
