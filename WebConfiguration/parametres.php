@@ -10,6 +10,7 @@
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/bootstrapSwitch.min.css" rel="stylesheet">
     
+    <link href="css/parametres.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
   </head>
   <body>

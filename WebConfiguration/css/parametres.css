@@ -1,0 +1,28 @@
+/*******************************************************************************
+*               Tous les styles spécifiques aux paramètres
+*******************************************************************************/
+
+/***** Paramètres des webradios *****/
+
+.radio-desc td {
+    vertical-align: middle;
+    
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.radio-desc:hover td {
+    white-space: normal;
+}
+
+.radio-desc .icon {
+    width: 50px;
+}
+
+.radio-desc .name {
+    max-width: 100px;
+}
+
+.radio-desc .adresse {
+    max-width: 400px;
+}
