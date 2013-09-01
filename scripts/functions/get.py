@@ -73,7 +73,7 @@ def news(conf) :
 		data = json.load(resp)
 		return data["max"]
 	elif conf["news"]["provider"] == "commafeed" :
-		req = urllib.urlopen("https://"+ conf["news"]["user"] + ":" + conf["news"]["passwd"] + "@www.commafeed.com/rest/category/get")
+		req = urllib.urlopen("https://"+ conf["news"]["user"] + ":" + conf["news"]["passwd"] + "@www.commafeed.com/rest/category/get") # TODO : Gerer la version auto hebergee
 		data = json.load(req)
 		unread = 0
 		for i in data["feeds"] : 
@@ -137,3 +137,8 @@ def news(conf) :
 		req = urllib.urlopen("https://"+ conf["news"]["user"] + ":" + conf["news"]["passwd"] +"@api.feedbin.me/v2/unread_entries.json")
 		data = json.load(req)
 		return len(data)
+	
+	elif conf["news"]["provider"] == "miniflux" :
+		req = urllib.urlopen("http://"+ conf["news"]["user"] + ":" + conf["news"]["passwd"] +"@" + conf["news"]["root"], '{"jsonrpc": "2.0", "method": "item.count_unread", "id": 1}')	# TODO : Gerer le switch http/https
+		data = json.load(req)
+		return data["result"]

@@ -17,9 +17,9 @@
         "location": "Eaubonne"
     },
     "news" : {
-	"provider" : "feedbin",
-	"user" : "",
-	"passwd" : "",
-	"root" : ""
+	"provider" : "miniflux",
+	"user" : "konfiot",
+	"passwd" : "kI5E+DJ9PjEnjkJ",
+	"root" : "crana.tk/miniflux/jsonrpc.php"
     }
 }
