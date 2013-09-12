@@ -51,7 +51,7 @@ var config = {
         if(formulaire === "")
             formulaire = "defaut";
             
-        $(".hero-unit").load("forms/" + formulaire + ".html", function(){    //On envoit la requette
+        $(".hero-unit").load("forms/" + formulaire + ".php", function(){    //On envoit la requette
             config.connectAll();                                                //On connecte les inputs
         
             config.resetForm();                                                 //On met les valeurs existantes

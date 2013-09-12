@@ -13,43 +13,41 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="radio-desc" >
-                        <td><img src="http://d1i6vahw24eb07.cloudfront.net/s75608q.png" class="icon" /></td>
-                        <td class="name" >100% Radio</td>
-                        <td class="adresse">
-                            <a target="_blank" href="http://mp3.live.tv-radio.com/centpourcent/all/centpourcent-128k.mp3" >mp3.live.tv-radio.com</a>
-                        </td>
-                        <td>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-info"><i class="icon-pencil"></i> Modifier</button>
-                                <button type="button" class="btn btn-danger"><i class="icon-remove"></i> Supprimer</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="radio-desc" >
-                        <td><img src="http://d3tybumvrk5xfv.cloudfront.net/gn/DV11DN60MWd.jpg" class="icon" /></td>
-                        <td class="name" >4U Radios - All Funky Classics</td>
-                        <td class="adresse">
-                            <a target="_blank" href="http://www.4uradios.com/funkyclassics.asx" >www.4uradios.com</a>
-                        </td>
-                        <td>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-info"><i class="icon-pencil"></i> Modifier</button>
-                                <button type="button" class="btn btn-danger"><i class="icon-remove"></i> Supprimer</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="radio-desc" >
-                        <td><img src="img/missing-img.png" class="icon" /></td>
-                        <td class="name" >[Nom]</td>
-                        <td class="adresse" >[Adresse]</td>
-                        <td>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-info"><i class="icon-pencil"></i> Modifier</button>
-                                <button type="button" class="btn btn-danger"><i class="icon-remove"></i> Supprimer</button>
-                            </div>
-                        </td>
-                    </tr>
+                    <?php
+                        // Lecture du Json
+                        
+                        $fichier = fopen("../../conf/webradios.json", 'r+');
+                        $json = fread($fichier, filesize("../../conf/webradios.json"));
+                        $json = json_decode($json, true);
+                        
+                        
+                        foreach( $json["list"] as $i ) {
+                            
+                            // Pour réduire l'adresse
+                            $radio_short = $i["adress"];
+                            if( strpos($radio_short, "//") != 0 )
+                                $radio_short = substr($radio_short, strpos($radio_short, "//")+2);
+                            if( strpos($radio_short, "/", 1) != 0 )
+                                $radio_short = substr($radio_short, 0 , strpos($radio_short, "/", 1));
+                            
+                            echo '
+                                <tr class="radio-desc" >
+                                    <td><img src="' .$i["icon"]. '" class="icon" /></td>
+                                    <td class="name" >' .$i["name"]. '</td>
+                                    <td class="adresse">
+                                        <a target="_blank" href="' .$i["adress"]. '" >' .$radio_short. '</a>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-info"><i class="icon-pencil"></i> Modifier</button>
+                                            <button type="button" class="btn btn-danger"><i class="icon-remove"></i> Supprimer</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ';
+                        }
+                        
+                    ?>
                 </tbody>
             </table>
         </fieldset>
