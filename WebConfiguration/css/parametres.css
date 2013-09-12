@@ -6,13 +6,8 @@
 
 .radio-desc td {
     vertical-align: middle;
-    
-    white-space: nowrap;
-    overflow: hidden;
-}
-
-.radio-desc:hover td {
     white-space: normal;
+    font-size : 75%;
 }
 
 .radio-desc .icon {
