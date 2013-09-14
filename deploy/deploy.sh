@@ -47,7 +47,7 @@ echo "Compressing"
 bzip2 system.img
 
 echo "Uploading"
-#yes yes | rsync -e ssh system.img.gz konfiot@frs.sourceforge.net:/home/frs/project/smart-wake/Nightly/ --progress
+rsync -e "ssh -o StrictHostKeyChecking=no" system.img.gz konfiot@frs.sourceforge.net:/home/frs/project/smart-wake/Nightly/ --progress
 
 echo "Cleaning"
 rm system.img.bz2
