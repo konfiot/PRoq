@@ -55,18 +55,6 @@ body {
    border-right: 1px solid #563d7c;
 }
 
-@media (max-width: 980px) {
-/* Enable use of floated navbar text */
-    .navbar-text .pull-right {
-        float: none;
-        padding-left: 5px;
-        padding-right: 5px;
-    }
-    
-    body{
-        padding-top: 0;                                                                                     /* Comme la navbar se remet en position relative, on enleve la marge */
-    }
-}
 
 /*** Personnalisation ***/
 .bs-sidebar .nav > li > h5 {
