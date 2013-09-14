@@ -5,7 +5,7 @@
     <title>Smart Wake - status</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
     
     <link href="css/font-awesome.min.css" rel="stylesheet">
     
@@ -18,7 +18,7 @@
   
     <div class="container-fluid">
         <div class="row-fluid">
-            <div class="offset1 span10 hero-unit">
+            <div class="col-md-offset-1 col-md-10 jumbotron">
                 <h1>Status</h1>
                 
                 <h2>Quoi mettre sur cette page ?</h2>
@@ -29,7 +29,7 @@
                 </p>
                 <p>
                     Et au passage ca m'aurrais éclaté d'utilliser ce genre de trucs <br />
-                    <span class="label">Bonswir</span> <span class="label label-warning">Attention !!! ca va pokuler !!!</span> <span class="label label-important">Trop tard ...</span>
+                    <span class="label label-default">Bonswir</span> <span class="label label-warning">Attention !!! ca va pokuler !!!</span> <span class="label label-info">Trop tard ...</span>
                 </p>
             </div>
         </div>

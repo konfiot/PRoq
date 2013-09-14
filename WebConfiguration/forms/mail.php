@@ -1,73 +1,72 @@
-<h1>Paramètres - mail</h1>
+<div class="page-header">
+    <h1>Paramètres<small> - compte email</small></h1>
+    <p>
+        Rentrez vos identifiants mail et soyez avertis dès la première heure de vos derniers emails
+    </p>
+</div>
 <p>
-    <form class="form-horizontal">
+    <form class="col-md-offset-1 col-md-10" >
     
         <fieldset>
-        <legend>Connection à votre compte</legend>
+            <legend>Connection à votre compte</legend>
         
-            <div class="control-group">
-                <label class="control-label" for="AdresseMail">Adresse email</label>
-                <div class="controls">
-                    <div class="input-prepend">
-                        <span class="add-on"><i class="icon-envelope"></i></span>
-                        <input type="email" id="AdresseMail" class="first_focus form-element" placeholder="Exemple : name@exemple.com">
-                    </div>
-                    <span class="help-inline"></span> <!-- Message d'erreur -->
+            <div class="form-group">
+                <label for="AdresseMail">Adresse email</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-envelope"></i></span>
+                    <input type="email" id="AdresseMail" class="first_focus form-control form-element" placeholder="Exemple : name@exemple.com">
                 </div>
+                <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
             </div>
             
-            <div class="control-group">
-                <label class="control-label" for="MailPassword">Mot de passe</label>
-                <div class="controls">
-                    <div class="input-prepend">
-                        <span class="add-on"><i class="icon-key"></i></span>
-                        <input type="password" id="MailPassword" placeholder="" class="form-element">
-                    </div>
-                    <span class="help-inline"></span> <!-- Message d'erreur -->
+            <div class="form-group">
+                <label for="MailPassword">Mot de passe</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-key"></i></span>
+                    <input type="password" id="MailPassword" class="form-control form-element" placeholder="" >
                 </div>
+                <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
             </div>
         </fieldset>
             
         <fieldset>
-        <legend>Paramètres avancés</legend>
-            <div class="control-group">
-                <label class="control-label" for="ServMail">Serveur mail</label>
-                <div class="controls">
-                    <div class="input-prepend">
-                        <span class="add-on"><i class="icon-laptop"></i></span>
-                        <input type="text" id="ServMail" placeholder="Facultatif" class="form-element">
-                    </div>
-                    <span class="help-inline"></span> <!-- Message d'erreur -->
+            <legend>Paramètres avancés</legend>
+            
+            <div class="form-group">
+                <label for="ServMail">Serveur mail</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-laptop"></i></span>
+                    <input type="text" id="ServMail" class="form-control form-element" placeholder="Facultatif" >
                 </div>
+                <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
             </div>
-            <div class="control-group">
-                <label class="control-label" for="PortMail">Port</label>
-                <div class="controls">
-                    <div class="input-prepend">
-                        <span class="add-on"><i class="icon-screenshot"></i></span>
-                        <input type="text" id="PortMail" min="0" max="65535" placeholder="Facultatif" class="form-element">
-                    </div>
-                    <span class="help-inline"></span> <!-- Message d'erreur -->
+            
+            <div class="form-group">
+                <label for="PortMail">Port</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-screenshot"></i></span>
+                    <input type="text" id="PortMail" class="form-control form-element" min="0" max="65535" placeholder="Facultatif" >
                 </div>
+                <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
             </div>
-            <div class="control-group success">
+            
+            <div class="form-group">
                 <label class="control-label" for="MailSsl">SSL</label>
-                <div class="controls">
-                    <div class="switch form-element" data-on-label="Oui" data-off-label="Non" id="MailSsl">
-                        <input type="checkbox" checked="checked">
-                    </div>
-                    <span class="help-inline"></span> <!-- Message d'erreur -->
+                <div class="switch form-element col-md-offset-1" data-on-label="Oui" data-off-label="Non" id="MailSsl">
+                    <input type="checkbox" checked="checked" class="col-md-offset-1" >
                 </div>
+                <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
             </div>
         </fieldset>
         
         <div class="input-prepend input-append" style="padding-left:75px" ><br />
-            <button class="btn" type="button" id="btn_annuler"> <i class="icon-remove"></i> Annuler</button>
-            <button class="btn" type="button" id="btn_envoyer"> <i class="icon-ok"></i> Valider</button> 
+            <button class="btn btn-danger" type="button" id="btn_annuler" > <i class="icon-remove"></i> Annuler</button>
+            <button class="btn btn-success" type="button" id="btn_envoyer"> <i class="icon-ok"></i> Valider</button> 
         </div>
     </form>
-        
-    <div class="alert span11 hide" id="generalErreur">
+
+    <div class="alert hide col-sm-11 col-md-11 alert-warning" id="generalErreur">
         Ici, les erreurs
     </div>
+    
 </p>

@@ -1,7 +1,7 @@
 var dialogs = {
     confirm : function(sel, onOk, onNo){
-        var btnOui = $(sel + " > .modal-footer > .btn-oui"),
-            btnNon = $(sel + "> .modal-footer > .btn-non");
+        var btnOui = $(sel + "  .modal-footer > .btn-oui"),
+            btnNon = $(sel + " .modal-footer > .btn-non");
             
         $(sel).modal("show");
         

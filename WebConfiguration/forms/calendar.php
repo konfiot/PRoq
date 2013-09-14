@@ -1,28 +1,32 @@
-<h1>Paramètres - calendrier</h1>
+<div class="page-header">
+    <h1>Paramètres<small> - calendrier</small></h1>
+    <p>
+        Enregistrez votre agenda au format ICS et soyez avertis de tous vos évenements iminants
+    </p>
+</div>
 <p>
-    <form class="form-horizontal">
-    
+    <form class="col-md-offset-1 col-md-10" >
         <fieldset>
-        <legend>Paramètrage de l'adresse du calendrier</legend>            
-            <div class="control-group">
-                <label class="control-label" for="CalendarUrl">Url du calendrier</label>
-                <div class="controls">
-                    <div class="input-prepend">
-                        <span class="add-on"><i class="icon-calendar"></i></span>
-                        <input type="text" id="CalendarUrl" placeholder="L'adresse de votre calendrier" class="form-element">
-                    </div>
-                    <span class="help-inline"></span> <!-- Message d'erreur -->
+            <legend>Paramètrage de l'adresse du calendrier</legend>
+        
+            <div class="form-group">
+                <label for="CalendarUrl" >Url du calendrier</label>
+                <div class="input-group" >
+                    <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                    <input type="text" id="CalendarUrl" class="form-control first_focus form-element" placeholder="L'adresse de votre calendrier" >
                 </div>
+                <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
             </div>
         </fieldset>
         
-        <div class="input-prepend input-append" style="padding-left:75px" ><br />
-            <button class="btn" type="button" id="btn_annuler"> <i class="icon-remove"></i> Annuler</button>
-            <button class="btn" type="button" id="btn_envoyer"> <i class="icon-ok"></i> Valider</button> 
+        <div class="input-prepend input-append" style="padding-left:75px"><br>
+            <button class="btn btn-danger" type="button" id="btn_annuler"> <i class="icon-remove"></i> Annuler</button>
+            <button class="btn btn-success" type="button" id="btn_envoyer"> <i class="icon-ok"></i> Valider</button> 
         </div>
     </form>
         
-    <div class="alert span11 hide" id="generalErreur">
+    <div class="alert hide col-sm-11 col-md-11 alert-warning" id="generalErreur">
         Ici, les erreurs
     </div>
+    
 </p>

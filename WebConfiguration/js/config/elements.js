@@ -23,8 +23,9 @@ function element(_sel, _categorie, _champ, _validation, _proccess){
     
     //Une fonction qui sert à éditer l'erreur
     this.erreur = function(type, message) {
-        $(this.element).parent().parent().parent().removeClass("success error info warning").addClass(type);
-        $(this.element).parent().parent().children(".help-inline").html(message);
+        config.erreur(this.element, type, message);
+        /*$(this.element).parent().parent().parent().removeClass("success error info warning").addClass(type);
+        $(this.element).parent().parent().children(".help-inline").html(message);*/
     },
     
     this.isValid = function(){

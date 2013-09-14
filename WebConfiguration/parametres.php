@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html>
-  <head>
+<!doctype html>
+<html><head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
     <title>Smart Wake - configuration</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
     
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/bootstrapSwitch.min.css" rel="stylesheet">
@@ -17,38 +16,34 @@
 
     <?php include("elements/top-navbar.php"); ?>
   
-    <div class="container-fluid">
-        <div class="row-fluid">
+    <div class="container">
+        <div class="row">
   
             <!-- ----------------------------------------------------------------------------------------------- -->
             <!--                                              Menu                                               -->
             <!-- ----------------------------------------------------------------------------------------------- -->
             
-            <div class="span3">
-                <div class="well sidebar-nav">
-                    <ul class="nav nav-list">
-                        <li class="nav-header">Paramètres de reveil</li>
-                        <li class="leftnav"><a href="#horaires">
-                            <i class="icon-fixed-width icon-time"></i> Regler les horaires de sonerie</a></li>
-                        <li class="leftnav"><a href="#sonneries">
-                            <i class="icon-fixed-width icon-bell"></i> Choisir la sonnerie</a></li>
-                        <li class="leftnav"><a href="#radios">
-                            <i class="icon-fixed-width icon-music"></i> Webradios</a></li>
-                        <li class="leftnav"><a href="#snooze">
-                            <i class="icon-fixed-width icon-pause"></i> Règlage de la touche "snooze"</a></li>
-                        <li class="nav-header">Paramètres des informations</li>
-                        <li class="leftnav"><a href="#informations">
-                            <i class="icon-fixed-width icon-comment-alt"></i> Informations à dicter</a></li>
-                        <li class="leftnav"><a href="#mail">
-                            <i class="icon-fixed-width icon-envelope-alt"></i> Mails</a></li>
-                        <li class="leftnav"><a href="#calendar">
-                            <i class="icon-fixed-width icon-calendar"></i> Calendrier</a></li>
-                        <li class="leftnav"><a href="#news">
-                            <i class="icon-fixed-width icon-rss"></i> News</a></li>
-                        <li class="leftnav"><a href="#weather">
-                            <i class="icon-fixed-width icon-cloud"></i> Météo</a></li>
-                    </ul>
-                </div>
+            <div class="col-md-3 well sidebar-nav">
+                <ul class=" nav nav-pills nav-stacked">
+                    <li class="leftnav"><a href="#horaires">
+                        <i class="icon-fixed-width icon-time"></i> Regler les horaires de sonerie</a></li>
+                    <li class="leftnav"><a href="#sonneries">
+                        <i class="icon-fixed-width icon-bell"></i> Choisir la sonnerie</a></li>
+                    <li class="leftnav"><a href="#radios">
+                        <i class="icon-fixed-width icon-music"></i> Webradios</a></li>
+                    <li class="leftnav"><a href="#snooze">
+                        <i class="icon-fixed-width icon-pause"></i> Règlage de la touche "snooze"</a></li>
+                    <li class="leftnav"><a href="#informations">
+                        <i class="icon-fixed-width icon-comment-alt"></i> Informations à dicter</a></li>
+                    <li class="leftnav"><a href="#mail">
+                        <i class="icon-fixed-width icon-envelope-alt"></i> Mails</a></li>
+                    <li class="leftnav"><a href="#calendar">
+                        <i class="icon-fixed-width icon-calendar"></i> Calendrier</a></li>
+                    <li class="leftnav"><a href="#news">
+                        <i class="icon-fixed-width icon-rss"></i> News</a></li>
+                    <li class="leftnav"><a href="#weather">
+                        <i class="icon-fixed-width icon-cloud"></i> Météo</a></li>
+                </ul>
             </div>
     
             <!-- ----------------------------------------------------------------------------------------------- -->
@@ -58,9 +53,9 @@
             <!--                                              Corps                                              -->
             <!-- ----------------------------------------------------------------------------------------------- -->
     
-            <div class="span9 hero-unit">
+            <div class="col-md-9 container" id="main" >
                 <h1>Paramètres 
-                    <img src="img/loader/horizontal.gif" />                     <!-- Image générée avec http://ajaxload.info/ -->
+                    <img src="img/loader/horizontal.gif">                     <!-- Image générée avec http://ajaxload.info/ -->
                 </h1>
             </div>
     
@@ -81,5 +76,5 @@
     <script type="text/javascript" src="js/config/parametres.js"></script>
     
     <script type="text/javascript" src="js/dialogs.js"></script>
-  </body>
-</html>
+  
+</body></html>

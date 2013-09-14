@@ -5,7 +5,7 @@
     <title>Smart Wake</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
     
     <link href="css/font-awesome.min.css" rel="stylesheet">
     
@@ -21,9 +21,9 @@
     <!-- ----------------------------------------------------------------------------------------------- -->
     
     
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="offset1 span10 hero-unit">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-1 col-md-10 jumbotron">
                 <p>
                     Bienvenue sur l'interface web qui vous permettra de configurer votre Smart Wake de qualité
                 </p>
@@ -38,7 +38,7 @@
                     </ul>
                 </p>
                 <p>
-                    <a class="btn btn-primary btn-large pull-right" href="https://github.com/konfiot/smart-wake"><i class="icon-github icon"></i> Projet github</a>
+                    <a class="btn btn-primary btn-lg pull-right" href="https://github.com/konfiot/smart-wake"><i class="icon-github icon"></i> Projet github</a>
                 </p>
             </div>
             

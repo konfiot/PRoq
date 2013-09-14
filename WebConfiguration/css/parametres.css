@@ -21,3 +21,9 @@
 .radio-desc .adresse {
     max-width: 400px;
 }
+
+/** Message d'erreur **/
+
+#generalErreur {
+    margin-top: 30px;
+}

@@ -1,8 +1,13 @@
 <!-- ---------------------------------------------- Contenu ---------------------------------------------- -->
+<div class="page-header">
     <h1>Paramètres</h1>
     <p>
-        Chaipas quoi mettre ici, à la limite autant afficher direct la premiere page de paramètres ^^ <br />
-        Au moins j'ai rentabilisé la navbar xD <br />
-        La navigation entre les pages de configuration se fera en javascript je pense
+        Dans cette section, vous allez pouvoir paramètrer votre réveil
+        <ul>
+            <li>Vous connecter à vos comptes divers comme vos mails, vos réseaux sociaux préférés ...</li>
+            <li>Règler les horaires de sonnerie de votre réveil</li>
+            <li>Ajouter de nouvelles sonneries ou webradios</li>
+        </ul>
     </p>
+</div>
 <!-- ------------------------------------------------------------------------------------------------------ -->

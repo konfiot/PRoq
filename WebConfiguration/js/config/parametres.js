@@ -51,7 +51,7 @@ var config = {
         if(formulaire === "")
             formulaire = "defaut";
             
-        $(".hero-unit").load("forms/" + formulaire + ".php", function(){    //On envoit la requette
+        $("#main").load("forms/" + formulaire + ".php", function(){    //On envoit la requette
             config.connectAll();                                                //On connecte les inputs
         
             config.resetForm();                                                 //On met les valeurs existantes
@@ -71,8 +71,13 @@ var config = {
     //Une fonction qui sert à éditer l'erreur ; sel est l'id du champ
     erreur: function(sel, type, message) {
         var el = $(sel);
-        el.parent().parent().removeClass("success error").addClass(type);
-        el.parent().children(".help-inline").html(message);
+        el.parent().parent().removeClass("has-success has-error has-warning").addClass("has-" + type);
+        el.show();
+        
+        if( message !== "" )
+            el.parent().parent().children(".help-block").show().html(message);
+        else
+            el.parent().parent().children(".help-block").hide();
     },
     
     //Pour afficher une erreur en bas de la page
@@ -280,7 +285,15 @@ var inputs = {
     "NewsProvider": new elementList("#NewsProvider",
         "news",
         "provider",
-        [ ],
+        [
+            {
+                "format": /\S+/,
+                "msg": {
+                    "type": "error",
+                    "text": "Champ obligatoire"
+                }
+            }
+        ],
         function(){}
     ),
     "NewsUser": new elementInput("#NewsUser",
