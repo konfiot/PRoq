@@ -23,27 +23,32 @@
             <!--                                              Menu                                               -->
             <!-- ----------------------------------------------------------------------------------------------- -->
             
-            <div class="col-md-3 well sidebar-nav">
-                <ul class=" nav nav-pills nav-stacked">
-                    <li class="leftnav"><a href="#horaires">
-                        <i class="icon-fixed-width icon-time"></i> Regler les horaires de sonerie</a></li>
-                    <li class="leftnav"><a href="#sonneries">
-                        <i class="icon-fixed-width icon-bell"></i> Choisir la sonnerie</a></li>
-                    <li class="leftnav"><a href="#radios">
-                        <i class="icon-fixed-width icon-music"></i> Webradios</a></li>
-                    <li class="leftnav"><a href="#snooze">
-                        <i class="icon-fixed-width icon-pause"></i> Règlage de la touche "snooze"</a></li>
-                    <li class="leftnav"><a href="#informations">
-                        <i class="icon-fixed-width icon-comment-alt"></i> Informations à dicter</a></li>
-                    <li class="leftnav"><a href="#mail">
-                        <i class="icon-fixed-width icon-envelope-alt"></i> Mails</a></li>
-                    <li class="leftnav"><a href="#calendar">
-                        <i class="icon-fixed-width icon-calendar"></i> Calendrier</a></li>
-                    <li class="leftnav"><a href="#news">
-                        <i class="icon-fixed-width icon-rss"></i> News</a></li>
-                    <li class="leftnav"><a href="#weather">
-                        <i class="icon-fixed-width icon-cloud"></i> Météo</a></li>
-                </ul>
+            <div class="col-md-3"> 
+                <div class="bs-sidebar hidden-print affix">
+                    <ul class="nav bs-sidenav">
+                        <li class="leftnav"><a href="#horaires">
+                            <i class="icon-fixed-width icon-time"></i> Horaires de sonerie</a></li>
+                        <li class="leftnav"><a href="#sonneries">
+                            <i class="icon-fixed-width icon-bell"></i> Choisir la sonnerie</a></li>
+                        <li class="leftnav"><a href="#radios">
+                            <i class="icon-fixed-width icon-music"></i> Webradios</a></li>
+                        <li class="leftnav"><a href="#snooze">
+                            <i class="icon-fixed-width icon-pause"></i> Touche "snooze"</a></li>
+                            
+                        <li class="leftnav"><h5>
+                            Titre</h5></li>
+                        <li class="leftnav"><a href="#informations">
+                            <i class="icon-fixed-width icon-comment-alt"></i> Informations à dicter</a></li>
+                        <li class="leftnav"><a href="#mail">
+                            <i class="icon-fixed-width icon-envelope-alt"></i> Mails</a></li>
+                        <li class="leftnav"><a href="#calendar">
+                            <i class="icon-fixed-width icon-calendar"></i> Calendrier</a></li>
+                        <li class="leftnav"><a href="#news">
+                            <i class="icon-fixed-width icon-rss"></i> News</a></li>
+                        <li class="leftnav"><a href="#weather">
+                            <i class="icon-fixed-width icon-cloud"></i> Météo</a></li>
+                    </ul>
+                </div>
             </div>
     
             <!-- ----------------------------------------------------------------------------------------------- -->
@@ -53,10 +58,12 @@
             <!--                                              Corps                                              -->
             <!-- ----------------------------------------------------------------------------------------------- -->
     
-            <div class="col-md-9 container" id="main" >
-                <h1>Paramètres 
-                    <img src="img/loader/horizontal.gif">                     <!-- Image générée avec http://ajaxload.info/ -->
-                </h1>
+            <div class="col-md-9" id="main" >
+                <div class="container">
+                    <h1>Paramètres 
+                        <img src="img/loader/horizontal.gif">                     <!-- Image générée avec http://ajaxload.info/ -->
+                    </h1>
+                </div>
             </div>
     
             <!-- ----------------------------------------------------------------------------------------------- -->

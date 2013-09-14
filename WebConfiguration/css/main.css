@@ -1,25 +1,77 @@
-/************************************************
-		Pour l'utillisation de la sidebar
-************************************************/
+/*******************************************************************************************************
+		Pour l'utillisation de la sidebar, copié sur http://getbootstrap.com/assets/css/docs.css
+*******************************************************************************************************/
 
 body {
-    padding-top: 70px;
-    padding-bottom: 40px;
+      padding-top: 70px;
+      padding-bottom: 40px;
 }
 
-.sidebar-nav {
-    padding: 9px 0;
+
+/*
+ * Side navigation
+ *
+ * Scrollspy and affixed enhanced navigation to highlight sections and secondary
+ * sections of docs content.
+ */
+
+/* By default it's not affixed in mobile views, so undo that */
+
+.bs-sidebar.affix {
+  position: static;
+}
+
+/* First level of nav */
+.bs-sidenav {
+   margin-top: 30px;
+   margin-bottom: 30px;
+   padding-top:      10px;
+   padding-bottom: 10px;
+   text-shadow: 0 1px 0 #fff;
+   background-color: #f7f5fa;
+   border-radius: 5px;
+}
+
+/* All levels of nav */
+.bs-sidebar .nav > li > a {
+   display: block;
+   color: #716b7a;
+   padding: 5px 20px;
+}
+
+.bs-sidebar .nav > li > a:hover,
+.bs-sidebar .nav > li > a:focus {
+   text-decoration: none;
+   background-color: #e5e3e9;
+   border-right: 1px solid #dbd8e0;
+}
+
+.bs-sidebar .nav > .active > a,
+.bs-sidebar .nav > .active:hover > a,
+.bs-sidebar .nav > .active:focus > a {
+   font-weight: bold;
+   color: #563d7c;
+   background-color: transparent;
+   border-right: 1px solid #563d7c;
 }
 
 @media (max-width: 980px) {
 /* Enable use of floated navbar text */
     .navbar-text .pull-right {
-      float: none;
-      padding-left: 5px;
-      padding-right: 5px;
+        float: none;
+        padding-left: 5px;
+        padding-right: 5px;
     }
     
     body{
-        padding-top: 0;                                                         /* Comme la navbar se remet en position relative, on enleve la marge */
+        padding-top: 0;                                                                                     /* Comme la navbar se remet en position relative, on enleve la marge */
     }
+}
+
+/*** Personnalisation ***/
+.bs-sidebar .nav > li > h5 {
+   display: block;
+   color: grey;
+   font-weight: bold;
+   padding: 5px 10px;
 }
