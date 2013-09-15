@@ -63,3 +63,10 @@ body {
    font-weight: bold;
    padding: 5px 10px;
 }
+
+@media (min-width: 980px) {
+    .bs-sidenav {
+        position: fixed;
+        width: 20%;
+    }
+}

@@ -26,6 +26,9 @@
             <div class="col-md-3"> 
                 <div class="bs-sidebar hidden-print affix">
                     <ul class="nav bs-sidenav">
+                    
+                        <li class="leftnav"><h5>
+                            Paramètre du réveil</h5></li>
                         <li class="leftnav"><a href="#horaires">
                             <i class="icon-fixed-width icon-time"></i> Horaires de sonerie</a></li>
                         <li class="leftnav"><a href="#sonneries">
@@ -34,19 +37,22 @@
                             <i class="icon-fixed-width icon-music"></i> Webradios</a></li>
                         <li class="leftnav"><a href="#snooze">
                             <i class="icon-fixed-width icon-pause"></i> Touche "snooze"</a></li>
-                            
-                        <li class="leftnav"><h5>
-                            Titre</h5></li>
                         <li class="leftnav"><a href="#informations">
                             <i class="icon-fixed-width icon-comment-alt"></i> Informations à dicter</a></li>
-                        <li class="leftnav"><a href="#mail">
-                            <i class="icon-fixed-width icon-envelope-alt"></i> Mails</a></li>
+                            
+                        <li class="leftnav"><h5>
+                            Informations</h5></li>
                         <li class="leftnav"><a href="#calendar">
                             <i class="icon-fixed-width icon-calendar"></i> Calendrier</a></li>
-                        <li class="leftnav"><a href="#news">
-                            <i class="icon-fixed-width icon-rss"></i> News</a></li>
                         <li class="leftnav"><a href="#weather">
                             <i class="icon-fixed-width icon-cloud"></i> Météo</a></li>
+                            
+                        <li class="leftnav"><h5>
+                            Comptes</h5></li>
+                        <li class="leftnav"><a href="#mail">
+                            <i class="icon-fixed-width icon-envelope-alt"></i> Mails</a></li>
+                        <li class="leftnav"><a href="#news">
+                            <i class="icon-fixed-width icon-rss"></i> News</a></li>
                     </ul>
                 </div>
             </div>
