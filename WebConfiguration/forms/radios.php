@@ -1,7 +1,11 @@
-<h1>Paramètrage des webradios</h1>
+<div class="page-header">
+    <h1>Paramètres<small> - webradios</small></h1>
+    <p>
+        Personnalisez la liste de vos webradios et vous pourrez les écouter depuis votre réveil ou dès votre lever
+    </p>
+</div>
 <p>
-    <form class="form-horizontal">
-    
+    <div class="col-md-offset-1 col-md-10" >
         <fieldset>         
             <table class="table table-hover">
                 <thead>
@@ -39,8 +43,8 @@
                                     </td>
                                     <td>
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-info"><i class="icon-pencil"></i> Modifier</button>
-                                            <button type="button" class="btn btn-danger"><i class="icon-remove"></i> Supprimer</button>
+                                            <button type="button" class="btn btn-info btn-sm"><i class="icon-pencil"></i> Modifier</button>
+                                            <button type="button" class="btn btn-danger btn-sm"><i class="icon-remove"></i> Supprimer</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -53,44 +57,69 @@
         </fieldset>
         
         <fieldset>
-        <legend>Ajout d'une nouvelle radio</legend>
-            <div class="control-group">
-                <label class="control-label" for="RadioName">Nom de la radio</label>
-                <div class="controls">
-                    <div class="input-prepend">
-                        <span class="add-on"><i class="icon-font"></i></span>
-                        <input type="text" id="RadioName" placeholder="Nom affiché" class="form-element">
-                    </div>
-                    <span class="help-inline"></span> <!-- Message d'erreur -->
+            <legend>Ajout d'une nouvelle radio</legend>
+            
+            
+            <ul class="nav nav-tabs">
+                <li class="active" ><a href="#radio-search" data-toggle="tab"><i class="icon-search"></i> Rechercher</a></li>
+                <li><a href="#radio-man" data-toggle="tab"><ic class="icon-pencil"></i> Manuel</a></li>
+            </ul>
+
+            <div class="tab-content">
+            
+                <!-- ---------- Mode recherche ---------- -->
+                <div class="tab-pane container active" id="radio-search">
+                    <h3>Liste des webradios ...</h3>
+                    <p>
+                        Il y aura un tableau avec un champ de recherche de radio
+                    </p>
                 </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="RadioUrl">Url de la radio</label>
-                <div class="controls">
-                    <div class="input-prepend">
-                        <span class="add-on"><i class="icon-code"></i></span>
-                        <input type="text" id="RadioUrl" placeholder="Adresse de la radio" class="form-element">
-                    </div>
-                    <span class="help-inline"></span> <!-- Message d'erreur -->
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="RadioPic">Icone de la radio</label>
-                <div class="controls">
-                    <div class="input-prepend">
-                        <span class="add-on"><i class="icon-picture"></i></span>
-                        <input type="text" id="RadioPic" placeholder="Adresse d'une image" class="form-element">
-                    </div>
-                    <span class="help-inline"></span> <!-- Message d'erreur -->
-                </div>
-            </div>
-        </fieldset>
+                
+                <!-- ---------- Mode manuel ---------- -->
+                <div class="tab-pane container" id="radio-man">
+                    <p>
+                        <form>
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="RadioName" >Nom de la webradio</label>
+                                    <div class="input-group" >
+                                        <span class="input-group-addon"><i class="icon-font"></i></span>
+                                        <input type="text" id="RadioName" class="form-control first_focus form-element" placeholder="Nom affiché" >
+                                    </div>
+                                    <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
+                                </div>
+                                <div class="form-group">
+                                    <label for="RadioUrl" >Adresse de la webradio</label>
+                                    <div class="input-group" >
+                                        <span class="input-group-addon"><i class="icon-code"></i></span>
+                                        <input type="text" id="RadioUrl" class="form-control form-element" placeholder="Url du flux de la radio" >
+                                    </div>
+                                    <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
+                                </div>
+                                <div class="form-group">
+                                    <label for="RadioIcon" >Icone de la webradio</label>
+                                    <div class="input-group" >
+                                        <span class="input-group-addon"><i class="icon-picture"></i></span>
+                                        <input type="text" id="RadioIcone" class="form-control form-element" placeholder="Url de l'icone de la webradio" >
+                                    </div>
+                                    <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
+                                </div>
+                            </fieldset>
         
-        <div class="input-prepend input-append" style="padding-left:75px" >
-            <button class="btn btn-info" type="button btn-info" id="btn_annuler"> <i class="icon-search"></i> Chercher une radio</button>
-            <button class="btn btn-success" type="button btn-success" id="btn_envoyer"> <i class="icon-plus"></i> Ajouter</button> 
-        </div>
-    </form>
+                            <div class="input-prepend input-append" style="padding-left:75px"><br>
+                                <button class="btn btn-danger" type="button" id="btn_annuler"> <i class="icon-remove"></i> Annuler</button>
+                                <button class="btn btn-success" type="button" id="btn_envoyer"> <i class="icon-ok"></i> Valider</button> 
+                            </div>
+                        </form>
+                    </p>
+                </div>
+                
+                <div class="alert hide col-sm-11 col-md-11 alert-warning" id="generalErreur">
+                    Ici, les erreurs
+                </div>
+                
+            </div>
+    </div>
         
     <div class="alert span11 hide" id="generalErreur">
         Ici, les erreurs

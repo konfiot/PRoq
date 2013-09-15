@@ -35,7 +35,7 @@
             <div class="form-group">
                 <label for="ServMail">Serveur mail</label>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="icon-laptop"></i></span>
+                    <span class="input-group-addon"><i class="icon-terminal"></i></span>
                     <input type="text" id="ServMail" class="form-control form-element" placeholder="Facultatif" >
                 </div>
                 <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->

@@ -4,10 +4,9 @@
 
 /***** Paramètres des webradios *****/
 
-.radio-desc td {
+table > tbody > .radio-desc > td {
     vertical-align: middle;
     white-space: normal;
-    font-size : 75%;
 }
 
 .radio-desc .icon {
@@ -15,11 +14,11 @@
 }
 
 .radio-desc .name {
-    max-width: 100px;
+    max-width: 150px;
 }
 
 .radio-desc .adresse {
-    max-width: 400px;
+    max-width: 450px;
 }
 
 /** Message d'erreur **/
