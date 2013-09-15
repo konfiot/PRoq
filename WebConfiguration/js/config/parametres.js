@@ -209,7 +209,7 @@ var inputs = {
             {
                 "format": /\S+/,
                 "msg": {
-                    "type": "info",
+                    "type": "warning",
                     "text": "A remplir manuellement"
                 }
             }
@@ -223,7 +223,7 @@ var inputs = {
             {
                 "format": /\S+/,
                 "msg": {
-                    "type": "info",
+                    "type": "warning",
                     "text": "A remplir manuellement"
                 }
             },

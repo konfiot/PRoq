@@ -52,9 +52,9 @@
             
             <div class="form-group">
                 <label class="control-label" for="MailSsl">SSL</label>
-                <div class="switch form-element col-md-offset-1" data-on-label="Oui" data-off-label="Non" id="MailSsl">
+                <span><div class="switch form-element col-md-offset-1" data-on-label="Oui" data-off-label="Non" id="MailSsl">
                     <input type="checkbox" checked="checked" class="col-md-offset-1" >
-                </div>
+                </div></span> <!-- Pour avoir le bon nombre de parents -->
                 <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
             </div>
         </fieldset>

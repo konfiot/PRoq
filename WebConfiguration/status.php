@@ -16,20 +16,15 @@
 
     <?php include("elements/top-navbar.php"); ?>
   
-    <div class="container-fluid">
-        <div class="row-fluid">
+    <div class="container">
+        <div class="row">
             <div class="col-md-offset-1 col-md-10 jumbotron">
-                <h1>Status</h1>
+                <h1>Status <small>(à venir)</small></h1>
                 
                 <h2>Quoi mettre sur cette page ?</h2>
                 <p>
-                    En fait je doit l'avouer, j'ai pensé à cette page d'un manière un peut <em>pulsat... pulsative ... pulrrblr ...</em> <strong>expeditive</strong><br />
-                    Donc en fait je pensais mettre des trucs du genre mettre un recapitulatif des infos et des paramètres (oui très useless oui ...) ou encore le status du serveur (ce qui est en soit très stupide --'). <br />
-                    Et pis y a aussi le fait qu'il faut justifier la navbar :s
-                </p>
-                <p>
-                    Et au passage ca m'aurrais éclaté d'utilliser ce genre de trucs <br />
-                    <span class="label label-default">Bonswir</span> <span class="label label-warning">Attention !!! ca va pokuler !!!</span> <span class="label label-info">Trop tard ...</span>
+                    Cette page pourra recceuillir tout un tableau de bord qui pourrait permettre de voir l'état du réveil tel que la prochaine heure de sonnerie, les comptes connectés.
+                    On pourra aussi interagir avec le réveil, par exemple lancer une musique, ou encore le mettre à jours.
                 </p>
             </div>
         </div>

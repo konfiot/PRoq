@@ -25,17 +25,12 @@
         <div class="row">
             <div class="col-md-offset-1 col-md-10 jumbotron">
                 <p>
-                    Bienvenue sur l'interface web qui vous permettra de configurer votre Smart Wake de qualité
+                    Bienvenue sur l'interface web qui vous permettra de configurer votre Smart Wake
                 </p>
                 
-                <h2>Qu'est-ce que Smart wake ?</h2>
+                <h2>Que mettre sur cette page</h2>
                 <p>
-                    On peut mettre ici une petite description du projet, toutca toutca ...
-                    <ul>
-                        <li>On dit que c'est de qualité</li>
-                        <li>Que ca a été très dur à réaliser</li>
-                        <li>Et surtout ... que Dan est un Kouby</li>
-                    </ul>
+                    On pourra mettre sur cette page une petite description de smart-wake, des liens vers des points stratégiques et pourquoi pas un flux de news concernants le projet
                 </p>
                 <p>
                     <a class="btn btn-primary btn-lg pull-right" href="https://github.com/konfiot/smart-wake"><i class="icon-github icon"></i> Projet github</a>

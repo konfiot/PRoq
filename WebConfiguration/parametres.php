@@ -66,9 +66,14 @@
     
             <div class="col-md-9" id="main" >
                 <div class="container">
-                    <h1>Paramètres 
-                        <img src="img/loader/horizontal.gif">                     <!-- Image générée avec http://ajaxload.info/ -->
-                    </h1>
+                    <div class="page-header">
+                        <h1>Paramètres 
+                            <img src="img/loader/horizontal.gif">                     <!-- Image générée avec http://ajaxload.info/ -->
+                        </h1>
+                    </div>
+                    <p>
+                        Le contenu est en train de charger, veuillez patienter ...
+                    </p>
                 </div>
             </div>
     
