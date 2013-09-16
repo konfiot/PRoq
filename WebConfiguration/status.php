@@ -5,7 +5,6 @@
     <title>Smart Wake - status</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
     
     <link href="css/font-awesome.min.css" rel="stylesheet">
     
@@ -30,7 +29,7 @@
         </div>
     </div>
     
-    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="//code.jquery.com/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
