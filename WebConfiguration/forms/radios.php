@@ -17,41 +17,12 @@
                     </tr>
                 </thead>
                 <tbody>
+
                     <?php
-                        // Lecture du Json
-                        
-                        $fichier = fopen("../../conf/webradios.json", 'r+');
-                        $json = fread($fichier, filesize("../../conf/webradios.json"));
-                        $json = json_decode($json, true);
-                        
-                        
-                        foreach( $json["list"] as $i ) {
-                            
-                            // Pour réduire l'adresse
-                            $radio_short = $i["adress"];
-                            if( strpos($radio_short, "//") != 0 )
-                                $radio_short = substr($radio_short, strpos($radio_short, "//")+2);
-                            if( strpos($radio_short, "/", 1) != 0 )
-                                $radio_short = substr($radio_short, 0 , strpos($radio_short, "/", 1));
-                            
-                            echo '
-                                <tr class="radio-desc" >
-                                    <td><img src="' .$i["icon"]. '" class="icon" /></td>
-                                    <td class="name" >' .$i["name"]. '</td>
-                                    <td class="adresse">
-                                        <a target="_blank" href="' .$i["adress"]. '" >' .$radio_short. '</a>
-                                    </td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-info btn-sm"><i class="icon-pencil"></i> Modifier</button>
-                                            <button type="button" class="btn btn-danger btn-sm"><i class="icon-remove"></i> Supprimer</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            ';
-                        }
-                        
+                        $_GET["format"] = "html";
+                        include("../functions/webradios.php");
                     ?>
+
                 </tbody>
             </table>
         </fieldset>
