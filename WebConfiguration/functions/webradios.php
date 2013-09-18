@@ -84,7 +84,7 @@
                     <td>
                         <div class="btn-group">
                             <button type="button" class="btn btn-info btn-sm"><i class="icon-pencil"></i> Modifier</button>
-                            <button type="button" class="btn btn-danger btn-sm"><i class="icon-remove"></i> Supprimer</button>
+                            <button type="button" class="btn btn-danger btn-sm radio-rm"><i class="icon-remove"></i> Supprimer</button>
                         </div>
                     </td>
                 </tr>
