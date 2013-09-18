@@ -5,7 +5,7 @@
     </p>
 </div>
 <p>
-    <div class="col-md-offset-1 col-md-10" >
+    <div class="col-md-offset-1 col-md-10" id="radios-list" >
         <fieldset>         
             <table class="table table-hover">
                 <thead>
@@ -68,7 +68,7 @@
                                     <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
                                 </div>
                                 <div class="form-group">
-                                    <label for="RadioIcon" >Icone de la webradio</label>
+                                    <label for="RadioIcone" >Icone de la webradio</label>
                                     <div class="input-group" >
                                         <span class="input-group-addon"><i class="icon-picture"></i></span>
                                         <input type="text" id="RadioIcone" class="form-control form-element" placeholder="Url de l'icone de la webradio" >
@@ -78,8 +78,7 @@
                             </fieldset>
         
                             <div class="input-prepend input-append" style="padding-left:75px"><br>
-                                <button class="btn btn-danger" type="button" id="btn_annuler"> <i class="icon-remove"></i> Annuler</button>
-                                <button class="btn btn-success" type="button" id="btn_envoyer"> <i class="icon-ok"></i> Valider</button> 
+                                <button class="btn btn-success" type="button" id="btn_envoyer_radio"> <i class="icon-ok"></i> Valider</button> 
                             </div>
                         </form>
                     </p>

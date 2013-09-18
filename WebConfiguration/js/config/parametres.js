@@ -53,6 +53,7 @@ var config = {
             
         $("#main").load("forms/" + formulaire + ".php", function(){    //On envoit la requette
             config.connectAll();                                                //On connecte les inputs
+            radios.connectAll();
         
             config.resetForm();                                                 //On met les valeurs existantes
             config.checkForm();                                                 //On colore les champs
@@ -89,7 +90,7 @@ var config = {
         if(message === "")
             $("#generalErreur").addClass("hide");
         else{
-            $("#generalErreur").removeClass("hide alert-success alert-danger alert-info");
+            $("#generalErreur").removeClass("hide alert-success alert-danger alert-info alert-warning");
             $("#generalErreur").addClass("alert-" + type).html(prefixe + message);
         }
     },
@@ -322,6 +323,41 @@ var inputs = {
                 }
             }
         ],
+        function(){}
+    ),
+    //Paramètres des news    ---------------------------------------------------
+    "RadioName": new elementInput("#RadioName",
+        "radios",
+        "name",
+        [
+            {
+                "format": /\S+/,
+                "msg": {
+                    "type": "error",
+                    "text": "Champ obligatoire"
+                }
+            }
+        ],
+        function(){}
+    ),
+    "RadioUrl": new elementInput("#RadioUrl",
+        "radios",
+        "url",
+        [
+            {
+                "format": /\S+/,
+                "msg": {
+                    "type": "error",
+                    "text": "Champ obligatoire"
+                }
+            }
+        ],
+        function(){}
+    ),
+    "RadioIcone": new elementInput("#RadioIcone",
+        "radios",
+        "icon",
+        [ ],
         function(){}
     )
 };

@@ -2,11 +2,10 @@
 <html><head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
     <title>Smart Wake - configuration</title>
-
+    
     <link href="css/bootstrap.min.css" rel="stylesheet">
     
     <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/bootstrapSwitch.min.css" rel="stylesheet">
     
     <link href="css/main.css" rel="stylesheet">
     <link href="css/parametres.css" rel="stylesheet">
@@ -92,6 +91,8 @@
     <script type="text/javascript" src="js/config/elements.js"></script>
     <script type="text/javascript" src="js/config/autoconfig.js"></script>
     <script type="text/javascript" src="js/config/parametres.js"></script>
+    
+    <script type="text/javascript" src="js/config/forms/radios.js"></script>
     
     <script type="text/javascript" src="js/dialogs.js"></script>
   
