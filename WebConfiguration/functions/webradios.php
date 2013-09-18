@@ -10,33 +10,31 @@
     $json = fread($fichier, filesize($path));
     $p_json = json_decode($json, true);
     
+    if( !isset($_GET["format"]) )
+        $_GET["format"] = "html";
+    
     if ( isset($_GET["add"]) ) {
         $p_add = json_decode($_GET["add"], true);
         $json = rmRadio($p_json, $p_add["name"] );             // Pour éviter les doublés
-        echo $json = addRadio(json_decode($json, true), $p_add);
+        $json = addRadio(json_decode($json, true), $p_add);
         
         fseek($fichier, 0);
         ftruncate($fichier, 0);
         fputs($fichier, $json);
     }
     
-    else if ( isset($_GET["remove"]) ) {
-        echo $json = rmRadio($p_json, $_GET["remove"]);
+    if ( isset($_GET["remove"]) ) {
+        $json = rmRadio($p_json, $_GET["remove"]);
         
         fseek($fichier, 0);
         ftruncate($fichier, 0);
         fputs($fichier, $json);
     }
     
-    else {
-        
-        if( $_GET["format"] == "html" )
-            echo toHtmlTable($p_json);
-            
-        else if( $_GET["format"] == "json" )
-            echo $json;
-        
-    }
+    if( $_GET["format"] == "html" )
+        echo toHtmlTable(json_decode($json, true));
+    else if( $_GET["format"] == "json" )
+        echo $json;
     
     fclose($fichier);
     

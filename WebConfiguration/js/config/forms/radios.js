@@ -13,14 +13,13 @@ var radios = {
             type: "GET",
             url: "functions/webradios.php?add="  + JSON.stringify(json),
             dataType: "html",
-            success: function(){
-                config.generalErreur("success", "Le formulaire à été envoyé avec succès");
-                $("#radios-list tbody").load("functions/webradios.php?format=html", function(){
-                    radios.connectAll();
-                }); // A optimiser à l'occasion
+            success: function(data){
+                $("#radios-list tbody").replaceWith("<tbody>" + data + "</tbody>");
+                radios.connectAll();
+                config.generalErreur("success", "Liste des radios modifiée");
             },
             error: function(){
-                config.generalErreur("danger", "Un problème est arrivé pendant l'envoit du formulaire");
+                config.generalErreur("danger", "Un problème est arrivé pendant l'ajout d'une webradio");
             }
         });   
     },
@@ -31,14 +30,12 @@ var radios = {
             url: "functions/webradios.php?remove="  + name,
             dataType: "html",
             success: function(data){
-                //alert(data);
-                config.generalErreur("success", "Le formulaire à été envoyé avec succès");
-                $("#radios-list tbody").load("functions/webradios.php?format=html", function(){
-                    radios.connectAll();
-                }); // A optimiser à l'occasion
+                $("#radios-list tbody").replaceWith("<tbody>" + data + "</tbody>");
+                radios.connectAll();
+                config.generalErreur("success", "Liste des radios modifiée");
             },
             error: function(){
-                config.generalErreur("danger", "Un problème est arrivé pendant l'envoit du formulaire");
+                config.generalErreur("danger", "Un problème est arrivé pendant la suppression d'une webradio");
             }
         });
     },
