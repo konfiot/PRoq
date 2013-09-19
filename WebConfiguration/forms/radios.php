@@ -31,10 +31,24 @@
             <legend>Ajout d'une nouvelle radio</legend>
             
             
-            <ul class="nav nav-tabs">
-                <li class="active" ><a href="#radio-search" data-toggle="tab"><i class="icon-search"></i> Rechercher</a></li>
-                <li><a href="#radio-man" data-toggle="tab"><ic class="icon-pencil"></i> Manuel</a></li>
+            <ul class="nav nav-tabs" id="tab-forms" >
+                <li class="active" >
+                    <a href="#radio-search" data-toggle="tab">
+                        <i class="icon-search"></i> Rechercher
+                    </a>
+                </li>
+                <li>
+                    <a href="#radio-man" data-toggle="tab">
+                        <ic class="icon-pencil"></i> Manuel
+                    </a>
+                </li>
+                <li class="vanish" id="radio-change-tab" >
+                    <a href="#radio-change" data-toggle="tab">
+                        <i class="icon-edit"></i> Modifier
+                    </a>
+                </li>
             </ul>
+
 
             <div class="tab-content">
             
@@ -83,11 +97,50 @@
                         </form>
                     </p>
                 </div>
-                
-                <div class="alert hide col-sm-11 col-md-11 alert-warning" id="generalErreur">
-                    Ici, les erreurs
+            
+                <!-- ---------- Mode modification ---------- -->
+                <div class="tab-pane container" id="radio-change">
+                    <h3>Modification : <em id="C-previous-name">[ancien nom]</em></h3>
+                    <p>
+                        <form>
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="C-RadioName" >Nom de la webradio</label>
+                                    <div class="input-group" >
+                                        <span class="input-group-addon"><i class="icon-font"></i></span>
+                                        <input type="text" id="C-RadioName" class="form-control first_focus form-element" placeholder="Nom affiché" >
+                                    </div>
+                                    <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
+                                </div>
+                                <div class="form-group">
+                                    <label for="C-RadioUrl" >Adresse de la webradio</label>
+                                    <div class="input-group" >
+                                        <span class="input-group-addon"><i class="icon-code"></i></span>
+                                        <input type="text" id="C-RadioUrl" class="form-control form-element" placeholder="Url du flux de la radio" >
+                                    </div>
+                                    <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
+                                </div>
+                                <div class="form-group">
+                                    <label for="C-RadioIcone" >Icone de la webradio</label>
+                                    <div class="input-group" >
+                                        <span class="input-group-addon"><i class="icon-picture"></i></span>
+                                        <input type="text" id="C-RadioIcone" class="form-control form-element" placeholder="Url de l'icone de la webradio" >
+                                    </div>
+                                    <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
+                                </div>
+                            </fieldset>
+        
+                            <div class="input-prepend input-append" style="padding-left:75px"><br>
+                                <button class="btn btn-success" type="button" id="btn_envoyer_C-radio"> <i class="icon-ok"></i> Modifier</button> 
+                            </div>
+                        </form>
+                    </p>
                 </div>
                 
+            </div>
+                
+            <div class="alert hide col-sm-11 col-md-11 alert-warning" id="generalErreur">
+                Ici, les erreurs
             </div>
     </div>
         

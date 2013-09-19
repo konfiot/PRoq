@@ -13,31 +13,30 @@
     if( !isset($_GET["format"]) )
         $_GET["format"] = "html";
     
+    
+    if ( isset($_GET["remove"]) ) {
+        $json = rmRadio($p_json, $_GET["remove"]);
+        $p_json = json_decode($json, true);
+    }
+    
     if ( isset($_GET["add"]) ) {
         $p_add = json_decode($_GET["add"], true);
         $json = rmRadio($p_json, $p_add["name"] );             // Pour éviter les doublés
         $json = addRadio(json_decode($json, true), $p_add);
-        
-        fseek($fichier, 0);
-        ftruncate($fichier, 0);
-        fputs($fichier, $json);
     }
     
-    if ( isset($_GET["remove"]) ) {
-        $json = rmRadio($p_json, $_GET["remove"]);
         
-        fseek($fichier, 0);
-        ftruncate($fichier, 0);
-        fputs($fichier, $json);
-    }
+    fseek($fichier, 0);
+    ftruncate($fichier, 0);
+    fputs($fichier, $json);
+    
+    fclose($fichier);
+    
     
     if( $_GET["format"] == "html" )
         echo toHtmlTable(json_decode($json, true));
     else if( $_GET["format"] == "json" )
         echo $json;
-    
-    fclose($fichier);
-    
 
     /* ********************************************************************** */
 
@@ -81,8 +80,8 @@
                     </td>
                     <td>
                         <div class="btn-group">
-                            <button type="button" class="btn btn-info btn-sm"><i class="icon-pencil"></i> Modifier</button>
-                            <button type="button" class="btn btn-danger btn-sm radio-rm"><i class="icon-remove"></i> Supprimer</button>
+                            <a class="btn btn-info btn-sm radio-change" ><i class="icon-pencil"></i> Modifier</a>
+                            <a class="btn btn-danger btn-sm radio-rm"><i class="icon-remove"></i> Supprimer</a>
                         </div>
                     </td>
                 </tr>

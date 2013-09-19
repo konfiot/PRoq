@@ -26,3 +26,9 @@ table > tbody > .radio-desc > td {
 #generalErreur {
     margin-top: 30px;
 }
+
+/***** Onglet invisibles *****/
+
+.nav>li:not(.active).vanish {
+    display: none;
+}
