@@ -106,9 +106,11 @@ var config = {
     },
     
     //Verifie tous les champs et remet en forme
-    checkForm : function(){
+    checkForm : function(sel){
+        //sel contient un selecteur sur une zone pour ne checker que ca
+        
         var test = true;
-        $(".form-element").each(function(e){
+        $(sel + " .form-element").each(function(e){
             test = inputs[this.id].isValid() ? test : false;
         });
         return test;
@@ -325,7 +327,7 @@ var inputs = {
         ],
         function(){}
     ),
-    //Paramètres des news    ---------------------------------------------------
+    //Paramètres des webradios    ---------------------------------------------------
     "RadioName": new elementInput("#RadioName",
         "radios",
         "name",
@@ -357,6 +359,40 @@ var inputs = {
     "RadioIcone": new elementInput("#RadioIcone",
         "radios",
         "icon",
+        [ ],
+        function(){}
+    ),
+    "C-RadioName": new elementInput("#C-RadioName",
+        "radios",
+        "c-name",
+        [
+            {
+                "format": /\S+/,
+                "msg": {
+                    "type": "error",
+                    "text": "Champ obligatoire"
+                }
+            }
+        ],
+        function(){}
+    ),
+    "C-RadioUrl": new elementInput("#C-RadioUrl",
+        "radios",
+        "c-url",
+        [
+            {
+                "format": /\S+/,
+                "msg": {
+                    "type": "error",
+                    "text": "Champ obligatoire"
+                }
+            }
+        ],
+        function(){}
+    ),
+    "C-RadioIcone": new elementInput("#C-RadioIcone",
+        "radios",
+        "c-icon",
         [ ],
         function(){}
     )

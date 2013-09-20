@@ -70,11 +70,17 @@ var radios = {
     
     connectAll : function(){
         $("#btn_envoyer_radio").off("click").click(function(){
-            radios.add();
+            if( config.checkForm("#radio-man") )
+                radios.add();
+            else
+                config.generalErreur("danger", "La webradio n'a pas pu être ajoutée, le formulaire est invalide");
         });
         
         $("#btn_envoyer_C-radio").off("click").click(function(){
-            radios.change();
+            if( config.checkForm("#radio-change") )
+                radios.change();
+            else
+                config.generalErreur("danger", "La webradio n'a pas pu être modifiée, le formulaire est invalide");
         });
         
         $(".radio-rm").off("click").click(function(e){
@@ -95,6 +101,8 @@ var radios = {
             $("#C-RadioName").val(name);
             $("#C-RadioUrl").val(url);
             $("#C-RadioIcone").val(icon);
+            
+            config.checkForm("#radio-change");                                  // Juste pour la couleur
         });
     }
 };
