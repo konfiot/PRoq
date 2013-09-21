@@ -35,7 +35,6 @@
                     <a class="btn btn-primary btn-lg pull-right" href="https://github.com/konfiot/smart-wake"><i class="icon-github icon"></i> Projet github</a>
                 </p>
             </div>
-            
         </div>
     </div>
     

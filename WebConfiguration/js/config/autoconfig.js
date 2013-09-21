@@ -90,7 +90,7 @@ var autoConfig = {
     },
     checkCity : function(ville, erreur){                                        // Retourne si oui ou non la ville existe
         jQuery.ajax({
-            url: "http://smart-wake.remi100756.c9.io/WebConfiguration/functions/checkCity.php?city=" + ville,
+            url: "functions/checkCity.php?city=" + ville,
             success: function(html) {
                 if(html != "true")
                     inputs.MeteoPos.setErreur(erreur.type, erreur.text);

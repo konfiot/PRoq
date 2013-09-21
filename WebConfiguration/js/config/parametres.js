@@ -11,6 +11,8 @@ $(function() {  //Executé après le chargement
         $(".leftnav").removeClass("active");                                    //On desactive tout
         $(e.delegateTarget).addClass("active");                                 //On active le bon
         
+        $(e.delegateTarget).find("i").addClass("icon-spin");
+        
         //----------------------------
         
         config.loadForm(window.location.hash.slice(1));
@@ -52,13 +54,16 @@ var config = {
             formulaire = "defaut";
             
         $("#main").load("forms/" + formulaire + ".php", function(){    //On envoit la requette
+            $(".leftnav").find("i").removeClass("icon-spin");                   //On supprime l'effet de chargement
+        
             config.connectAll();                                                //On connecte les inputs
             radios.connectAll();
         
             config.resetForm();                                                 //On met les valeurs existantes
             config.checkForm();                                                 //On colore les champs
             
-            $('.switch')['bootstrapSwitch']();
+            $("[title]").tooltip({"container": "body"});                        //On active les tooltips
+            $('.switch').bootstrapSwitch();                                     //On active les switchs
         });
         
         $(".leftnav>a").each(function(e) {
@@ -144,8 +149,6 @@ var config = {
 
     //Connecte tous les inputs
     connectAll : function(){
-        $("[title]").tooltip({"container": "body"});
-        
         for (var i in inputs) {
             inputs[i].reconnect();
         }

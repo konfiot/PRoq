@@ -15,7 +15,7 @@
                     <span class="input-group-addon"><i class="icon-map-marker"></i></span>
                     <input type="text" id="MeteoPos" class="form-element form-control" placeholder="La ville où vous habitez">
                 </div>
-                <button class="btn btn-info col-md-2" type="button" id="btn-find-pos"> <i class="icon-search"></i> Me localiser</button>
+                <button class="btn btn-info col-md-2" type="button" id="btn-find-pos" style="z-index: 100" > <i class="icon-search"></i> Me localiser</button>
                 <span class="help-block col-md-12" style="display: none;" ></span> <!-- Message d'erreur -->
             </div>
         </fieldset>
