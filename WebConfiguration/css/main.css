@@ -64,9 +64,15 @@ body {
    padding: 5px 10px;
 }
 
-@media (min-width: 980px) {
-    .bs-sidenav {
-        position: fixed;
-        width: 213px;
-    }
+@media screen and (min-width: 980px) {
+  .bs-sidenav {
+    position: fixed;
+    width: 213px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .bs-sidenav {
+    position: fixed;
+    width: 263px;
+  }
 }
