@@ -144,6 +144,8 @@ var config = {
 
     //Connecte tous les inputs
     connectAll : function(){
+        $("[title]").tooltip({"container": "body"});
+        
         for (var i in inputs) {
             inputs[i].reconnect();
         }

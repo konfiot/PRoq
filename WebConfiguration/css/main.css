@@ -67,6 +67,6 @@ body {
 @media (min-width: 980px) {
     .bs-sidenav {
         position: fixed;
-        width: 263px;
+        width: 213px;
     }
 }

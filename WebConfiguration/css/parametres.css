@@ -21,6 +21,20 @@ table > tbody > .radio-desc > td {
     max-width: 450px;
 }
 
+td.btn-col {
+    text-align: right;
+}
+
+.small-button-group a{
+    color: grey;
+    margin-right: 10px;
+    padding: 0px;
+}
+
+.small-button-group a:last-child {
+    margin-right: 0px;
+}
+
 /** Message d'erreur **/
 
 #generalErreur {

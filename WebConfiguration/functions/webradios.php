@@ -78,10 +78,14 @@
                     <td class="adresse">
                         <a target="_blank" href="' .$i["adress"]. '" >' .shortUrl($i["adress"]). '</a>
                     </td>
-                    <td>
-                        <div class="btn-group">
-                            <a class="btn btn-info btn-sm radio-change" ><i class="icon-pencil"></i> Modifier</a>
-                            <a class="btn btn-danger btn-sm radio-rm"><i class="icon-remove"></i> Supprimer</a>
+                    <td class="btn-col" >
+                        <div class="btn-group small-button-group">
+                            <a class="btn radio-change" title="Editer" >
+                                <i class="icon-pencil icon-large"></i>
+                            </a>
+                            <a class="btn radio-rm" title="Supprimer" >
+                                <i class="icon-remove icon-large"></i>
+                            </a>
                         </div>
                     </td>
                 </tr>
