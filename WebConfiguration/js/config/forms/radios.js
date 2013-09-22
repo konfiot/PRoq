@@ -92,6 +92,7 @@ var radios = {
         });
         
         $(".radio-rm").off("click").click(function(e){
+            $(e.delegateTarget).find("i").addClass("icon-spin");                // Effet de rotation le temps de la supresssion
             var name = $(e.delegateTarget).parent().parent().parent().find(".name").html();
             radios.rm(name);
         });
@@ -110,7 +111,13 @@ var radios = {
             $("#C-RadioUrl").val(url);
             $("#C-RadioIcone").val(icon);
             
+            element.addClass("success");                                        // Met la ligne éditée en surbrillance
             config.checkForm("#radio-change");                                  // Juste pour la couleur
         });
+        
+        //Pour supprimer l'effet de surbrillance
+        $("a[data-toggle='tab']:not([href='#radio-change'])").on("shown.bs.tab", function(e) {
+            $(".radio-desc").removeClass("success");
+        })
     }
 };
