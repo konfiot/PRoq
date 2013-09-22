@@ -15,14 +15,14 @@
                     <span class="input-group-addon"><i class="icon-map-marker"></i></span>
                     <input type="text" id="MeteoPos" class="form-element form-control" placeholder="La ville où vous habitez">
                 </div>
-                <button class="btn btn-info col-md-2" type="button" id="btn-find-pos" style="z-index: 100" > <i class="icon-search"></i> Me localiser</button>
-                <span class="help-block col-md-12" style="display: none;" ></span> <!-- Message d'erreur -->
+                <button class="btn btn-info col-md-2" type="button" id="btn-find-pos" > <i class="icon-search"></i> Me localiser</button>
+                <span class="help-block col-md-12" style="display: none; z-index: -1;" ></span> <!-- Message d'erreur -->
             </div>
         </fieldset>
         
         <div class="input-prepend input-append" style="padding-left:75px"><br>
-            <button class="btn btn-danger" type="button" id="btn_annuler"> <i class="icon-remove"></i> Annuler</button>
-            <button class="btn btn-success" type="button" id="btn_envoyer"> <i class="icon-ok"></i> Valider</button> 
+            <button class="btn btn-danger"  type="button" id="btn_annuler"> <i class="icon-remove"></i> Annuler</button>
+            <button class="btn btn-success" type="button" id="btn_envoyer" data-loading-text=" <i class='icon-spinner icon-spin'></i> Valider"> <i class="icon-ok"></i> Valider</button> 
         </div>
     </form>
         

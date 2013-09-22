@@ -1,5 +1,6 @@
 var radios = {
     add : function() {
+        $("#btn_envoyer_radio").button("loading");
         var json = {
             "name" : inputs.RadioName.valeur(),
             "icon" : inputs.RadioIcone.valeur(),
@@ -16,15 +17,19 @@ var radios = {
             success: function(data){
                 $("#radios-list tbody").replaceWith("<tbody>" + data + "</tbody>");
                 radios.connectAll();
+                
                 config.generalErreur("success", "Liste des radios modifiée");
+                $("#btn_envoyer_radio").button("reset");
             },
             error: function(){
                 config.generalErreur("danger", "Un problème est arrivé pendant l'ajout d'une webradio");
+                $("#btn_envoyer_radio").button("reset");
             }
         });   
     },
     
     change : function() {
+        $("#btn_envoyer_C-radio").button("loading");
         var json = {
             "name" : $("#C-RadioName").val(),
             "icon" : $("#C-RadioIcone").val(),
@@ -43,11 +48,14 @@ var radios = {
             success: function(data){
                 $("#radios-list tbody").replaceWith("<tbody>" + data + "</tbody>");
                 radios.connectAll();
+                
                 config.generalErreur("success", "Liste des radios modifiée");
+                $("#btn_envoyer_C-radio").button("reset");
                 $("#tab-forms>li:first-child>a").tab("show");
             },
             error: function(){
                 config.generalErreur("danger", "Un problème est arrivé pendant la modification d'une webradio");
+                $("#btn_envoyer_C-radio").button("reset");
             }
         });   
     },

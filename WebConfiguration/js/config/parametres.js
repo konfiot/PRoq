@@ -127,6 +127,8 @@ var config = {
             return;
         }
 
+        $("#btn_envoyer").button("loading");                                    //Petit effet sur le bouton envoyer
+
         $(".form-element").each(function(e){
             var champ = inputs[this.id].champ,
                 categorie = inputs[this.id].categorie;
@@ -140,9 +142,11 @@ var config = {
             dataType: "text",
             success: function(){
                 config.generalErreur("success", "Le formulaire à été envoyé avec succès");
+                $("#btn_envoyer").button("reset");
             },
             error: function(){
                 config.generalErreur("danger", "Un problème est arrivé pendant l'envoit du formulaire");
+                $("#btn_envoyer").button("reset");
             }
         });
     },

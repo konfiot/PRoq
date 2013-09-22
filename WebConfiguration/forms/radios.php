@@ -92,7 +92,7 @@
                             </fieldset>
         
                             <div class="input-prepend input-append" style="padding-left:75px"><br>
-                                <button class="btn btn-success" type="button" id="btn_envoyer_radio"> <i class="icon-ok"></i> Valider</button> 
+                                <button class="btn btn-success" type="button" id="btn_envoyer_radio" data-loading-text=" <i class='icon-spinner icon-spin'></i> Valider"> <i class="icon-ok"></i> Valider</button> 
                             </div>
                         </form>
                     </p>
@@ -131,7 +131,7 @@
                             </fieldset>
         
                             <div class="input-prepend input-append" style="padding-left:75px"><br>
-                                <button class="btn btn-success" type="button" id="btn_envoyer_C-radio"> <i class="icon-ok"></i> Modifier</button> 
+                                <button class="btn btn-success" type="button" id="btn_envoyer_C-radio" data-loading-text=" <i class='icon-spinner icon-spin'></i> Modifier"> <i class="icon-ok"></i> Modifier</button> 
                             </div>
                         </form>
                     </p>
