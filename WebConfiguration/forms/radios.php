@@ -16,7 +16,7 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class=".radio-search" >
 
                     <?php
                         $_GET["format"] = "html";
@@ -54,10 +54,26 @@
             
                 <!-- ---------- Mode recherche ---------- -->
                 <div class="tab-pane container active" id="radio-search">
-                    <h3>Liste des webradios ...</h3>
                     <p>
-                        Il y aura un tableau avec un champ de recherche de radio
+                        <div class="input-group" >
+                            <span class="input-group-addon"><i class="icon-search"></i></span>
+                            <input type="text" id="RadioSearch" class="form-control first_focus form-element" placeholder="Rechercher une radio" >
+                        </div>
                     </p>
+                    <table class="table table-hover .radio-search">
+                        <thead>
+                            <tr>
+                                <td></td>
+                                <th>Nom</th>
+                                <th>Adresse</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                include("../functions/searchRadio.php");
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
                 
                 <!-- ---------- Mode manuel ---------- -->

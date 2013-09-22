@@ -1,3 +1,5 @@
+var requeteSearch;
+
 var radios = {
     add : function() {
         $("#btn_envoyer_radio").button("loading");
@@ -77,6 +79,33 @@ var radios = {
     },
     
     connectAll : function(){
+        $("[title]").tooltip({"container": "body"});
+        
+        $("#radio-search [title].radio-desc").off("click").click(function(e){
+            if( e.target.localName != "a")
+                alert("dan");
+        });
+        
+        $("#RadioSearch").keydown(function(){
+            $("#radio-search .input-group i").removeClass("icon-search").addClass("icon-spinner icon-spin");
+            
+            if(requeteSearch !== undefined)
+                requeteSearch.abort();
+                
+            requeteSearch = $.ajax({
+                type: "GET",
+                url : "functions/searchRadio.php?format=html&q=" + $("#RadioSearch").val(),
+                dataType: "html",
+                success : function(data) {
+                    $("#radio-search tbody").html(data);
+                    $("#radio-search [title]").tooltip({"container": "#radio-search tbody"});
+                    
+                    $("#radio-search .input-group i").removeClass("icon-spinner icon-spin").addClass("icon-search");
+                    $("#radio-search [title].radio-desc").tooltip("destroy").tooltip({"container": "#radio-search tbody", placement: "right"});
+                }
+            });
+        });
+        
         $("#btn_envoyer_radio").off("click").click(function(){
             if( config.checkForm("#radio-man") )
                 radios.add();
@@ -117,7 +146,7 @@ var radios = {
         
         //Pour supprimer l'effet de surbrillance
         $("a[data-toggle='tab']:not([href='#radio-change'])").on("shown.bs.tab", function(e) {
-            $(".radio-desc").removeClass("success");
+            $(".radio-search").removeClass("success");
         })
     }
 };

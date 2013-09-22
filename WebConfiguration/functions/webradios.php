@@ -10,8 +10,7 @@
     $json = fread($fichier, filesize($path));
     $p_json = json_decode($json, true);
     
-    if( !isset($_GET["format"]) )
-        $_GET["format"] = "html";
+    if( !isset($_GET["format"]) ) $_GET["format"] = "html";
     
     
     if ( isset($_GET["remove"]) ) {
@@ -76,7 +75,7 @@
                     <td><img src="' .$i["icon"]. '" class="icon" /></td>
                     <td class="name" >' .$i["name"]. '</td>
                     <td class="adresse">
-                        <a target="_blank" href="' .$i["adress"]. '" >' .shortUrl($i["adress"]). '</a>
+                        <a target="_blank" href="' .$i["adress"]. '" title="' .$i["adress"]. '" >' .shortUrl($i["adress"]). '</a>
                     </td>
                     <td class="btn-col" >
                         <div class="btn-group small-button-group">
