@@ -60,20 +60,9 @@
                             <input type="text" id="RadioSearch" class="form-control first_focus form-element" placeholder="Rechercher une radio" >
                         </div>
                     </p>
-                    <table class="table table-hover .radio-search">
-                        <thead>
-                            <tr>
-                                <td></td>
-                                <th>Nom</th>
-                                <th>Adresse</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                                include("../functions/searchRadio.php");
-                            ?>
-                        </tbody>
-                    </table>
+                    <div id="table-frame">
+                        <!-- Résultat de la recherche -->
+                    </div>
                 </div>
                 
                 <!-- ---------- Mode manuel ---------- -->

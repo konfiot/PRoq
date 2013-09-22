@@ -35,6 +35,10 @@ td.btn-col {
     margin-right: 0px;
 }
 
+.radio-search tr {
+    cursor: pointer;
+}
+
 /** Message d'erreur **/
 
 #generalErreur {

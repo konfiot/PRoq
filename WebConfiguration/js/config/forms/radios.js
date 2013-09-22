@@ -81,9 +81,22 @@ var radios = {
     connectAll : function(){
         $("[title]").tooltip({"container": "body"});
         
+        $("#radio-search .input-group i").removeClass("icon-spinner icon-spin").addClass("icon-search");
+        $("#radio-search [title].radio-desc").tooltip("destroy").tooltip({"container": "#radio-search tbody", placement: "right"});
+        
         $("#radio-search [title].radio-desc").off("click").click(function(e){
-            if( e.target.localName != "a")
-                alert("dan");
+            if( e.target.localName != "a") {
+                var element = $(e.delegateTarget);
+                var name = element.find(".name").html();
+                var url = element.find(".adresse>a").attr("href");
+                var icon = element.find("td img").attr("src");
+                
+                $("#RadioName").val(name);
+                $("#RadioUrl").val(url);
+                $("#RadioIcone").val(icon);
+                
+                $('#tab-forms a[href="#radio-man"]').tab('show');
+            }
         });
         
         $("#RadioSearch").keydown(function(){
@@ -97,11 +110,10 @@ var radios = {
                 url : "functions/searchRadio.php?format=html&q=" + $("#RadioSearch").val(),
                 dataType: "html",
                 success : function(data) {
-                    $("#radio-search tbody").html(data);
+                    $("#table-frame").html(data);
                     $("#radio-search [title]").tooltip({"container": "#radio-search tbody"});
                     
-                    $("#radio-search .input-group i").removeClass("icon-spinner icon-spin").addClass("icon-search");
-                    $("#radio-search [title].radio-desc").tooltip("destroy").tooltip({"container": "#radio-search tbody", placement: "right"});
+                    radios.connectAll();
                 }
             });
         });
