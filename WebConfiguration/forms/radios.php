@@ -5,9 +5,9 @@
     </p>
 </div>
 <p>
-    <div class="col-md-offset-1 col-md-10" id="radios-list" >
+    <div class="col-md-offset-1 col-md-10" >
         <fieldset>         
-            <table class="table table-hover">
+            <table class="table table-hover" id="radios-list">
                 <thead>
                     <tr>
                         <td></td>
@@ -16,7 +16,7 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tbody class=".radio-search" >
+                <tbody>
 
                     <?php
                         $_GET["format"] = "html";

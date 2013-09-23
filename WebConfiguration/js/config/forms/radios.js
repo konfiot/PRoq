@@ -17,7 +17,7 @@ var radios = {
             url: "functions/webradios.php?add="  + JSON.stringify(json),
             dataType: "html",
             success: function(data){
-                $("#radios-list tbody").replaceWith("<tbody>" + data + "</tbody>");
+                $("#radios-list tbody").html(data);
                 radios.connectAll();
                 
                 config.generalErreur("success", "Liste des radios modifiée");
@@ -68,7 +68,7 @@ var radios = {
             url: "functions/webradios.php?remove="  + name,
             dataType: "html",
             success: function(data){
-                $("#radios-list tbody").replaceWith("<tbody>" + data + "</tbody>");
+                $("#radios-list tbody").html(data);
                 radios.connectAll();
                 config.generalErreur("success", "Liste des radios modifiée");
             },
@@ -99,7 +99,7 @@ var radios = {
             }
         });
         
-        $("#RadioSearch").keydown(function(){
+        $("#RadioSearch").off("keyup").keyup(function(){
             $("#radio-search .input-group i").removeClass("icon-search").addClass("icon-spinner icon-spin");
             
             if(requeteSearch !== undefined)
@@ -107,7 +107,7 @@ var radios = {
                 
             requeteSearch = $.ajax({
                 type: "GET",
-                url : "functions/searchRadio.php?format=html&q=" + $("#RadioSearch").val(),
+                url : "functions/searchRadio.php?format=html&q=" + $("#RadioSearch").val().replace(/\s+/g, ''), //On vire les espaces
                 dataType: "html",
                 success : function(data) {
                     $("#table-frame").html(data);
