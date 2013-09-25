@@ -34,6 +34,19 @@ td.btn-col {
 .small-button-group a:last-child {
     margin-right: 0px;
 }
+#table-frame {
+    text-align: center;
+}
+
+#table-frame .pagination {
+    margin: auto;
+    cursor: pointer;
+}
+
+.table.table-hover.radio-search {
+    text-align: left;
+}
+
 
 .radio-search tr {
     cursor: pointer;

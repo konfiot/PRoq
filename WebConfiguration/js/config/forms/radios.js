@@ -118,6 +118,24 @@ var radios = {
             });
         });
         
+        $("#table-frame .pagination a").off("click").click(function(e){
+            $("#radio-search .input-group i").removeClass("icon-search").addClass("icon-spinner icon-spin");
+            
+            if(requeteSearch !== undefined)
+                requeteSearch.abort();
+            requeteSearch = $.ajax({
+                type: "GET",
+                url : "functions/searchRadio.php?format=html&q=" + $("#RadioSearch").val().replace(/\s+/g, '') + "&page=" + $(e.delegateTarget).attr("page"),
+                dataType: "html",
+                success : function(data) {
+                    $("#table-frame").html(data);
+                    $("#radio-search [title]").tooltip({"container": "#radio-search tbody"});
+                    
+                    radios.connectAll();
+                }
+            });
+        });
+        
         $("#btn_envoyer_radio").off("click").click(function(){
             if( config.checkForm("#radio-man") )
                 radios.add();
@@ -152,6 +170,7 @@ var radios = {
             $("#C-RadioUrl").val(url);
             $("#C-RadioIcone").val(icon);
             
+            $("#radios-list .radio-desc.success").removeClass("success");
             element.addClass("success");                                        // Met la ligne éditée en surbrillance
             config.checkForm("#radio-change");                                  // Juste pour la couleur
         });

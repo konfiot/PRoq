@@ -4,7 +4,7 @@
     ***************************************************************************/
     
     if( !isset($_GET["format"]) ) $_GET["format"] = "html";
-    if( !isset($_GET["format"]) ) $_GET["page"] = "0";
+    if( !isset($_GET["page"]) ) $_GET["page"] = "1";
     
     $json = file_get_contents("http://opml.radiotime.com/Search.ashx?render=json&query=" . $_GET["q"]);
     $json = json_decode($json, true);
@@ -44,11 +44,35 @@
             return $fullUrl;
     }
     
+    function pageSelector($nbPages, $page) {
+        $r .= '<ul class="pagination">';
+        if( $page == 1 )
+            $class = "disabled";
+        $r .= '<li class="'.$class.'"><a page="'.($page-1).'">&laquo;</a></li>';
+            
+        for($i = 1 ; $i <= $nbPages ; $i++) {
+            $class = "";
+            if( $i == $page)
+                $class = "active";
+                
+            $r .= '<li class="'.$class.'"><a page="'.$i.'">'.$i.'</a></li>';
+        }
+        
+        $class = "";
+        if( $page == $nbPages )
+            $class = "disabled";
+        $r .= '<li class="'.$class.'"><a page="'.($page+1).'">&raquo;</a></li>';
+            
+        $r .= '</ul>';
+        return $r;
+    }
+    
     function toHtml($json) {
         $n = count($json);
         if($n == 0) return "Aucune radio trouvée";
+        $r .=  pageSelector(intval(($n+9)/10), $_GET["page"]);
         
-        $json = array_slice($json, $_GET["page"]*10, 10);
+        $json = array_slice($json, ($_GET["page"]-1)*10, 10);
         
         $r .= '<p>' .$n. ' radios trouvées </p>';
         $r .= '
@@ -76,8 +100,10 @@
         }
         
         $r .= "\n<!-- -----------------------------------------------------------------!></tbody></table>";
+        
+        $r .=  pageSelector(intval(($n+9)/10), $_GET["page"]);
+        
         return $r;
     }
 
 ?>
-
