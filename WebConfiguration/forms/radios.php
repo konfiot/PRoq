@@ -57,7 +57,7 @@
                     <p>
                         <div class="input-group" >
                             <span class="input-group-addon"><i class="icon-search"></i></span>
-                            <input type="text" id="RadioSearch" class="form-control first_focus form-element" placeholder="Rechercher une radio" >
+                            <input type="text" id="RadioSearch" class="form-control first_focus" placeholder="Rechercher une radio" >
                         </div>
                     </p>
                     <div id="table-frame">

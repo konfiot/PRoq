@@ -1,6 +1,65 @@
 var requeteSearch;
 
 var radios = {
+    
+    radioList : function(args) {
+    /*  Argument de la classe d'édition de la liste des webradios :
+        {
+            action : [
+                {
+                    type : "remove",
+                    arg : "[name]"
+                },
+                {
+                    type : "add",
+                    arg : "[name]"
+                }
+            ],
+            error : {
+                type : "danger",
+                message : "[message]"
+            },
+            at_end : function() {}
+        } */
+        
+        this.json = args;
+        
+        // Valeurs par défaut
+        this.json.error.type = this.json.error.type || "danger";
+        this.json.error.message = this.json.error.type || "La modification a échoué";
+        
+        this.sendReq = function() {
+            var req = "functions/webradios.php?";
+            for( var i=0 ; i < this.json.action.length ; i++) {
+                if(i) req += "&";
+                req += this.json.action[i].type + "=" + this.json.action[i].arg;
+            }
+            
+            var json = this.json;
+            
+            $.ajax({
+                type: "GET",
+                url: req,
+                dataType: "html",
+                success: function(data){
+                    $("#radios-list tbody").html(data);
+                    radios.connectAll();
+                    
+                    config.generalErreur("success", "Liste des radios modifiée");
+                    json.at_end();
+                },
+                error: function(){
+                    json.showError();
+                    json.at_end();
+                }
+            });
+        };
+        
+        this.showError = function() {
+            config.generalErreur(this.json.error.type, this.json.error.message);
+        };
+    },
+    
     add : function() {
         $("#btn_envoyer_radio").button("loading");
         var json = {
@@ -12,22 +71,21 @@ var radios = {
         if( json.icon === "" )
             json.icon = "img/missing-img.png";
         
-        $.ajax({
-            type: "GET",
-            url: "functions/webradios.php?add="  + JSON.stringify(json),
-            dataType: "html",
-            success: function(data){
-                $("#radios-list tbody").html(data);
-                radios.connectAll();
-                
-                config.generalErreur("success", "Liste des radios modifiée");
-                $("#btn_envoyer_radio").button("reset");
+        
+        var req = new radios.radioList({
+            action : [{
+                type : "add",
+                arg : JSON.stringify(json)
+            }],
+            error : {
+                message : "L'ajout d'une webradio a échoué"
             },
-            error: function(){
-                config.generalErreur("danger", "Un problème est arrivé pendant l'ajout d'une webradio");
+            at_end : function() {
                 $("#btn_envoyer_radio").button("reset");
             }
-        });   
+        });
+        
+        req.sendReq();
     },
     
     change : function() {
@@ -43,40 +101,43 @@ var radios = {
         if( json.icon === "" )
             json.icon = "img/missing-img.png";
         
-        $.ajax({
-            type: "GET",
-            url: "functions/webradios.php?remove=" + ans + "&add=" + JSON.stringify(json),
-            dataType: "html",
-            success: function(data){
-                $("#radios-list tbody").replaceWith("<tbody>" + data + "</tbody>");
-                radios.connectAll();
-                
-                config.generalErreur("success", "Liste des radios modifiée");
-                $("#btn_envoyer_C-radio").button("reset");
-                $("#tab-forms>li:first-child>a").tab("show");
+        var req = new radios.radioList({
+            action : [
+                {
+                    type : "remove",
+                    arg : ans
+                }, {
+                    type : "add",
+                    arg : JSON.stringify(json)
+                }
+            ],
+            error : {
+                message : "La modification d'une webradio a échouée"
             },
-            error: function(){
-                config.generalErreur("danger", "Un problème est arrivé pendant la modification d'une webradio");
+            at_end : function() {
                 $("#btn_envoyer_C-radio").button("reset");
             }
-        });   
+        });
+        
+        req.sendReq();
     },
     
     rm : function(name) {
-        $.ajax({
-            type: "GET",
-            url: "functions/webradios.php?remove="  + name,
-            dataType: "html",
-            success: function(data){
-                $("#radios-list tbody").html(data);
-                radios.connectAll();
-                config.generalErreur("success", "Liste des radios modifiée");
+        var req = new radios.radioList({
+            action : [{
+                type : "remove",
+                arg : name
+            }],
+            error : {
+                message : "La suppression d'une webradio a échouée"
             },
-            error: function(){
-                config.generalErreur("danger", "Un problème est arrivé pendant la suppression d'une webradio");
-            }
+            at_end : function() {}
         });
+        
+        req.sendReq();
     },
+    
+    /* ********************************************************************** */
     
     connectAll : function(){
         $("[title]").tooltip({"container": "body"});

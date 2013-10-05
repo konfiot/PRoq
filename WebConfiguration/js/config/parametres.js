@@ -106,7 +106,10 @@ var config = {
             var champ = inputs[this.id].champ,
                 categorie = inputs[this.id].categorie;
                 
-            inputs[this.id].valeur( config.config[categorie][champ] );
+            if( typeof config.config[categorie] !== "undefined" )
+            if( typeof config.config[categorie][champ] !== "undefined" )        // C'est doublé pour ne pas avoir de message d'erreur dans la console
+                inputs[this.id].valeur( config.config[categorie][champ] );
+                
         });
     },
     
