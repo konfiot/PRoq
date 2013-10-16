@@ -63,3 +63,18 @@ td.btn-col {
 .nav>li:not(.active).vanish {
     display: none;
 }
+
+/**************************** Liste des sonneries *****************************/
+
+#wake-list td, #wake-list>thead>tr>th {
+    text-align: center;
+}
+
+
+#wake-list .day:not(.active) span {
+    display: none;
+}
+
+#wake-list .day.active i{
+    display: none;
+}
