@@ -10,13 +10,15 @@
             <legend>Paramètrage de votre position</legend>    
             
             <div class="form-group">
-                <label for="MeteoPos" class="col-md-12" >Votre position</label>
-                <div class="input-group col-md-10">
+                <label for="MeteoPos" >Votre position</label>
+                <div class="input-group">
                     <span class="input-group-addon"><i class="icon-map-marker"></i></span>
                     <input type="text" id="MeteoPos" class="form-element form-control" placeholder="La ville où vous habitez">
+                    <span class="input-group-btn">
+                        <button class="btn btn-info" type="button" id="btn-find-pos" > <i class="icon-search"></i> Me localiser</button>
+                    </span>
                 </div>
-                <button class="btn btn-info col-md-2" type="button" id="btn-find-pos" > <i class="icon-search"></i> Me localiser</button>
-                <span class="help-block col-md-12" style="display: none; z-index: -1;" ></span> <!-- Message d'erreur -->
+                <span class="help-block" style="display: none; z-index: -1;" ></span> <!-- Message d'erreur -->
             </div>
         </fieldset>
         
