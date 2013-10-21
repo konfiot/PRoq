@@ -104,6 +104,22 @@ def news(conf) :
 		data = json.load(resp)
 		return data["unreadcounts"][len(data["unreadcounts"])-1]["count"]
 
+	elif conf["news"]["provider"] == "subreader" :
+		req = urllib.urlopen("https://subreader.com/accounts/ClientLogin", urllib.urlencode({"Email" : conf["news"]["user"], "Passwd": conf["news"]["passwd"]}))
+		auth_token = re.findall(r"Auth=(.+)", req.read())
+		req = urllib2.Request("https://subreader.com/reader/api/0/unread-count?output=json", None, {"Authorization" : "GoogleLogin auth=" + auth_token[0]})
+		resp = urllib2.urlopen(req)
+		data = json.load(resp)
+		return data["unreadcounts"][len(data["unreadcounts"])-1]["count"]
+
+	elif conf["news"]["provider"] == "reedah" :
+		req = urllib.urlopen("https://reedah.com/accounts/ClientLogin", urllib.urlencode({"Email" : conf["news"]["user"], "Passwd": conf["news"]["passwd"]}))
+		auth_token = re.findall(r"Auth=(.+)", req.read())
+		req = urllib2.Request("https://reedah.com/reader/api/0/unread-count?output=json", None, {"Authorization" : "GoogleLogin auth=" + auth_token[0]})
+		resp = urllib2.urlopen(req)
+		data = json.load(resp)
+		return data["unreadcounts"][len(data["unreadcounts"])-1]["count"]
+
 	elif conf["news"]["provider"] == "selfoss" :
 		req = urllib.urlopen(conf["news"]["root"] + "/sources/stats/")
 		data = json.load(req)
