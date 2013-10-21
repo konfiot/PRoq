@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 
 from Tkinter import *
-import Image, ImageTk
+from PIL import Image
+import ImageTk
 import json
 import urllib
 import StringIO
