@@ -46,7 +46,7 @@ image_news = pygame.image.load("images/misc/news.png")
 image_cal = pygame.image.load("images/misc/cal.png")
 
 
-config_menu = menu.Menu(screen, font)
+config_menu = menu.Menu(screen, font, ["Modifier l'heure", "Modifier l'action du snooze"])
 
 
 def update(): 
@@ -113,6 +113,10 @@ while 1 :
 	time.sleep(0.1)
 	update()
 	config_menu.show()
+	config_menu.select(0)
+	time.sleep(1)
+	config_menu.select(1)
+	time.sleep(1)
 	config_menu.hide()
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:

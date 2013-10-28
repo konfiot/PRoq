@@ -1,32 +1,52 @@
 import pygame
-
+import time
 
 class Menu (object) :
-	def __init__ (self, screen, font) :
+	def __init__ (self, screen, font, items) :
 
 		self.screen = screen
 		self.background_menu = pygame.Surface(screen.get_size())
 		self.background_menu = self.background_menu.convert()
 		self.background_menu.fill((0, 0, 0))
+		
+		self.current_selected = -1
 
-		text_menu_time = font.render("Modifier l'heure", 1, (255, 255, 255))
-		text_menu_time_pos = text_menu_time.get_rect(x=20, y=20)
-		self.background_menu.blit(text_menu_time, text_menu_time_pos)
+		self.items = items
 
-		text_menu_snooze = font.render("Modifier l'action du snooze", 1, (255, 255, 255))
-		text_menu_snooze_pos = text_menu_snooze.get_rect(x=20, y=40)
-		self.background_menu.blit(text_menu_snooze, text_menu_snooze_pos)
+		self.font = font
 
+		for i in range(len(self.items)) :
+			text = self.font.render(self.items[i], 1, (255, 255, 255))
+			text_pos = text.get_rect(x=20, y=20*(i+1))
+			self.background_menu.blit(text, text_pos)
 	
 
 	def show(self) :
-		for i in range(240, -1) :
+		for i in range(240, 0, -1) :
 			self.screen.blit(self.background_menu, (0, i))
-			pygame.display.flip()
+			pygame.display.update()
 			time.sleep(0.0005)
 
 	def hide(self) :
 		for i in range(240) :
 			self.screen.blit(self.background_menu, (0, i))
-			pygame.display.flip()
+			pygame.display.update()
 			time.sleep(0.0005)
+		self.current_selected = -1
+
+	def select(self, index) :
+		self.background_menu.fill((0, 0, 0))
+		for i in range(len(self.items)) :
+			font = self.font
+			font_bold = pygame.font.Font(None, 17)
+			font_bold.set_underline(True)
+			if index == i :
+				text = font_bold.render(self.items[i], 1, (255, 255, 255))
+			else : 
+				text = font.render(self.items[i], 1, (255, 255, 255))
+			
+			text_pos = text.get_rect(x=20, y=20*(i+1))
+			self.background_menu.blit(text, text_pos)
+		self.screen.blit(self.background_menu, (0, i))
+		pygame.display.flip()
+
