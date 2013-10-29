@@ -16,7 +16,7 @@ if [ ! -f "id_rsa" ]
 then
 echo "Downloading RSA key"
 wget https://dl.dropboxusercontent.com/s/cf82cjgih3jhzp1/id_rsa
-wget $PRIVATE_URL 2>&1 /dev/null
+wget $PRIVATE_URL > /dev/null 2>&1
 chmod 600 id_rsa
 chmod 600 id_rsa_sourceforge
 fi
@@ -49,7 +49,7 @@ echo "Compressing"
 bzip2 system.img
 
 echo "Uploading"
-rsync -e "ssh -o StrictHostKeyChecking=no -i id_rsa_sourceforge" system.img.gz konfiot@frs.sourceforge.net:/home/frs/project/smart-wake/Nightly/ --progress
+rsync -e "ssh -o StrictHostKeyChecking=no -i id_rsa_sourceforge" system.img.bz2 konfiot@frs.sourceforge.net:/home/frs/project/smart-wake/Nightly/ --progress
 
 echo "Cleaning"
 rm system.img.bz2
