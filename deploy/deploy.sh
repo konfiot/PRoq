@@ -16,8 +16,9 @@ if [ ! -f "id_rsa" ]
 then
 echo "Downloading RSA key"
 wget https://dl.dropboxusercontent.com/s/cf82cjgih3jhzp1/id_rsa
-wget $PRIVATE_URL > /dev/null
+wget $PRIVATE_URL 2>&1 /dev/null
 chmod 600 id_rsa
+chmod 600 id_rsa_sourceforge
 fi
 
 if [ ! -f "arch.img" ]
