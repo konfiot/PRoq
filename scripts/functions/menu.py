@@ -1,8 +1,9 @@
 import pygame
 import time
+import copy
 
 class Menu (object) :
-	def __init__ (self, screen, font, items) :
+	def __init__ (self, screen, items) :
 
 		self.screen = screen
 		self.background_menu = pygame.Surface(screen.get_size())
@@ -13,10 +14,8 @@ class Menu (object) :
 
 		self.items = items
 
-		self.font = font
-
 		for i in range(len(self.items)) :
-			text = self.font.render(self.items[i], 1, (255, 255, 255))
+			text = (pygame.font.Font(None, 17)).render(self.items[i], 1, (255, 255, 255))
 			text_pos = text.get_rect(x=20, y=20*(i+1))
 			self.background_menu.blit(text, text_pos)
 	
@@ -37,7 +36,7 @@ class Menu (object) :
 	def select(self, index) :
 		self.background_menu.fill((0, 0, 0))
 		for i in range(len(self.items)) :
-			font = self.font
+			font = pygame.font.Font(None, 17)
 			font_bold = pygame.font.Font(None, 17)
 			font_bold.set_underline(True)
 			if index == i :
@@ -49,4 +48,12 @@ class Menu (object) :
 			self.background_menu.blit(text, text_pos)
 		self.screen.blit(self.background_menu, (0, i))
 		pygame.display.flip()
+
+	def select_delta(self, delta) :
+		if self.current_selected != -1 :
+			index = (self.current_selected + delta)%(len(self.items))
+		else : 
+			index = 0
+		self.select(index)
+		self.current_selected = index
 
