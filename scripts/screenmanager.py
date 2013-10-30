@@ -46,7 +46,7 @@ image_news = pygame.image.load("images/misc/news.png")
 image_cal = pygame.image.load("images/misc/cal.png")
 
 
-config_menu = menu.Menu(screen, ["Modifier l'heure", "Modifier l'action du snooze"])
+config_menu = menu.Menu(screen, ["Modifier l'heure", "Duree du snooze", "Modifier l'action du snooze"])
 
 
 def update(): 
