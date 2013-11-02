@@ -16,4 +16,6 @@ while 1 :
 	
 	print json.dumps(data) + "$" + json.dumps(data_forecast) + "$" + str(unread) + "$" + str(news) + "$" + json.dumps(cal)
 
+	sys.stdout.flush()
+
 	time.sleep(10)
