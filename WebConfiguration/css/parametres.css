@@ -70,6 +70,9 @@ td.btn-col {
     text-align: center;
 }
 
+#wake-list tbody>tr:not(.enable) {
+    opacity: 0.3;
+}
 
 #wake-list .day:not(.active) span {
     display: none;
