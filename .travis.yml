@@ -3,3 +3,7 @@ script: deploy/deploy.sh
 before_install : sudo apt-get update && sudo apt-get install qemu qemu-system
 notifications:
   email: false
+env:
+  global: 
+    - secure: "TVxwOjO9/VWQECt8ylwqT4UnLjIxuDWgfgMO1u95WUf3kjJy/3VKb2JA8iG7SXpXss4ooc6EX5peOo46/54QWFrngdeD49+tFkBsvMXbue5bVHLuCIjNcnTzt1Lp8WtnB3zvwmVNdzAGnpMxxvEej15ZAo1cBAqCh0zyviyP6Ho="
+

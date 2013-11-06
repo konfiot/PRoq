@@ -1,141 +1,131 @@
 #!/usr/bin/python2.7
 # -*- coding: utf-8 -*-
 
-from Tkinter import *
-import Image, ImageTk
+import pygame
 import json
 import urllib
 import StringIO
+import time
 from datetime import datetime, date
-from functions import get
+from functions import get, menu
+import sys
 
-root = Tk()
+# Initialisation
+
+pygame.font.init()
+screen = pygame.display.set_mode((320, 240))
+background = pygame.Surface(screen.get_size())
+background = background.convert()
+
+# Récupération de la config
 
 conf_file = open("../conf/wake.json")
 conf = json.load(conf_file)
 
-def update_time () :
-	label_time.configure(text=datetime.today().strftime("%H:%M"))
-	label_time.after(1000, update_time)
+# Récupération des infos
 
-def update() :
-	(data, data_forecast) = get.weather(conf)
-	image_ = Image.open("images/weather/" + data_forecast["list"][0]["weather"][0]["icon"] + ".png")
-	tkpi_ = ImageTk.PhotoImage(image_)
-	label_image.configure(image=tkpi)
-
-	label_temp.configure(text=round(data_forecast["list"][0]["temp"]["day"], 1))
-
-	label_time_rise.configure(text=datetime.fromtimestamp(data["sys"]["sunrise"]).strftime("%H:%M"))
-
-	label_time_set.configure(text=datetime.fromtimestamp(data["sys"]["sunset"]).strftime("%H:%M"))
-
-	label_mail.configure(text=get.mail(conf))
-
-	label_news.configure(text=get.news(conf))
-	
-	label_cal.configure(text=get.calendar(conf)[0])
-
-	root.after(10000, update)
-
-
-# On met la fenêtre en plein écran
-
-w, h = 320, 240
-#root.overrideredirect(1)
-root.geometry("%dx%d+0+0" % (w, h))
-root.configure(background='black')
-
-# On va chercher la météo
-
-(data, data_forecast) = get.weather(conf) 
-
-# On ouvre l'image
-
-image = Image.open("images/weather/" + data_forecast["list"][0]["weather"][0]["icon"] + ".png")
-tkpi = ImageTk.PhotoImage(image)
-
-label_image = Label(root, image=tkpi, background="black")
-label_image.place(x=-15,y=0,width=w*50/100,height=h*50/100)
-
-# On ajoute l'heure
-
-label_time = Label(root, background="black", foreground="white", text=datetime.today().strftime("%H:%M"), font=("Helvetica", 95))
-label_time.place(x=0, y=120, width=w, height=h*50/100)
-
-# On ajoute la température
-
-image_temp = Image.open("images/misc/temp.png")
-tkpi_temp = ImageTk.PhotoImage(image_temp)
-
-label_image_temp = Label(root, image=tkpi_temp, background="black")
-label_image_temp.place(x=120,y=-10,width=w*25/100,height=h*25/100)
-
-label_temp = Label(root, background="black", foreground="white", text=round(data_forecast["list"][0]["temp"]["day"], 1))
-label_temp.place(x=165, y=2, width=w*15/100,height=h*15/100)
-
-# On ajoute les image de lever et de coucher du soleil
-
-image_rise = Image.open("images/misc/rise.png")
-tkpi_rise = ImageTk.PhotoImage(image_rise)
-
-label_image_rise = Label(root, image=tkpi_rise, background="black")
-label_image_rise.place(x=120,y=30,width=w*25/100,height=h*25/100)
-
-label_time_rise = Label(root, background="black", foreground="white", text=datetime.fromtimestamp(data["sys"]["sunrise"]).strftime("%H:%M"))
-label_time_rise.place(x=170, y=42, width=w*15/100,height=h*15/100)
-
-image_set = Image.open("images/misc/set.png")
-tkpi_set = ImageTk.PhotoImage(image_set)
-
-label_image_set = Label(root, image=tkpi_set, background="black")
-label_image_set.place(x=210,y=30,width=w*25/100,height=h*25/100)
-
-label_time_set = Label(root, background="black", foreground="white", text=datetime.fromtimestamp(data["sys"]["sunset"]).strftime("%H:%M"))
-label_time_set.place(x=260, y=42, width=w*15/100,height=h*15/100)
-
-# On ajoute le compteur des mails non lus
-
-image_mail = Image.open("images/misc/mail.png")
-tkpi_mail = ImageTk.PhotoImage(image_mail)
-
-label_image_mail = Label(root, image=tkpi_mail, background="black")
-label_image_mail.place(x=120,y=70,width=w*25/100,height=h*25/100)
-
+(data, data_forecast) = get.weather(conf)
 unread = get.mail(conf)
-
-label_mail = Label(root, background="black", foreground="white", text=unread)
-label_mail.place(x=170, y=80, width=w*10/100,height=h*15/100)
-
-# On met aussi les news
-
-image_news = Image.open("images/misc/news.png")
-tkpi_news = ImageTk.PhotoImage(image_news)
-
-label_image_news = Label(root, image=tkpi_news, background="black")
-label_image_news.place(x=210,y=-10,width=w*25/100,height=h*25/100)
-
 news = get.news(conf)
-
-label_news = Label(root, background="black", foreground="white", text=news)
-label_news.place(x=260, y=2, width=w*10/100,height=h*15/100)
-
-# On ajoute le compteur d'évènements dans la journée
-
-image_cal = Image.open("images/misc/cal.png")
-tkpi_cal = ImageTk.PhotoImage(image_cal)
-
-label_image_cal = Label(root, image=tkpi_cal, background="black")
-label_image_cal.place(x=210,y=70,width=w*25/100,height=h*25/100)
-
 cal = get.calendar(conf)
 
-label_cal = Label(root, background="black", foreground="white", text=cal[0]		)
-label_cal.place(x=260, y=80, width=w*10/100,height=h*15/100)
+# Définition des polices
 
-# On lance la fenêtre
+font = pygame.font.Font(None, 17)
+font_time = pygame.font.Font(None, 190)
 
-root.after(10000, update)
-label_time.after(1000, update_time)
 
-root.mainloop()
+# Definition des images
+
+image_weather = pygame.image.load("images/weather/" + data_forecast["list"][0]["weather"][0]["icon"] + ".png")
+image_temp = pygame.image.load("images/misc/temp.png")
+image_rise = pygame.image.load("images/misc/rise.png")
+image_set = pygame.image.load("images/misc/set.png")
+image_mail = pygame.image.load("images/misc/mail.png")
+image_news = pygame.image.load("images/misc/news.png")
+image_cal = pygame.image.load("images/misc/cal.png")
+
+
+config_menu = menu.Menu(screen, ["Modifier l'heure", "Duree du snooze", "Modifier l'action du snooze"])
+
+
+def update(): 
+	# Collage des images
+	background.fill((0, 0, 0))
+
+	background.blit(image_weather, image_weather.get_rect())
+	background.blit(image_temp, image_temp.get_rect(centerx=130))
+	background.blit(image_rise, image_rise.get_rect(centerx=190, centery=22))
+	background.blit(image_set, image_set.get_rect(centerx=260, centery=22))
+	background.blit(image_mail, image_mail.get_rect(centerx=130, centery=60))
+	background.blit(image_news, image_news.get_rect(centerx=190, centery=60))
+	background.blit(image_cal, image_cal.get_rect(centerx=260, centery=60))
+
+	# On ajoute l'heure
+
+	text_time = font_time.render(datetime.today().strftime("%H:%M"), 1, (255, 255, 255))
+	text_time_pos = text_time.get_rect(centerx=157, y=112)
+	background.blit(text_time, text_time_pos)
+
+	# On ajoute la température
+
+	text_temp = font.render(str(round(data_forecast["list"][0]["temp"]["day"], 1)), 1, (255, 255, 255))
+	text_temp_pos = text_temp.get_rect(x=145, y=18)
+	background.blit(text_temp, text_temp_pos)
+
+	# On ajoute les image de lever et de coucher du soleil
+
+	text_time_rise = font.render(datetime.fromtimestamp(data["sys"]["sunrise"]).strftime("%H:%M"), 1, (255, 255, 255))
+	text_time_rise_pos = text_time_rise.get_rect(x=210, y=18)
+	background.blit(text_time_rise, text_time_rise_pos)
+
+	text_time_set = font.render(datetime.fromtimestamp(data["sys"]["sunset"]).strftime("%H:%M"), 1, (255, 255, 255))
+	text_time_set_pos = text_time_set.get_rect(x=280, y=18)
+	background.blit(text_time_set, text_time_set_pos)
+
+	# On ajoute le compteur des mails non lus
+
+
+	text_mail = font.render(str(unread), 1, (255, 255, 255))
+	text_mail_pos = text_mail.get_rect(x=145, y=55)
+	background.blit(text_mail, text_mail_pos)
+
+	# On met aussi les news
+
+
+	text_news = font.render(str(news), 1, (255, 255, 255))
+	text_news_pos = text_news.get_rect(x=210, y=55)
+	background.blit(text_news, text_news_pos)
+
+	# On ajoute le compteur d'évènements dans la journée
+
+
+	text_cal = font.render(str(cal[0]), 1, (255, 255, 255))
+	text_cal_pos = text_cal.get_rect(x=280, y=55)
+	background.blit(text_cal, text_cal_pos)
+
+	screen.blit(background, (0, 0))
+	pygame.display.flip()
+
+# Boucle de rafraichissement
+
+while 1 : 
+	time.sleep(0.1)
+	update()
+	config_menu.show()
+	config_menu.select_delta(2)
+	time.sleep(1)
+	config_menu.select_delta(2)
+	time.sleep(1)
+	config_menu.select_delta(2)
+	time.sleep(1)
+	config_menu.select_delta(-1)
+	time.sleep(1)
+	config_menu.select_delta(-1)
+	time.sleep(1)
+	config_menu.select_delta(-1)
+	time.sleep(1)
+	config_menu.hide()
+	for event in pygame.event.get():
+		if event.type == pygame.QUIT:
+			sys.exit()
