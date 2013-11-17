@@ -4,9 +4,12 @@
 from functions import get
 import time
 import json
+import socket
 
 conf_file = open("../conf/wake.json")
 conf = json.load(conf_file)
+s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+s.connect("mastersocket")
 
 while 1 :
 	(data, data_forecast) = get.weather(conf)
@@ -14,8 +17,6 @@ while 1 :
 	news = get.news(conf)
 	cal = get.calendar(conf)
 	
-	print json.dumps(data) + "$" + json.dumps(data_forecast) + "$" + str(unread) + "$" + str(news) + "$" + json.dumps(cal)
-
-	sys.stdout.flush()
-
+	s.send(json.dumps([data, data_forecast, unread, news, cal]))
+	
 	time.sleep(10)
