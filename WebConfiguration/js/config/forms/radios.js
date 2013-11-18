@@ -142,7 +142,7 @@ var radios = {
     connectAll : function(){
         $("[title]").tooltip({"container": "body"});
         
-        $("#radio-search .input-group i").removeClass("icon-spinner icon-spin").addClass("icon-search");
+        $("#radio-search .input-group i").removeClass("fa fa-spinner fa-spin").addClass("fa fa-search");
         $("#radio-search [title].radio-desc").tooltip("destroy").tooltip({"container": "#radio-search tbody", placement: "right"});
         
         $("#radio-search [title].radio-desc").off("click").click(function(e){
@@ -161,7 +161,7 @@ var radios = {
         });
         
         $("#RadioSearch").off("keyup").keyup(function(){
-            $("#radio-search .input-group i").removeClass("icon-search").addClass("icon-spinner icon-spin");
+            $("#radio-search .input-group i").removeClass("fa fa-search").addClass("fa fa-spinner fa-spin");
             
             if(requeteSearch !== undefined)
                 requeteSearch.abort();

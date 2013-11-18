@@ -12,10 +12,10 @@
             <div class="form-group">
                 <label for="MeteoPos" >Votre position</label>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="icon-map-marker"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
                     <input type="text" id="MeteoPos" class="form-element form-control" placeholder="La ville où vous habitez">
                     <span class="input-group-btn">
-                        <button class="btn btn-info" type="button" id="btn-find-pos" > <i class="icon-search"></i> Me localiser</button>
+                        <button class="btn btn-info" type="button" id="btn-find-pos" > <i class="fa fa-search"></i> Me localiser</button>
                     </span>
                 </div>
                 <span class="help-block" style="display: none; z-index: -1;" ></span> <!-- Message d'erreur -->
@@ -23,8 +23,8 @@
         </fieldset>
         
         <div class="input-prepend input-append" style="padding-left:75px"><br>
-            <button class="btn btn-danger"  type="button" id="btn_annuler"> <i class="icon-remove"></i> Annuler</button>
-            <button class="btn btn-success" type="button" id="btn_envoyer" data-loading-text=" <i class='icon-spinner icon-spin'></i> Valider"> <i class="icon-ok"></i> Valider</button> 
+            <button class="btn btn-danger"  type="button" id="btn_annuler"> <i class="fa fa-times"></i> Annuler</button>
+            <button class="btn btn-success" type="button" id="btn_envoyer" data-loading-text=" <i class='fa fa-spinner fa fa-spin'></i> Valider"> <i class="fa fa-check"></i> Valider</button> 
         </div>
     </form>
         

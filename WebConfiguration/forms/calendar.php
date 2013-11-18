@@ -12,7 +12,7 @@
             <div class="form-group">
                 <label for="CalendarUrl" >Url du calendrier</label>
                 <div class="input-group" >
-                    <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                     <input type="text" id="CalendarUrl" class="form-control first_focus form-element" placeholder="L'adresse de votre calendrier" >
                 </div>
                 <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
@@ -20,8 +20,8 @@
         </fieldset>
         
         <div class="input-prepend input-append" style="padding-left:75px"><br>
-            <button class="btn btn-danger"  type="button" id="btn_annuler"> <i class="icon-remove"></i> Annuler</button>
-            <button class="btn btn-success" type="button" id="btn_envoyer" data-loading-text=" <i class='icon-spinner icon-spin'></i> Valider"> <i class="icon-ok"></i> Valider</button> 
+            <button class="btn btn-danger"  type="button" id="btn_annuler"> <i class="fa fa-times"></i> Annuler</button>
+            <button class="btn btn-success" type="button" id="btn_envoyer" data-loading-text=" <i class='fa fa-spinner fa-spin'></i> Valider"> <i class="fa fa-check"></i> Valider</button> 
         </div>
     </form>
         

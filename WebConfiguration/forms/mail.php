@@ -13,7 +13,7 @@
             <div class="form-group">
                 <label for="AdresseMail">Adresse email</label>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="icon-envelope"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                     <input type="email" id="AdresseMail" class="first_focus form-control form-element" placeholder="Exemple : name@exemple.com">
                 </div>
                 <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
@@ -22,7 +22,7 @@
             <div class="form-group">
                 <label for="MailPassword">Mot de passe</label>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="icon-key"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-key"></i></span>
                     <input type="password" id="MailPassword" class="form-control form-element" placeholder="" >
                 </div>
                 <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
@@ -35,7 +35,7 @@
             <div class="form-group">
                 <label for="ServMail">Serveur mail</label>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="icon-terminal"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-terminal"></i></span>
                     <input type="text" id="ServMail" class="form-control form-element" placeholder="Facultatif" >
                 </div>
                 <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
@@ -44,7 +44,7 @@
             <div class="form-group">
                 <label for="PortMail">Port</label>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="icon-screenshot"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-dot-circle-o"></i></span>
                     <input type="text" id="PortMail" class="form-control form-element" min="0" max="65535" placeholder="Facultatif" >
                 </div>
                 <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
@@ -60,8 +60,8 @@
         </fieldset>
         
         <div class="input-prepend input-append" style="padding-left:75px"><br>
-            <button class="btn btn-danger"  type="button" id="btn_annuler"> <i class="icon-remove"></i> Annuler</button>
-            <button class="btn btn-success" type="button" id="btn_envoyer" data-loading-text=" <i class='icon-spinner icon-spin'></i> Valider"> <i class="icon-ok"></i> Valider</button> 
+            <button class="btn btn-danger"  type="button" id="btn_annuler"> <i class="fa fa-times"></i> Annuler</button>
+            <button class="btn btn-success" type="button" id="btn_envoyer" data-loading-text=" <i class='fa fa-spinner fa-spin'></i> Valider"> <i class="fa fa-check"></i> Valider</button> 
         </div>
     </form>
 

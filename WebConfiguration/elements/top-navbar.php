@@ -19,9 +19,9 @@
                     Petit message sympatique de bienvenue
                 </p>
                 <ul class="nav navbar-nav">
-                <li <?php if($page=="index.php")      echo 'class="active"'; ?> ><a href="index.php"><i class="icon-white icon-home"></i> Accueil</a></li>
-                    <li <?php if($page=="status.php")     echo 'class="active"'; ?> ><a href="status.php"><i class="icon-white icon-signal"></i> Status</a></li>
-                    <li <?php if($page=="parametres.php") echo 'class="active"'; ?> ><a href="parametres.php"><i class="icon-white icon-wrench"></i> Paramètres</a></li>
+                <li <?php if($page=="index.php")      echo 'class="active"'; ?> ><a href="index.php"><i class="fa fa-fw fa-home"></i> Accueil</a></li>
+                    <li <?php if($page=="status.php")     echo 'class="active"'; ?> ><a href="status.php"><i class="fa fa-fw fa-signal"></i> Status</a></li>
+                    <li <?php if($page=="parametres.php") echo 'class="active"'; ?> ><a href="parametres.php"><i class="fa fa-fw fa-wrench"></i> Paramètres</a></li>
                 </ul>
             </div>
         </div>

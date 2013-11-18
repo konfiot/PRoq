@@ -80,10 +80,10 @@
                     <td class="btn-col" >
                         <div class="btn-group small-button-group">
                             <a class="btn radio-change" title="Editer" >
-                                <i class="icon-pencil icon-large"></i>
+                                <i class="fa fa-pencil fa-lg"></i>
                             </a>
                             <a class="btn radio-rm" title="Supprimer" >
-                                <i class="icon-remove icon-large"></i>
+                                <i class="fa fa-times fa-lg"></i>
                             </a>
                         </div>
                     </td>

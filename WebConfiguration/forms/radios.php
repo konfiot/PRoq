@@ -34,17 +34,17 @@
             <ul class="nav nav-tabs" id="tab-forms" >
                 <li class="active" >
                     <a href="#radio-search" data-toggle="tab">
-                        <i class="icon-search"></i> Rechercher
+                        <i class="fa fa-search"></i> Rechercher
                     </a>
                 </li>
                 <li>
                     <a href="#radio-man" data-toggle="tab">
-                        <ic class="icon-pencil"></i> Manuel
+                        <ic class="fa fa-pencil"></i> Manuel
                     </a>
                 </li>
                 <li class="vanish" id="radio-change-tab" >
                     <a href="#radio-change" data-toggle="tab">
-                        <i class="icon-edit"></i> Modifier
+                        <i class="fa fa-edit"></i> Modifier
                     </a>
                 </li>
             </ul>
@@ -56,7 +56,7 @@
                 <div class="tab-pane container active" id="radio-search">
                     <p>
                         <div class="input-group" >
-                            <span class="input-group-addon"><i class="icon-search"></i></span>
+                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
                             <input type="text" id="RadioSearch" class="form-control first_focus" placeholder="Rechercher une radio" >
                         </div>
                     </p>
@@ -73,7 +73,7 @@
                                 <div class="form-group">
                                     <label for="RadioName" >Nom de la webradio</label>
                                     <div class="input-group" >
-                                        <span class="input-group-addon"><i class="icon-font"></i></span>
+                                        <span class="input-group-addon"><i class="fa fa-font"></i></span>
                                         <input type="text" id="RadioName" class="form-control first_focus form-element" placeholder="Nom affiché" >
                                     </div>
                                     <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
@@ -81,7 +81,7 @@
                                 <div class="form-group">
                                     <label for="RadioUrl" >Adresse de la webradio</label>
                                     <div class="input-group" >
-                                        <span class="input-group-addon"><i class="icon-code"></i></span>
+                                        <span class="input-group-addon"><i class="fa fa-code"></i></span>
                                         <input type="text" id="RadioUrl" class="form-control form-element" placeholder="Url du flux de la radio" >
                                     </div>
                                     <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
@@ -89,7 +89,7 @@
                                 <div class="form-group">
                                     <label for="RadioIcone" >Icone de la webradio</label>
                                     <div class="input-group" >
-                                        <span class="input-group-addon"><i class="icon-picture"></i></span>
+                                        <span class="input-group-addon"><i class="fa fa-picture-o"></i></span>
                                         <input type="text" id="RadioIcone" class="form-control form-element" placeholder="Url de l'icone de la webradio" >
                                     </div>
                                     <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
@@ -97,7 +97,7 @@
                             </fieldset>
         
                             <div class="input-prepend input-append" style="padding-left:75px"><br>
-                                <button class="btn btn-success" type="button" id="btn_envoyer_radio" data-loading-text=" <i class='icon-spinner icon-spin'></i> Valider"> <i class="icon-ok"></i> Valider</button> 
+                                <button class="btn btn-success" type="button" id="btn_envoyer_radio" data-loading-text=" <i class='fa fa-spinner fa-spin'></i> Valider"> <i class="fa fa-check"></i> Valider</button> 
                             </div>
                         </form>
                     </p>
@@ -112,7 +112,7 @@
                                 <div class="form-group">
                                     <label for="C-RadioName" >Nom de la webradio</label>
                                     <div class="input-group" >
-                                        <span class="input-group-addon"><i class="icon-font"></i></span>
+                                        <span class="input-group-addon"><i class="fa fa-font"></i></span>
                                         <input type="text" id="C-RadioName" class="form-control first_focus form-element" placeholder="Nom affiché" >
                                     </div>
                                     <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
@@ -120,7 +120,7 @@
                                 <div class="form-group">
                                     <label for="C-RadioUrl" >Adresse de la webradio</label>
                                     <div class="input-group" >
-                                        <span class="input-group-addon"><i class="icon-code"></i></span>
+                                        <span class="input-group-addon"><i class="fa fa-code"></i></span>
                                         <input type="text" id="C-RadioUrl" class="form-control form-element" placeholder="Url du flux de la radio" >
                                     </div>
                                     <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
@@ -128,7 +128,7 @@
                                 <div class="form-group">
                                     <label for="C-RadioIcone" >Icone de la webradio</label>
                                     <div class="input-group" >
-                                        <span class="input-group-addon"><i class="icon-picture"></i></span>
+                                        <span class="input-group-addon"><i class="fa fa-picture-o"></i></span>
                                         <input type="text" id="C-RadioIcone" class="form-control form-element" placeholder="Url de l'icone de la webradio" >
                                     </div>
                                     <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
@@ -136,7 +136,7 @@
                             </fieldset>
         
                             <div class="input-prepend input-append" style="padding-left:75px"><br>
-                                <button class="btn btn-success" type="button" id="btn_envoyer_C-radio" data-loading-text=" <i class='icon-spinner icon-spin'></i> Modifier"> <i class="icon-ok"></i> Modifier</button> 
+                                <button class="btn btn-success" type="button" id="btn_envoyer_C-radio" data-loading-text=" <i class='fa fa-spinner fa-spin'></i> Modifier"> <i class="fa fa-check"></i> Modifier</button> 
                             </div>
                         </form>
                     </p>
