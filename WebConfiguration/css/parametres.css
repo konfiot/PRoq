@@ -81,3 +81,7 @@ td.btn-col {
 #wake-list .day.active i{
     display: none;
 }
+
+#wake-list .day.active{
+    background-color: #E0E0E0;
+}

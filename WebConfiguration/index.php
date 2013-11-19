@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
-    <title>Smart Wake</title>
+    <title>PRoq</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     
@@ -32,7 +32,7 @@
                     On pourra mettre sur cette page une petite description de smart-wake, des liens vers des points stratégiques et pourquoi pas un flux de news concernants le projet
                 </p>
                 <p>
-                    <a class="btn btn-primary btn-lg pull-right" href="https://github.com/konfiot/smart-wake"><i class="icon-github icon"></i> Projet github</a>
+                    <a class="btn btn-primary btn-lg pull-right" href="https://github.com/konfiot/smart-wake"><i class="fa fa-github"></i> Projet github</a>
                 </p>
             </div>
         </div>

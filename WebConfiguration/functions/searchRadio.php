@@ -25,7 +25,8 @@
         foreach($before["body"] as $i ) {
             if($i["type"] == "audio") {
                 $r["name"] = $i["text"];
-                $r["adress"] = $i["URL"];
+                $r["adress"] = explode("\n", file_get_contents($i["URL"]));
+                    $r["adress"] = $r["adress"][0];
                 $r["icon"] = $i["image"];
                 
                 $after[] = $r;

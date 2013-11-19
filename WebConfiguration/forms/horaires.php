@@ -19,21 +19,21 @@
             <td>Semaine</td>
             <td>7h20</td>
             
-            <td class="day active" > <i class="icon-ban-circle"></i><span>L</span> </td>
-            <td class="day active" > <i class="icon-ban-circle"></i><span>M</span> </td>
-            <td class="day active" > <i class="icon-ban-circle"></i><span>M</span> </td>
-            <td class="day active" > <i class="icon-ban-circle"></i><span>J</span> </td>
-            <td class="day active" > <i class="icon-ban-circle"></i><span>V</span> </td>
-            <td class="day" > <i class="icon-ban-circle"></i><span>S</span> </td>
-            <td class="day" > <i class="icon-ban-circle"></i><span>D</span> </td>
+            <td class="day active" > <i class="fa fa-ban"></i><span>L</span> </td>
+            <td class="day active" > <i class="fa fa-ban"></i><span>M</span> </td>
+            <td class="day active" > <i class="fa fa-ban"></i><span>M</span> </td>
+            <td class="day active" > <i class="fa fa-ban"></i><span>J</span> </td>
+            <td class="day active" > <i class="fa fa-ban"></i><span>V</span> </td>
+            <td class="day" > <i class="fa fa-ban"></i><span>S</span> </td>
+            <td class="day" > <i class="fa fa-ban"></i><span>D</span> </td>
     
             <td class="btn-col" >
                 <div class="btn-group small-button-group">
                     <a class="btn radio-change" title="Editer" >
-                        <i class="icon-pencil icon-large"></i>
+                        <i class="fa fa-pencil fa-large fa-lg"></i>
                     </a>
                     <a class="btn radio-rm" title="Supprimer" >
-                        <i class="icon-remove icon-large"></i>
+                        <i class="fa fa-times fa-lg"></i>
                     </a>
                 </div>
             </td>
@@ -42,21 +42,21 @@
             <td>Week'end</td>
             <td>9h00</td>
             
-            <td class="day" > <i class="icon-ban-circle"></i><span>L</span> </td>
-            <td class="day" > <i class="icon-ban-circle"></i><span>M</span> </td>
-            <td class="day" > <i class="icon-ban-circle"></i><span>M</span> </td>
-            <td class="day" > <i class="icon-ban-circle"></i><span>J</span> </td>
-            <td class="day" > <i class="icon-ban-circle"></i><span>V</span> </td>
-            <td class="day active" > <i class="icon-ban-circle"></i><span>S</span> </td>
-            <td class="day active" > <i class="icon-ban-circle"></i><span>D</span> </td>
+            <td class="day" > <i class="fa fa-ban"></i><span>L</span> </td>
+            <td class="day" > <i class="fa fa-ban"></i><span>M</span> </td>
+            <td class="day" > <i class="fa fa-ban"></i><span>M</span> </td>
+            <td class="day" > <i class="fa fa-ban"></i><span>J</span> </td>
+            <td class="day" > <i class="fa fa-ban"></i><span>V</span> </td>
+            <td class="day active" > <i class="fa fa-ban"></i><span>S</span> </td>
+            <td class="day active" > <i class="fa fa-ban"></i><span>D</span> </td>
             
             <td class="btn-col" >
                 <div class="btn-group small-button-group">
                     <a class="btn radio-change" title="Editer" >
-                        <i class="icon-pencil icon-large"></i>
+                        <i class="fa fa-pencil fa-large fa-lg"></i>
                     </a>
                     <a class="btn radio-rm" title="Supprimer" >
-                        <i class="icon-remove icon-large"></i>
+                        <i class="fa fa-times fa-lg"></i>
                     </a>
                 </div>
             </td>
@@ -65,21 +65,21 @@
             <td>Vacances</td>
             <td>10h00</td>
             
-            <td class="day active" > <i class="icon-ban-circle"></i><span>L</span> </td>
-            <td class="day active" > <i class="icon-ban-circle"></i><span>M</span> </td>
-            <td class="day active" > <i class="icon-ban-circle"></i><span>M</span> </td>
-            <td class="day active" > <i class="icon-ban-circle"></i><span>J</span> </td>
-            <td class="day active" > <i class="icon-ban-circle"></i><span>V</span> </td>
-            <td class="day active" > <i class="icon-ban-circle"></i><span>S</span> </td>
-            <td class="day active" > <i class="icon-ban-circle"></i><span>D</span> </td>
+            <td class="day active" > <i class="fa fa-ban"></i><span>L</span> </td>
+            <td class="day active" > <i class="fa fa-ban"></i><span>M</span> </td>
+            <td class="day active" > <i class="fa fa-ban"></i><span>M</span> </td>
+            <td class="day active" > <i class="fa fa-ban"></i><span>J</span> </td>
+            <td class="day active" > <i class="fa fa-ban"></i><span>V</span> </td>
+            <td class="day active" > <i class="fa fa-ban"></i><span>S</span> </td>
+            <td class="day active" > <i class="fa fa-ban"></i><span>D</span> </td>
             
             <td class="btn-col" >
                 <div class="btn-group small-button-group">
                     <a class="btn radio-change" title="Editer" >
-                        <i class="icon-pencil icon-large"></i>
+                        <i class="fa fa-pencil fa-large fa-lg"></i>
                     </a>
                     <a class="btn radio-rm" title="Supprimer" >
-                        <i class="icon-remove icon-large"></i>
+                        <i class="fa fa-times fa-lg"></i>
                     </a>
                 </div>
             </td>
