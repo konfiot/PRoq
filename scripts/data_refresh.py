@@ -8,8 +8,6 @@ import socket
 
 conf_file = open("../conf/wake.json")
 conf = json.load(conf_file)
-s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-s.connect("mastersocket")
 
 while 1 :
 	(data, data_forecast) = get.weather(conf)
@@ -17,6 +15,9 @@ while 1 :
 	news = get.news(conf)
 	cal = get.calendar(conf)
 	
-	s.send(json.dumps([data, data_forecast, unread, news, cal]))
-	
+	s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+	s.connect("mastersocket")
+	s.send(json.dumps({"request": "new_data", "content": [data, data_forecast, unread, news, cal]}))
+	print s.recv(8192)	
+	s.shutdown(socket.SHUT_RDWR)
 	time.sleep(10)
