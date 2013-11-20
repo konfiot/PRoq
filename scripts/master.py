@@ -5,17 +5,22 @@ import os, socket, json
 
 content = {}
 
-def managedata (json_data) :
+def managedata (json_data, content) :
 	data = {}
 	try: 
 		data = json.loads(json_data)
 	except ValueError: 
 		print "Y'a une couille dans ljson quoi"
-		return "KO"
+		return "KO", content
 	
 	if data["request"] == "new_data": 
 		content = data["content"]
-		return "OK"
+		return "OK", content
+	elif data["request"] == "get_data": 
+		try :
+			return json.dumps(content), content
+		except UnboundLocalError:
+			return "", content
 
 
 s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
@@ -45,7 +50,8 @@ while 1 :
 
 	if data :
 		print "Data : " + data
-		to_send = managedata(data)
+		to_send, content = managedata(data, content)
+		print "Sent : " + to_send
 		conn.send(to_send)
 
 

@@ -9,6 +9,7 @@ import time
 from datetime import datetime, date
 from functions import get, menu
 import sys
+import socket
 
 # Initialisation
 
@@ -24,10 +25,13 @@ conf = json.load(conf_file)
 
 # Récupération des infos
 
-(data, data_forecast) = get.weather(conf)
-unread = get.mail(conf)
-news = get.news(conf)
-cal = get.calendar(conf)
+
+s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+s.connect("mastersocket")
+s.send(json.dumps({"request": "get_data"}))
+data = s.recv(8192)
+print "Data : " + data
+(data, data_forecast, unread, news, cal) = json.loads(data)
 
 # Définition des polices
 
@@ -112,20 +116,9 @@ def update():
 while 1 : 
 	time.sleep(0.1)
 	update()
-	config_menu.show()
-	config_menu.select_delta(2)
-	time.sleep(1)
-	config_menu.select_delta(2)
-	time.sleep(1)
-	config_menu.select_delta(2)
-	time.sleep(1)
-	config_menu.select_delta(-1)
-	time.sleep(1)
-	config_menu.select_delta(-1)
-	time.sleep(1)
-	config_menu.select_delta(-1)
-	time.sleep(1)
-	config_menu.hide()
+	#config_menu.show()
+	#config_menu.select_delta(2)
+	#config_menu.hide()
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			sys.exit()
