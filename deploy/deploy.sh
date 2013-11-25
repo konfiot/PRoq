@@ -39,8 +39,7 @@ qemu-system-arm -kernel kernel-qemu -cpu arm1176 -m 256 -M versatilepb -no-reboo
 sleep 25
 
 echo "Copying files"
-scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./scripts root@localhost:./scripts
-scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./WebConfiguration/ root@localhost:./
+scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./ root@localhost:./
 
 echo "Installing"
 ssh root@localhost -o StrictHostKeyChecking=no -p 5555 -i id_rsa "export EDITOR=cat ; yes | pacman -Syu lighttpd python2-pygame php-cgi php yaourt python2-pip ; echo 'n\ny\n' | yaourt -S picospeaker ; yes | pip-2.7 install icalendar ; systemctl enable lighttpd ; mkdir /etc/lighttpd/conf.d ; echo 'server.modules += ( \"mod_fastcgi\" ) index-file.names += ( \"index.php\" ) fastcgi.server = ( \".php\" => ((                    \"bin-path\" => \"/usr/bin/php-cgi\",                    \"socket\" => \"/tmp/php.socket\",                    \"max-procs\" => 2,                    \"bin-environment\" => (                      \"PHP_FCGI_CHILDREN\" => \"16\",                      \"PHP_FCGI_MAX_REQUESTS\" => \"10000\"                    ),                    \"bin-copy-environment\" => (                   \"PATH\", \"SHELL\", \"USER\"                    ),                    \"broken-scriptfilename\" => \"enable\"                )))' >> /etc/lighttpd/conf.d/fastcgi.conf ; echo 'include \"conf.d/fastcgi.conf\"' >> /etc/lighttpd/lighttpd.conf ; mv ~/WebConfiguration/* /srv/http/ ; rm .ssh/authorized_keys .ssh/known_hosts ; sed -i 's/sda/mmcblk0p/' /etc/fstab ; reboot"
