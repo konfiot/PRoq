@@ -23,16 +23,6 @@ background = background.convert()
 conf_file = open("../conf/wake.json")
 conf = json.load(conf_file)
 
-# Récupération des infos
-
-
-s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-s.connect("mastersocket")
-s.send(json.dumps({"request": "get_data"}))
-data = s.recv(8192)
-print "Data : " + data
-(data, data_forecast, unread, news, cal) = json.loads(data)
-
 # Définition des polices
 
 font = pygame.font.Font(None, 17)
@@ -41,7 +31,6 @@ font_time = pygame.font.Font(None, 190)
 
 # Definition des images
 
-image_weather = pygame.image.load("images/weather/" + data_forecast["list"][0]["weather"][0]["icon"] + ".png")
 image_temp = pygame.image.load("images/misc/temp.png")
 image_rise = pygame.image.load("images/misc/rise.png")
 image_set = pygame.image.load("images/misc/set.png")
@@ -52,8 +41,18 @@ image_cal = pygame.image.load("images/misc/cal.png")
 
 config_menu = menu.Menu(screen, ["Modifier l'heure", "Duree du snooze", "Modifier l'action du snooze"])
 
+def get_data(): 
+	s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+	s.connect("mastersocket")
+	s.send(json.dumps({"request": "get_data"}))
+	data = s.recv(8192)
+	(data, data_forecast, unread, news, cal) = json.loads(data)
+
+	return (data, data_forecast, unread, news, cal)
 
 def update(): 
+	(data, data_forecast, unread, news, cal) = get_data()
+	image_weather = pygame.image.load("images/weather/" + data_forecast["list"][0]["weather"][0]["icon"] + ".png")
 	# Collage des images
 	background.fill((0, 0, 0))
 
@@ -116,6 +115,7 @@ def update():
 while 1 : 
 	time.sleep(0.1)
 	update()
+
 	#config_menu.show()
 	#config_menu.select_delta(2)
 	#config_menu.hide()
