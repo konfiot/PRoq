@@ -4,6 +4,7 @@
 import urllib
 import json
 import subprocess
+import socket
 from functions import get
 
 def get_weather_string (id) :
@@ -95,26 +96,22 @@ def get_weather_string (id) :
 conf_file = open("../conf/wake.json")
 conf = json.load(conf_file)
 
+def get_data(): 
+	s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+	s.connect("mastersocket")
+	s.send(json.dumps({"request": "get_data"}))
+	data = s.recv(8192)
+	(data, data_forecast, unread, news, cal) = json.loads(data)
+
+	return (data, data_forecast, unread, news, cal)
+
+(data, data_forecast, unread, news, cal) = get_data()
 
 # Gestion Météo
 
-data = get.weather(conf)[1]
-
-id = data["list"][0]["weather"][0]["id"]
+id = data["weather"][0]["id"]
 
 weather_string = get_weather_string(id);
-
-# Gestion Mail
-
-unread = get.mail(conf)
-
-# Gestion Calendrier
-
-cal = get.calendar(conf)
-
-# Gestion des news
-
-news = get.news(conf)
 
 # Synthèse vocale
 
