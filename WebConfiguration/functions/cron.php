@@ -15,7 +15,6 @@
     }
 
     echo json_encode($cron);            // On retourne le tout en Json
-    echo toCron($cron);
     
     
     // Pour éditer le fichier
@@ -59,7 +58,7 @@
         $r = '';
         foreach($array as $name => $ligne) {
             if( ! $ligne['enable'] )
-                $r .= '# ';
+                $r .= '#';
             $r .= $ligne['m'] .' '. $ligne['h'] .' '. $ligne['day'] .' '. $ligne['month'] .' ';
             $r .= implode(',', $ligne['dow']) .' ';
             $r .= $ligne['command'] .' ';
