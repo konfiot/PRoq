@@ -13,6 +13,10 @@
         $line = add( $_GET['add'] );
         $cron[ $line["name"] ] = $line;
     }
+    
+    if( isset($_GET['rm']) ) {          // On enlève les éventuels éléments à enlever
+        unset( $cron[ $_GET['rm'] ] );
+    }
 
     echo json_encode($cron);            // On retourne le tout en Json
     
