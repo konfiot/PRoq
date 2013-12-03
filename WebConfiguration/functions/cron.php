@@ -3,25 +3,84 @@
     *   
     ***********************************************************************/
     
-    $cron = shell_exec("crontab -l");
-    echo toJson($cron);
+    $file_adress = "../conf/wake.cron";
     
-    // Pour éditer
-    //shell_exec("echo '5 3 * * * http ls' >> ../../conf/wake.cron");
-    //shell_exec("crontab ../../conf/wake.cron");
+    $cron = shell_exec("crontab -l");   // On lis le contenu du cron
+    $cron = parse($cron);               // On le convertis en array
+    
+    
+    if( isset($_GET['add']) ) {         // On ajoute ce qui est dans l'argument 'add'
+        $line = add( $_GET['add'] );
+        $cron[ $line["name"] ] = $line;
+    }
+
+    echo json_encode($cron);            // On retourne le tout en Json
+    echo toCron($cron);
+    
+    
+    // Pour éditer le fichier
+    
+    $fichier = fopen($file_adress, 'r+');   // On modifie le cron
+    
+    fseek($fichier, 0);
+    ftruncate($fichier, 0);
+    fputs($fichier, toCron($cron));
+    
+    fclose($fichier);
     
     //echo shell_exec("crontab -l");
     
-    function toJson($cron) {
+    
+    
+    
+    /* ***************************** Fonctions ****************************** */
+    
+    // Convertis le json de l'argument "add" en une ligne de l'array
+    function add($json) {
+        $j = json_decode($json, true);
+        
+        $r = array(
+            "m" => $j['horaire']['m'],
+            "h" => $j['horaire']['h'],
+            "day" => '*',
+            "month" => '*',
+            "dow" => $j['jours'],
+            "command" => '/root/proq/scripts/wakeup.py '.$j['sonnerie'],
+            "enable" => $j['actif'],
+            "name" => $j['nom']
+        );
+        
+        return $r;
+    }
+    
+    
+    // Convertis l'array dans un format lisible par crontab
+    function toCron($array) {
+        $r = '';
+        foreach($array as $name => $ligne) {
+            if( ! $ligne['enable'] )
+                $r .= '# ';
+            $r .= $ligne['m'] .' '. $ligne['h'] .' '. $ligne['day'] .' '. $ligne['month'] .' ';
+            $r .= implode(',', $ligne['dow']) .' ';
+            $r .= $ligne['command'] .' ';
+            $r .= '#'.$name;
+            $r .= "\n";
+        }
+        return $r;
+    }
+    
+    
+    // Convertis le cron en array
+    function parse($cron) {
         $cron = split("\n", $cron);
         $json = array();
         
         foreach($cron as $j) {                      // Lignes
             if( $j[0] == "#" ) {                    // Si ca c'est commenté
-                $disabled = true;
+                $enable = false;
                 $j = substr($j, 1);
             }
-            else $disabled = false;
+            else $enable = true;
             
             $j = split("#", $j);
             $i = $j[0];
@@ -37,12 +96,27 @@
                     "month" => $i[3],
                     "dow" => split(",", $i[4]),
                     "command" => $i[5],
-                    "disabled" => $disabled
+                    "enable" => $enable,
+                    "name" => $name
                 );
                 $json[$name] = $line;
             }
         }
         
-        return json_encode($json, true);
+        return $json;
     }
+    
+    /* ******************** Exemples ********************
+    Argument add :
+     {
+       "nom" : "test",
+       "horaire" : {
+            "h" : 9,
+            "m" : 30
+        },
+        "jours" : [ 1, 2, 3, 4, 5, 6, 7 ],
+        "actif" : true,
+        "sonnerie" : "adresse_sonnerie"
+     }
+    * ****************************************************/
 ?>
