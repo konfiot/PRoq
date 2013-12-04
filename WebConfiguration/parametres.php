@@ -5,6 +5,7 @@
     
     <link href="css/bootstrap.min.css" rel="stylesheet">
     
+    <link href="css/nprogress.css" rel="stylesheet">
     <link href="css/bootstrapSwitch.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     
@@ -85,6 +86,7 @@
     
     <script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script>
     <script type="text/javascript" src="http://www.geoplugin.net/javascript.gp"></script>
+    <script type="text/javascript" src="js/nprogress.js"></script>
     
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/bootstrapSwitch.min.js"></script>
