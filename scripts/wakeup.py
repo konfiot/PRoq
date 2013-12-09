@@ -6,14 +6,16 @@ import os
 import time
 import json
 from mpd import MPDClient
+import alsaaudio
 
 def wait_for_dismiss (client) :
-	#for i in range(100) : 
-	#	try:
-	#		client.setvol(i)
-	#	except  :
-	#		pass
-	#	time.sleep(0.1)
+	mixer = alsaaudio.Mixer(control="PCM")
+	for i in range(100) : 
+		try:
+			mixer.setvolume(i)
+		except  :
+			pass
+		time.sleep(0.1)
 	time.sleep(10)
 
 
