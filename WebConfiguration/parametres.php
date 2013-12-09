@@ -53,6 +53,11 @@
                             <i class="fa fa-envelope-o"></i> Mails</a></li>
                         <li class="leftnav"><a href="#news">
                             <i class="fa fa-rss"></i> News</a></li>
+                            
+                        <li class="leftnav"><h5>
+                            Avancé</h5></li>
+                        <li class="leftnav"><a href="#proxy">
+                            <i class="fa fa-sitemap"></i> Proxy</a></li>
                     </ul>
                 </div>
             </div>
