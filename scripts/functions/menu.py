@@ -40,9 +40,9 @@ class Menu (object) :
 			font_bold = pygame.font.Font(None, 17)
 			font_bold.set_underline(True)
 			if index == i :
-				text = font_bold.render(self.items[i], 1, (255, 255, 255))
+				text = font_bold.render(self.items[i].decode("utf-8"), 1, (255, 255, 255))
 			else : 
-				text = font.render(self.items[i], 1, (255, 255, 255))
+				text = font.render(self.items[i].decode("utf-8"), 1, (255, 255, 255))
 			
 			text_pos = text.get_rect(x=20, y=20*(i+1))
 			self.background_menu.blit(text, text_pos)
