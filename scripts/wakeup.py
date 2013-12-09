@@ -5,8 +5,15 @@ import subprocess
 import os
 import time
 import json
+from mpd import MPDClient
 
-def wait_for_dismiss () :
+def wait_for_dismiss (client) :
+	#for i in range(100) : 
+	#	try:
+	#		client.setvol(i)
+	#	except  :
+	#		pass
+	#	time.sleep(0.1)
 	time.sleep(10)
 
 
@@ -15,11 +22,15 @@ def wait_for_dismiss () :
 conf_file = open("../conf/wake.json")
 conf = json.load(conf_file)
 
+client = MPDClient()
+client.connect("localhost", 6600)
+client.clear()
+client.crossfade(5)
+client.add(conf["general"]["music_path"])
 
-process = subprocess.Popen(["mplayer", "-loop", "0", conf["general"]["music_path"]])
+client.play()
+wait_for_dismiss(client)
 
-wait_for_dismiss()
-
-process.terminate()
+client.disconnect()
 
 subprocess.call(["./tts.py"])

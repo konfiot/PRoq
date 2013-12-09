@@ -6,6 +6,7 @@ import json
 import subprocess
 import socket
 from functions import get
+from mpd import MPDClient
 
 def get_weather_string (id) :
 	string = "Non reconnu"
@@ -117,5 +118,11 @@ weather_string = get_weather_string(id);
 
 tosay = "Temps prévu pour aujourd'hui : ".decode("utf-8") + weather_string.decode("utf-8") + ". Vous avez " + str(unread) + "Messages non lus. " + str(news) + " nouvelles non lues et " + str(cal[0]) + " évènements aujourd'hui : ".decode("utf-8") + cal[1].decode("utf-8")
 
-subprocess.call(["pico2wave", "-l", "fr-FR", "-w" "temp.wav", tosay.encode("utf-8")])
-subprocess.call(["play", "temp.wav"])
+client = MPDClient()
+client.connect("localhost", 6600)
+
+subprocess.call(["pico2wave", "-l", "fr-FR", "-w" "/var/lib/mpd/music/temp.wav", tosay.encode("utf-8")])
+client.update()
+client.add("temp.wav")
+client.next()
+client.disconnect()
