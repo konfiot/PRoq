@@ -411,5 +411,18 @@ var inputs = {
         "c-icon",
         [ ],
         function(){}
+    ),
+    //Paramètres du proxy    ---------------------------------------------------
+    "ProxyOn": new elementSwitch("#ProxyOn",
+        "proxy",
+        "enable",
+        [ ],
+        function(){}
+    ),
+    "ProxyIp": new elementInput("#ProxyIp",
+        "proxy",
+        "ip",
+        [ ],
+        function(){}
     )
 };
