@@ -153,7 +153,9 @@ var radios = {
                 var icon = element.find("td img").attr("src");
                 
                 $("#RadioName").val(name);
-                $("#RadioUrl").val(url);
+                $.post("functions/proxy.php", {url: url}, function(data){
+                    $("#RadioUrl").val(data.split("\n")[0]);
+                });
                 $("#RadioIcone").val(icon);
                 
                 $('#tab-forms a[href="#radio-man"]').tab('show');

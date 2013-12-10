@@ -1,0 +1,1 @@
+<?php echo file_get_contents("http://".str_replace("http://", "", $_POST["url"])); ?>

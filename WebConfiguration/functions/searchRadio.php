@@ -25,8 +25,8 @@
         foreach($before["body"] as $i ) {
             if($i["type"] == "audio") {
                 $r["name"] = $i["text"];
-                $r["adress"] = explode("\n", file_get_contents($i["URL"]));
-                    $r["adress"] = $r["adress"][0];
+                //$r["adress"] = explode("\n", file_get_contents($i["URL"]));
+                $r["adress"] = $i["URL"];
                 $r["icon"] = $i["image"];
                 
                 $after[] = $r;
@@ -83,7 +83,7 @@
                 <tr>
                     <th></th>
                     <th>Nom</th>
-                    <th>Adresse</th>
+                    <!--<th>Adresse</th>-->
                 </tr>
             </thead>
             <tbody>';
@@ -93,8 +93,8 @@
                 <tr class="radio-desc" title="Ajouter" >
                     <td><img src="' .$i["icon"]. '" class="icon" /></td>
                     <td class="name" >' .$i["name"]. '</td>
-                    <td class="adresse">
-                        <a target="_blank" href="' .$i["adress"]. '" title="' .$i["adress"]. '" >' .shortUrl($i["adress"]). '</a>
+                    <td class="adresse" style="display:none">
+                        <a target="_blank" href="' .$i["adress"].'" title="' .$i["adress"]. '" >' .shortUrl($i["adress"]). '</a>
                     </td>
                 </tr>
             ';
