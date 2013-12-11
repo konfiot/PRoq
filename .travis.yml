@@ -1,5 +1,5 @@
 language: python
-script: deploy/deploy.sh
+script: utils/deploy.sh
 before_install : sudo apt-get update && sudo apt-get install qemu qemu-system
 notifications:
   email: false
