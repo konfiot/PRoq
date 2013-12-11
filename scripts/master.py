@@ -33,7 +33,6 @@ except OSError:
 
 s.bind("mastersocket")
 s.listen(1)
-s.setblocking(0)
 
 
 while 1 :
