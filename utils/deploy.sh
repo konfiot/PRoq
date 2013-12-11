@@ -48,7 +48,7 @@ ssh root@localhost -o StrictHostKeyChecking=no -p 5555 -i id_rsa "export EDITOR=
 Type=forking
 ExecStart=/root/start.sh
 [Install]
-WantedBy=multi-user.target' > /etc/systemd/system/proq.service ; systemctl enable lighttpd mpd proq ; mv ~/WebConfiguration/* /srv/http/ ; mkdir /srv/http/conf/ ; ln -s /srv/http/conf/ ~/PRoq/ ; rm .ssh/authorized_keys .ssh/known_hosts ; sed -i 's/sda/mmcblk0p/' /etc/fstab ; reboot"
+WantedBy=multi-user.target' > /etc/systemd/system/proq.service ; systemctl enable lighttpd mpd proq ; mv ~/WebConfiguration/* /srv/http/ ; mkdir /srv/http/conf/ ; ln -s /srv/http/conf/ /root/ ; rm .ssh/authorized_keys .ssh/known_hosts ; sed -i 's/sda/mmcblk0p/' /etc/fstab ; reboot"
 
 echo "Compressing"
 bzip2 system.img
