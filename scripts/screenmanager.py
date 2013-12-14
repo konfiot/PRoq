@@ -26,7 +26,7 @@ conf = json.load(conf_file)
 # Définition des polices
 font_filename = pygame.font.match_font(conf["general"]["font"])
 font = pygame.font.Font(font_filename, 12)
-font_time = pygame.font.Font(font_filename, 120)
+font_time = pygame.font.Font(font_filename, 135)
 
 
 # Definition des images
@@ -73,8 +73,9 @@ def update():
 		# On ajoute l'heure
 
 		text_time = font_time.render(datetime.today().strftime("%H:%M"), 1, (255, 255, 255))
-		text_time_pos = text_time.get_rect(centerx=157, y=112)
-		background.blit(text_time, text_time_pos)
+		text_height = font_time.get_ascent()
+		text_time = text_time.subsurface(pygame.Rect(0, (text_time.get_height() - text_height) / 2 , text_time.get_width(), text_height))
+		background.blit(pygame.transform.smoothscale(text_time, (320, 120)), pygame.Rect(0, 120, 320, 120))
 
 		# On ajoute la température
 
