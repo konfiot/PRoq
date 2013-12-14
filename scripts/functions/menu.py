@@ -3,7 +3,7 @@ import time
 import copy
 
 class Menu (object) :
-	def __init__ (self, screen, items) :
+	def __init__ (self, screen, items, font) :
 
 		self.screen = screen
 		self.background_menu = pygame.Surface(screen.get_size())
@@ -36,8 +36,8 @@ class Menu (object) :
 	def select(self, index) :
 		self.background_menu.fill((0, 0, 0))
 		for i in range(len(self.items)) :
-			font = pygame.font.Font(None, 17)
-			font_bold = pygame.font.Font(None, 17)
+			font = pygame.font.Font(self.font, 17)
+			font_bold = pygame.font.Font(self.font, 17)
 			font_bold.set_underline(True)
 			if index == i :
 				text = font_bold.render(self.items[i].decode("utf-8"), 1, (255, 255, 255))

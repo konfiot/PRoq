@@ -24,9 +24,9 @@ conf_file = open("../conf/wake.json")
 conf = json.load(conf_file)
 
 # Définition des polices
-
-font = pygame.font.Font(None, 17)
-font_time = pygame.font.Font(None, 190)
+font_filename = pygame.font.match_font(conf["general"]["font"])
+font = pygame.font.Font(font_filename, 12)
+font_time = pygame.font.Font(font_filename, 120)
 
 
 # Definition des images
@@ -39,7 +39,7 @@ image_news = pygame.image.load("images/misc/news.png")
 image_cal = pygame.image.load("images/misc/cal.png")
 
 
-config_menu = menu.Menu(screen, ["Modifier l'heure", "Durée du snooze", "Modifier l'action du snooze"])
+config_menu = menu.Menu(screen, ["Modifier l'heure", "Durée du snooze", "Modifier l'action du snooze"], font)
 
 def get_data(): 
 	s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
