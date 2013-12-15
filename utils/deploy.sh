@@ -44,13 +44,36 @@ scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./utils/start.sh root@local
 scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./WebConfiguration/ root@localhost:./
 
 echo "Installing"
-ssh root@localhost -o StrictHostKeyChecking=no -p 5555 -i id_rsa "cp /etc/pacman.d/mirrorlist{,.backup} ; sed '/^#\ S/ s|#||' -i /etc/pacman.d/mirrorlist.backup ; rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist ; export EDITOR=cat ; yes | pacman -R heirloom-mailx ; yes | pacman -Syu gcc make autoconf automake binutils git popt lighttpd python mpd python2-pygame php-cgi php yaourt python2-pip alsa-lib alsa-firmware ttf-dejavu ttf-droid ttf-ubuntu-font-family ttf-linux-libertine ttf-liberation ttf-junicode ttf-freefont ttf-inconsolata ttf-indic-otf ttf-cheapskate ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ; echo 'n\ny' | yaourt -S svox-pico-git ; yes | pip-2.7 install icalendar python-mpd2 ; mkdir /etc/lighttpd/conf.d ; mkdir /var/lib/mpd/music ; touch /var/lib/mpd/mpd.db ; chown -R mpd:mpd  /var/lib/mpd/ ; echo 'music_directory \"/var/lib/mpd/music\"' >> /etc/mpd.conf ; echo 'server.modules += ( \"mod_fastcgi\" ) index-file.names += ( \"index.php\" ) fastcgi.server = ( \".php\" => ((                    \"bin-path\" => \"/usr/bin/php-cgi\",                    \"socket\" => \"/tmp/php.socket\",                    \"max-procs\" => 2,                    \"bin-environment\" => (                      \"PHP_FCGI_CHILDREN\" => \"16\",                      \"PHP_FCGI_MAX_REQUESTS\" => \"10000\"                    ),                    \"bin-copy-environment\" => (                   \"PATH\", \"SHELL\", \"USER\"                    ),                    \"broken-scriptfilename\" => \"enable\"                )))' >> /etc/lighttpd/conf.d/fastcgi.conf ; echo 'include \"conf.d/fastcgi.conf\"' >> /etc/lighttpd/lighttpd.conf ; echo '[Unit]
+ssh root@localhost -o StrictHostKeyChecking=no -p 5555 -i id_rsa "cp /etc/pacman.d/mirrorlist{,.backup} ;
+sed '/^#\ S/ s|#||' -i /etc/pacman.d/mirrorlist.backup ;
+rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist ;
+export EDITOR=cat ; yes | pacman -R heirloom-mailx ;
+yes | pacman -Syu gcc make autoconf automake binutils git popt lighttpd python mpd python2-pygame php-cgi php python2-pip alsa-lib alsa-firmware ttf-dejavu ttf-droid ttf-ubuntu-font-family ttf-linux-libertine ttf-liberation ttf-junicode ttf-freefont ttf-inconsolata ttf-indic-otf ttf-cheapskate ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ;
+wget https://aur.archlinux.org/packages/sv/svox-pico-git/svox-pico-git.tar.gz ;
+tar -xvzf svox-pico-git.tar.gz ;
+sed '/i686/armv6h' -i svox-pico-git/PKGBUILD ;
+cd svox-pico-git ;
+makepkg ;
+yes | pacman -U svox-pico-git-*.pkg.tar.xz ;
+yes | pip-2.7 install icalendar python-mpd2 ; mkdir /etc/lighttpd/conf.d ;
+mkdir /var/lib/mpd/music ; touch /var/lib/mpd/mpd.db ;
+chown -R mpd:mpd  /var/lib/mpd/ ; echo 'music_directory \"/var/lib/mpd/music\"' >> /etc/mpd.conf ;
+echo 'server.modules += ( \"mod_fastcgi\" ) index-file.names += ( \"index.php\" ) fastcgi.server = ( \".php\" => ((                    \"bin-path\" => \"/usr/bin/php-cgi\",                    \"socket\" => \"/tmp/php.socket\",                    \"max-procs\" => 2,                    \"bin-environment\" => (                      \"PHP_FCGI_CHILDREN\" => \"16\",                      \"PHP_FCGI_MAX_REQUESTS\" => \"10000\"                    ),                    \"bin-copy-environment\" => (                   \"PATH\", \"SHELL\", \"USER\"                    ),                    \"broken-scriptfilename\" => \"enable\"                )))' >> /etc/lighttpd/conf.d/fastcgi.conf ;
+echo 'include \"conf.d/fastcgi.conf\"' >> /etc/lighttpd/lighttpd.conf ;
+echo '[Unit]
 After=network.target
 [Service]
 Type=forking
 ExecStart=/root/start.sh
 [Install]
-WantedBy=multi-user.target' > /etc/systemd/system/proq.service ; systemctl enable lighttpd mpd proq ; mv ~/WebConfiguration/* /srv/http/ ; mkdir /srv/http/conf/ ; ln -s /srv/http/conf/ /root/ ; rm .ssh/authorized_keys .ssh/known_hosts ; sed -i 's/sda/mmcblk0p/' /etc/fstab ; reboot"
+WantedBy=multi-user.target' > /etc/systemd/system/proq.service ;
+systemctl enable lighttpd mpd proq ;
+mv ~/WebConfiguration/* /srv/http/ ;
+mkdir /srv/http/conf/ ;
+ln -s /srv/http/conf/ /root/ ;
+rm .ssh/authorized_keys .ssh/known_hosts ;
+sed -i 's/sda/mmcblk0p/' /etc/fstab ;
+reboot"
 
 echo "Compressing"
 bzip2 system.img
