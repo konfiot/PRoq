@@ -51,7 +51,7 @@ export EDITOR=cat ; yes | pacman -R heirloom-mailx ;
 yes | pacman -Syu gcc make autoconf automake binutils git popt lighttpd python mpd python2-pygame php-cgi php python2-pip alsa-lib alsa-firmware ttf-dejavu ttf-droid ttf-ubuntu-font-family ttf-linux-libertine ttf-liberation ttf-junicode ttf-freefont ttf-inconsolata ttf-indic-otf ttf-cheapskate ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ;
 wget https://aur.archlinux.org/packages/sv/svox-pico-git/svox-pico-git.tar.gz ;
 tar -xvzf svox-pico-git.tar.gz ;
-sed '/i686/armv6h' -i svox-pico-git/PKGBUILD ;
+sed 's/i686/armv6h/' -i svox-pico-git/PKGBUILD ;
 cd svox-pico-git ;
 makepkg ;
 yes | pacman -U svox-pico-git-*.pkg.tar.xz ;
