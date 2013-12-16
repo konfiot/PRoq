@@ -53,7 +53,7 @@ wget https://aur.archlinux.org/packages/sv/svox-pico-git/svox-pico-git.tar.gz ;
 tar -xvzf svox-pico-git.tar.gz ;
 sed 's/i686/armv6h/' -i svox-pico-git/PKGBUILD ;
 cd svox-pico-git ;
-yes | pacman -Sy & makepkg --asroot;
+yes | pacman -Syu & makepkg --asroot;
 yes | pacman -U svox-pico-git-*.pkg.tar.xz ;
 yes | pip-2.7 install icalendar python-mpd2 ; mkdir /etc/lighttpd/conf.d ;
 mkdir /var/lib/mpd/music ; touch /var/lib/mpd/mpd.db ;
