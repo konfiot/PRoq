@@ -48,12 +48,7 @@ ssh root@localhost -o StrictHostKeyChecking=no -p 5555 -i id_rsa "cp /etc/pacman
 sed '/^#\ S/ s|#||' -i /etc/pacman.d/mirrorlist.backup ;
 rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist ;
 export EDITOR=cat ; yes | pacman -R heirloom-mailx ;
-yes | pacman -Sy gcc make autoconf automake binutils git popt patch libtool lighttpd python mpd python2-pygame php-cgi php python2-pip alsa-lib alsa-firmware ttf-dejavu ttf-droid ttf-ubuntu-font-family ttf-linux-libertine ttf-liberation ttf-junicode ttf-freefont ttf-inconsolata ttf-indic-otf ttf-cheapskate ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ;
-wget https://aur.archlinux.org/packages/sv/svox-pico-git/svox-pico-git.tar.gz ;
-tar -xvzf svox-pico-git.tar.gz ;
-sed 's/i686/armv6h/' -i svox-pico-git/PKGBUILD ;
-cd svox-pico-git ;
-makepkg --asroot;
+yes | pacman -Syu gcc make autoconf automake binutils git popt patch libtool lighttpd python mpd python2-pygame php-cgi php python2-pip alsa-lib alsa-firmware ttf-dejavu ttf-droid ttf-ubuntu-font-family ttf-linux-libertine ttf-liberation ttf-junicode ttf-freefont ttf-inconsolata ttf-indic-otf ttf-cheapskate ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ;
 yes | pacman -U svox-pico-git-*.pkg.tar.xz ;
 yes | pip-2.7 install icalendar python-mpd2 ; mkdir /etc/lighttpd/conf.d ;
 mkdir /var/lib/mpd/music ; touch /var/lib/mpd/mpd.db ;
