@@ -36,7 +36,19 @@ fi
 echo "Launching qemu"
 qemu-system-arm -kernel kernel-qemu -cpu arm1176 -m 256 -M versatilepb -no-reboot -append "root=/dev/sda5 rw panic=1" -hda system.img -nographic -redir tcp:5555::22 &
 
-sleep 40
+git clone git://projects.archlinux.org/pacman.git
+ 
+cd pacman
+./autogen.sh
+./configure --disable-doc
+make
+sudo make install
+cd 
+wget https://aur.archlinux.org/packages/sv/svox-pico-git/svox-pico-git.tar.gz ;
+tar -xvzf svox-pico-git.tar.gz ;
+sed 's/configure/configure CC=gcc-arm-linux-gnueabihf' -i svox-pico-git/PKGBUILD ;
+cd svox-pico-git ;
+makepkg;
 
 echo "Copying files"
 scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./scripts root@localhost:./scripts
