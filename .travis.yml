@@ -1,6 +1,6 @@
 language: python
 script: utils/deploy.sh
-before_install : sudo apt-get update && sudo apt-get install autopoint qemu qemu-system libpopt-dev fakeroot build-essential gcc-arm-linux-gnueabihf patch libarchive-dev
+before_install : sudo apt-get update && sudo apt-get install autopoint qemu qemu-system libpopt0 libpopt-dev fakeroot build-essential gcc-arm-linux-gnueabihf patch libarchive-dev
 notifications:
   email: false
 env:
