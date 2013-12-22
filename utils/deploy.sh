@@ -48,7 +48,7 @@ cd
 wget http://rpm5.org/files/popt/popt-1.16.tar.gz
 tar -xf popt-*.tar.gz
 cd popt-*
-./configure --prefix=/usr --disable-static 
+./configure --prefix=/usr --disable-static --host=arm-linux-gnueabihf
 make
 sudo make install
 
