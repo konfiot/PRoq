@@ -64,6 +64,7 @@ makepkg;
 cd ..
 
 echo "Copying files"
+scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./svox-pico-git/svox-pico-git*.tar.xz root@localhost:./
 scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./scripts root@localhost:./scripts
 scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./utils/start.sh root@localhost:./
 scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./WebConfiguration/ root@localhost:./
@@ -74,6 +75,7 @@ sed '/^#\ S/ s|#||' -i /etc/pacman.d/mirrorlist.backup ;
 rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist ;
 export EDITOR=cat ; yes | pacman -R heirloom-mailx ;
 yes | pacman -Syu gcc make autoconf automake binutils git popt patch libtool lighttpd python mpd python2-pygame php-cgi php python2-pip alsa-lib alsa-firmware ttf-dejavu ttf-droid ttf-ubuntu-font-family ttf-linux-libertine ttf-liberation ttf-junicode ttf-freefont ttf-inconsolata ttf-indic-otf ttf-cheapskate ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ;
+yes | pacman -U svox-pico-git*.tar.xz
 yes | pacman -U svox-pico-git-*.pkg.tar.xz ;
 yes | pip-2.7 install icalendar python-mpd2 ; mkdir /etc/lighttpd/conf.d ;
 mkdir /var/lib/mpd/music ; touch /var/lib/mpd/mpd.db ;
