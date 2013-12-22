@@ -43,7 +43,8 @@ cd pacman
 ./configure --disable-doc
 make
 sudo make install
-cd 
+
+cd ..
 
 wget http://rpm5.org/files/popt/popt-1.16.tar.gz
 tar -xf popt-*.tar.gz
@@ -52,11 +53,15 @@ cd popt-*
 make
 sudo make install
 
+cd ..
+
 wget https://aur.archlinux.org/packages/sv/svox-pico-git/svox-pico-git.tar.gz ;
 tar -xvzf svox-pico-git.tar.gz ;
 sed 's/configure /configure --host=arm-linux-gnueabihf /' -i svox-pico-git/PKGBUILD ;
 cd svox-pico-git ;
 makepkg;
+
+cd ..
 
 echo "Copying files"
 scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./scripts root@localhost:./scripts
