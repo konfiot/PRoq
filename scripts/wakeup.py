@@ -10,9 +10,11 @@ import alsaaudio
 
 def wait_for_dismiss (client) :
 	mixer = alsaaudio.Mixer(control="PCM")
+	mixer.setmute(1)
 	for i in range(100) : 
 		try:
-			mixer.setvolume(i)
+			client.setvol(i)
+			mixer.setmute(0)
 		except  :
 			pass
 		time.sleep(0.1)
