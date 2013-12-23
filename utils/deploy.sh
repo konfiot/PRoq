@@ -60,7 +60,7 @@ tar -xvzf svox-pico-git.tar.gz ;
 sed 's/configure /configure --host=arm-linux-gnueabihf /' -i svox-pico-git/PKGBUILD ;
 cd svox-pico-git ;
 makepkg;
-
+ls
 cd ..
 
 echo "Copying files"
