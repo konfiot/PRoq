@@ -27,7 +27,7 @@ conf = json.load(conf_file)
 client = MPDClient()
 client.connect("localhost", 6600)
 client.clear()
-client.crossfade(5)
+client.update()
 client.add(conf["general"]["music_path"])
 
 client.play()
