@@ -60,11 +60,11 @@ tar -xvzf svox-pico-git.tar.gz ;
 sed 's/configure /configure --host=arm-linux-gnueabihf /' -i svox-pico-git/PKGBUILD ;
 cd svox-pico-git ;
 makepkg;
-ls
+
 cd ..
 
 echo "Copying files"
-scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 svox-pico-git/svox-pico-git-*.pkg.tar.xz root@localhost:./
+scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 svox-pico-git/svox-pico-git-*.pkg.tar.gz root@localhost:./
 scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./scripts root@localhost:./scripts
 scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./utils/start.sh root@localhost:./
 scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./WebConfiguration/ root@localhost:./
@@ -76,7 +76,7 @@ ssh root@localhost -o StrictHostKeyChecking=no -p 5555 -i id_rsa "#cp /etc/pacma
 export EDITOR=cat ; 
 yes | pacman -R heirloom-mailx ;
 yes | pacman -Syu gcc make autoconf automake binutils git popt patch libtool lighttpd python mpd python2-pygame php-cgi php python2-pip alsa-lib alsa-firmware ttf-dejavu ttf-droid ttf-ubuntu-font-family ttf-linux-libertine ttf-liberation ttf-junicode ttf-freefont ttf-inconsolata ttf-indic-otf ttf-cheapskate ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ;
-yes | pacman -U svox-pico-git-*.pkg.tar.xz ;
+yes | pacman -U svox-pico-git-*.pkg.tar.gz ;
 yes | pip-2.7 install icalendar python-mpd2 ; mkdir /etc/lighttpd/conf.d ;
 mkdir /var/lib/mpd/music ; touch /var/lib/mpd/mpd.db ;
 chown -R mpd:mpd  /var/lib/mpd/ ; echo 'music_directory \"/var/lib/mpd/music\"' >> /etc/mpd.conf ;
