@@ -70,9 +70,9 @@ scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./utils/start.sh root@local
 scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./WebConfiguration/ root@localhost:./
 
 echo "Installing"
-ssh root@localhost -o StrictHostKeyChecking=no -p 5555 -i id_rsa "#cp /etc/pacman.d/mirrorlist{,.backup} ;
-#sed '/^#\ S/ s|#||' -i /etc/pacman.d/mirrorlist.backup ;
-#rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist ;
+ssh root@localhost -o StrictHostKeyChecking=no -p 5555 -i id_rsa "cp /etc/pacman.d/mirrorlist{,.backup} ;
+sed '/^#\ S/ s|#||' -i /etc/pacman.d/mirrorlist.backup ;
+rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist ;
 export EDITOR=cat ; 
 yes | pacman -R heirloom-mailx ;
 yes | pacman -Syu gcc make autoconf automake binutils git popt patch libtool lighttpd python mpd python2-pygame php-cgi php python2-pip alsa-lib alsa-firmware ttf-dejavu ttf-droid ttf-ubuntu-font-family ttf-linux-libertine ttf-liberation ttf-junicode ttf-freefont ttf-inconsolata ttf-indic-otf ttf-cheapskate ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ;
