@@ -11,6 +11,18 @@ from functions import get, menu, render, datatable
 import sys
 import socket
 
+def hex_to_rgb(value):
+	value = value.lstrip('#')
+	lv = len(value)
+	return tuple(int(value[i:i+lv/3], 16) for i in range(0, lv, lv/3))
+
+def color_surface(surface, (red, green, blue)):
+	surface.convert_alpha()
+	arr = pygame.surfarray.pixels3d(surface)
+	arr[:,:,0] = red
+	arr[:,:,1] = green
+	arr[:,:,2] = blue
+
 # Initialisation
 
 pygame.font.init()
@@ -29,7 +41,7 @@ font = pygame.font.Font(font_filename, 135)
 font_time = pygame.font.Font(font_filename, 135)
 
 
-# Definition des images
+# Definition et coloration des images
 
 image_temp = pygame.image.load("images/misc/temp.png")
 image_rise = pygame.image.load("images/misc/rise.png")
@@ -37,10 +49,15 @@ image_set = pygame.image.load("images/misc/set.png")
 image_mail = pygame.image.load("images/misc/mail.png")
 image_news = pygame.image.load("images/misc/news.png")
 image_cal = pygame.image.load("images/misc/cal.png")
+color_surface(image_temp, hex_to_rgb(conf["general"]["front_color"]))
+color_surface(image_rise, hex_to_rgb(conf["general"]["front_color"]))
+color_surface(image_set, hex_to_rgb(conf["general"]["front_color"]))
+color_surface(image_mail, hex_to_rgb(conf["general"]["front_color"]))
+color_surface(image_news, hex_to_rgb(conf["general"]["front_color"]))
+color_surface(image_cal, hex_to_rgb(conf["general"]["front_color"]))		
 
-
-config_menu = menu.Menu(screen, ["Modifier l'heure", "Durée du snooze", "Modifier l'action du snooze"], font)
-table = datatable.DataTable(background, font, 0, 160, 160, 120, 3, 2, 10, 5)
+config_menu = menu.Menu(screen, ["Modifier l'heure", "Durée du snooze", "Modifier l'action du snooze"], None, hex_to_rgb(conf["general"]["front_color"]), hex_to_rgb(conf["general"]["back_color"]))
+table = datatable.DataTable(background, font, hex_to_rgb(conf["general"]["front_color"]), hex_to_rgb(conf["general"]["back_color"]), 0, 160, 160, 120, 3, 2, 10, 5)
 
 def get_data(): 
 	s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
@@ -56,48 +73,20 @@ def get_data():
 
 def update(): 
 	raw = get_data()
+
 	if raw :
 		(data, data_forecast, unread, news, cal) = raw
 
 		image_weather = pygame.image.load("images/weather/" + data_forecast["list"][0]["weather"][0]["icon"] + ".png")
-		# Collage des images
-		background.fill((0, 0, 0))
+		color_surface(image_weather, hex_to_rgb(conf["general"]["front_color"]))
+
+		background.fill(hex_to_rgb(conf["general"]["back_color"]))
+
+		background.blit(image_weather, image_weather.get_rect())
+                
+		render.render(datetime.today().strftime("%H:%M"), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 120, 320, 120)
 
 		table.update([{"image": image_temp, "data": str(round(data_forecast["list"][0]["temp"]["day"], 1))}, {"image": image_rise, "data": datetime.fromtimestamp(data["sys"]["sunrise"]).strftime("%H:%M")}, {"image": image_rise, "data": datetime.fromtimestamp(data["sys"]["sunset"]).strftime("%H:%M")}, {"image": image_mail, "data": str(unread)}, {"image": image_news, "data": str(news)}, {"image": image_cal, "data": str(cal[0])}])
-
-		"""background.blit(image_weather, image_weather.get_rect())
-		background.blit(image_temp, image_temp.get_rect(centerx=130))
-		background.blit(image_rise, image_rise.get_rect(centerx=190, centery=22))
-		background.blit(image_set, image_set.get_rect(centerx=260, centery=22))
-		background.blit(image_mail, image_mail.get_rect(centerx=125, centery=60))
-		background.blit(image_news, image_news.get_rect(centerx=190, centery=60))
-		background.blit(image_cal, image_cal.get_rect(centerx=260, centery=60))
-
-		# On ajoute l'heure
-		
-		render.render(datetime.today().strftime("%H:%M"), font_time, background, (255,255,255), 0, 120, 320, 120)
-		
-		# On ajoute la température
-
-		render.render(str(round(data_forecast["list"][0]["temp"]["day"], 1)), font, background, (255,255,255), 140, 20, 30, 14)
-		
-		# On ajoute les image de lever et de coucher du soleil
-
-		render.render(datetime.fromtimestamp(data["sys"]["sunrise"]).strftime("%H:%M"), font, background, (255,255,255), 210, 20, 30, 14)
-
-		render.render(datetime.fromtimestamp(data["sys"]["sunrise"]).strftime("%H:%M"), font, background, (255,255,255), 280, 20, 30, 14)
-
-		# On ajoute le compteur des mails non lus
-
-		render.render(str(unread), font, background, (255,255,255), 140, 52, 30, 14)
-
-		# On met aussi les news
-
-		render.render(str(news), font, background, (255,255,255), 210, 52, 30, 14)
-
-		# On ajoute le compteur d'évènements dans la journée
-
-		render.render(str(cal[0]), font, background, (255,255,255), 280, 52, 30, 14)"""
 
 		screen.blit(background, (0, 0))
 		pygame.display.flip()
@@ -112,6 +101,7 @@ while 1 :
 
 	#config_menu.show()
 	#config_menu.select_delta(2)
+	#time.sleep(1)	
 	#config_menu.hide()
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
