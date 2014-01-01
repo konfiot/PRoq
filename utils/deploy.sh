@@ -35,7 +35,7 @@ cp arch.img system.img
 fi
 
 echo "Launching qemu"
-qemu-system-arm -kernel kernel-qemu -cpu arm1176 -m 256 -M versatilepb -no-reboot -append "root=/dev/sda5 rw panic=1" -hda system.img -nographic -redir tcp:5555::22 &
+qemu-system-arm -kernel kernel-qemu -cpu arm1176 -m 256 -M versatilepb -no-reboot -append "root=/dev/sda5 rw panic=1" -hda system.img -nographic -daemonize -redir tcp:5555::22 
 
 git clone git://projects.archlinux.org/pacman.git -b maint && cd pacman && ./autogen.sh && ./configure --disable-doc && make && sudo make install && cd ..
 
@@ -44,10 +44,10 @@ wget http://rpm5.org/files/popt/popt-1.16.tar.gz && tar -xf popt-*.tar.gz && cd 
 wget https://aur.archlinux.org/packages/sv/svox-pico-git/svox-pico-git.tar.gz && tar -xvzf svox-pico-git.tar.gz && sed 's/configure /configure --host=arm-linux-gnueabihf /' -i svox-pico-git/PKGBUILD && cd svox-pico-git && makepkg makepkg -Acs && cd ..
 
 echo "Copying files"
-scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 svox-pico-git/svox-pico-git-*.pkg.tar.gz root@localhost:./ &
-scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./scripts root@localhost:./scripts &
-scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./utils/start.sh root@localhost:./ &
-scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./WebConfiguration/ root@localhost:./ &
+scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 svox-pico-git/svox-pico-git-*.pkg.tar.gz root@localhost:./
+scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./scripts root@localhost:./scripts 
+scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./utils/start.sh root@localhost:./ 
+scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./WebConfiguration/ root@localhost:./ 
 
 echo "Installing"
 ssh root@localhost -o StrictHostKeyChecking=no -p 5555 -i id_rsa "cp /etc/pacman.d/mirrorlist{,.backup} ;
