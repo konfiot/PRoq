@@ -56,7 +56,7 @@ wget https://aur.archlinux.org/packages/sv/svox-pico-git/svox-pico-git.tar.gz
 tar -xvzf svox-pico-git.tar.gz
 sed 's/configure /configure --host=arm-linux-gnueabihf /' -i svox-pico-git/PKGBUILD
 cd svox-pico-git
-makepkg makepkg -Acs
+makepkg -Acs
 cd ..
 
 echo "Copying files"
