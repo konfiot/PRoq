@@ -67,7 +67,7 @@ color_surface(image_news, hex_to_rgb(conf["general"]["front_color"]))
 color_surface(image_cal, hex_to_rgb(conf["general"]["front_color"]))		
 
 config_menu = menu.Menu(screen, ["Modifier l'heure", "Durée du snooze", "Modifier l'action du snooze"], None, hex_to_rgb(conf["general"]["front_color"]), hex_to_rgb(conf["general"]["back_color"]))
-table = datatable.DataTable(background, font, hex_to_rgb(conf["general"]["front_color"]), hex_to_rgb(conf["general"]["back_color"]), 0, 160, 160, 120, 3, 2, 10, 5)
+table = datatable.DataTable(background, font, hex_to_rgb(conf["general"]["front_color"]), hex_to_rgb(conf["general"]["back_color"]), 0, 120, 200, 128, 3, 2, 10, 5)
 
 def get_data(): 
 	s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
