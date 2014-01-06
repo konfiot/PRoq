@@ -94,7 +94,7 @@ sed -i 's/sda/mmcblk0p/' /etc/fstab ;
 reboot"
 
 echo "Compressing"
-bzip2 system.img
+xz system.img
 
 echo "Uploading"
 rsync -e "ssh -o StrictHostKeyChecking=no -i id_rsa_sourceforge" system.img.bz2 konfiot@frs.sourceforge.net:/home/frs/project/smart-wake/Nightly/ --progress
