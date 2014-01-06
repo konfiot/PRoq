@@ -10,6 +10,16 @@ from datetime import datetime, date
 from functions import get, menu, render, datatable
 import sys
 import socket
+import fcntl
+import struct
+
+def get_ip_address(ifname):
+	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+	return socket.inet_ntoa(fcntl.ioctl(
+		s.fileno(),
+		0x8915,  # SIOCGIFADDR
+		struct.pack('256s', ifname[:15])
+	)[20:24])
 
 def hex_to_rgb(value):
 	value = value.lstrip('#')
@@ -91,8 +101,9 @@ def update():
 		screen.blit(background, (0, 0))
 		pygame.display.flip()
 	else :
-		ip = socket.gethostbyname(socket.gethostname())
-		render.render(ip, font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 0, 320, 240)
+		render.render(get_ip_address('eth0'), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 0, 320, 240)
+		screen.blit(background, (0, 0))
+                pygame.display.flip()
 
 # Boucle de rafraichissement
 
