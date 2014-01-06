@@ -6,7 +6,7 @@
     $file_adress = "../conf/wake.cron";
     
     $cron = shell_exec("crontab -l");   // On lis le contenu du cron
-    $cron = "0 7 * * 1,2,3,4,5 /root/proq/scripts/wakeup.py adresse_sonnerie_1 #Cours
+    $cron = "00 7 * * 1,2,3,4,5 /root/proq/scripts/wakeup.py adresse_sonnerie_1 #Cours
 30 9 * * 6,7 /root/proq/scripts/wakeup.py adresse_sonnerie_2 #Week'end
 #30 10 * * 1,2,3,4,5,6,7 /root/proq/scripts/wakeup.py adresse_sonnerie_3 #Vacances
 ";

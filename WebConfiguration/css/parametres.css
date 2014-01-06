@@ -85,3 +85,7 @@ td.btn-col {
 #wake-list .day.active{
     background-color: #E0E0E0;
 }
+
+#wake-list #schema-horaire{
+    display: none;
+}
