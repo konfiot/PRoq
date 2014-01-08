@@ -97,7 +97,7 @@ echo "Compressing"
 xz system.img
 
 echo "Uploading"
-rsync -e "ssh -o StrictHostKeyChecking=no -i id_rsa_sourceforge" system.img.bz2 konfiot@frs.sourceforge.net:/home/frs/project/smart-wake/Nightly/ --progress
+rsync -e "ssh -o StrictHostKeyChecking=no -i id_rsa_sourceforge" system.img.xz konfiot@frs.sourceforge.net:/home/frs/project/smart-wake/Nightly/ --progress
 
 echo "Cleaning"
-rm system.img.bz2
+rm system.img.xz
