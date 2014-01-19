@@ -37,30 +37,9 @@ fi
 echo "Launching qemu"
 qemu-system-arm -kernel kernel-qemu -cpu arm1176 -m 256 -M versatilepb -no-reboot -append "root=/dev/sda5 rw panic=1" -hda system.img -nographic -redir tcp:5555::22 &
 
-git clone git://projects.archlinux.org/pacman.git -b maint
-cd pacman
-./autogen.sh
-./configure --disable-doc
-make
-sudo make install
-cd ..
-
-wget http://rpm5.org/files/popt/popt-1.16.tar.gz
-tar -xf popt-*.tar.gz && cd popt-*
-./configure --prefix=/usr --disable-static --host=arm-linux-gnueabihf
-make
-sudo make install
-cd ..
-
-wget https://aur.archlinux.org/packages/sv/svox-pico-git/svox-pico-git.tar.gz
-tar -xvzf svox-pico-git.tar.gz
-sed 's/configure /configure --host=arm-linux-gnueabihf /' -i svox-pico-git/PKGBUILD
-cd svox-pico-git
-makepkg -Acs
-cd ..
+sleep 30
 
 echo "Copying files"
-scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 svox-pico-git/svox-pico-git-*.pkg.tar.gz root@localhost:./
 scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./scripts root@localhost:./scripts 
 scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./utils/start.sh root@localhost:./ 
 scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./WebConfiguration/ root@localhost:./ 
@@ -72,7 +51,8 @@ rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist ;
 export EDITOR=cat ; 
 yes | pacman -R heirloom-mailx ;
 yes | pacman -Syu popt python2-numpy lighttpd python mpd python2-pygame php-cgi php python2-pip alsa-lib alsa-firmware ttf-dejavu ttf-droid ttf-ubuntu-font-family ttf-linux-libertine ttf-liberation ttf-junicode ttf-freefont ttf-inconsolata ttf-indic-otf ttf-cheapskate ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ;
-yes | pacman -U svox-pico-git-*.pkg.tar.gz --arch x86_64 &
+wget https://dl.dropboxusercontent.com/s/blr71qll61vclex/svox-pico-git-7cb980c-1-armv6h.pkg.tar.xz
+yes | pacman -U svox-pico-git-*.pkg.tar.xz &
 yes | pip-2.7 install icalendar python-mpd2 netsyslog ; mkdir /etc/lighttpd/conf.d ;
 mkdir /var/lib/mpd/music ; touch /var/lib/mpd/mpd.db ;
 chown -R mpd:mpd  /var/lib/mpd/ ; echo 'music_directory \"/var/lib/mpd/music\"' >> /etc/mpd.conf ;
