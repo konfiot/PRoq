@@ -1,6 +1,6 @@
 language: python
 script: utils/deploy.sh
-before_install : "sudo add-apt-repository -y ppa:openstack-ubuntu-testing/havana && sudo apt-get update && sudo apt-get install autopoint qemu qemu-system libc6-dev-armhf-cross bsdtar libpopt0 libpopt-dev fakeroot build-essential gcc-arm-linux-gnueabihf patch libarchive-dev && wget https://my.bitcasa.com/download-send/8275189836e36e7bf8b9abc04e734c1135eb2da75c1fa4ae4a10189512d9db43/2185853b873a60c0a9fe8c3c617d9b0b6a9c592fd4355182292eecc0df692fa7/pxz.deb?size=10410 -o pxz.deb && sudo dpkg --install pxz.deb"
+before_install : "sudo add-apt-repository -y ppa:openstack-ubuntu-testing/havana && sudo apt-get update && sudo apt-get install autopoint qemu qemu-system libc6-dev-armhf-cross bsdtar libpopt0 libpopt-dev fakeroot build-essential gcc-arm-linux-gnueabihf patch libarchive-dev && git clone https://github.com/jnovy/pxz && cd pxz && make && sudo make install"
 notifications:
   email: false
 env:
