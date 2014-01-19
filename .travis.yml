@@ -1,6 +1,6 @@
 language: python
 script: utils/deploy.sh
-before_install : "sudo add-apt-repository -y ppa:openstack-ubuntu-testing/havana && sudo apt-get update && sudo apt-get install autopoint qemu qemu-system libc6-dev-armhf-cross bsdtar libpopt0 libpopt-dev fakeroot build-essential gcc-arm-linux-gnueabihf patch libarchive-dev && git clone https://github.com/jnovy/pxz && cd pxz && make && sudo make install"
+before_install : "sudo add-apt-repository -y ppa:openstack-ubuntu-testing/havana && sudo apt-get update && sudo apt-get install autopoint qemu qemu-system libc6-dev-armhf-cross bsdtar libpopt0 libpopt-dev fakeroot build-essential gcc-arm-linux-gnueabihf liblzma-dev patch libarchive-dev && git clone https://github.com/jnovy/pxz && cd pxz && make && sudo make install"
 notifications:
   email: false
 env:
