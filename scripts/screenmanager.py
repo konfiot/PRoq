@@ -91,7 +91,8 @@ def update():
 		screen.blit(background, (0, 0))
 		pygame.display.flip()
 	else :
-		return False
+		ip = socket.gethostbyname(socket.gethostname())
+		render.render(ip, font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 0, 320, 240)
 
 # Boucle de rafraichissement
 
