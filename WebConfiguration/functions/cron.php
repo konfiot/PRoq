@@ -35,7 +35,7 @@
     
     fclose($fichier);
     
-    //echo shell_exec("crontab -l");
+    echo shell_exec("crontab $file_adress");
     
     
     
