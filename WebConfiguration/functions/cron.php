@@ -69,7 +69,7 @@
                 $r .= '#';
             $r .= $ligne['m'] .' '. $ligne['h'] .' '. $ligne['day'] .' '. $ligne['month'] .' ';
             $r .= implode(',', $ligne['dow']) .' ';
-            $r .= $ligne['command'] .' ';
+            $r .= escapeshellcmd($ligne['command']) .' ';
             $r .= '#'.$name;
             $r .= "\n";
         }

@@ -24,16 +24,25 @@ var horaires = {
         
         if( carac.enable )
             ligne.addClass("enable");
+            
+            
+        $(".horaire").each(function(i){                                  // Si il y a déjà une horaire à ce nom, on le remplace
+            if($($(".horaire")[i]).find('.titre').text() == carac.name) {
+                $($(".horaire")[i]).replaceWith(ligne);
+            }
+        });
         
         
         ligne.appendTo($("#wake-list tbody"));
-
+        
+        ligne.find(".radio-change").click(function(e){
+            var ligne = $(e.delegateTarget).parent().parent().parent();
+            horaires.change(ligne);
+        });
         
         ligne.find(".radio-rm").click(function(e){
             var ligne = $(e.delegateTarget).parent().parent().parent();
-            if( ligne.hasClass("enable") ){
-                horaires.rm(ligne)
-            }
+            horaires.rm(ligne);
         });
     },
     
@@ -64,6 +73,19 @@ var horaires = {
                 ligne.find(".radio-rm").removeClass("fa-spin");
             }
         });
+    },
+    
+    change : function(ligne) {
+        $("#HoraireName").val( ligne.find(".titre").text() );
+        
+        $("#HoraireTime").val( ligne.find(".heure").text().split("h")[0] );
+        $("#HoraireMin").val( ligne.find(".heure").text().split("h")[1] );
+        
+        for( var i = 0 ; i <= 6 ; i++ ) {
+            $($("#HoraireDOW input")[i]).prop('checked', $(ligne.find(".day")[i]).hasClass('active'));
+        }
+        
+        $("#HoraireEnable").prop('checked', ligne.hasClass("enable") );
     },
     
     //{"m":"00","h":"7","day":"*","month":"*","dow":["1","2","3","4","5"],"command":"\/root\/proq\/scripts\/wakeup.py adresse_sonnerie_1 ","enable":true,"name":"Cours"}
