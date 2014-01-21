@@ -10,6 +10,16 @@ from datetime import datetime, date
 from functions import get, menu, render, datatable
 import sys
 import socket
+import fcntl
+import struct
+
+def get_ip_address(ifname):
+	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+	return socket.inet_ntoa(fcntl.ioctl(
+		s.fileno(),
+		0x8915,  # SIOCGIFADDR
+		struct.pack('256s', ifname[:15])
+	)[20:24])
 
 def hex_to_rgb(value):
 	value = value.lstrip('#')
@@ -57,7 +67,7 @@ color_surface(image_news, hex_to_rgb(conf["general"]["front_color"]))
 color_surface(image_cal, hex_to_rgb(conf["general"]["front_color"]))		
 
 config_menu = menu.Menu(screen, ["Modifier l'heure", "Durée du snooze", "Modifier l'action du snooze"], None, hex_to_rgb(conf["general"]["front_color"]), hex_to_rgb(conf["general"]["back_color"]))
-table = datatable.DataTable(background, font, hex_to_rgb(conf["general"]["front_color"]), hex_to_rgb(conf["general"]["back_color"]), 0, 160, 160, 120, 3, 2, 10, 5)
+table = datatable.DataTable(background, font, hex_to_rgb(conf["general"]["front_color"]), hex_to_rgb(conf["general"]["back_color"]), 0, 120, 200, 128, 3, 2, 10, 5)
 
 def get_data(): 
 	s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
@@ -91,7 +101,9 @@ def update():
 		screen.blit(background, (0, 0))
 		pygame.display.flip()
 	else :
-		return False
+		render.render(get_ip_address('eth0'), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 0, 320, 240)
+		screen.blit(background, (0, 0))
+                pygame.display.flip()
 
 # Boucle de rafraichissement
 
