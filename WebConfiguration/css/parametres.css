@@ -64,13 +64,13 @@ td.btn-col {
     display: none;
 }
 
-/**************************** Liste des sonneries *****************************/
+/**************************** Liste des horaires *****************************/
 
 #wake-list td, #wake-list>thead>tr>th {
     text-align: center;
 }
 
-#wake-list tbody>tr:not(.enable) {
+#wake-list tbody>tr:not(.enable)>td:not(.btn-col) {
     opacity: 0.3;
 }
 

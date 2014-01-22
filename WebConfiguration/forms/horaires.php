@@ -43,7 +43,7 @@
 <!-- ------------------------------------------------------------------------------------------------------ -->
 <form class="col-md-offset-1 col-md-10" >
     <fieldset>
-        <legend>Ajouter/Modifier une radio</legend>
+        <legend>Ajouter/Modifier une horaire</legend>
         
             <div class="form-group">
                 <label for="HoraireName" >Nom de l'horaire</label>

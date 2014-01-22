@@ -182,7 +182,7 @@ var radios = {
         });
         
         $("#table-frame .pagination a").off("click").click(function(e){
-            $("#radio-search .input-group i").removeClass("icon-search").addClass("icon-spinner icon-spin");
+            $("#radio-search .input-group i").removeClass("icon-search").addClass("icon-spinner fa-spin");
             
             if(requeteSearch !== undefined)
                 requeteSearch.abort();
@@ -214,7 +214,7 @@ var radios = {
         });
         
         $(".radio-rm").off("click").click(function(e){
-            $(e.delegateTarget).find("i").addClass("icon-spin");                // Effet de rotation le temps de la supresssion
+            $(e.delegateTarget).find("i").addClass("fa-spin");                // Effet de rotation le temps de la supresssion
             var name = $(e.delegateTarget).parent().parent().parent().find(".name").html();
             radios.rm(name);
         });

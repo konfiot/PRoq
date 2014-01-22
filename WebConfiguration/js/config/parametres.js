@@ -15,7 +15,7 @@ $(function() {  //Executé après le chargement
         $(".leftnav").removeClass("active");                                    //On desactive tout
         $(e.delegateTarget).addClass("active");                                 //On active le bon
         
-        $(e.delegateTarget).find("i").addClass("icon-spin");
+        $(e.delegateTarget).find("i").addClass("fa-spin");
         
         //----------------------------
         
@@ -58,7 +58,7 @@ var config = {
             formulaire = "defaut";
             
         $("#main").load("forms/" + formulaire + ".php", function(){    //On envoit la requette
-            $(".leftnav").find("i").removeClass("icon-spin");                   //On supprime l'effet de chargement
+            $(".leftnav").find("i").removeClass("fa-spin");                   //On supprime l'effet de chargement
         
             config.connectAll();                                                //On connecte les inputs
             radios.connectAll();
