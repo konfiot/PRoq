@@ -17,11 +17,12 @@ os.environ["https_proxy"] = conf["general"]["https_proxy"]
 
 while 1 :
 	try :
-		(data, data_forecast) = get.weather(conf)
 		unread = get.mail(conf)
+		(data, data_forecast) = get.weather(conf)
 		news = get.news(conf)
 		cal = get.calendar(conf)
 	except :
+		print "Error"
 		continue;
 	s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 	s.connect("mastersocket")

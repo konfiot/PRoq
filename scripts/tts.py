@@ -116,7 +116,7 @@ weather_string = get_weather_string(id);
 
 # Synthèse vocale
 
-tosay = "Temps prévu pour aujourd'hui : ".decode("utf-8") + weather_string.decode("utf-8") + ". Vous avez ".decode("utf-8") + str(unread).decode("utf-8") + "Messages non lus. " + str(news).decode("utf-8") + " nouvelles non lues et ".decode("utf-8") + str(cal[0]).decode("utf-8") + " évènements aujourd'hui : ".decode("utf-8") + cal[1]
+tosay = "Temps prévu pour aujourd'hui : ".decode("utf-8") + weather_string.decode("utf-8") + ". Vous avez ".decode("utf-8") + str(unread).decode("utf-8") + str(news).decode("utf-8") + " nouvelles non lues et ".decode("utf-8") + str(cal[0]).decode("utf-8") + " évènements aujourd'hui : ".decode("utf-8") + cal[1]
 
 client = MPDClient()
 client.connect("localhost", 6600)
