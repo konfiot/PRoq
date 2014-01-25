@@ -24,15 +24,19 @@ $(function() {  //Executé après le chargement
     });
     
     /**************************************************************************/
-    
+    console.log("dan");
     $.getJSON("functions/config.php", function(donnees){                        //On recupère la configuration sur le serveur
         config.config = donnees;
-    
+        
         /**********************************************************************/
         //Pour afficher le bon formulaire si il y a une ancre
         if( window.location.hash !== "" )   config.loadForm(window.location.hash.slice(1));
         else                                config.loadForm("");
     });
+    
+    if (typeof donnees === 'undefined') {
+        alert("Impossible de charger la configuration, vérifiez le répertoire d'inclusion");
+    }
     
 /****/
 });             //Executé après le chargement {fin}
