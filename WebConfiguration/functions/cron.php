@@ -3,7 +3,9 @@
     *                       Modification du crontab
     ***********************************************************************/
     
-    $file_adress = "../conf/wake.cron";
+    include('environement.php');
+    
+    $file_adress = $configuration_folder.'wake.cron';
     
     $cron = shell_exec("crontab -l");   // On lis le contenu du cron
     $cron = "00 7 * * 1,2,3,4,5 /root/proq/scripts/wakeup.py adresse_sonnerie_1 #Cours

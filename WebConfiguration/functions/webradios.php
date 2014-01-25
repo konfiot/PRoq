@@ -3,8 +3,10 @@
     * Pour éditer et lire la liste des webradios
     ***************************************************************************/
     
+    include('environement.php');
+    
     // Lecture du Json
-    $path = "../../conf/webradios.json";
+    $path = $configuration_folder.'webradios.json';
     
     $fichier = fopen($path, 'r+');
     $json = fread($fichier, filesize($path));

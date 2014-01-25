@@ -6,9 +6,11 @@
     *       - Argument "value"     = valeure à lui donner (retourne valeure du champ si vide)
     ***********************************************************************/
     
-    $path = "../../conf/wake.json";
+    include('environement.php');
     
-    $fichier = fopen($path, 'r+');                                              //Ouverture fichier (ouverture/écriture dans tous les cas parce-que yolo)
+    $path = $configuration_folder.'wake.json';
+    
+    $fichier = fopen($path, 'r+');                                              //Ouverture fichier (ouverture/écriture dans tous les cas)
     $json = fread($fichier, filesize($path));                                   //On le lis
         
     if( isset($_GET["categorie"])){                                 //Categorie entree
