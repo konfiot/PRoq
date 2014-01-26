@@ -50,7 +50,7 @@ sed '/^#\ S/ s|#||' -i /etc/pacman.d/mirrorlist.backup ;
 rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist ;
 export EDITOR=cat ; 
 yes | pacman -R heirloom-mailx ;
-yes | pacman -Syu popt python2-numpy lighttpd python mpd python2-pygame php-cgi php python2-pip alsa-lib alsa-firmware ttf-dejavu ttf-droid ttf-ubuntu-font-family ttf-linux-libertine ttf-liberation ttf-junicode ttf-freefont ttf-inconsolata ttf-indic-otf ttf-cheapskate ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ;
+yes | pacman -Syu popt python2-numpy lighttpd python mpd python2-pygame php-cgi php python2-pip git alsa-lib alsa-firmware ttf-dejavu ttf-droid ttf-ubuntu-font-family ttf-linux-libertine ttf-liberation ttf-junicode ttf-freefont ttf-inconsolata ttf-indic-otf ttf-cheapskate ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ;
 wget https://dl.dropboxusercontent.com/s/blr71qll61vclex/svox-pico-git-7cb980c-1-armv6h.pkg.tar.xz
 yes | pacman -U svox-pico-git-*.pkg.tar.xz &
 yes | pip2.7 install icalendar python-mpd2 netsyslog ; mkdir /etc/lighttpd/conf.d ;
@@ -66,6 +66,7 @@ ExecStart=/root/start.sh
 [Install]
 WantedBy=multi-user.target' > /etc/systemd/system/proq.service ;
 systemctl enable lighttpd mpd proq ;
+ln -s /root/utils/update.sh /etc/cron.weekly/
 mv ~/WebConfiguration/* /srv/http/ ;
 mkdir /srv/http/conf/ ;
 ln -s /srv/http/conf/ /root/ ;
