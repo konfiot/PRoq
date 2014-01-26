@@ -17,7 +17,7 @@ def get_ip_address(ifname):
 	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 	return socket.inet_ntoa(fcntl.ioctl(
 		s.fileno(),
-		0x8915,  # SIOCGIFADDR
+		0x8915,
 		struct.pack('256s', ifname[:15])
 	)[20:24])
 
@@ -32,6 +32,17 @@ def color_surface(surface, (red, green, blue)):
 	arr[:,:,0] = red
 	arr[:,:,1] = green
 	arr[:,:,2] = blue
+
+def show_menu(background, back_color):
+	dt = datetime.today()
+	while True :
+		background.fill(back_color)
+		render.render(get_ip_address('p5p1'), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 0, 320, 60)
+		render.render(dt.strftime("%H:%M"), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 60, 320, 120)
+		screen.blit(background, (0, 0))
+		pygame.display.flip()
+		dt = dt.replace(minute = (dt.minute + 1) % 60)
+		time.sleep(1)
 
 # Initialisation
 
@@ -101,16 +112,16 @@ def update():
 		screen.blit(background, (0, 0))
 		pygame.display.flip()
 	else :
-		render.render(get_ip_address('eth0'), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 0, 320, 240)
+		render.render(get_ip_address('p5p1'), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 0, 320, 240)
 		screen.blit(background, (0, 0))
                 pygame.display.flip()
 
 # Boucle de rafraichissement
 
-while 1 : 
+while True : 
 	time.sleep(0.1)
 	update()
-
+	show_menu(background, hex_to_rgb(conf["general"]["back_color"]))
 	#config_menu.show()
 	#config_menu.select_delta(2)
 	#time.sleep(1)	
