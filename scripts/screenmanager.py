@@ -37,7 +37,7 @@ def show_menu(background, back_color):
 	dt = datetime.today()
 	while True :
 		background.fill(back_color)
-		render.render(get_ip_address('p5p1'), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 0, 320, 60)
+		render.render(get_ip_address('eth0'), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 0, 320, 60)
 		render.render(dt.strftime("%H:%M"), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 60, 320, 120)
 		screen.blit(background, (0, 0))
 		pygame.display.flip()
@@ -107,12 +107,12 @@ def update():
                 
 		render.render(datetime.today().strftime("%H:%M"), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 120, 320, 120)
 
-		table.update([{"image": image_temp, "data": str(round(data_forecast["list"][0]["temp"]["day"], 1))}, {"image": image_rise, "data": datetime.fromtimestamp(data["sys"]["sunrise"]).strftime("%H:%M")}, {"image": image_rise, "data": datetime.fromtimestamp(data["sys"]["sunset"]).strftime("%H:%M")}, {"image": image_mail, "data": str(unread)}, {"image": image_news, "data": str(news)}, {"image": image_cal, "data": str(cal[0])}])
+		table.update([{"image": image_temp, "data": str(round(data_forecast["list"][0]["temp"]["day"], 1))}, {"image": image_rise, "data": datetime.fromtimestamp(data["sys"]["sunrise"]).strftime("%H:%M")}, {"image": image_rise, "data": datetime.fromtimestamp(data["sys"]["sunset"]).strftime("%H:%M")}, {"image": image_mail, "data": str(unread[0])}, {"image": image_news, "data": str(news)}, {"image": image_cal, "data": str(cal[0])}])
 
 		screen.blit(background, (0, 0))
 		pygame.display.flip()
 	else :
-		render.render(get_ip_address('p5p1'), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 0, 320, 240)
+		render.render(get_ip_address('eth0'), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 0, 320, 240)
 		screen.blit(background, (0, 0))
                 pygame.display.flip()
 
