@@ -53,7 +53,7 @@ yes | pacman -R heirloom-mailx ;
 yes | pacman -Syu popt python2-numpy lighttpd python mpd python2-pygame php-cgi php python2-pip alsa-lib alsa-firmware ttf-dejavu ttf-droid ttf-ubuntu-font-family ttf-linux-libertine ttf-liberation ttf-junicode ttf-freefont ttf-inconsolata ttf-indic-otf ttf-cheapskate ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming python2-dateutil ;
 wget https://dl.dropboxusercontent.com/s/blr71qll61vclex/svox-pico-git-7cb980c-1-armv6h.pkg.tar.xz
 yes | pacman -U svox-pico-git-*.pkg.tar.xz &
-yes | pip-2.7 install icalendar python-mpd2 netsyslog ; mkdir /etc/lighttpd/conf.d ;
+yes | pip2.7 install icalendar python-mpd2 netsyslog ; mkdir /etc/lighttpd/conf.d ;
 mkdir /var/lib/mpd/music ; touch /var/lib/mpd/mpd.db ;
 chown -R mpd:mpd  /var/lib/mpd/ ; echo 'music_directory \"/var/lib/mpd/music\"' >> /etc/mpd.conf ;
 echo 'server.modules += ( \"mod_fastcgi\" ) index-file.names += ( \"index.php\" ) fastcgi.server = ( \".php\" => ((                    \"bin-path\" => \"/usr/bin/php-cgi\",                    \"socket\" => \"/tmp/php.socket\",                    \"max-procs\" => 2,                    \"bin-environment\" => (                      \"PHP_FCGI_CHILDREN\" => \"16\",                      \"PHP_FCGI_MAX_REQUESTS\" => \"10000\"                    ),                    \"bin-copy-environment\" => (                   \"PATH\", \"SHELL\", \"USER\"                    ),                    \"broken-scriptfilename\" => \"enable\"                )))' >> /etc/lighttpd/conf.d/fastcgi.conf ;
