@@ -7,7 +7,7 @@ import urllib
 import StringIO
 import time
 from datetime import datetime, date
-from functions import get, menu, render, datatable
+from functions import get, render, datatable
 import sys
 import socket
 import fcntl
@@ -35,14 +35,21 @@ def color_surface(surface, (red, green, blue)):
 
 def show_menu(background, back_color):
 	dt = datetime.today()
+	i = 0
 	while True :
 		background.fill(back_color)
 		render.render(get_ip_address('eth0'), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 0, 320, 60)
-		render.render(dt.strftime("%H:%M"), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 60, 320, 120)
+		if i == 0 : 
+			render.render(dt.strftime("%H:%M"), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 60, 320, 120)
+		elif i == 1 :
+			pass
 		screen.blit(background, (0, 0))
 		pygame.display.flip()
 		dt = dt.replace(minute = (dt.minute + 1) % 60)
 		time.sleep(1)
+		i+=1
+		if i >= 2 :
+			break
 
 # Initialisation
 
@@ -77,7 +84,6 @@ color_surface(image_mail, hex_to_rgb(conf["general"]["front_color"]))
 color_surface(image_news, hex_to_rgb(conf["general"]["front_color"]))
 color_surface(image_cal, hex_to_rgb(conf["general"]["front_color"]))		
 
-config_menu = menu.Menu(screen, ["Modifier l'heure", "Durée du snooze", "Modifier l'action du snooze"], None, hex_to_rgb(conf["general"]["front_color"]), hex_to_rgb(conf["general"]["back_color"]))
 table = datatable.DataTable(background, font, hex_to_rgb(conf["general"]["front_color"]), hex_to_rgb(conf["general"]["back_color"]), 0, 120, 200, 128, 3, 2, 10, 5)
 
 def get_data(): 
