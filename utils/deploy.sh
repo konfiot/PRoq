@@ -45,10 +45,7 @@ scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./utils/start.sh root@local
 scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./WebConfiguration/ root@localhost:./ 
 
 echo "Installing"
-ssh root@localhost -o StrictHostKeyChecking=no -p 5555 -i id_rsa "cp /etc/pacman.d/mirrorlist{,.backup} ;
-sed '/^#\ S/ s|#||' -i /etc/pacman.d/mirrorlist.backup ;
-rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist ;
-export EDITOR=cat ; 
+ssh root@localhost -o StrictHostKeyChecking=no -p 5555 -i id_rsa "export EDITOR=cat ; 
 yes | pacman -R heirloom-mailx ;
 yes | pacman -Syu popt python2-numpy lighttpd python mpd python2-pygame php-cgi php python2-pip alsa-lib alsa-firmware ttf-dejavu ttf-droid ttf-ubuntu-font-family ttf-linux-libertine ttf-liberation ttf-junicode ttf-freefont ttf-inconsolata ttf-indic-otf ttf-cheapskate ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ;
 wget https://dl.dropboxusercontent.com/s/blr71qll61vclex/svox-pico-git-7cb980c-1-armv6h.pkg.tar.xz
