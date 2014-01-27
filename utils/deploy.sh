@@ -41,7 +41,7 @@ sleep 30
 
 echo "Copying files"
 scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./scripts root@localhost:./scripts 
-scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./utils/start.sh root@localhost:./ 
+scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./utils/{start,update}.sh root@localhost:./ 
 scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./WebConfiguration/ root@localhost:./ 
 
 echo "Installing"
