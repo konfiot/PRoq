@@ -32,11 +32,14 @@ $(function() {  //Executé après le chargement
         //Pour afficher le bon formulaire si il y a une ancre
         if( window.location.hash !== "" )   config.loadForm(window.location.hash.slice(1));
         else                                config.loadForm("");
+    }).always(function() {
+        if ( jQuery.isEmptyObject(config.config) ) {
+            console.log(config.config);
+            alert("Impossible de charger la configuration, vérifiez le répertoire d'inclusion");
+        }
     });
     
-    if (typeof donnees === 'undefined') {
-        alert("Impossible de charger la configuration, vérifiez le répertoire d'inclusion");
-    }
+    
     
 /****/
 });             //Executé après le chargement {fin}
