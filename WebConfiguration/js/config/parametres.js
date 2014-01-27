@@ -24,7 +24,6 @@ $(function() {  //Executé après le chargement
     });
     
     /**************************************************************************/
-    console.log("dan");
     $.getJSON("functions/config.php", function(donnees){                        //On recupère la configuration sur le serveur
         config.config = donnees;
         

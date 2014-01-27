@@ -179,7 +179,7 @@ function elementSwitch(_element, _categorie, _champ, _validation, _proccess){
     
     this.valeur = function(v){
         if( (typeof v) == "undefined" )
-            return $(this.element).bootstrapSwitch("status");
+            return $(this.element).bootstrapSwitch("state");
         else
             $(this.element).bootstrapSwitch("setState", v);
     };

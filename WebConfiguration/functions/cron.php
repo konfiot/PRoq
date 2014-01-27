@@ -5,17 +5,11 @@
     
     include('environement.php');
     
-    $file_adress = $configuration_folder.'wake.cron';
+    $path = $configuration_folder.'wake.cron';
     
-    $fichier = fopen($file_adress, 'r+');                                       // On ouvre le fichier de cron
+    $fichier = fopen($path, 'r+');                                       // On ouvre le fichier de cron
     $cron = fread($fichier, filesize($path));                                   // On lis le contenu du cron
     
-    $json = fread($fichier, filesize($path));
-    
-    $cron = "00 7 * * 1,2,3,4,5 /root/proq/scripts/wakeup.py adresse_sonnerie_1 #Cours
-30 9 * * 6,7 /root/proq/scripts/wakeup.py adresse_sonnerie_2 #Week'end
-#30 10 * * 1,2,3,4,5,6,7 /root/proq/scripts/wakeup.py adresse_sonnerie_3 #Vacances
-";
     $cron = parse($cron);               // On le convertis en array
     
     
