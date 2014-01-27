@@ -1,5 +1,5 @@
 #!/bin/sh
-cd /root
+cd ~
 git clone https://github.com/konfiot/PRoq.git
 cp -R PRoq/{scripts,utils/start.sh,utils} ./
 cp -R PRoq/WebConfiguration/* /srv/http
