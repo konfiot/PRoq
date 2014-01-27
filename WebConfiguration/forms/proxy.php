@@ -1,4 +1,4 @@
-<div class="page-header">
+<div class="page-header"> 
     <h1>Paramètres<small> - proxy</small></h1>
     <p>
         Paramètrez un éventuel proxy
