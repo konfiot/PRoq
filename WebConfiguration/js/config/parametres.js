@@ -426,10 +426,32 @@ var inputs = {
         [ ],
         function(){}
     ),
-    "ProxyIp": new elementInput("#ProxyIp",
+    "ProxyHttp": new elementInput("#ProxyHttp",
         "proxy",
-        "ip",
-        [ ],
+        "http",
+        [
+            {
+                "format": /\S+/,
+                "msg": {
+                    "type": "error",
+                    "text": "Champ obligatoire"
+                }
+            }
+        ],
+        function(){}
+    ),
+    "ProxyHttps": new elementInput("#ProxyHttps",
+        "proxy",
+        "https",
+        [
+            {
+                "format": /\S+/,
+                "msg": {
+                    "type": "error",
+                    "text": "Champ obligatoire"
+                }
+            }
+        ],
         function(){}
     )
 };

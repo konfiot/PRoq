@@ -9,8 +9,8 @@
         <fieldset>
             <div class="form-group">
                 <label class="control-label" for="ProxyOn">Utiliser un proxy</label>
-                <span><div class="switch form-element col-md-offset-1" data-on-label="Oui" data-off-label="Non" id="ProxyOn">
-                    <input type="checkbox" checked="checked" class="col-md-offset-1" >
+                <span><span>
+                    <input class="switch form-element" type="checkbox" data-on-label="Oui" data-off-label="Non" id="ProxyOn">
                 </div></span> <!-- Pour avoir le bon nombre de parents -->
                 <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
             </div>
@@ -20,10 +20,19 @@
             <legend>Connection à un proxy</legend>
         
             <div class="form-group">
-                <label for="ProxyIp">Adresse du serveur</label>
+                <label for="ProxyHttp">Proxy HTTP</label>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-terminal"></i></span>
-                    <input id="ProxyIp" class="first_focus form-control form-element" placeholder="Adresse ip du proxy">
+                    <span class="input-group-addon"><strong>http://</strong></span>
+                    <input id="ProxyHttp" class="first_focus form-control form-element" placeholder="Adresse ip du proxy http">
+                </div>
+                <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
+            </div>
+        
+            <div class="form-group">
+                <label for="ProxyHttps">Proxy HTTPS</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><strong>https://<strong/></span>
+                    <input id="ProxyHttps" class="first_focus form-control form-element" placeholder="Adresse ip du proxy https">
                 </div>
                 <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
             </div>

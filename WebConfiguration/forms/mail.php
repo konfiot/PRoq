@@ -53,7 +53,7 @@
             <div class="form-group">
                 <label class="control-label" for="MailSsl">SSL</label>
                 <span><span>
-                    <input class="switch" type="checkbox" data-on-label="Oui" data-off-label="Non" id="MailSsl">
+                    <input class="switch form-element" type="checkbox" data-on-label="Oui" data-off-label="Non" id="MailSsl">
                 </div></span> <!-- Pour avoir le bon nombre de parents -->
                 <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
             </div>
