@@ -7,7 +7,7 @@ import urllib
 import StringIO
 import time
 from datetime import datetime, date
-from functions import get, menu, render, datatable
+from functions import get, render, datatable
 import sys
 import socket
 import fcntl
@@ -17,7 +17,7 @@ def get_ip_address(ifname):
 	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 	return socket.inet_ntoa(fcntl.ioctl(
 		s.fileno(),
-		0x8915,  # SIOCGIFADDR
+		0x8915,
 		struct.pack('256s', ifname[:15])
 	)[20:24])
 
@@ -32,6 +32,24 @@ def color_surface(surface, (red, green, blue)):
 	arr[:,:,0] = red
 	arr[:,:,1] = green
 	arr[:,:,2] = blue
+
+def show_menu(background, back_color):
+	dt = datetime.today()
+	i = 0
+	while True :
+		background.fill(back_color)
+		render.render(get_ip_address('eth0'), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 0, 320, 60)
+		if i == 0 : 
+			render.render(dt.strftime("%H:%M"), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 60, 320, 120)
+		elif i == 1 :
+			pass
+		screen.blit(background, (0, 0))
+		pygame.display.flip()
+		dt = dt.replace(minute = (dt.minute + 1) % 60)
+		time.sleep(1)
+		i+=1
+		if i >= 2 :
+			break
 
 # Initialisation
 
@@ -66,7 +84,6 @@ color_surface(image_mail, hex_to_rgb(conf["general"]["front_color"]))
 color_surface(image_news, hex_to_rgb(conf["general"]["front_color"]))
 color_surface(image_cal, hex_to_rgb(conf["general"]["front_color"]))		
 
-config_menu = menu.Menu(screen, ["Modifier l'heure", "Durée du snooze", "Modifier l'action du snooze"], None, hex_to_rgb(conf["general"]["front_color"]), hex_to_rgb(conf["general"]["back_color"]))
 table = datatable.DataTable(background, font, hex_to_rgb(conf["general"]["front_color"]), hex_to_rgb(conf["general"]["back_color"]), 0, 120, 200, 128, 3, 2, 10, 5)
 
 def get_data(): 
@@ -96,7 +113,7 @@ def update():
                 
 		render.render(datetime.today().strftime("%H:%M"), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 120, 320, 120)
 
-		table.update([{"image": image_temp, "data": str(round(data_forecast["list"][0]["temp"]["day"], 1))}, {"image": image_rise, "data": datetime.fromtimestamp(data["sys"]["sunrise"]).strftime("%H:%M")}, {"image": image_rise, "data": datetime.fromtimestamp(data["sys"]["sunset"]).strftime("%H:%M")}, {"image": image_mail, "data": str(unread)}, {"image": image_news, "data": str(news)}, {"image": image_cal, "data": str(cal[0])}])
+		table.update([{"image": image_temp, "data": str(round(data_forecast["list"][0]["temp"]["day"], 1))}, {"image": image_rise, "data": datetime.fromtimestamp(data["sys"]["sunrise"]).strftime("%H:%M")}, {"image": image_rise, "data": datetime.fromtimestamp(data["sys"]["sunset"]).strftime("%H:%M")}, {"image": image_mail, "data": str(unread[0])}, {"image": image_news, "data": str(news)}, {"image": image_cal, "data": str(cal[0])}])
 
 		screen.blit(background, (0, 0))
 		pygame.display.flip()
@@ -107,10 +124,10 @@ def update():
 
 # Boucle de rafraichissement
 
-while 1 : 
+while True : 
 	time.sleep(0.1)
 	update()
-
+	show_menu(background, hex_to_rgb(conf["general"]["back_color"]))
 	#config_menu.show()
 	#config_menu.select_delta(2)
 	#time.sleep(1)	

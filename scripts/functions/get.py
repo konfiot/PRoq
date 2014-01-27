@@ -4,18 +4,24 @@ from icalendar import Calendar, Event, vDDDTypes
 from datetime import datetime, date
 import json
 import re
+from email.parser import Parser
 
 def mail (conf) :
 	mail_conf = conf["mail"]
-	
+	parser = Parser()
 	if mail_conf["ssl"] :
 		obj = imaplib.IMAP4_SSL(mail_conf["server"], mail_conf["port"])
 	else :
-		obj = imaplib.IMAP4_SSL(mail_conf["server"], mail_conf["port"])
-
+		obj = imaplib.IMAP4(mail_conf["server"], mail_conf["port"])
+	
 	obj.login(mail_conf["username"], mail_conf["passwd"])
 	obj.select()
-	return len(obj.search(None, 'UnSeen')[1][0].split())
+	data = obj.search(None, 'UnSeen')
+	header = ""
+	for num in data[1][0].split() :
+		msg = parser.parsestr(obj.fetch(num, '(BODY[HEADER.FIELDS (SUBJECT FROM)])')[1][0][1])
+		header += "Message de " + re.sub(r'<(.+)>', '', msg["from"]) + " : " + msg["subject"].replace("RE:", "").replace("Re:", "").replace("Fwd:", "").replace("FWD:", "").replace("Tr:", "").replace("TR:", "") + ". "
+	return len(data[1][0].split()), header
 
 def calendar (conf) :
 	rdv = ""
