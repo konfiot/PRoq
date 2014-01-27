@@ -69,6 +69,7 @@ mkdir /srv/http/conf/ ;
 ln -s /srv/http/conf/ /root/ ;
 rm .ssh/authorized_keys .ssh/known_hosts ;
 sed -i 's/sda/mmcblk0p/' /etc/fstab ;
+sed -i -e 's/;extension=openssl.so/extension=openssl.so/g' /etc/php/php.ini;
 reboot"
 
 echo "Compressing"
