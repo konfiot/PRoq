@@ -12,8 +12,8 @@ conf = json.load(conf_file)
 
 # Mise en place des proxies
 
-os.environ["http_proxy"] = "http://" + conf["general"]["http_proxy"] if conf["general"]["http_proxy"] !== "" else ""
-os.environ["https_proxy"] = "https://" + conf["general"]["https_proxy"] if conf["general"]["https_proxy"] !== "" else ""
+os.environ["http_proxy"] = "http://" + conf["proxy"]["http"] if conf["proxy"]["enable"] else ""
+os.environ["https_proxy"] = "https://" + conf["proxy"]["https"] if conf["proxy"]["enable"] else ""
 
 while 1 :
 	try :
