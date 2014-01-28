@@ -11,9 +11,9 @@ conf_file = open("../conf/wake.json")
 conf = json.load(conf_file)
 
 # Mise en place des proxies
-
-os.environ["http_proxy"] = "http://" + conf["proxy"]["http"] if conf["proxy"]["enable"] else ""
-os.environ["https_proxy"] = "https://" + conf["proxy"]["https"] if conf["proxy"]["enable"] else ""
+if conf["proxy"]["enabled"] :
+	os.environ["http_proxy"] = "http://" + conf["proxy"]["http"]
+	os.environ["https_proxy"] = "https://" + conf["proxy"]["https"]
 
 while 1 :
 	try :
