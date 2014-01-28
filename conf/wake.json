@@ -4,8 +4,6 @@
     "font": "Helvetica",
     "front_color": "#FFFFFF",
     "back_color": "#000000",
-    "http_proxy": "http://172.20.0.1:3128",
-    "https_proxy": ""
   },
   "mail": {
     "full_adress": "test.smartwake@laposte.net",
@@ -29,7 +27,7 @@
   },
   "proxy": {
       "enable": false,
-      "http": "www.random.troll",
-      "https": "www.randoms.trolls"
+      "http": "172.20.0.1:3128",
+      "https": ""
   }
 }
