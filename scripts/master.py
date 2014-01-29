@@ -3,24 +3,32 @@
 
 import os, socket, json
 
-content = {}
+content = {]
+prox = False
 
-def managedata (json_data, content) :
+def managedata (json_data) :
+	global content
+	global prox	
 	data = {}
 	try: 
 		data = json.loads(json_data)
 	except ValueError: 
-		print "Y'a une couille dans ljson quoi"
-		return "KO", content
+		print "Problème durant le parsage du JSON"
+		return "KO"
 	
 	if data["request"] == "new_data": 
 		content = data["content"]
-		return "OK", content
+		return "OK"
 	elif data["request"] == "get_data": 
 		try :
-			return json.dumps(content), content
+			return json.dumps(content)
 		except UnboundLocalError:
-			return "", content
+			return ""
+	elif data["request"] == "set_prox_state": 
+		prox = data["content"]
+		return "OK"
+	elif data["request"] == "get_prox_state": 
+		return str(prox)
 
 
 s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
@@ -49,7 +57,7 @@ while 1 :
 
 	if data :
 		print "Data : " + data
-		to_send, content = managedata(data, content)
+		to_send = managedata(data, content)
 		print "Sent : " + to_send
 		conn.send(to_send)
 
