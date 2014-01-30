@@ -5,10 +5,12 @@ import os, socket, json
 
 content = {]
 prox = False
+delta = 0
 
 def managedata (json_data) :
 	global content
 	global prox	
+	global delta	
 	data = {}
 	try: 
 		data = json.loads(json_data)
@@ -29,6 +31,12 @@ def managedata (json_data) :
 		return "OK"
 	elif data["request"] == "get_prox_state": 
 		return str(prox)
+	elif data["request"] == "set_delta": 
+		delta += int(data["delta"])
+		return "OK"
+	elif data["request"] == "get_delta": 
+		delta = 0
+		return str(delta)
 
 
 s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
