@@ -44,8 +44,9 @@ def managedata (json_data) :
 		delta += int(data["delta"])
 		return "OK"
 	elif data["request"] == "get_delta": 
+		to_send = str(delta) 		
 		delta = 0
-		return str(delta)
+		return to_send
 
 
 s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
