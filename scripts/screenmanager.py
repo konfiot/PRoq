@@ -129,12 +129,20 @@ mixer = alsaaudio.Mixer(control="PCM")
 while True : 
 	time.sleep(0.1)
 	update()
+
 	s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 	s.connect("mastersocket")
 	s.send(json.dumps({"request": "get_delta"}))
 	data = int(s.recv(4096))
 	mixer.setvolume(mixer.getvolume() + delta)
-	show_menu(background, hex_to_rgb(conf["general"]["back_color"]))
+	
+	s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+	s.connect("mastersocket")
+	s.send(json.dumps({"request": "get_sw_state"}))
+	data = bool(s.recv(4096))
+
+	if data : 
+		show_menu(background, hex_to_rgb(conf["general"]["back_color"]))
 	
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
