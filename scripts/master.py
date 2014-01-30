@@ -6,6 +6,7 @@ import os, socket, json
 content = {]
 prox = False
 delta = 0
+sw = False
 
 def managedata (json_data) :
 	global content
@@ -26,11 +27,19 @@ def managedata (json_data) :
 			return json.dumps(content)
 		except UnboundLocalError:
 			return ""
+
 	elif data["request"] == "set_prox_state": 
 		prox = data["content"]
 		return "OK"
 	elif data["request"] == "get_prox_state": 
 		return str(prox)
+
+	elif data["request"] == "set_sw_state": 
+		sw = data["content"]
+		return "OK"
+	elif data["request"] == "get_sw_state": 
+		return str(sw)
+
 	elif data["request"] == "set_delta": 
 		delta += int(data["delta"])
 		return "OK"
