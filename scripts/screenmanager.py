@@ -37,17 +37,33 @@ def show_menu(background, back_color):
 	dt = datetime.today()
 	i = 0
 	while True :
+		s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+		s.connect("mastersocket")
+		s.send(json.dumps({"request": "get_delta"}))
+		delta = int(s.recv(4096))
+
+		s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+		s.connect("mastersocket")
+		s.send(json.dumps({"request": "get_sw_state"}))
+		sw_state = bool(s.recv(4096))
+
+
 		background.fill(back_color)
 		render.render(get_ip_address('eth0'), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 0, 320, 60)
+		
 		if i == 0 : 
 			render.render(dt.strftime("%H:%M"), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 60, 320, 120)
+			dt = dt.replace(minute = (dt.minute + delta) % 60)
 		elif i == 1 :
 			pass
+
+		if sw_state :
+			i+= 1
+
 		screen.blit(background, (0, 0))
 		pygame.display.flip()
-		dt = dt.replace(minute = (dt.minute + 1) % 60)
-		time.sleep(1)
-		i+=1
+		time.sleep(0.1)
+
 		if i >= 2 :
 			break
 
@@ -133,9 +149,10 @@ while True :
 	s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 	s.connect("mastersocket")
 	s.send(json.dumps({"request": "get_delta"}))
-	data = int(s.recv(4096))
+	delta = int(s.recv(4096))
 	mixer.setvolume(mixer.getvolume() + delta)
-	
+
+
 	s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 	s.connect("mastersocket")
 	s.send(json.dumps({"request": "get_sw_state"}))
