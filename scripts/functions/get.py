@@ -10,9 +10,9 @@ def mail (conf) :
 	mail_conf = conf["mail"]
 	parser = Parser()
 	if mail_conf["ssl"] :
-		obj = imaplib.IMAP4_SSL(mail_conf["server"], mail_conf["port"])
+		obj = imaplib.IMAP4_SSL(mail_conf["server"], int(mail_conf["port"]))
 	else :
-		obj = imaplib.IMAP4(mail_conf["server"], mail_conf["port"])
+		obj = imaplib.IMAP4(mail_conf["server"], int(mail_conf["port"]))
 	
 	obj.login(mail_conf["username"], mail_conf["passwd"])
 	obj.select()

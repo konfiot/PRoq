@@ -7,6 +7,7 @@ import time
 import json
 from mpd import MPDClient
 import alsaaudio
+import socket
 
 def wait_for_dismiss (client) :
 	mixer = alsaaudio.Mixer(control="PCM")
@@ -15,10 +16,24 @@ def wait_for_dismiss (client) :
 		try:
 			client.setvol(i)
 			mixer.setmute(0)
+			s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+			s.connect("mastersocket")
+			s.send(json.dumps({"request": "get_prox_state"}))
+			prox = int(s.recv(4096))
+			if prox == 1 :
+				client.setvol(100)
+				return
 		except  :
 			pass
 		time.sleep(0.1)
-	time.sleep(10)
+	client.setvol(100)
+	while True :
+		s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+		s.connect("mastersocket")
+		s.send(json.dumps({"request": "get_prox_state"}))
+		prox = int(s.recv(4096))
+		if prox == 1 :
+			return
 
 
 # Ouverture du fichier de configuration
