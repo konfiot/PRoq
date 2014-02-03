@@ -9,37 +9,68 @@
     
     $fichier = fopen($path, 'r+');                                       // On ouvre le fichier de cron
     $cron = fread($fichier, filesize($path));                                   // On lis le contenu du cron
+	fclose($fichier);
     
     $cron = parse($cron);               // On le convertis en array
-    
-    
-    if( isset($_GET['add']) ) {         // On ajoute ce qui est dans l'argument 'add'
+	
+	if( isset($_GET['next']) ) {
+		echo json_encode(nextRing($cron));
+		return;
+	}
+	
+	if( isset($_GET['add']) ) {         // On ajoute ce qui est dans l'argument 'add'
         $line = add( $_GET['add'] );
         $cron[ $line["name"] ] = $line;
     }
-    
-    if( isset($_GET['rm']) ) {          // On enlève les éventuels éléments à enlever
+	
+	if( isset($_GET['rm']) ) {          // On enlève les éventuels éléments à enlever
         unset( $cron[ $_GET['rm'] ] );
     }
-
-    echo json_encode($cron);            // On retourne le tout en Json
-    
-    
-    // Pour éditer le fichier
-    
-    
-    fseek($fichier, 0);                 // on modifie le cron
+	
+	echo json_encode($cron);            // On retourne le tout en Json
+	
+	
+	// Pour éditer le fichier
+	
+    $fichier = fopen($path, 'r+');
+	
+	fseek($fichier, 0);                 // on modifie le cron
     ftruncate($fichier, 0);
     fputs($fichier, toCron($cron));
-    
-    fclose($fichier);
-    
-    echo shell_exec("crontab $file_adress");
-    
-    
+	
+	// echo toCron($cron);
+	
+	fclose($fichier);
+	
+	shell_exec("crontab $file_adress");
+	
+	return;
     
     
     /* ***************************** Fonctions ****************************** */
+    
+    function nextRing($json) {
+		$next = array();
+        foreach($json as $name => $line) {
+            if($json[$name]['enable']) {
+                if( (nextLineRing($next) > nextLineRing($json[$name])) || $next == array() ){// Cette ligne s'active dans moins longtemps
+					$next = $json[$name];
+                }
+            }
+        }
+		return array('heure' => nextLineRing($next),
+					 'ligne' => $next);
+    }
+    
+    // Retourne l'heure de sonnerie d'une ligne
+    function nextLineRing($l) {
+        if( $l == array() ) return 0;
+		$t = strtotime("-1 day", mktime($l['h'], $l['m'], 0));                  // A l'heure de la sonnerie, hier
+        while($t < time() || !in_array(date('N', $t), $l['dow']) ) {
+            $t = strtotime("+1 day", $t);
+        }
+        return $t;
+    }
     
     // Convertis le json de l'argument "add" en une ligne de l'array
     function add($json) {
