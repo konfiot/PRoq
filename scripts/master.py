@@ -3,8 +3,8 @@
 
 import os, socket, json
 
-content = {]
-prox = False
+content = {}
+prox = 0
 delta = 0
 sw = False
 
@@ -75,7 +75,7 @@ while 1 :
 
 	if data :
 		print "Data : " + data
-		to_send = managedata(data, content)
+		to_send = managedata(data)
 		print "Sent : " + to_send
 		conn.send(to_send)
 
