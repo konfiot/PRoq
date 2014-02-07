@@ -53,7 +53,7 @@ def show_menu(background, back_color):
 		
 		if i == 0 : 
 			render.render(dt.strftime("%H:%M"), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 60, 320, 120)
-			dt = dt.replace(minute = (dt.minute + delta) % 60)
+			dt = dt.replace(minute = (dt.minute + delta) % 60, hour = (dt.minute + int(delta/60)) % 24)
 		elif i == 1 :
 			pass
 
