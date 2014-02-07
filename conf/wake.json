@@ -3,7 +3,7 @@
     "music_path": "http:\/\/sc3.spacialnet.com:31560\/",
     "font": "Helvetica",
     "front_color": "#FFFFFF",
-    "back_color": "#000000",
+    "back_color": "#000000"
   },
   "mail": {
     "full_adress": "test.smartwake@laposte.net",

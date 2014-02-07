@@ -5,6 +5,7 @@ from datetime import datetime, date
 import json
 import re
 from email.parser import Parser
+from email.header import decode_header
 
 def mail (conf) :
 	mail_conf = conf["mail"]
@@ -20,7 +21,21 @@ def mail (conf) :
 	header = ""
 	for num in data[1][0].split() :
 		msg = parser.parsestr(obj.fetch(num, '(BODY[HEADER.FIELDS (SUBJECT FROM)])')[1][0][1])
-		header += "Message de " + re.sub(r'<(.+)>', '', msg["from"]) + " : " + msg["subject"].replace("RE:", "").replace("Re:", "").replace("Fwd:", "").replace("FWD:", "").replace("Tr:", "").replace("TR:", "") + ". "
+		sender_tuple =  re.sub(r'<(.+)>', '', msg["from"])
+		sender = ""
+		for i in decode_header(sender_tuple) :
+			if i[0] is not None :
+				sender += i[0].decode(i[1])
+			else : 
+				sender += i[0]
+		subject_tuple =  msg["subject"]
+		subject = ""
+		for j in decode_header(subject_tuple) :
+			if j[0] is not None :
+				subject += j[0].decode(i[1])
+			else : 
+				subject += j[0]
+		header += "Message de " + sender + " : " + subject.replace("RE:", "").replace("Re:", "").replace("Fwd:", "").replace("FWD:", "").replace("Tr:", "").replace("TR:", "") + ". "
 	return len(data[1][0].split()), header
 
 def calendar (conf) :
