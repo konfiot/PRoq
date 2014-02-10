@@ -1,22 +1,30 @@
 <?php
     /***********************************************************************
     *                       Modification du crontab
+    * - Argument "next" : retourne un json contenant : en 'ligne' : les caractéristiques de la prochaine alarme ; en 'heure' : le timestamp de la prochaine occurence
+    * - Argument "change" : entrée : {"h" : heure, "m" : minutes} change l'heure de sonnerie pour une sonnerie
     ***********************************************************************/
     
     include('environement.php');
     
     $path = $configuration_folder.'wake.cron';
+    $path_temp = $configuration_folder.'wake.temp.cron';
     
     $fichier = fopen($path, 'r+');                                       // On ouvre le fichier de cron
     $cron = fread($fichier, filesize($path));                                   // On lis le contenu du cron
-	fclose($fichier);
+    fclose($fichier);
     
     $cron = parse($cron);               // On le convertis en array
 	
-	if( isset($_GET['next']) ) {
-		echo json_encode(nextRing($cron));
-		return;
-	}
+    if( isset($_GET['change']) ) {
+        changeTomorrow( json_decode($_GET['change'], true) , $configuration_folder);
+	    return;
+    }
+	
+    if( isset($_GET['next']) ) {
+        echo json_encode(nextRing($cron));
+        return;
+    }
 	
 	if( isset($_GET['add']) ) {         // On ajoute ce qui est dans l'argument 'add'
         $line = add( $_GET['add'] );
@@ -27,30 +35,37 @@
         unset( $cron[ $_GET['rm'] ] );
     }
 	
-	echo json_encode($cron);            // On retourne le tout en Json
+    echo json_encode($cron);            // On retourne le tout en Json
 	
 	
 	// Pour éditer le fichier
 	
     $fichier = fopen($path, 'r+');
 	
-	fseek($fichier, 0);                 // on modifie le cron
+    fseek($fichier, 0);                 // on modifie le cron
     ftruncate($fichier, 0);
     fputs($fichier, toCron($cron));
 	
-	// echo toCron($cron);
+    fclose($fichier);
 	
-	fclose($fichier);
+    shell_exec("crontab $path");
 	
-	shell_exec("crontab $file_adress");
-	
-	return;
+    return;
     
     
     /* ***************************** Fonctions ****************************** */
     
+    function changeTomorrow($change, $path) {
+        $file = fopen($path."wake.temp.cron", 'w');
+        fputs($file, $change['m']." ".$change['h']." * * * echo 'ca sonne !'  | wall \n");
+        fputs($file, $change['m']." ".$change['h']." * * * crontab ".realpath($path."wake.cron")."\n");
+        fclose($path."wake.temp.cron");
+
+        shell_exec("crontab ".$path."wake.temp.cron");
+    }
+	
     function nextRing($json) {
-		$next = array();
+        $next = array();
         foreach($json as $name => $line) {
             if($json[$name]['enable']) {
                 if( (nextLineRing($next) > nextLineRing($json[$name])) || $next == array() ){// Cette ligne s'active dans moins longtemps
