@@ -97,7 +97,7 @@
             "day" => '*',
             "month" => '*',
             "dow" => $j['jours'],
-            "command" => '/root/proq/scripts/wakeup.py '.$j['sonnerie'],
+            "command" => '/root/proq/scripts/wakeup.py',
             "enable" => $j['actif'],
             "name" => $j['nom']
         );
@@ -167,8 +167,7 @@
             "m" : 30
         },
         "jours" : [ 1, 2, 3, 4, 5, 6, 7 ],
-        "actif" : true,
-        "sonnerie" : "adresse_sonnerie"
+        "actif" : true
      }
     * ****************************************************/
 ?>

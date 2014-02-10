@@ -88,7 +88,7 @@ var horaires = {
         $("#HoraireEnable").prop('checked', ligne.hasClass("enable") );
     },
     
-    //{"m":"00","h":"7","day":"*","month":"*","dow":["1","2","3","4","5"],"command":"\/root\/proq\/scripts\/wakeup.py adresse_sonnerie_1 ","enable":true,"name":"Cours"}
+    //{"m":"00","h":"7","day":"*","month":"*","dow":["1","2","3","4","5"],"command":"\/root\/proq\/scripts\/wakeup.py ","enable":true,"name":"Cours"}
     add : function() {
         $("#btn_envoyer_horaires").find("i").addClass("fa-spin");
         
@@ -108,8 +108,7 @@ var horaires = {
                 m : $("#HoraireMin").val()
             },
             actif : $("#HoraireEnable").is(':checked'),
-            jours : dow_list,
-            sonnerie : "adresse_sonnerie"
+            jours : dow_list
         };
         
         console.log(JSON.stringify(json));
