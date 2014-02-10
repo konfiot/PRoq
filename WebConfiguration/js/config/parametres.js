@@ -440,6 +440,12 @@ var inputs = {
         ],
         function(){}
     ),
+    "ProxyHttpsOn": new elementSwitch("#ProxyHttpsOn",
+        "proxy",
+        "https_enable",
+        [ ],
+        function(){}
+    ),
     "ProxyHttps": new elementInput("#ProxyHttps",
         "proxy",
         "https",

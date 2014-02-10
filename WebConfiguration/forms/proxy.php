@@ -7,17 +7,18 @@
 <p>
     <form class="col-md-offset-1 col-md-10" >
         <fieldset>
+        </fieldset>
+        
+        <fieldset>
+            <legend>Connection à un proxy pour le protocole http</legend>
+            
             <div class="form-group">
-                <label class="control-label" for="ProxyOn">Utiliser un proxy</label>
+                <label class="control-label" for="ProxyOn">Utiliser un proxy pour Http</label>
                 <span><span>
                     <input class="switch form-element" type="checkbox" data-on-label="Oui" data-off-label="Non" id="ProxyOn">
                 </div></span> <!-- Pour avoir le bon nombre de parents -->
                 <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
             </div>
-        </fieldset>
-        
-        <fieldset>
-            <legend>Connection à un proxy</legend>
         
             <div class="form-group">
                 <label for="ProxyHttp">Proxy HTTP</label>
@@ -25,6 +26,18 @@
                     <span class="input-group-addon"><strong>http://</strong></span>
                     <input id="ProxyHttp" class="first_focus form-control form-element" placeholder="Adresse ip du proxy http">
                 </div>
+                <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
+            </div>
+        </fieldset>
+        
+        <fieldset>
+            <legend>Connection à un proxy pour le protocole https</legend>
+            
+            <div class="form-group">
+                <label class="control-label" for="ProxyHttpsOn">Utiliser un proxy pour Https</label>
+                <span><span>
+                    <input class="switch form-element" type="checkbox" data-on-label="Oui" data-off-label="Non" id="ProxyHttpsOn">
+                </div></span> <!-- Pour avoir le bon nombre de parents -->
                 <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
             </div>
         

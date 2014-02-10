@@ -28,6 +28,7 @@
   "proxy": {
       "enable": false,
       "http": "172.20.0.1:3128",
+      "https_enable" : false,
       "https": ""
   }
 }
