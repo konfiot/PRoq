@@ -16,7 +16,7 @@ def mail (conf) :
 		obj = imaplib.IMAP4(mail_conf["server"], int(mail_conf["port"]))
 	
 	obj.login(mail_conf["username"], mail_conf["passwd"])
-	obj.select()
+	obj.select(readonly=True)
 	data = obj.search(None, 'UnSeen')
 	header = ""
 	for num in data[1][0].split() :
