@@ -69,6 +69,7 @@ var config = {
             config.connectAll();                                                //On connecte les inputs
             radios.connectAll();
             horaires.connectAll();
+            news.connectAll();
         
             config.resetForm();                                                 //On met les valeurs existantes
             config.checkForm();                                                 //On colore les champs

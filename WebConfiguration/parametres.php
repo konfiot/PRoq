@@ -104,6 +104,7 @@
     
     <script type="text/javascript" src="js/config/forms/radios.js"></script>
     <script type="text/javascript" src="js/config/forms/horaires.js"></script>
+    <script type="text/javascript" src="js/config/forms/news.js"></script>
     
     <script type="text/javascript" src="js/dialogs.js"></script>
   

@@ -14,20 +14,20 @@
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-rss"></i></span>
                     <select class="selectpicker form-element form-control" id="NewsProvider">
-                        <option>newsblur</option>
-                        <option>theoldreader</option>
-                        <option>commafeed</option>
-                        <option>bazqux</option>
-                        <option>inoreader</option>
-                        <option>feedhq</option>
-                        <option>subreader</option>
-                        <option>reedah</option>
-                        <option>selfoss</option>
-                        <option>ttrss</option>
-                        <option>kouio</option>
-                        <option>birdreader</option>
-                        <option>feedbin</option>
-                        <option>miniflux</option>
+                        <option _disable="" >newsblur</option>
+                        <option _disable="#NewsRoot" >theoldreader</option>
+                        <option _disable="" >commafeed</option>
+                        <option _disable="#NewsRoot" >bazqux</option>
+                        <option _disable="#NewsRoot" >inoreader</option>
+                        <option _disable="#NewsRoot" >feedhq</option>
+                        <option _disable="#NewsRoot" >subreader</option>
+                        <option _disable="#NewsRoot" >reedah</option>
+                        <option _disable="" >selfoss</option>
+                        <option _disable="" >ttrss</option>
+                        <option _disable="#NewsPassword,#NewsRoot" >kouio</option>
+                        <option _disable="" >birdreader</option>
+                        <option _disable="" >feedbin</option>
+                        <option _disable="" >miniflux</option>
                     </select>
                     <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
                 </div>
