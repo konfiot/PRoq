@@ -1,8 +1,13 @@
 <?php
     /***********************************************************************
     *                       Modification du crontab
+    * - Rien : donne le cron convertis en JSON
+    * - Add : pour ajouter une ligne au cron
+    * - Rm : supprime la ligne du nom donné
     * - Argument "next" : retourne un json contenant : en 'ligne' : les caractéristiques de la prochaine alarme ; en 'heure' : le timestamp de la prochaine occurence
+    *       example : http://[...]/functions/cron.php?next
     * - Argument "change" : entrée : {"h" : heure, "m" : minutes} change l'heure de sonnerie pour une sonnerie
+    *       example : http://[...]/functions/cron.php?change={"h":7,"m":30}
     ***********************************************************************/
     
     include('environement.php');
@@ -15,41 +20,41 @@
     fclose($fichier);
     
     $cron = parse($cron);               // On le convertis en array
-	
+    
     if( isset($_GET['change']) ) {
         changeTomorrow( json_decode($_GET['change'], true) , $configuration_folder);
-	    return;
+        return;
     }
-	
+    
     if( isset($_GET['next']) ) {
         echo json_encode(nextRing($cron));
         return;
     }
-	
-	if( isset($_GET['add']) ) {         // On ajoute ce qui est dans l'argument 'add'
+    
+    if( isset($_GET['add']) ) {         // On ajoute ce qui est dans l'argument 'add'
         $line = add( $_GET['add'] );
         $cron[ $line["name"] ] = $line;
     }
-	
-	if( isset($_GET['rm']) ) {          // On enlève les éventuels éléments à enlever
+    
+    if( isset($_GET['rm']) ) {          // On enlève les éventuels éléments à enlever
         unset( $cron[ $_GET['rm'] ] );
     }
-	
+    
     echo json_encode($cron);            // On retourne le tout en Json
-	
-	
-	// Pour éditer le fichier
-	
+    
+    
+    // Pour éditer le fichier
+    
     $fichier = fopen($path, 'r+');
-	
+    
     fseek($fichier, 0);                 // on modifie le cron
     ftruncate($fichier, 0);
     fputs($fichier, toCron($cron));
-	
+    
     fclose($fichier);
-	
+    
     shell_exec("crontab $path");
-	
+    
     return;
     
     
@@ -63,24 +68,24 @@
 
         shell_exec("crontab ".$path."wake.temp.cron");
     }
-	
+    
     function nextRing($json) {
         $next = array();
         foreach($json as $name => $line) {
             if($json[$name]['enable']) {
                 if( (nextLineRing($next) > nextLineRing($json[$name])) || $next == array() ){// Cette ligne s'active dans moins longtemps
-					$next = $json[$name];
+                    $next = $json[$name];
                 }
             }
         }
-		return array('heure' => nextLineRing($next),
-					 'ligne' => $next);
+        return array('heure' => nextLineRing($next),
+                     'ligne' => $next);
     }
     
     // Retourne l'heure de sonnerie d'une ligne
     function nextLineRing($l) {
         if( $l == array() ) return 0;
-		$t = strtotime("-1 day", mktime($l['h'], $l['m'], 0));                  // A l'heure de la sonnerie, hier
+        $t = strtotime("-1 day", mktime($l['h'], $l['m'], 0));                  // A l'heure de la sonnerie, hier
         while($t < time() || !in_array(date('N', $t), $l['dow']) ) {
             $t = strtotime("+1 day", $t);
         }

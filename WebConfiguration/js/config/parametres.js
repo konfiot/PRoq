@@ -325,29 +325,19 @@ var inputs = {
     "NewsUser": new elementInput("#NewsUser",
         "news",
         "user",
-        [
-            {
-                "format": /\S+/,
-                "msg": {
-                    "type": "error",
-                    "text": "Champ obligatoire"
-                }
-            }
-        ],
+        [ ],
         function(){}
     ),
     "NewsPassword": new elementInput("#NewsPassword",
         "news",
         "passwd",
-        [
-            {
-                "format": /\S+/,
-                "msg": {
-                    "type": "error",
-                    "text": "Champ obligatoire"
-                }
-            }
-        ],
+        [ ],
+        function(){}
+    ),
+    "NewsRoot": new elementInput("#NewsRoot",
+        "news",
+        "root",
+        [ ],
         function(){}
     ),
     //Paramètres des webradios    ---------------------------------------------------

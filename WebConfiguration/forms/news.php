@@ -16,6 +16,18 @@
                     <select class="selectpicker form-element form-control" id="NewsProvider">
                         <option>newsblur</option>
                         <option>theoldreader</option>
+                        <option>commafeed</option>
+                        <option>bazqux</option>
+                        <option>inoreader</option>
+                        <option>feedhq</option>
+                        <option>subreader</option>
+                        <option>reedah</option>
+                        <option>selfoss</option>
+                        <option>ttrss</option>
+                        <option>kouio</option>
+                        <option>birdreader</option>
+                        <option>feedbin</option>
+                        <option>miniflux</option>
                     </select>
                     <span class="help-block" style="display: none;" ></span> <!-- Message d'erreur -->
                 </div>
@@ -35,6 +47,15 @@
                 <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-key"></i></span>
                         <input type="password" id="NewsPassword" class="form-element form-control" placeholder="Votre mot de passe">
+                </div>
+                <span class="help-block"></span> <!-- Message d'erreur -->
+            </div>
+            
+            <div class="form-group">
+                <label for="NewsRoot">Adresse</label>
+                <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-code"></i></span>
+                        <input type="text" id="NewsRoot" class="form-element form-control" placeholder="L'adresse de votre serveur de news (facultatif)">
                 </div>
                 <span class="help-block"></span> <!-- Message d'erreur -->
             </div>

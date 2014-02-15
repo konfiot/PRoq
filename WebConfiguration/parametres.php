@@ -58,6 +58,8 @@
                             Avancé</h5></li>
                         <li class="leftnav"><a href="#proxy">
                             <i class="fa fa-sitemap"></i> Proxy</a></li>
+                        <li class="leftnav"><a href="#fuseau">
+                            <i class="fa fa-map-marker"></i> Fuseau horaire</a></li>
                     </ul>
                 </div>
             </div>
