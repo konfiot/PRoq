@@ -14,7 +14,7 @@
   </head>
   <body>
 
-    <?php include("elements/top-navbar.php"); ?>
+    <?php include( "elements/top-navbar.php" ); ?>
   
     <div class="container">
         <div class="row">
