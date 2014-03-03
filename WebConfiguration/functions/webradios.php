@@ -8,8 +8,10 @@
     // Lecture du Json
     $path = $configuration_folder.'webradios.json';
     
-    $fichier = fopen($path, 'r+');
+    $fichier = fopen($path, 'r');
     $json = fread($fichier, filesize($path));
+    fclose($fichier);
+    
     $p_json = json_decode($json, true);
     
     if( !isset($_GET["format"]) ) $_GET["format"] = "html";
@@ -26,11 +28,9 @@
         $json = addRadio(json_decode($json, true), $p_add);
     }
     
-        
-    fseek($fichier, 0);
-    ftruncate($fichier, 0);
-    fputs($fichier, $json);
     
+    $fichier = fopen($path, 'w');
+    fputs($fichier, $json);
     fclose($fichier);
     
     
