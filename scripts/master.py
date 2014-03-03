@@ -36,13 +36,13 @@ def managedata (json_data) :
 
 	elif data["request"] == "set_sw_state": 
 		sw = data["content"]
-		return "OK"
+		return 
 	elif data["request"] == "get_sw_state": 
 		return str(sw)
 
 	elif data["request"] == "set_delta": 
-		delta += int(data["delta"])
-		return "OK"
+		delta += int(data["content"])
+		return 
 	elif data["request"] == "get_delta": 
 		to_send = str(delta) 		
 		delta = 0
@@ -74,9 +74,10 @@ while 1 :
 
 
 	if data :
-		print "Data : " + data
+		print "Data : " + str(data)
 		to_send = managedata(data)
-		print "Sent : " + to_send
-		conn.send(to_send)
+		print "Sent : " + str(to_send)
+		if to_send is not None :
+			conn.send(str(to_send))
 
 
