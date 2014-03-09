@@ -57,7 +57,7 @@ cd wiringPi
 cd ..
 git clone https://github.com/Gadgetoid/WiringPi2-Python.git
 cd WiringPi2-Python/
-python setup.py install
+python2.7 setup.py install
 cd ..
 mkdir /etc/lighttpd/conf.d ;
 mkdir /var/lib/mpd/music ; touch /var/lib/mpd/mpd.db ;
