@@ -50,10 +50,14 @@ yes | pacman -R heirloom-mailx ;
 yes | pacman -Syu popt python2-numpy lighttpd python mpd python2-pygame php-cgi php python2-pip git alsa-lib alsa-firmware make gcc ttf-dejavu ttf-droid ttf-ubuntu-font-family ttf-linux-libertine ttf-liberation ttf-junicode ttf-freefont ttf-inconsolata ttf-indic-otf ttf-cheapskate ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ;
 wget https://dl.dropboxusercontent.com/s/blr71qll61vclex/svox-pico-git-7cb980c-1-armv6h.pkg.tar.xz
 yes | pacman -U svox-pico-git-*.pkg.tar.xz &
-yes | pip2.7 install icalendar python-mpd2 wiringpi2 ; 
-git clone https://github.com/guyc/py-gaugette.git
-cd py-gaugette
-python setup.py install 
+yes | pip2.7 install icalendar python-mpd2  ; 
+git clone git://git.drogon.net/wiringPi
+cd wiringPi
+./build
+cd ..
+git clone https://github.com/Gadgetoid/WiringPi2-Python.git
+cd WiringPi2-Python/
+python setup.py install
 cd ..
 mkdir /etc/lighttpd/conf.d ;
 mkdir /var/lib/mpd/music ; touch /var/lib/mpd/mpd.db ;
