@@ -3,7 +3,7 @@
 if [ ! -f "kernel-qemu" ]
 then
 echo "Downloading kernel"
-wget http://www.xecdesign.com/downloads/linux-qemu/kernel-qemu
+wget http://www.xecdesign.com/downloads/linux-qemu/kernel-qemu &
 fi
 
 if [ ! -f "id_rsa" ]
@@ -37,7 +37,7 @@ fi
 echo "Launching qemu"
 qemu-system-arm -kernel kernel-qemu -cpu arm1176 -m 256 -M versatilepb -no-reboot -append "root=/dev/sda5 rw panic=1" -hda system.img -nographic -redir tcp:5555::22 &
 
-sleep 30
+sleep 15
 
 echo "Copying files"
 scp -r -i id_rsa -o StrictHostKeyChecking=no -P 5555 ./scripts root@localhost:./scripts 
@@ -55,10 +55,12 @@ git clone git://git.drogon.net/wiringPi &&
 cd wiringPi &&
 ./build &&
 cd .. &&
+rm -r wiringPi
 git clone https://github.com/Gadgetoid/WiringPi2-Python.git &&
 cd WiringPi2-Python/ &&
 python2.7 setup.py install &&
 cd .. &&
+rm -r WiringPi2-Python.git &&
 mkdir /etc/lighttpd/conf.d &&
 mkdir /var/lib/mpd/music && touch /var/lib/mpd/mpd.db  &&
 chown -R mpd:mpd  /var/lib/mpd/ && echo 'music_directory \"/var/lib/mpd/music\"' >> /etc/mpd.conf &&
