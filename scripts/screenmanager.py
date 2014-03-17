@@ -14,6 +14,9 @@ import fcntl
 import struct
 import alsaaudio
 import math
+import ctypes
+import ctypes.util
+import time
 
 def get_ip_address(ifname):
 	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -36,9 +39,6 @@ def color_surface(surface, (red, green, blue)):
 	arr[:,:,2] = blue
 
 def _linux_set_time(time_tuple):
-    import ctypes
-    import ctypes.util
-    import time
 
     # /usr/include/linux/time.h:
     #
@@ -100,6 +100,7 @@ def show_menu(background, back_color):
 
 		if i >= 2 :
 			_linux_set_time(dt.timetuple())
+			urllib.urlopen("http://127.0.0.1/functions/cron.php?change=" + time.mktime(dr.timetuple())).read()
 			break
 
 # Initialisation
