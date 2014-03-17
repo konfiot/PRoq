@@ -12,6 +12,8 @@ import sys
 import socket
 import fcntl
 import struct
+import alsaaudio
+import math
 
 def get_ip_address(ifname):
 	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -33,8 +35,40 @@ def color_surface(surface, (red, green, blue)):
 	arr[:,:,1] = green
 	arr[:,:,2] = blue
 
+def _linux_set_time(time_tuple):
+    import ctypes
+    import ctypes.util
+    import time
+
+    # /usr/include/linux/time.h:
+    #
+    # define CLOCK_REALTIME                     0
+    CLOCK_REALTIME = 0
+
+    # /usr/include/time.h
+    #
+    # struct timespec
+    #  {
+    #    __time_t tv_sec;            /* Seconds.  */
+    #    long int tv_nsec;           /* Nanoseconds.  */
+    #  };
+    class timespec(ctypes.Structure):
+        _fields_ = [("tv_sec", ctypes.c_long),
+                    ("tv_nsec", ctypes.c_long)]
+
+    librt = ctypes.CDLL(ctypes.util.find_library("rt"))
+
+    ts = timespec()
+    ts.tv_sec = int( time.mktime( datetime( *time_tuple[:6]).timetuple() ) )
+    ts.tv_nsec = time_tuple[6] * 1000000 # Millisecond to nanosecond
+
+    # http://linux.die.net/man/3/clock_settime
+    librt.clock_settime(CLOCK_REALTIME, ctypes.byref(ts))
+
 def show_menu(background, back_color):
 	dt = datetime.today()
+	data = json.load(urllib.urlopen("http://127.0.0.1/functions/cron.php?next"))
+	dr = datetime.fromtimestamp(data["heure"])
 	i = 0
 	while True :
 		s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
@@ -45,7 +79,7 @@ def show_menu(background, back_color):
 		s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 		s.connect("mastersocket")
 		s.send(json.dumps({"request": "get_sw_state"}))
-		sw_state = bool(s.recv(4096))
+		sw_state = int(s.recv(4096))
 
 
 		background.fill(back_color)
@@ -53,10 +87,10 @@ def show_menu(background, back_color):
 		
 		if i == 0 : 
 			render.render(dt.strftime("%H:%M"), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 60, 320, 120)
-			dt = dt.replace(minute = (dt.minute + delta) % 60, hour = (dt.minute + int(delta/60)) % 24)
+			dt = dt.replace(minute = (dt.minute + delta) % 60, hour = dt.hour + int(math.floor((dt.minute + delta) / 60)))
 		elif i == 1 :
-			pass
-
+			render.render(dr.strftime("%H:%M"), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 60, 320, 120)
+			dr = dr.replace(minute = (dr.minute + delta) % 60, hour = dr.hour + int(math.floor((dr.minute + delta) / 60)))
 		if sw_state :
 			i+= 1
 
@@ -65,6 +99,7 @@ def show_menu(background, back_color):
 		time.sleep(0.1)
 
 		if i >= 2 :
+			_linux_set_time(dt.timetuple())
 			break
 
 # Initialisation
@@ -150,15 +185,16 @@ while True :
 	s.connect("mastersocket")
 	s.send(json.dumps({"request": "get_delta"}))
 	delta = int(s.recv(4096))
-	mixer.setvolume(mixer.getvolume() + delta)
+	mixer.setvolume(mixer.getvolume()[0] + delta)
 
 
 	s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 	s.connect("mastersocket")
 	s.send(json.dumps({"request": "get_sw_state"}))
-	data = bool(s.recv(4096))
-
+	data = int(s.recv(4096))
+	print data
 	if data : 
+		print "FDDALHJDLKJFDSKLJHFLKJSDFHSDLKJHFSLKDJH"
 		show_menu(background, hex_to_rgb(conf["general"]["back_color"]))
 	
 	for event in pygame.event.get():

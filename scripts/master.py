@@ -6,12 +6,13 @@ import os, socket, json
 content = {}
 prox = 0
 delta = 0
-sw = False
+sw = 0
 
 def managedata (json_data) :
 	global content
 	global prox	
 	global delta	
+	global sw
 	data = {}
 	try: 
 		data = json.loads(json_data)
@@ -35,10 +36,12 @@ def managedata (json_data) :
 		return str(prox)
 
 	elif data["request"] == "set_sw_state": 
-		sw = data["content"]
-		return 
+		sw = int(data["content"])
+		return
 	elif data["request"] == "get_sw_state": 
-		return str(sw)
+		sw_ret = sw
+		sw = 0
+		return str(sw_ret)
 
 	elif data["request"] == "set_delta": 
 		delta += int(data["content"])
