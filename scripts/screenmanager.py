@@ -195,7 +195,6 @@ while True :
 	data = int(s.recv(4096))
 	print data
 	if data : 
-		print "FDDALHJDLKJFDSKLJHFLKJSDFHSDLKJHFSLKDJH"
 		show_menu(background, hex_to_rgb(conf["general"]["back_color"]))
 	
 	for event in pygame.event.get():
