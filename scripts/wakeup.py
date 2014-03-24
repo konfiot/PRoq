@@ -11,8 +11,9 @@ import socket
 
 def wait_for_dismiss () :
 	mixer = alsaaudio.Mixer(control="PCM")
-	mixer.setmute(1)
-	for i in range(mixer.getvolume()) : 
+	print mixer.getvolume()[0]
+	for i in range(mixer.getvolume()[0]) : 
+		print i
 		try:
 			mixer.setvolume(i)
 			s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
@@ -20,18 +21,20 @@ def wait_for_dismiss () :
 			s.send(json.dumps({"request": "get_prox_state"}))
 			prox = int(s.recv(4096))
 			if prox == 1 :
-				mixer.setvolume(mixer.getvolume())
+				mixer.setvolume(mixer.getvolume()[0])
+				print "Return"
 				return
 		except  :
 			pass
 		time.sleep(0.1)
-	mixer.setvolume(mixer.getvolume())
+	mixer.setvolume(mixer.getvolume()[0])
 	while True :
 		s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 		s.connect("mastersocket")
 		s.send(json.dumps({"request": "get_prox_state"}))
 		prox = int(s.recv(4096))
 		if prox == 1 :
+			print "Return"
 			return
 
 

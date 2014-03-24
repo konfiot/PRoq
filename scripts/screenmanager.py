@@ -14,9 +14,8 @@ import fcntl
 import struct
 import alsaaudio
 import math
-import ctypes
-import ctypes.util
-import time
+
+print "Import"
 
 def get_ip_address(ifname):
 	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -39,6 +38,9 @@ def color_surface(surface, (red, green, blue)):
 	arr[:,:,2] = blue
 
 def _linux_set_time(time_tuple):
+    import ctypes
+    import ctypes.util
+    import time
 
     # /usr/include/linux/time.h:
     #
@@ -100,13 +102,12 @@ def show_menu(background, back_color):
 
 		if i >= 2 :
 			_linux_set_time(dt.timetuple())
-			urllib.urlopen("http://127.0.0.1/functions/cron.php?change=" + time.mktime(dr.timetuple())).read()
 			break
 
 # Initialisation
 
-pygame.font.init()
-screen = pygame.display.set_mode((320, 240))
+pygame.init()
+screen = pygame.display.set_mode([320, 240])
 background = pygame.Surface(screen.get_size())
 background = background.convert()
 
@@ -186,7 +187,8 @@ while True :
 	s.connect("mastersocket")
 	s.send(json.dumps({"request": "get_delta"}))
 	delta = int(s.recv(4096))
-	mixer.setvolume(mixer.getvolume()[0] + delta)
+	print mixer.getvolume()[0] + delta
+	mixer.setvolume(min(100, mixer.getvolume()[0] + delta))
 
 
 	s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)

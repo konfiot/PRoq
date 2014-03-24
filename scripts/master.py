@@ -31,7 +31,7 @@ def managedata (json_data) :
 
 	elif data["request"] == "set_prox_state": 
 		prox = data["content"]
-		return "OK"
+		return 
 	elif data["request"] == "get_prox_state": 
 		return str(prox)
 
