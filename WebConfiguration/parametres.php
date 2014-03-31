@@ -91,7 +91,7 @@
     
     <?php include("elements/fenConfirm.php"); ?>
     
-    <script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="http://www.geoplugin.net/javascript.gp"></script>
     <script type="text/javascript" src="js/nprogress.js"></script>
     
