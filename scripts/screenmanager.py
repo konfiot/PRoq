@@ -14,6 +14,7 @@ import fcntl
 import struct
 import alsaaudio
 import math
+from mpd import MPDClient
 
 print "Import"
 
@@ -139,6 +140,10 @@ color_surface(image_cal, hex_to_rgb(conf["general"]["front_color"]))
 
 table = datatable.DataTable(background, font, hex_to_rgb(conf["general"]["front_color"]), hex_to_rgb(conf["general"]["back_color"]), 0, 120, 200, 128, 3, 2, 10, 5)
 
+client = MPDClient()
+client.connect("localhost", 6600)
+
+
 def get_data(): 
 	s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 	s.connect("mastersocket")
@@ -187,8 +192,12 @@ while True :
 	s.connect("mastersocket")
 	s.send(json.dumps({"request": "get_delta"}))
 	delta = int(s.recv(4096))
-	print mixer.getvolume()[0] + delta
-	mixer.setvolume(min(100, mixer.getvolume()[0] + delta))
+
+	if delta != 0 :
+		mixer.setvolume(min(100, mixer.getvolume()[0] + delta))
+		client.clear()
+		client.add("blup.mp3")
+		client.play()
 
 
 	s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
