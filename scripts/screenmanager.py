@@ -101,6 +101,7 @@ def show_menu(background, back_color):
 
 		if i >= 2 :
 			_linux_set_time(dt.timetuple())
+			urlopen("http://127.0.0.1/functions/cron.php?change=" + dr.strftime("%s")).read()
 			break
 
 # Initialisation
