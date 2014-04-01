@@ -6,3 +6,4 @@ cp -R PRoq/WebConfiguration/* /srv/http
 cp PRoq/utils/update.sh utils/update.sh
 rm -r PRoq
 systemctl restart proq
+systemctl restart lighttpd
