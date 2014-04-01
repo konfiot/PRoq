@@ -1,29 +1,28 @@
 #!/usr/bin/python2.7
 # -*- coding: utf-8 -*-
 
-from pygame import Surface, font, display, surfarray
-import json
-import urllib
-import StringIO
-import time
+from pygame import Surface, font, display, surfarray, image
+from json import load as jload, loads as jloads, dumps as jdumps
+from urllib import urlopen
+from time import mktime, sleep
 from datetime import datetime, date
 from functions import get, render, datatable
-import sys
+#import sys
 import socket
-import fcntl
-import struct
+from fcntl import ioctl
+from struct import pack
 from alsaaudio import Mixer 
-import math
+from math import floor
 from mpd import MPDClient
 
 print "Import"
 
 def get_ip_address(ifname):
 	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-	return socket.inet_ntoa(fcntl.ioctl(
+	return socket.inet_ntoa(ioctl(
 		s.fileno(),
 		0x8915,
-		struct.pack('256s', ifname[:15])
+		pack('256s', ifname[:15])
 	)[20:24])
 
 def hex_to_rgb(value):
@@ -41,7 +40,6 @@ def color_surface(surface, (red, green, blue)):
 def _linux_set_time(time_tuple):
     import ctypes
     import ctypes.util
-    import time
 
     # /usr/include/linux/time.h:
     #
@@ -62,7 +60,7 @@ def _linux_set_time(time_tuple):
     librt = ctypes.CDLL(ctypes.util.find_library("rt"))
 
     ts = timespec()
-    ts.tv_sec = int( time.mktime( datetime( *time_tuple[:6]).timetuple() ) )
+    ts.tv_sec = int( mktime( datetime( *time_tuple[:6]).timetuple() ) )
     ts.tv_nsec = time_tuple[6] * 1000000 # Millisecond to nanosecond
 
     # http://linux.die.net/man/3/clock_settime
@@ -70,36 +68,36 @@ def _linux_set_time(time_tuple):
 
 def show_menu(background, back_color):
 	dt = datetime.today()
-	data = json.load(urllib.urlopen("http://127.0.0.1/functions/cron.php?next"))
+	data = jload(urlopen("http://127.0.0.1/functions/cron.php?next"))
 	dr = datetime.fromtimestamp(data["heure"])
 	i = 0
 	while True :
 		s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 		s.connect("mastersocket")
-		s.send(json.dumps({"request": "get_delta"}))
+		s.send(jdumps({"request": "get_delta"}))
 		delta = int(s.recv(4096))
 
 		s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 		s.connect("mastersocket")
-		s.send(json.dumps({"request": "get_sw_state"}))
+		s.send(jdumps({"request": "get_sw_state"}))
 		sw_state = int(s.recv(4096))
 
 
 		background.fill(back_color)
-		render.render(get_ip_address('eth0'), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 0, 320, 60)
+		render.render(get_ip_address('eth0'), font, background, hex_to_rgb(conf["general"]["front_color"]), 0, 0, 320, 60)
 		
 		if i == 0 : 
-			render.render(dt.strftime("%H:%M"), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 60, 320, 120)
-			dt = dt.replace(minute = (dt.minute + delta) % 60, hour = dt.hour + int(math.floor((dt.minute + delta) / 60)))
+			render.render(dt.strftime("%H:%M"), font, background, hex_to_rgb(conf["general"]["front_color"]), 0, 60, 320, 120)
+			dt = dt.replace(minute = (dt.minute + delta) % 60, hour = dt.hour + int(floor((dt.minute + delta) / 60)))
 		elif i == 1 :
-			render.render(dr.strftime("%H:%M"), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 60, 320, 120)
-			dr = dr.replace(minute = (dr.minute + delta) % 60, hour = dr.hour + int(math.floor((dr.minute + delta) / 60)))
+			render.render(dr.strftime("%H:%M"), font, background, hex_to_rgb(conf["general"]["front_color"]), 0, 60, 320, 120)
+			dr = dr.replace(minute = (dr.minute + delta) % 60, hour = dr.hour + int(floor((dr.minute + delta) / 60)))
 		if sw_state :
 			i+= 1
 
 		screen.blit(background, (0, 0))
 		display.flip()
-		time.sleep(0.1)
+		sleep(0.1)
 
 		if i >= 2 :
 			_linux_set_time(dt.timetuple())
@@ -116,12 +114,12 @@ background = background.convert()
 # Récupération de la config
 
 conf_file = open("../conf/wake.json")
-conf = json.load(conf_file)
+conf = jload(conf_file)
 
 # Définition des polices
 font_filename = font.match_font(conf["general"]["font"])
 font = font.Font(font_filename, 135)
-font_time = font.Font(font_filename, 135)
+#font_time = font.Font(font_filename, 135)
 
 
 # Definition et coloration des images
@@ -148,9 +146,9 @@ client.connect("localhost", 6600)
 def get_data(): 
 	s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 	s.connect("mastersocket")
-	s.send(json.dumps({"request": "get_data"}))
+	s.send(jdumps({"request": "get_data"}))
 	data = s.recv(8192)
-	raw = json.loads(data)
+	raw = jloads(data)
 	if raw :
 		(data, data_forecast, unread, news, cal) = raw
 		return (data, data_forecast, unread, news, cal)
@@ -170,14 +168,14 @@ def update():
 
 		background.blit(image_weather, image_weather.get_rect())
                 
-		render.render(datetime.today().strftime("%H:%M"), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 120, 320, 120)
+		render.render(datetime.today().strftime("%H:%M"), font, background, hex_to_rgb(conf["general"]["front_color"]), 0, 120, 320, 120)
 
 		table.update([{"image": image_temp, "data": str(round(data_forecast["list"][0]["temp"]["day"], 1))}, {"image": image_rise, "data": datetime.fromtimestamp(data["sys"]["sunrise"]).strftime("%H:%M")}, {"image": image_rise, "data": datetime.fromtimestamp(data["sys"]["sunset"]).strftime("%H:%M")}, {"image": image_mail, "data": str(unread[0])}, {"image": image_news, "data": str(news)}, {"image": image_cal, "data": str(cal[0])}])
 
 		screen.blit(background, (0, 0))
 		display.flip()
 	else :
-		render.render(get_ip_address('eth0'), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 0, 320, 240)
+		render.render(get_ip_address('eth0'), font, background, hex_to_rgb(conf["general"]["front_color"]), 0, 0, 320, 240)
 		screen.blit(background, (0, 0))
                 display.flip()
 
@@ -186,12 +184,12 @@ def update():
 mixer = Mixer(control="PCM")
 
 while True : 
-	time.sleep(0.1)
+	sleep(0.1)
 	update()
 
 	s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 	s.connect("mastersocket")
-	s.send(json.dumps({"request": "get_delta"}))
+	s.send(jdumps({"request": "get_delta"}))
 	delta = int(s.recv(4096))
 
 	if delta != 0 :
@@ -203,7 +201,7 @@ while True :
 
 	s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 	s.connect("mastersocket")
-	s.send(json.dumps({"request": "get_sw_state"}))
+	s.send(jdumps({"request": "get_sw_state"}))
 	data = int(s.recv(4096))
 	print data
 	if data : 
