@@ -1,7 +1,7 @@
 #!/usr/bin/python2.7
 # -*- coding: utf-8 -*-
 
-import pygame
+from pygame import Surface, font, display, surfarray
 import json
 import urllib
 import StringIO
@@ -12,7 +12,7 @@ import sys
 import socket
 import fcntl
 import struct
-import alsaaudio
+from alsaaudio import Mixer 
 import math
 from mpd import MPDClient
 
@@ -33,7 +33,7 @@ def hex_to_rgb(value):
 
 def color_surface(surface, (red, green, blue)):
 	surface.convert_alpha()
-	arr = pygame.surfarray.pixels3d(surface)
+	arr = surfarray.pixels3d(surface)
 	arr[:,:,0] = red
 	arr[:,:,1] = green
 	arr[:,:,2] = blue
@@ -98,7 +98,7 @@ def show_menu(background, back_color):
 			i+= 1
 
 		screen.blit(background, (0, 0))
-		pygame.display.flip()
+		display.flip()
 		time.sleep(0.1)
 
 		if i >= 2 :
@@ -107,9 +107,10 @@ def show_menu(background, back_color):
 
 # Initialisation
 
-pygame.init()
-screen = pygame.display.set_mode([320, 240])
-background = pygame.Surface(screen.get_size())
+display.init()
+font.init()
+screen = display.set_mode([320, 240])
+background = Surface(screen.get_size())
 background = background.convert()
 
 # Récupération de la config
@@ -118,19 +119,19 @@ conf_file = open("../conf/wake.json")
 conf = json.load(conf_file)
 
 # Définition des polices
-font_filename = pygame.font.match_font(conf["general"]["font"])
-font = pygame.font.Font(font_filename, 135)
-font_time = pygame.font.Font(font_filename, 135)
+font_filename = font.match_font(conf["general"]["font"])
+font = font.Font(font_filename, 135)
+font_time = font.Font(font_filename, 135)
 
 
 # Definition et coloration des images
 
-image_temp = pygame.image.load("images/misc/temp.png")
-image_rise = pygame.image.load("images/misc/rise.png")
-image_set = pygame.image.load("images/misc/set.png")
-image_mail = pygame.image.load("images/misc/mail.png")
-image_news = pygame.image.load("images/misc/news.png")
-image_cal = pygame.image.load("images/misc/cal.png")
+image_temp = image.load("images/misc/temp.png")
+image_rise = image.load("images/misc/rise.png")
+image_set = image.load("images/misc/set.png")
+image_mail = image.load("images/misc/mail.png")
+image_news = image.load("images/misc/news.png")
+image_cal = image.load("images/misc/cal.png")
 color_surface(image_temp, hex_to_rgb(conf["general"]["front_color"]))
 color_surface(image_rise, hex_to_rgb(conf["general"]["front_color"]))
 color_surface(image_set, hex_to_rgb(conf["general"]["front_color"]))
@@ -162,7 +163,7 @@ def update():
 	if raw :
 		(data, data_forecast, unread, news, cal) = raw
 
-		image_weather = pygame.image.load("images/weather/" + data_forecast["list"][0]["weather"][0]["icon"] + ".png")
+		image_weather = image.load("images/weather/" + data_forecast["list"][0]["weather"][0]["icon"] + ".png")
 		color_surface(image_weather, hex_to_rgb(conf["general"]["front_color"]))
 
 		background.fill(hex_to_rgb(conf["general"]["back_color"]))
@@ -174,15 +175,15 @@ def update():
 		table.update([{"image": image_temp, "data": str(round(data_forecast["list"][0]["temp"]["day"], 1))}, {"image": image_rise, "data": datetime.fromtimestamp(data["sys"]["sunrise"]).strftime("%H:%M")}, {"image": image_rise, "data": datetime.fromtimestamp(data["sys"]["sunset"]).strftime("%H:%M")}, {"image": image_mail, "data": str(unread[0])}, {"image": image_news, "data": str(news)}, {"image": image_cal, "data": str(cal[0])}])
 
 		screen.blit(background, (0, 0))
-		pygame.display.flip()
+		display.flip()
 	else :
 		render.render(get_ip_address('eth0'), font_time, background, hex_to_rgb(conf["general"]["front_color"]), 0, 0, 320, 240)
 		screen.blit(background, (0, 0))
-                pygame.display.flip()
+                display.flip()
 
 # Boucle de rafraichissement
 
-mixer = alsaaudio.Mixer(control="PCM")
+mixer = Mixer(control="PCM")
 
 while True : 
 	time.sleep(0.1)
@@ -207,7 +208,3 @@ while True :
 	print data
 	if data : 
 		show_menu(background, hex_to_rgb(conf["general"]["back_color"]))
-	
-	for event in pygame.event.get():
-		if event.type == pygame.QUIT:
-			sys.exit()
