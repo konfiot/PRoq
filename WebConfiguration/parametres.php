@@ -8,6 +8,7 @@
     <link href="css/nprogress.css" rel="stylesheet">
     <link href="css/bootstrapSwitch.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/colorpicker.min.css" rel="stylesheet">
     
     <link href="css/main.css" rel="stylesheet">
     <link href="css/parametres.css" rel="stylesheet">
@@ -60,6 +61,8 @@
                             <i class="fa fa-sitemap"></i> Proxy</a></li>
                         <li class="leftnav"><a href="#fuseau">
                             <i class="fa fa-map-marker"></i> Fuseau horaire</a></li>
+                        <li class="leftnav"><a href="#apparence">
+                            <i class="fa fa-font"></i> Apparence</a></li>
                     </ul>
                 </div>
             </div>
@@ -94,6 +97,7 @@
     <script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script>
     <script type="text/javascript" src="http://www.geoplugin.net/javascript.gp"></script>
     <script type="text/javascript" src="js/nprogress.js"></script>
+    <script type="text/javascript" src="js/colorpicker.min.js"></script>
     
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/bootstrapSwitch.min.js"></script>
