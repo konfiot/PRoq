@@ -1,8 +1,7 @@
 language: python
 script: utils/deploy.sh
 before_install : "sudo add-apt-repository -y ppa:openstack-ubuntu-testing/havana && sudo apt-get update && sudo apt-get install autopoint qemu qemu-system build-essential liblzma-dev && git clone https://github.com/jnovy/pxz && cd pxz && make && sudo make install && cd .."
-notifications:
-  email: false
+after_success : rsync -e "ssh -o StrictHostKeyChecking=no -i id_rsa_sourceforge" system.img.xz konfiot@frs.sourceforge.net:/home/frs/project/smart-wake/Nightly/ --progress
 env:
   global: 
     - secure: "TVxwOjO9/VWQECt8ylwqT4UnLjIxuDWgfgMO1u95WUf3kjJy/3VKb2JA8iG7SXpXss4ooc6EX5peOo46/54QWFrngdeD49+tFkBsvMXbue5bVHLuCIjNcnTzt1Lp8WtnB3zvwmVNdzAGnpMxxvEej15ZAo1cBAqCh0zyviyP6Ho="

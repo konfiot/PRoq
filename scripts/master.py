@@ -6,12 +6,13 @@ import os, socket, json
 content = {}
 prox = 0
 delta = 0
-sw = False
+sw = 0
 
 def managedata (json_data) :
 	global content
 	global prox	
 	global delta	
+	global sw
 	data = {}
 	try: 
 		data = json.loads(json_data)
@@ -30,19 +31,21 @@ def managedata (json_data) :
 
 	elif data["request"] == "set_prox_state": 
 		prox = data["content"]
-		return "OK"
+		return 
 	elif data["request"] == "get_prox_state": 
 		return str(prox)
 
 	elif data["request"] == "set_sw_state": 
-		sw = data["content"]
-		return "OK"
+		sw = int(data["content"])
+		return
 	elif data["request"] == "get_sw_state": 
-		return str(sw)
+		sw_ret = sw
+		sw = 0
+		return str(sw_ret)
 
 	elif data["request"] == "set_delta": 
-		delta += int(data["delta"])
-		return "OK"
+		delta += int(data["content"])
+		return 
 	elif data["request"] == "get_delta": 
 		to_send = str(delta) 		
 		delta = 0
@@ -74,9 +77,10 @@ while 1 :
 
 
 	if data :
-		print "Data : " + data
+		print "Data : " + str(data)
 		to_send = managedata(data)
-		print "Sent : " + to_send
-		conn.send(to_send)
+		print "Sent : " + str(to_send)
+		if to_send is not None :
+			conn.send(str(to_send))
 
 

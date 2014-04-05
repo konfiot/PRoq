@@ -1,7 +1,7 @@
 smart-wake
 ==========
 
-Le projet SmartWake de SI 2013
+Le projet SmartWake de SI 2013.
 
 #Prérequis
 * Linux

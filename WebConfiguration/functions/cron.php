@@ -1,33 +1,20 @@
 <?php
-    /***********************************************************************
-    *                       Modification du crontab
-    * - Rien : donne le cron convertis en JSON
-    * - Add : pour ajouter une ligne au cron
-    * - Rm : supprime la ligne du nom donné
-    * - Argument "next" : retourne un json contenant : en 'ligne' : les caractéristiques de la prochaine alarme ; en 'heure' : le timestamp de la prochaine occurence
-    *       example : http://[...]/functions/cron.php?next
-    * - Argument "change" : entrée : {"h" : heure, "m" : minutes} change l'heure de sonnerie pour une sonnerie
-    *       example : http://[...]/functions/cron.php?change={"h":7,"m":30}
-    ***********************************************************************/
-    
     include('environement.php');
     
     $path = $configuration_folder.'wake.cron';
     $path_temp = $configuration_folder.'wake.temp.cron';
     
-    $fichier = fopen($path, 'r+');                                       // On ouvre le fichier de cron
-    $cron = fread($fichier, filesize($path));                                   // On lis le contenu du cron
-    fclose($fichier);
-    
+    $cron = file_get_contents($path);   // On lis le contenu du cron
     $cron = parse($cron);               // On le convertis en array
     
     if( isset($_GET['change']) ) {
-        changeTomorrow( json_decode($_GET['change'], true) , $configuration_folder);
+        changeTomorrow( $_GET['change'] , $configuration_folder);
         return;
     }
     
     if( isset($_GET['next']) ) {
-        echo json_encode(nextRing($cron));
+		$true_cron = parse(shell_exec('crontab -l'));
+        echo json_encode(nextRing($true_cron));
         return;
     }
     
@@ -61,11 +48,11 @@
     /* ***************************** Fonctions ****************************** */
     
     function changeTomorrow($change, $path) {
-        $file = fopen($path."wake.temp.cron", 'w');
-        fputs($file, $change['m']." ".$change['h']." * * * echo 'ca sonne !'  | wall \n");
-        fputs($file, $change['m']." ".$change['h']." * * * crontab ".realpath($path."wake.cron")."\n");
-        fclose($path."wake.temp.cron");
-
+        $file = fopen($path.'wake.temp.cron', 'w');
+        fputs($file, date('i h d m w', $change) . " echo 'ca sonne !'  | wall #temp_ring \n");
+        fputs($file, date('i h d m w', $change) . " crontab ".realpath($path."wake.cron")." #next\n");
+        fclose($file);
+		
         shell_exec("crontab ".$path."wake.temp.cron");
     }
     

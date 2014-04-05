@@ -24,14 +24,14 @@ def mail (conf) :
 		sender_tuple =  re.sub(r'<(.+)>', '', msg["from"])
 		sender = ""
 		for i in decode_header(sender_tuple) :
-			if i[0] is not None :
+			if i[1] is not None :
 				sender += i[0].decode(i[1])
 			else : 
 				sender += i[0]
 		subject_tuple =  msg["subject"]
 		subject = ""
 		for j in decode_header(subject_tuple) :
-			if j[0] is not None :
+			if j[1] is not None :
 				subject += j[0].decode(i[1])
 			else : 
 				subject += j[0]
