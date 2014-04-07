@@ -5,12 +5,11 @@
     *       - Argument "champ"     = nom du champ        (retourne json entier si vide)
     *       - Argument "value"     = valeure à lui donner (retourne valeure du champ si vide)
     ***********************************************************************/
-    
     include('environement.php');
     
     $path = $configuration_folder.'wake.json';     
 	$json = file_get_contents($path);
-	 
+	
     if( isset($_GET["categorie"])){                                 //Categorie entree
         $json = json_decode($json, true);
         if( isset($_GET["champ"]) ){                                    //Champ entré

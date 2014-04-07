@@ -6,9 +6,9 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     
     <link href="css/nprogress.css" rel="stylesheet">
+    <link href="css/colpick.css" rel="stylesheet"> <!-- https://github.com/josedvq/colpick-jQuery-Color-Picker -->
     <link href="css/bootstrapSwitch.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/colorpicker.min.css" rel="stylesheet">
     
     <link href="css/main.css" rel="stylesheet">
     <link href="css/parametres.css" rel="stylesheet">
@@ -97,7 +97,7 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="http://www.geoplugin.net/javascript.gp"></script>
     <script type="text/javascript" src="js/nprogress.js"></script>
-    <script type="text/javascript" src="js/colorpicker.min.js"></script>
+    <script type="text/javascript" src="js/colpick.js"></script> <!-- https://github.com/josedvq/colpick-jQuery-Color-Picker -->
     
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/bootstrapSwitch.min.js"></script>
