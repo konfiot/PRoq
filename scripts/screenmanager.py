@@ -18,12 +18,15 @@ from mpd import MPDClient
 print "Import"
 
 def get_ip_address(ifname):
-	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-	return socket.inet_ntoa(ioctl(
-		s.fileno(),
-		0x8915,
-		pack('256s', ifname[:15])
-	)[20:24])
+	try :
+		s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+		return socket.inet_ntoa(ioctl(
+			s.fileno(),
+			0x8915,
+			pack('256s', ifname[:15])
+		)[20:24])
+	except IOError : 
+		print ("Can't find interface")
 
 def hex_to_rgb(value):
 	value = value.lstrip('#')
@@ -184,9 +187,16 @@ def update():
 
 mixer = Mixer(control="PCM")
 
+i = 0
+
 while True : 
 	sleep(0.1)
 	update()
+	
+	i+=1
+	if i >= 20 : 
+		conf_file = open("../conf/wake.json")
+		conf = jload(conf_file)
 
 	s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 	s.connect("mastersocket")

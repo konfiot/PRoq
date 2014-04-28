@@ -16,6 +16,8 @@ if conf["proxy"]["enable"] :
 #	os.environ["https_proxy"] = "https://" + conf["proxy"]["https"]
 
 while 1 :
+	conf_file = open("../conf/wake.json")
+	conf = json.load(conf_file)
 	#try :
 	unread = get.mail(conf)
 	(data, data_forecast) = get.weather(conf)
