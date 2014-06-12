@@ -55,7 +55,9 @@ def calendar (conf) :
 				end = vDDDTypes.from_ical(component.get('dtend')).date()
 
 			if date.today() >= start and date.today() <= end :
-				rdv +=  "A ".decode("utf-8") + vDDDTypes.from_ical(component.get('dtstart')).strftime("%H heures %M").decode("utf-8").replace("0", "") + ", ".decode("utf-8") + component.get("summary").decode("utf-8") + ", ".decode("utf-8")
+				if type(vDDDTypes.from_ical(component.get('dtstart'))) == type(datetime.today()) :
+					rdv +=  "A ".encode("utf-8") + vDDDTypes.from_ical(component.get('dtstart')).strftime("%H heures %M").encode("utf-8").replace("0","") + ", ".encode("utf-8")
+				rdv += component.get("summary").encode("utf-8") + ", ".encode("utf-8")
 				i += 1
 	return (i, rdv)
 
