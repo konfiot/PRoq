@@ -3,14 +3,7 @@
 if [ ! -f "kernel-qemu" ]
 then
 echo "Downloading kernel"
-wget http://www.xecdesign.com/downloads/linux-qemu/kernel-qemu &
-fi
-
-if [ ! -f "id_rsa" ]
-then
-echo "Downloading RSA key"
-wget https://dl.dropboxusercontent.com/s/cf82cjgih3jhzp1/id_rsa
-wget $PRIVATE_URL > /dev/null 2>&1
+wget http://www.xecdesign.com/downloads/linux-qemu/kernel-qemu
 fi
 
 if [ ! -f "arch.img.bz2" ]
@@ -20,7 +13,6 @@ wget https://dl.dropboxusercontent.com/s/5nd5k523uvq5ifu/arch.img.bz2
 fi
 
 chmod 600 id_rsa
-chmod 600 id_rsa_sourceforge
 
 if [ ! -f "arch.img" ]
 then
