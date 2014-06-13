@@ -51,7 +51,8 @@ yes | pacman -U svox-pico-git-*.pkg.tar.xz &&
 yes | pip2.7 install icalendar python-mpd2 spidev pyalsaaudio RPi.GPIO && 
 mkdir /etc/lighttpd/conf.d &&
 mkdir /var/lib/mpd/music && touch /var/lib/mpd/mpd.db  &&
-chown -R mpd:mpd  /var/lib/mpd/ && echo 'music_directory \"/var/lib/mpd/music\"' >> /etc/mpd.conf &&
+chown -R mpd:mpd  /var/lib/mpd/ &&
+echo 'music_directory \"/var/lib/mpd/music\"' >> /etc/mpd.conf &&
 echo 'server.modules += ( \"mod_fastcgi\" ) index-file.names += ( \"index.php\" ) fastcgi.server = ( \".php\" => ((                    \"bin-path\" => \"/usr/bin/php-cgi\",                    \"socket\" => \"/tmp/php.socket\",                    \"max-procs\" => 2,                    \"bin-environment\" => (                      \"PHP_FCGI_CHILDREN\" => \"16\",                      \"PHP_FCGI_MAX_REQUESTS\" => \"10000\"                    ),                    \"bin-copy-environment\" => (                   \"PATH\", \"SHELL\", \"USER\"                    ),                    \"broken-scriptfilename\" => \"enable\"                )))' >> /etc/lighttpd/conf.d/fastcgi.conf &&
 echo 'include \"conf.d/fastcgi.conf\"' >> /etc/lighttpd/lighttpd.conf &&
 echo '[Unit]
@@ -70,7 +71,7 @@ rm .ssh/authorized_keys .ssh/known_hosts &&
 rm /etc/cron.hourly/man-db
 history -c &&
 sed -i 's/sda/mmcblk0p/' /etc/fstab &&
-sed -i -e 's/;extension=openssl.so/extension=openssl.so/g' /etc/php/php. &&
+sed -i -e 's/;extension=openssl.so/extension=openssl.so/g' /etc/php/php.ini &&
 reboot"
 
 echo "Compressing"
